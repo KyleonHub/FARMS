@@ -1,0 +1,159 @@
+/* ==========================================================================
+   FARMS MODERN LOGIN PAGE STYLESHEET
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. DESIGN TOKENS & VARIABLES
+   -------------------------------------------------------------------------- */
+:root {
+  --primary-color: #2e7d32; /* Sets the main brand green color */
+  --primary-hover: #1b5e20; /* Sets a darker green for button hover states */
+  --bg-gradient-start: #e8f5e9; /* Sets the starting light-green tint for the background */
+  --bg-gradient-end: #c8e6c9; /* Sets the ending green tint for the background gradient */
+  --card-bg: #ffffff; /* Sets the main container background to solid white */
+  --text-primary: #1c2d21; /* Sets dark charcoal for main headings and text */
+  --text-secondary: #667085; /* Sets a soft gray for subheadings and placeholders */
+  --border-color: #d0d5dd; /* Sets a subtle border color for form input fields */
+  --focus-ring: rgba(46, 125, 50, 0.25); /* Sets the soft green glow color when clicking inputs */
+  --radius-sm: 8px; /* Sets rounded corners for inputs and buttons */
+  --radius-lg: 16px; /* Sets smooth rounded corners for the main login card */
+  --shadow-card: 0 12px 32px rgba(0, 0, 0, 0.08); /* Adds soft depth shadow beneath the card */
+  --transition-speed: 0.2s ease; /* Defines standard smooth animation timing */
+}
+
+/* --------------------------------------------------------------------------
+   2. GLOBAL RESET & BASE STYLES
+   -------------------------------------------------------------------------- */
+* {
+  box-sizing: border-box; /* Includes padding and borders in total element width/height */
+  margin: 0; /* Removes default browser outer spacing from all elements */
+  padding: 0; /* Removes default browser inner spacing from all elements */
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; /* Sets modern system font stack */
+}
+
+/* --------------------------------------------------------------------------
+   3. BODY & LAYOUT CENTERING
+   -------------------------------------------------------------------------- */
+body {
+  min-height: 100vh; /* Ensures the page takes up the full browser screen height */
+  display: flex; /* Activates Flexbox layout mode for the page body */
+  justify-content: center; /* Horizontally centers the login card on the screen */
+  align-items: center; /* Vertically centers the login card on the screen */
+  background: linear-gradient(135deg, var(--bg-gradient-start), var(--bg-gradient-end)); /* Applies diagonal background gradient */
+  color: var(--text-primary); /* Sets default page text color */
+  padding: 1.5rem; /* Adds safety padding around edges for mobile screens */
+}
+
+/* --------------------------------------------------------------------------
+   4. CARD CONTAINER
+   -------------------------------------------------------------------------- */
+.login-card {
+  width: 100%; /* Makes card expand up to its max-width */
+  max-width: 400px; /* Restricts card width on desktop screens */
+  background-color: var(--card-bg); /* Applies white background to card */
+  padding: 2.5rem 2rem; /* Adds inner spacing (top/bottom, left/right) inside card */
+  border-radius: var(--radius-lg); /* Rounds the card corners */
+  box-shadow: var(--shadow-card); /* Lifts card off background with a soft drop shadow */
+  border: 1px solid rgba(255, 255, 255, 0.8); /* Adds crisp subtle outer border */
+}
+
+/* --------------------------------------------------------------------------
+   5. HEADER & TYPOGRAPHY
+   -------------------------------------------------------------------------- */
+.login-card h1 {
+  font-size: 1.8rem; /* Sets title size */
+  font-weight: 700; /* Makes title bold */
+  color: var(--primary-color); /* Applies brand green color to title */
+  text-align: center; /* Centers title text inside card */
+  margin-bottom: 0.5rem; /* Adds spacing beneath title */
+  letter-spacing: -0.5px; /* Slightly tightens letter spacing for modern look */
+}
+
+.login-card p {
+  font-size: 0.95rem; /* Sets subheading text size */
+  color: var(--text-secondary); /* Applies soft gray color to subheading */
+  text-align: center; /* Centers subheading text */
+  margin-bottom: 2rem; /* Adds spacing before form starts */
+}
+
+/* --------------------------------------------------------------------------
+   6. FORM GROUPS & LABELS
+   -------------------------------------------------------------------------- */
+.form-group {
+  margin-bottom: 1.25rem; /* Separates form fields vertically */
+}
+
+.form-group label {
+  display: block; /* Forces label onto its own line above input */
+  font-size: 0.875rem; /* Sets label text size */
+  font-weight: 600; /* Makes label text semi-bold */
+  color: var(--text-primary); /* Sets label text color */
+  margin-bottom: 0.5rem; /* Adds spacing between label and input box */
+}
+
+/* --------------------------------------------------------------------------
+   7. INPUT FIELDS & FOCUS STATES
+   -------------------------------------------------------------------------- */
+.form-group input {
+  width: 100%; /* Makes input field fill full width of container */
+  padding: 0.85rem 1rem; /* Adds comfortable typing area inside input */
+  font-size: 0.95rem; /* Sets text size when typing */
+  color: var(--text-primary); /* Sets typed text color */
+  background-color: #fafafa; /* Sets subtle light gray input background */
+  border: 1px solid var(--border-color); /* Sets light gray outline border */
+  border-radius: var(--radius-sm); /* Rounds input box corners */
+  outline: none; /* Removes browser default blue focus outline */
+  transition: border-color var(--transition-speed), box-shadow var(--transition-speed), background-color var(--transition-speed); /* Smoothly animates focus changes */
+}
+
+.form-group input::placeholder {
+  color: #a0aec0; /* Sets placeholder text color */
+}
+
+.form-group input:focus {
+  background-color: #ffffff; /* Changes background to pure white on click */
+  border-color: var(--primary-color); /* Highlights border with brand green when active */
+  box-shadow: 0 0 0 4px var(--focus-ring); /* Adds soft green glowing halo ring on click */
+}
+
+/* --------------------------------------------------------------------------
+   8. SUBMIT BUTTON
+   -------------------------------------------------------------------------- */
+.btn-login {
+  width: 100%; /* Makes button span full width of card */
+  padding: 0.85rem; /* Sets vertical button height via padding */
+  margin-top: 0.5rem; /* Adds spacing above button */
+  font-size: 1rem; /* Sets button text size */
+  font-weight: 600; /* Makes button text semi-bold */
+  color: #ffffff; /* Sets button text color to white */
+  background-color: var(--primary-color); /* Sets button background to brand green */
+  border: none; /* Removes default button outline border */
+  border-radius: var(--radius-sm); /* Rounds button corners */
+  cursor: pointer; /* Shows hand pointer cursor when hovering over button */
+  transition: background-color var(--transition-speed), transform 0.1s ease, box-shadow var(--transition-speed); /* Enables smooth hover animation */
+  box-shadow: 0 4px 12px rgba(46, 125, 50, 0.2); /* Adds subtle green drop shadow under button */
+}
+
+.btn-login:hover {
+  background-color: var(--primary-hover); /* Darkens button color on hover */
+  transform: translateY(-1px); /* Slightly lifts button upward on hover */
+  box-shadow: 0 6px 16px rgba(46, 125, 50, 0.3); /* Enhances shadow depth on hover */
+}
+
+.btn-login:active {
+  transform: translateY(0); /* Returns button to normal position when clicked */
+}
+
+/* --------------------------------------------------------------------------
+   9. MOBILE RESPONSIVENESS
+   -------------------------------------------------------------------------- */
+@media (max-width: 480px) {
+  .login-card {
+    padding: 1.75rem 1.25rem; /* Reduces card padding on small phone screens */
+    border-radius: 12px; /* Slightly tightens rounded corners on small screens */
+  }
+
+  .login-card h1 {
+    font-size: 1.5rem; /* Scales down title font size for mobile */
+  }
+}
