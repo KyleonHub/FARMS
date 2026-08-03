@@ -65,6 +65,68 @@ body {
   background-color: #e8f5e9; /* Fallback background tint if no image is present | Alt: #f0f0f0 */
 }
 
+.login-card-container {
+  position: relative; /* Stacks card above background and swoop layers | Alt: position: absolute */
+  z-index: 1; /* Elevates card above background and swoop layers | Alt: z-index: 2 */
+  display: flex; /* Activates Flexbox layout mode | Alt: display: grid with place-items: center */
+  justify-content: center; /* Horizontally centers liquid glass card | Alt: flex-start or flex-end */
+  align-items: center; /* Vertically centers liquid glass card | Alt: flex-start or baseline */
+  width: 100%; /* Spans full available width | Alt: width: auto */
+  max-width: 400px; /* Restricts card width on desktop screens | Alt: max-width: 420px */
+}
+
+.login-card-container form {
+  display: inline-flex;       /* Keeps container strictly fitted to its content */
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  
+  /* Strict Oval Frame Styling */
+  border: 2px solid #064e3b;  /* Green outline matching the text */
+  border-radius: 50%;         /* Creates an ellipse/oval shape */
+  padding: 15px 30px;         /* Top/bottom and left/right space shaping the oval */
+  margin: 0 auto 15px auto;
+}
+.mini-logo {
+  margin: 0;
+  font-family: system-ui, -apple-system, sans-serif;
+  font-size: 2.2rem;
+  font-weight: 900;
+  color: #064e3b;
+  letter-spacing: 1px;
+  line-height: 1;
+}
+.header-divider {
+  position: relative;
+  width: 100%;             /* Spans the width of the text container */
+  max-width: 280px;        /* Limits max length */
+  border: none;
+  height: 3px;             /* Line thickness */
+  background-color: #064e3b; /* Matches title color */
+  margin: 0px auto 3px auto; /* Centers the line and adds spacing */
+}
+.login-card-subtitle {
+  display: block;
+  margin: 0 auto 2.5rem auto; /* Centers the subtitle and adds spacing below */
+  font-family: system-ui, -apple-system, sans-serif;
+  font-size: 0.80rem; 
+  text-align: center; /* Centers the subtitle text */
+  font-weight: 600;
+  color: #064e3b;
+  white-space: nowrap;  
+  width : 100%; /* Ensures the subtitle spans the width of the container */
+}
+.footer-text {
+  position: relative;
+  margin: 2.5rem auto 0 auto; /* Centers the footer text and adds spacing above */
+  bottom: 1rem; /* Adjust as needed */
+  width: 100%;
+  text-align: center;
+  font-size: 0.75rem;
+  color: #064e3b;
+}
+
 /* --------------------------------------------------------------------------
    5. CURVED FRAME OVERLAY (SOLVED BOTTOM WHITE STRIP & PICKABLE COLORS)
    -------------------------------------------------------------------------- */
