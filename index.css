@@ -1,289 +1,188 @@
 /* ==========================================================================
-   FARMS LIQUID GLASS (GLASSMORPHISM) LOGIN PAGE STYLESHEET
+   1. Global Reset & Base Styles
    ========================================================================== */
-
-/* --------------------------------------------------------------------------
-   1. DESIGN TOKENS & EASY-PICKABLE SWOOP BORDER COLORS
-   -------------------------------------------------------------------------- */
-:root {
-  /* --- EASILY PICKABLE SWOOP / FRAME BORDER COLORS --- */
-  --swoop-gold: #d4af37; /* Pick your accent stripe color here | Alt: #ffc107 or #e0a800 */
-  --swoop-green: #0f4d2a; /* Pick your main bottom swoop color here | Alt: #1b5e20 or #0d3b1e */
-  
-  /* Brand UI Colors */
-  --primary-color: #0f4d2a; /* Sets BulSU deep green for buttons/headers | Alt: #1b5e20 */
-  --primary-hover: #08331b; /* Sets darker green for button hover state | Alt: color-mix(in srgb, var(--primary-color), black 20%) */
-  --accent-gold: #d4af37; /* Sets accent gold for focus states/photo border | Alt: #f5c518 */
-  --text-primary: #111b15; /* Sets dark text color for high contrast | Alt: #000000 */
-  --text-secondary: #3d5245; /* Sets subtle dark green-grey for captions | Alt: #4a5568 */
-  --border-glass: rgba(255, 255, 255, 0.6); /* Translucent bright rim for liquid glass outline | Alt: rgba(255, 255, 255, 0.3) */
-  --focus-ring: rgba(212, 175, 55, 0.4); /* Glowing gold aura around active input fields | Alt: rgba(15, 77, 42, 0.3) */
-  --radius-sm: 10px; /* Standard rounded corners for form inputs and buttons | Alt: 6px or 50px */
-  --radius-lg: 24px; /* Smooth liquid curved corners for main container | Alt: 30px or 16px */
-  --transition-speed: 0.25s cubic-bezier(0.4, 0, 0.2, 1); /* Liquid smooth animation speed | Alt: 0.2s ease */
-}
-
-/* --------------------------------------------------------------------------
-   2. GLOBAL RESET & BASE STYLES
-   -------------------------------------------------------------------------- */
 * {
-  box-sizing: border-box; /* Includes padding/borders in total width/height | Alt: content-box */
-  margin: 0; /* Removes default browser outer margins | Alt: reset targeted tags only */
-  padding: 0; /* Removes default browser inner padding | Alt: reset targeted tags only */
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; /* Sets modern font stack | Alt: 'Inter', 'Poppins' */
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
 }
 
-/* --------------------------------------------------------------------------
-   3. BODY & LAYOUT CONTAINER
-   -------------------------------------------------------------------------- */
 body {
-  min-height: 100vh; /* Takes up full browser screen height | Alt: 100dvh for mobile screens */
-  display: flex; /* Activates Flexbox layout mode | Alt: display: grid with place-items: center */
-  justify-content: center; /* Horizontally centers liquid glass card | Alt: flex-start or flex-end */
-  align-items: center; /* Vertically centers liquid glass card | Alt: flex-start or baseline */
-  position: relative; /* Anchor container for absolute elements | Alt: position: static */
-  overflow: hidden; /* Prevents scrollbars from background layers | Alt: overflow: auto */
-  padding: 1.5rem; /* Safety edge padding for mobile screens | Alt: clamp(1rem, 3vw, 3rem) */
-}
-
-/* --------------------------------------------------------------------------
-   4. REPLACEABLE BACKGROUND IMAGE LAYER
-   -------------------------------------------------------------------------- */
-.bg-image-container {
-  position: absolute; /* Spans full screen behind all other elements | Alt: position: fixed */
-  top: 0; /* Aligns top edge | Alt: inset: 0 */
-  left: 0; /* Aligns left edge | Alt: inset: 0 */
-  width: 100%; /* Spans full screen width | Alt: 100vw */
-  height: 100%; /* Spans full screen height | Alt: 100vh */
-  z-index: -2; /* Places image behind frame overlay and login card | Alt: z-index: 0 */
-  
-  /* Replaceable background image */
-  background-image: url('bg.jpg');
-  background-size: cover; /* Stretches image cleanly across entire screen | Alt: background-size: contain */
-  background-position: center center; /* Keeps central photo focused | Alt: top center */
-  background-repeat: no-repeat; /* Prevents image tiling | Alt: repeat */
-  background-color: #e8f5e9; /* Fallback background tint if no image is present | Alt: #f0f0f0 */
-}
-
-.login-card-container {
-  position: relative; /* Stacks card above background and swoop layers | Alt: position: absolute */
-  z-index: 1; /* Elevates card above background and swoop layers | Alt: z-index: 2 */
-  display: flex; /* Activates Flexbox layout mode | Alt: display: grid with place-items: center */
-  justify-content: center; /* Horizontally centers liquid glass card | Alt: flex-start or flex-end */
-  align-items: center; /* Vertically centers liquid glass card | Alt: flex-start or baseline */
-  width: 100%; /* Spans full available width | Alt: width: auto */
-  max-width: 400px; /* Restricts card width on desktop screens | Alt: max-width: 420px */
-}
-
-.login-card-container form {
-  display: inline-flex;       /* Keeps container strictly fitted to its content */
-  flex-direction: column;
+  min-height: 100vh;
+  display: flex;
   align-items: center;
   justify-content: center;
-  text-align: center;
-  
-  /* Strict Oval Frame Styling */
-  border: 2px solid #064e3b;  /* Green outline matching the text */
-  border-radius: 50%;         /* Creates an ellipse/oval shape */
-  padding: 15px 30px;         /* Top/bottom and left/right space shaping the oval */
-  margin: 0 auto 15px auto;
-}
-.mini-logo {
-  margin: 0;
-  font-family: system-ui, -apple-system, sans-serif;
-  font-size: 2.2rem;
-  font-weight: 900;
-  color: #064e3b;
-  letter-spacing: 1px;
-  line-height: 1;
-}
-.header-divider {
   position: relative;
-  width: 100%;             /* Spans the width of the text container */
-  max-width: 280px;        /* Limits max length */
-  border: none;
-  height: 3px;             /* Line thickness */
-  background-color: #064e3b; /* Matches title color */
-  margin: 0px auto 3px auto; /* Centers the line and adds spacing */
-}
-.login-card-subtitle {
-  display: block;
-  margin: 0 auto 2.5rem auto; /* Centers the subtitle and adds spacing below */
-  font-family: system-ui, -apple-system, sans-serif;
-  font-size: 0.80rem; 
-  text-align: center; /* Centers the subtitle text */
-  font-weight: 600;
-  color: #064e3b;
-  white-space: nowrap;  
-  width : 100%; /* Ensures the subtitle spans the width of the container */
-}
-.footer-text {
-  position: relative;
-  margin: 2.5rem auto 0 auto; /* Centers the footer text and adds spacing above */
-  bottom: 1rem; /* Adjust as needed */
-  width: 100%;
-  text-align: center;
-  font-size: 0.75rem;
-  color: #064e3b;
+  overflow: hidden;
+  background-color: #0f172a; /* Fallback dark background */
 }
 
-/* --------------------------------------------------------------------------
-   5. CURVED FRAME OVERLAY (SOLVED BOTTOM WHITE STRIP & PICKABLE COLORS)
-   -------------------------------------------------------------------------- */
+/* ==========================================================================
+   2. Background Image & Curved SVG Frame Overlay
+   ========================================================================== */
+.bg-image-container {
+  position: absolute;
+  inset: 0;
+  // background: url('https://images.unsplash.com/photo-1541829070764-84a7d30dd3f3?q=80&w=1920') no-repeat center center/cover;
+  z-index: 1;
+  background: linear-gradient(to bottom, rgba(15, 23, 42, 0.7), rgba(15, 23, 42, 0.9)), url('bg.jpg') no-repeat center center/cover;
+}
+
 .curved-frame-overlay {
-  position: absolute; /* Positions curved SVG frame across lower screen | Alt: position: fixed */
-  bottom: 0; /* Pins frame strictly to the bottom edge | Alt: top: auto */
-  left: 0; /* Pins frame to left edge | Alt: right: 0 */
-  width: 100%; /* Spans full screen width | Alt: 100vw */
-  height: 60%; /* Occupies bottom 60% of viewport | Alt: height: 50% or 70% */
-  z-index: -1; /* Sits directly above background image but behind glass card | Alt: z-index: 0 */
-  pointer-events: none; /* Allows user clicks to pass through overlay | Alt: pointer-events: auto */
-  line-height: 0; /* ELIMINATES GAP: Prevents inline SVG font-line baseline white gap | Alt: font-size: 0 */
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 60vh;
+  z-index: 2;
+  pointer-events: none;
 }
 
 .curved-frame-overlay svg {
-  display: block; /* ELIMINATES GAP: Removes standard inline-block sub-pixel bottom gap | Alt: vertical-align: bottom */
-  width: 100%; /* Stretches SVG graphics full width | Alt: width: 100vw */
-  height: 100%; /* Stretches SVG graphics full container height | Alt: height: auto */
+  width: 100%;
+  height: 100%;
+  display: block;
 }
 
-/* Dynamic color assignment for SVG swoops driven directly by CSS variables */
+/* Pickable Accent Swoop Colors */
 .swoop-gold-path {
-  fill: var(--swoop-gold); /* Connects gold swoop path directly to CSS variable | Alt: fill: #ffc107 */
+  fill: #f59e0b; /* Accent Gold */
+  opacity: 0.85;
 }
 
 .swoop-green-path {
-  fill: var(--swoop-green); /* Connects green swoop path directly to CSS variable | Alt: fill: #1b5e20 */
+  fill: #065f46; /* Primary Green */
+  opacity: 0.95;
 }
 
-/* --------------------------------------------------------------------------
-   6. LIQUID GLASS CONTAINER (THE GLASSMORPHISM CARD)
-   -------------------------------------------------------------------------- */
+/* ==========================================================================
+   3. Glassmorphism Login Card
+   ========================================================================== */
 .login-card {
-  position: relative; /* Stacks card above background overlay layer | Alt: position: absolute */
-  z-index: 1; /* Elevates card above background and curved frame layers | Alt: z-index: 2 */
-  width: 100%; /* Spans full available width | Alt: width: 90% */
-  max-width: 400px; /* Restricts card width on desktop screens | Alt: max-width: 420px */
-  
-  /* --- LIQUID GLASS MAGIC PROPERTIES --- */
-  background: rgba(255, 255, 255, 0.35); /* Translucent frosted white tint | Alt: rgba(255, 255, 255, 0.2) for sheerer glass */
-  backdrop-filter: blur(20px) saturate(180%); /* Blurs background photo & swoops behind card | Alt: blur(15px) */
-  -webkit-backdrop-filter: blur(20px) saturate(180%); /* Safari browser blur compatibility | Alt: blur(12px) */
-  
-  /* Refractive glass specular rim light highlights */
-  border: 1px solid var(--border-glass); /* Bright translucent rim border | Alt: border-top: 2px solid rgba(255, 255, 255, 0.8) */
-  box-shadow: 
-    0 24px 48px rgba(0, 0, 0, 0.25), /* Deep ambient drop shadow for height | Alt: 0 12px 32px rgba(0,0,0,0.3) */
-    inset 0 1.5px 1.5px rgba(255, 255, 255, 0.8), /* Top liquid light reflection edge | Alt: inset 0 2px 4px rgba(255,255,255,0.9) */
-    inset 0 -1.5px 1.5px rgba(0, 0, 0, 0.1); /* Bottom shadow depth refraction | Alt: inset 0 -2px 4px rgba(0,0,0,0.15) */
-  
-  padding: 2.25rem 2rem; /* Inner card padding | Alt: 2rem */
-  border-radius: var(--radius-lg); /* Curved liquid corners | Alt: border-radius: 30px */
+  position: relative;
+  z-index: 3;
+  width: 100%;
+  max-width: 420px;
+  margin: 20px;
+  padding: 40px 32px;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 20px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+  color: #ffffff;
 }
 
-/* --------------------------------------------------------------------------
-   8. HEADER & TYPOGRAPHY
-   -------------------------------------------------------------------------- */
-.login-card h1 {
-  font-size: 2rem; /* Title font size | Alt: clamp(1.6rem, 5vw, 2.2rem) */
-  font-weight: 800; /* Bold title weight | Alt: font-weight: 700 */
-  color: var(--primary-color); /* BulSU deep green header color | Alt: text-shadow: 0 1px 2px rgba(255,255,255,0.8) */
-  text-align: center; /* Centered alignment | Alt: text-align: left */
-  margin-bottom: 0.3rem; /* Bottom margin | Alt: 8px */
-  letter-spacing: -0.5px; /* Modern tight letter spacing | Alt: 0px */
+/* Header Elements */
+.login-card-header {
+  text-align: center;
+  margin-bottom: 28px;
 }
 
-.login-card p {
-  font-size: 0.95rem; /* Subtext font size | Alt: 0.9rem */
-  color: var(--text-secondary); /* Dark green-grey | Alt: #1a1a1a */
-  text-align: center; /* Centered alignment | Alt: text-align: left */
-  margin-bottom: 1.8rem; /* Spacing before form fields | Alt: 1.5rem */
-  font-weight: 600; /* Semi-bold weight for readability over glass | Alt: font-weight: 500 */
+.mini-logo {
+  font-size: 36px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  color: #ffffff;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
-/* --------------------------------------------------------------------------
-   9. FORM GROUPS & LABELS
-   -------------------------------------------------------------------------- */
+.header-divider {
+  border: none;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #f59e0b, transparent);
+  margin: 5px 0;
+}
+
+.login-card-subtitle {
+  font-size: 10px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: rgba(255, 255, 255, 0.85);
+  margin-bottom: 40px;
+}
+
+/* ==========================================================================
+   4. Form Controls & Inputs
+   ========================================================================== */
 .form-group {
-  margin-bottom: 1.25rem; /* Vertical field spacing | Alt: margin-bottom: 1rem */
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
 }
 
 .form-group label {
-  display: block; /* Sits on its own line above input | Alt: display: flex */
-  font-size: 0.875rem; /* Label font size | Alt: 0.8rem */
-  font-weight: 700; /* Bold label weight | Alt: font-weight: 600 */
-  color: var(--text-primary); /* Dark readable label text | Alt: var(--primary-color) */
-  margin-bottom: 0.5rem; /* Gap between label and input | Alt: 0.4rem */
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: rgba(255, 255, 255, 0.9);
 }
 
-/* --------------------------------------------------------------------------
-   10. INPUT FIELDS & FOCUS STATES
-   -------------------------------------------------------------------------- */
 .form-group input {
-  width: 100%; /* Spans full card width | Alt: width: 95% */
-  padding: 0.85rem 1.1rem; /* Inner typing area padding | Alt: padding: 1rem */
-  font-size: 0.95rem; /* Typed text size | Alt: 16px (prevents mobile browser zoom) */
-  color: var(--text-primary); /* Typed text color | Alt: #000000 */
-  background: rgba(255, 255, 255, 0.55); /* Frosted input box background | Alt: rgba(255, 255, 255, 0.4) */
-  border: 1px solid rgba(255, 255, 255, 0.8); /* Translucent input border outline | Alt: 1px solid var(--primary-color) */
-  border-radius: var(--radius-sm); /* Rounded input corners | Alt: border-radius: 8px */
-  outline: none; /* Removes default browser outline | Alt: outline: none */
-  transition: all var(--transition-speed); /* Smooth glass focus timing | Alt: 0.2s ease */
-  backdrop-filter: blur(6px); /* Frosted blur inside input box | Alt: backdrop-filter: none */
+  width: 100%;
+  padding: 12px 16px;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+  font-size: 14px;
+  outline: none;
+  transition: all 0.3s ease;
 }
 
 .form-group input::placeholder {
-  color: rgba(17, 27, 21, 0.55); /* Semi-transparent dark placeholder text | Alt: #555555 */
+  color: rgba(255, 255, 255, 0.6);
 }
 
 .form-group input:focus {
-  background: rgba(255, 255, 255, 0.85); /* Brightens background when typing | Alt: #ffffff */
-  border-color: var(--accent-gold); /* Gold active border highlight | Alt: border-color: var(--primary-color) */
-  box-shadow: 0 0 0 4px var(--focus-ring), 0 4px 12px rgba(0, 0, 0, 0.08); /* Glowing gold halo ring | Alt: box-shadow: 0 0 10px rgba(212,175,55,0.6) */
+  background: rgba(255, 255, 255, 0.3);
+  border-color: #f59e0b;
+  box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.3);
 }
 
-/* --------------------------------------------------------------------------
-   11. SUBMIT BUTTON
-   -------------------------------------------------------------------------- */
+/* Sign In Button */
 .btn-login {
-  width: 100%; /* Spans full card width | Alt: width: auto */
-  padding: 0.9rem; /* Vertical button height padding | Alt: 1rem */
-  margin-top: 0.6rem; /* Spacing above button | Alt: margin-top: 1rem */
-  font-size: 1rem; /* Text size | Alt: 0.95rem */
-  font-weight: 700; /* Bold button text | Alt: font-weight: 600 */
-  color: #ffffff; /* Button text color | Alt: var(--primary-color) */
-  background: linear-gradient(135deg, #0f4d2a 0%, #08331b 100%); /* BulSU green gradient background | Alt: linear-gradient(135deg, #d4af37, #b89320) */
-  border: 1px solid rgba(255, 255, 255, 0.3); /* Translucent button rim border | Alt: border: none */
-  border-radius: var(--radius-sm); /* Rounded button corners | Alt: border-radius: 50px */
-  cursor: pointer; /* Pointer cursor on hover | Alt: cursor: default */
-  transition: all var(--transition-speed); /* Smooth hover animation timing | Alt: 0.2s ease */
-  box-shadow: 0 6px 18px rgba(15, 77, 42, 0.35); /* Green depth shadow | Alt: box-shadow: 0 4px 12px rgba(0,0,0,0.2) */
+  width: 100%;
+  padding: 14px;
+  margin-top: 10px;
+  border: none;
+  border-radius: 10px;
+  background: #065f46;
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.1s ease;
+  box-shadow: 0 4px 12px rgba(6, 95, 70, 0.4);
 }
 
 .btn-login:hover {
-  background: linear-gradient(135deg, #146135 0%, #0c4223 100%); /* Darkens gradient on hover | Alt: filter: brightness(1.1) */
-  transform: translateY(-2px); /* Lifts button on hover | Alt: transform: scale(1.02) */
-  box-shadow: 0 8px 24px rgba(15, 77, 42, 0.5); /* Enhances shadow depth on hover | Alt: box-shadow: 0 4px 10px rgba(0,0,0,0.3) */
+  background: #047857;
 }
 
 .btn-login:active {
-  transform: translateY(0); /* Returns to normal position on click | Alt: transform: scale(0.98) */
+  transform: scale(0.98);
 }
 
-/* --------------------------------------------------------------------------
-   12. MOBILE RESPONSIVENESS
-   -------------------------------------------------------------------------- */
-@media (max-width: 360px) {
-  .login-card {
-    padding: 1.75rem 1.25rem; /* Reduces inner card padding on mobile | Alt: padding: 1.5rem */
-    border-radius: 18px; /* Slightly tighter corner radius | Alt: border-radius: 16px */
-  }
+/* ==========================================================================
+   5. Footer Link
+   ========================================================================== */
+.footer-text {
+  text-align: center;
+  margin-top: 24px;
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.8);
+}
 
-  .login-card h1 {
-    font-size: 1.65rem; /* Scales down header font size for mobile | Alt: font-size: 1.5rem */
-  }
+.footer-text a {
+  color: #fbbf24;
+  text-decoration: none;
+  font-weight: 600;
+}
 
-  .curved-frame-overlay {
-    height: 70%; /* Increases swoop height coverage on mobile screens | Alt: height: 60% */
-  }
+.footer-text a:hover {
+  text-decoration: underline;
 }
