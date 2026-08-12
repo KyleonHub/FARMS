@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>FARMS - Admin Portal</title>
+  <title>FARMS - Admin Portal Dashboard</title>
   <link rel="stylesheet" href="adminDASH.css">
 </head>
 <body>
@@ -31,16 +31,25 @@
   <div class="admin-container">
     <!-- Sidebar Navigation -->
     <aside class="admin-sidebar">
+      <div class="sidebar-header-label">Main Menu</div>
       <nav class="sidebar-nav">
-        <a href="#" class="nav-item active">📊 Dashboard</a>
-        <a href="#" class="nav-item">👨‍🏫 Faculty Status</a>
-        <a href="#" class="nav-item">🏫 Room Matrix</a>
-        <a href="#" class="nav-item">📅 Class Schedules</a>
-        <a href="#" class="nav-item">🔑 Access Requests</a>
-        <a href="#" class="nav-item">📝 Activity Logs</a>
+        <a href="#" class="nav-item active"><span class="nav-icon">📊</span> Dashboard</a>
+        <a href="#" class="nav-item"><span class="nav-icon">👨‍🏫</span> Faculty Status</a>
+        <a href="#" class="nav-item"><span class="nav-icon">🏫</span> Room Matrix</a>
+        <a href="#" class="nav-item"><span class="nav-icon">📅</span> Class Schedules</a>
+        <a href="#" class="nav-item"><span class="nav-icon">🔑</span> Access Requests</a>
+        <a href="#" class="nav-item"><span class="nav-icon">📝</span> Activity Logs</a>
       </nav>
+      
       <div class="sidebar-footer">
-        <a href="index.html" class="nav-item logout">🚪 Sign Out</a>
+        <div class="sidebar-system-status">
+          <span class="status-dot"></span>
+          <div class="status-text">
+            <strong>System Online</strong>
+            <span>Server 01 - Optimal</span>
+          </div>
+        </div>
+        <a href="index.html" class="nav-item logout"><span class="nav-icon">🚪</span> Sign Out</a>
       </div>
     </aside>
 
@@ -98,9 +107,9 @@
 
               <label class="control-label" style="margin-top: 16px;">Quick Select</label>
               <div class="vertical-storey">
-                <button class="storey-btn quick-bldg-btn" data-bldg="CBA Building">CBA Building</button>
-                <button class="storey-btn quick-bldg-btn" data-bldg="Hangar">Hangar</button>
-                <button class="storey-btn quick-bldg-btn" data-bldg="Pancho Building">Pancho Building</button>
+                <button class="storey-btn quick-bldg-btn" data-bldg="CBA Building"><span class="dot-indicator"></span> CBA Building</button>
+                <button class="storey-btn quick-bldg-btn" data-bldg="Hangar"><span class="dot-indicator"></span> Hangar</button>
+                <button class="storey-btn quick-bldg-btn" data-bldg="Pancho Building"><span class="dot-indicator"></span> Pancho Building</button>
               </div>
             </div>
 
@@ -138,17 +147,24 @@
 
           <!-- RIGHT DISPLAY AREA -->
           <div class="map-display-area">
+            
+            <!-- FLOATING HOVER TOOLTIP -->
+            <div id="roomTooltip" class="map-tooltip hidden">
+              <span id="tooltipRoom" class="tooltip-title">Room 101</span>
+              <span id="tooltipStatus" class="tooltip-status">Vacant</span>
+              <span id="tooltipDetail" class="tooltip-detail">Click to view details</span>
+            </div>
+
             <!-- SVG MAP CONTAINER -->
             <div id="svgContainer" class="map-wrapper">
               <div id="campusMap" class="svg-map-view">
                 <svg viewBox="0 0 1200 650" width="100%" height="100%" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
-                  <!-- Enhanced Campus Hover Styles -->
                   <style>
-                    .campus-boundary { fill: #f8f9fa; stroke: #343a40; stroke-width: 4; rx: 16; }
-                    .campus-title { font-family: system-ui, sans-serif; font-weight: 700; font-size: 22px; fill: #495057; }
+                    .campus-boundary { fill: #f0fdf4; stroke: #064e3b; stroke-width: 4; rx: 16; }
+                    .campus-title { font-family: system-ui, sans-serif; font-weight: 700; font-size: 22px; fill: #064e3b; }
                     
-                    .building-box { fill: #ffffff; stroke: #212529; stroke-width: 3.5; rx: 8; transition: all 0.3s ease; }
-                    .building-label { font-family: system-ui, sans-serif; font-weight: 800; font-size: 20px; fill: #212529; text-anchor: middle; pointer-events: none; transition: fill 0.3s ease; }
+                    .building-box { fill: #ffffff; stroke: #064e3b; stroke-width: 3.5; rx: 8; transition: all 0.3s ease; }
+                    .building-label { font-family: system-ui, sans-serif; font-weight: 800; font-size: 20px; fill: #0f172a; text-anchor: middle; pointer-events: none; transition: fill 0.3s ease; }
                     
                     .clickable-shell { 
                       cursor: pointer; 
@@ -157,13 +173,12 @@
                       transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); 
                     }
                     
-                    /* Tactile pop-up effect */
-                    .clickable-shell:hover { transform: translateY(-5px) scale(1.02); }
+                    .clickable-shell:hover { transform: translateY(-4px) scale(1.015); }
                     .clickable-shell:hover .building-box { 
-                      fill: #f8fafc; 
-                      stroke: #064e3b; 
+                      fill: #ecfdf5; 
+                      stroke: #f59e0b; 
                       stroke-width: 5; 
-                      filter: drop-shadow(0px 10px 15px rgba(0,0,0,0.15)); 
+                      filter: drop-shadow(0px 10px 15px rgba(6, 78, 59, 0.2)); 
                     }
                     .clickable-shell:hover .building-label { fill: #064e3b; }
                   </style>

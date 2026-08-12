@@ -18,6 +18,13 @@ document.addEventListener('DOMContentLoaded', () => {
   const listControlGroup = document.getElementById('listControlGroup');
   const listTableBody = document.getElementById('listTableBody');
 
+  // Tooltip Tracking Elements
+  const tooltip = document.getElementById('roomTooltip');
+  const tooltipRoom = document.getElementById('tooltipRoom');
+  const tooltipStatus = document.getElementById('tooltipStatus');
+  const tooltipDetail = document.getElementById('tooltipDetail');
+  const mapDisplayArea = document.querySelector('.map-display-area');
+
   const BUILDING_CONFIG = {
     'CBA Building': { floors: 4 },
     'Hangar': { floors: 1 },
@@ -39,7 +46,6 @@ document.addEventListener('DOMContentLoaded', () => {
   let activeMode = 'svg';
   let activeListFilter = 'all';
 
-  // HELPER: Dynamic Title Updates
   function updateTitle() {
     if (activeMode === 'list') {
       viewTitle.textContent = activeBuilding ? `${activeBuilding} - Room List` : 'All Buildings - Room List';
@@ -48,7 +54,45 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  // 1. Primary View Mode Switcher
+  mapDisplayArea.addEventListener('mousemove', (e) => {
+    if (tooltip && !tooltip.classList.contains('hidden')) {
+      const rect = mapDisplayArea.getBoundingClientRect();
+      tooltip.style.left = `${e.clientX - rect.left + 15}px`;
+      tooltip.style.top = `${e.clientY - rect.top + 15}px`;
+    }
+  });
+
+  function attachRoomTooltips() {
+    const roomGroups = document.querySelectorAll('.room-group');
+    
+    roomGroups.forEach(group => {
+      group.addEventListener('mouseenter', () => {
+        const textElement = group.querySelector('.room-text');
+        const subTextElement = group.querySelector('.sub-text');
+        
+        if (textElement) {
+          tooltipRoom.textContent = textElement.textContent;
+          const status = subTextElement ? subTextElement.textContent : 'Unknown';
+          tooltipStatus.textContent = status;
+          
+          if (status.toLowerCase() === 'vacant') {
+            tooltipStatus.style.color = '#34d399';
+            tooltipDetail.textContent = 'Click to assign room';
+          } else {
+            tooltipStatus.style.color = '#f87171';
+            tooltipDetail.textContent = 'Click to view occupant';
+          }
+
+          tooltip.classList.remove('hidden');
+        }
+      });
+
+      group.addEventListener('mouseleave', () => {
+        tooltip.classList.add('hidden');
+      });
+    });
+  }
+
   btnSvgView.addEventListener('click', () => {
     activeMode = 'svg';
     btnSvgView.classList.add('active');
@@ -82,6 +126,7 @@ document.addEventListener('DOMContentLoaded', () => {
     storeyGroup.classList.add('hidden');
     backToCampusBtn.classList.add('hidden');
     listControlGroup.classList.remove('hidden');
+    tooltip.classList.add('hidden'); 
     
     document.querySelectorAll('.bldg-filter').forEach(btn => {
       btn.classList.toggle('active', btn.getAttribute('data-bldg') === (activeBuilding || 'all'));
@@ -91,7 +136,6 @@ document.addEventListener('DOMContentLoaded', () => {
     renderListView();
   });
 
-  // 2. Building Shell Clicks
   const buildingShells = document.querySelectorAll('.clickable-shell');
   buildingShells.forEach(shell => {
     shell.addEventListener('click', () => {
@@ -125,7 +169,6 @@ document.addEventListener('DOMContentLoaded', () => {
     renderListView();
   }
 
-  // 3. Dynamic Storey Selector
   function buildFloorTabs(buildingName) {
     storeySelector.innerHTML = '';
     const totalFloors = BUILDING_CONFIG[buildingName]?.floors || 1;
@@ -155,7 +198,6 @@ document.addEventListener('DOMContentLoaded', () => {
     return `${floorNum}th Floor`;
   }
 
-  // 4. List View Filtering
   const statusFilterBtns = document.querySelectorAll('.status-filter');
   statusFilterBtns.forEach(btn => {
     btn.addEventListener('click', () => {
@@ -209,12 +251,12 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // 5. Back Button Action
   backToCampusBtn.addEventListener('click', () => {
     campusMap.classList.remove('hidden');
     buildingMap.classList.add('hidden');
     backToCampusBtn.classList.add('hidden');
     storeyGroup.classList.add('hidden');
+    tooltip.classList.add('hidden');
     
     if (activeMode === 'svg') {
       campusOverviewGroup.classList.remove('hidden');
@@ -225,32 +267,32 @@ document.addEventListener('DOMContentLoaded', () => {
     renderListView();
   });
 
-  // 6. SVG Floor Plan Renderer (Enhanced Hover Physics)
   function loadFloorSVG(building, floor) {
+    tooltip.classList.add('hidden');
+
     if (building === 'CBA Building') {
       const translateY = (4 - floor) * 210;
       floorPlanContent.innerHTML = `
         <svg viewBox="0 0 1100 220" width="100%" height="100%" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
           <style>
-            .floor-label { font-family: system-ui, sans-serif; font-weight: bold; font-size: 16px; fill: #495057; }
-            .hallway { fill: #f1f3f5; stroke: #dee2e6; stroke-dasharray: 4,4; }
-            .stair-box { fill: #e9ecef; stroke: #6c757d; stroke-width: 2; rx: 4; }
-            .stair-step { stroke: #adb5bd; stroke-width: 1.5; }
-            .cr-rect { fill: #e7f5ff; stroke: #1c7ed6; stroke-width: 2; rx: 4; }
+            .floor-label { font-family: system-ui, sans-serif; font-weight: bold; font-size: 16px; fill: #064e3b; }
+            .hallway { fill: #f1f3f5; stroke: #cbd5e1; stroke-dasharray: 4,4; }
+            .stair-box { fill: #f8fafc; stroke: #64748b; stroke-width: 2; rx: 4; }
+            .stair-step { stroke: #cbd5e1; stroke-width: 1.5; }
+            .cr-rect { fill: #ecfdf5; stroke: #064e3b; stroke-width: 2; rx: 4; }
             
-            .room-rect { fill: #ffffff; stroke: #343a40; stroke-width: 2.5; rx: 6; transition: all 0.2s ease; }
-            .room-text { font-family: system-ui, sans-serif; font-weight: bold; font-size: 14px; fill: #212529; text-anchor: middle; pointer-events: none; }
-            .sub-text { font-family: system-ui, sans-serif; font-size: 11px; fill: #6c757d; text-anchor: middle; pointer-events: none; }
+            .room-rect { fill: #ffffff; stroke: #334155; stroke-width: 2.5; rx: 6; transition: all 0.2s ease; }
+            .room-text { font-family: system-ui, sans-serif; font-weight: bold; font-size: 14px; fill: #0f172a; text-anchor: middle; pointer-events: none; }
+            .sub-text { font-family: system-ui, sans-serif; font-size: 11px; fill: #64748b; text-anchor: middle; pointer-events: none; }
             
-            .room-group.available .room-rect { fill: #d4edda; stroke: #28a745; }
-            .room-group.available .sub-text { fill: #155724; }
-            .room-group.booked .room-rect { fill: #f8d7da; stroke: #dc3545; }
-            .room-group.booked .sub-text { fill: #721c24; }
+            .room-group.available .room-rect { fill: #ecfdf5; stroke: #10b981; }
+            .room-group.available .sub-text { fill: #047857; }
+            .room-group.booked .room-rect { fill: #fff1f2; stroke: #f43f5e; }
+            .room-group.booked .sub-text { fill: #be123c; }
 
-            /* Interactive Room Physics */
             .room-group { cursor: pointer; transform-origin: center; transform-box: fill-box; transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1); }
             .room-group:hover { transform: translateY(-3px) scale(1.02); }
-            .room-group:hover .room-rect { filter: drop-shadow(0px 6px 10px rgba(0,0,0,0.2)) brightness(0.95); stroke-width: 3.5; }
+            .room-group:hover .room-rect { filter: drop-shadow(0px 6px 10px rgba(6,78,59,0.15)) brightness(0.98); stroke-width: 3.5; stroke: #f59e0b; }
           </style>
 
           <g transform="translate(-40, -${30 + translateY})">
@@ -296,44 +338,44 @@ document.addEventListener('DOMContentLoaded', () => {
                 <text x="40" y="142" class="sub-text" font-size="9" font-weight="bold">STAIRS</text>
               </g>
 
-              <g><rect x="850" y="55" width="90" height="150" class="cr-rect"/><text x="895" y="130" class="room-text" fill="#1c7ed6">CR</text></g>
+              <g><rect x="850" y="55" width="90" height="150" class="cr-rect"/><text x="895" y="130" class="room-text" fill="#064e3b">CR</text></g>
             </g>
           </g>
         </svg>
       `;
     } else if (building === 'Hangar') {
       floorPlanContent.innerHTML = `
-        <svg viewBox="0 0 1150 460" width="100%" height="100%" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
+        <svg viewBox="0 0 1150 380" width="100%" height="100%" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
           <style>
-            .floor-label { font-family: system-ui, sans-serif; font-weight: bold; font-size: 20px; fill: #495057; }
-            .room-text { font-family: system-ui, sans-serif; font-weight: bold; font-size: 15px; fill: #212529; text-anchor: middle; pointer-events: none; }
-            .sub-text { font-family: system-ui, sans-serif; font-size: 12px; fill: #6c757d; text-anchor: middle; pointer-events: none; }
+            .floor-label { font-family: system-ui, sans-serif; font-weight: bold; font-size: 20px; fill: #064e3b; }
+            .room-text { font-family: system-ui, sans-serif; font-weight: bold; font-size: 15px; fill: #0f172a; text-anchor: middle; pointer-events: none; }
+            .sub-text { font-family: system-ui, sans-serif; font-size: 12px; fill: #64748b; text-anchor: middle; pointer-events: none; }
             
-            .room-rect { fill: #ffffff; stroke: #343a40; stroke-width: 2.5; rx: 8; transition: all 0.2s ease; }
-            .room-group.available .room-rect { fill: #d4edda; stroke: #28a745; }
-            .room-group.available .sub-text { fill: #155724; }
-            .room-group.booked .room-rect { fill: #f8d7da; stroke: #dc3545; }
-            .room-group.booked .sub-text { fill: #721c24; }
+            .room-rect { fill: #ffffff; stroke: #334155; stroke-width: 2.5; rx: 8; transition: all 0.2s ease; }
+            .room-group.available .room-rect { fill: #ecfdf5; stroke: #10b981; }
+            .room-group.available .sub-text { fill: #047857; }
+            .room-group.booked .room-rect { fill: #fff1f2; stroke: #f43f5e; }
+            .room-group.booked .sub-text { fill: #be123c; }
             
             .room-group { cursor: pointer; transform-origin: center; transform-box: fill-box; transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1); }
             .room-group:hover { transform: translateY(-3px) scale(1.02); }
-            .room-group:hover .room-rect { filter: drop-shadow(0px 6px 10px rgba(0,0,0,0.2)) brightness(0.95); stroke-width: 3.5; }
+            .room-group:hover .room-rect { filter: drop-shadow(0px 6px 10px rgba(6,78,59,0.15)) brightness(0.98); stroke-width: 3.5; stroke: #f59e0b; }
           </style>
           
-          <rect x="50" y="20" width="1050" height="420" rx="10" fill="#ffffff" stroke="#212529" stroke-width="6"/>
-          <text x="100" y="230" transform="rotate(-90, 100, 230)" text-anchor="middle" font-family="system-ui, sans-serif" font-size="28" font-weight="900" fill="#e9ecef" letter-spacing="10">HANGAR</text>
+          <rect x="50" y="20" width="1050" height="340" rx="10" fill="#ffffff" stroke="#064e3b" stroke-width="4"/>
+          <text x="100" y="190" transform="rotate(-90, 100, 190)" text-anchor="middle" font-family="system-ui, sans-serif" font-size="24" font-weight="900" fill="#e2e8f0" letter-spacing="8">HANGAR</text>
           <text x="140" y="55" class="floor-label">GROUND FLOOR</text>
 
-          <g transform="translate(0, 20)">
-            <g id="room-rect-H3" class="room-group available"><rect x="140" y="50" width="180" height="110" class="room-rect"/><text x="230" y="102" class="room-text">Room H3</text><text id="status-text-H3" x="230" y="125" class="sub-text">Vacant</text></g>
-            <g id="room-rect-H2" class="room-group booked"><rect x="140" y="175" width="180" height="110" class="room-rect"/><text x="230" y="227" class="room-text">Room H2</text><text id="status-text-H2" x="230" y="250" class="sub-text">Occupied</text></g>
-            <g id="room-rect-H1" class="room-group available"><rect x="140" y="300" width="180" height="110" class="room-rect"/><text x="230" y="352" class="room-text">Room H1</text><text id="status-text-H1" x="230" y="375" class="sub-text">Vacant</text></g>
+          <g transform="translate(0, 10)">
+            <g id="room-rect-H3" class="room-group available"><rect x="140" y="50" width="180" height="85" class="room-rect"/><text x="230" y="88" class="room-text">Room H3</text><text id="status-text-H3" x="230" y="108" class="sub-text">Vacant</text></g>
+            <g id="room-rect-H2" class="room-group booked"><rect x="140" y="145" width="180" height="85" class="room-rect"/><text x="230" y="183" class="room-text">Room H2</text><text id="status-text-H2" x="230" y="203" class="sub-text">Occupied</text></g>
+            <g id="room-rect-H1" class="room-group available"><rect x="140" y="240" width="180" height="85" class="room-rect"/><text x="230" y="278" class="room-text">Room H1</text><text id="status-text-H1" x="230" y="298" class="sub-text">Vacant</text></g>
             
-            <rect x="350" y="50" width="460" height="360" fill="#f8f9fa" stroke="#dee2e6" stroke-dasharray="10,10" stroke-width="3" rx="8"/>
+            <rect x="350" y="50" width="460" height="275" fill="#f8fafc" stroke="#cbd5e1" stroke-dasharray="8,8" stroke-width="2" rx="8"/>
 
-            <g id="room-rect-H6" class="room-group available"><rect x="840" y="50" width="180" height="110" class="room-rect"/><text x="930" y="102" class="room-text">Room H6</text><text id="status-text-H6" x="930" y="125" class="sub-text">Vacant</text></g>
-            <g id="room-rect-H5" class="room-group booked"><rect x="840" y="175" width="180" height="110" class="room-rect"/><text x="930" y="227" class="room-text">Room H5</text><text id="status-text-H5" x="930" y="250" class="sub-text">Occupied</text></g>
-            <g id="room-rect-H4" class="room-group available"><rect x="840" y="300" width="180" height="110" class="room-rect"/><text x="930" y="352" class="room-text">Room H4</text><text id="status-text-H4" x="930" y="375" class="sub-text">Vacant</text></g>
+            <g id="room-rect-H6" class="room-group available"><rect x="840" y="50" width="180" height="85" class="room-rect"/><text x="930" y="88" class="room-text">Room H6</text><text id="status-text-H6" x="930" y="108" class="sub-text">Vacant</text></g>
+            <g id="room-rect-H5" class="room-group booked"><rect x="840" y="145" width="180" height="85" class="room-rect"/><text x="930" y="183" class="room-text">Room H5</text><text id="status-text-H5" x="930" y="203" class="sub-text">Occupied</text></g>
+            <g id="room-rect-H4" class="room-group available"><rect x="840" y="240" width="180" height="85" class="room-rect"/><text x="930" y="278" class="room-text">Room H4</text><text id="status-text-H4" x="930" y="298" class="sub-text">Vacant</text></g>
           </g>
         </svg>
       `;
@@ -341,33 +383,33 @@ document.addEventListener('DOMContentLoaded', () => {
       floorPlanContent.innerHTML = `
         <svg viewBox="40 20 1520 660" width="100%" height="100%" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
           <style>
-            .floor-label { font-family: system-ui, sans-serif; font-weight: bold; font-size: 20px; fill: #495057; }
-            .hallway { fill: #f1f3f5; stroke: #dee2e6; stroke-dasharray: 4,4; }
-            .cr-rect { fill: #e7f5ff; stroke: #1c7ed6; stroke-width: 2.5; rx: 5; }
+            .floor-label { font-family: system-ui, sans-serif; font-weight: bold; font-size: 20px; fill: #064e3b; }
+            .hallway { fill: #f1f3f5; stroke: #cbd5e1; stroke-dasharray: 4,4; }
+            .cr-rect { fill: #ecfdf5; stroke: #064e3b; stroke-width: 2.5; rx: 5; }
             
-            .room-text { font-family: system-ui, sans-serif; font-weight: bold; font-size: 13px; fill: #212529; text-anchor: middle; pointer-events: none; }
-            .sub-text { font-family: system-ui, sans-serif; font-size: 10px; fill: #6c757d; text-anchor: middle; pointer-events: none; }
+            .room-text { font-family: system-ui, sans-serif; font-weight: bold; font-size: 13px; fill: #0f172a; text-anchor: middle; pointer-events: none; }
+            .sub-text { font-family: system-ui, sans-serif; font-size: 10px; fill: #64748b; text-anchor: middle; pointer-events: none; }
             
-            .room-rect { fill: #ffffff; stroke: #343a40; stroke-width: 2.5; rx: 5; transition: all 0.2s ease; }
-            .room-group.available .room-rect { fill: #d4edda; stroke: #28a745; }
-            .room-group.available .sub-text { fill: #155724; }
-            .room-group.booked .room-rect { fill: #f8d7da; stroke: #dc3545; }
-            .room-group.booked .sub-text { fill: #721c24; }
+            .room-rect { fill: #ffffff; stroke: #334155; stroke-width: 2.5; rx: 5; transition: all 0.2s ease; }
+            .room-group.available .room-rect { fill: #ecfdf5; stroke: #10b981; }
+            .room-group.available .sub-text { fill: #047857; }
+            .room-group.booked .room-rect { fill: #fff1f2; stroke: #f43f5e; }
+            .room-group.booked .sub-text { fill: #be123c; }
             
             .room-group { cursor: pointer; transform-origin: center; transform-box: fill-box; transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1); }
             .room-group:hover { transform: translateY(-3px) scale(1.02); }
-            .room-group:hover .room-rect { filter: drop-shadow(0px 6px 10px rgba(0,0,0,0.2)) brightness(0.95); stroke-width: 3.5; }
+            .room-group:hover .room-rect { filter: drop-shadow(0px 6px 10px rgba(6,78,59,0.15)) brightness(0.98); stroke-width: 3.5; stroke: #f59e0b; }
           </style>
           
-          <rect x="50" y="30" width="1500" height="640" rx="8" fill="#ffffff" stroke="#212529" stroke-width="5"/>
+          <rect x="50" y="30" width="1500" height="640" rx="8" fill="#ffffff" stroke="#064e3b" stroke-width="4"/>
           <text x="70" y="62" class="floor-label">PANCHO BUILDING - GROUND FLOOR</text>
 
           <rect x="100" y="240" width="1300" height="90" class="hallway"/>
           <rect x="1400" y="240" width="63" height="410" class="hallway"/>
-          <text x="700" y="292" font-family="system-ui, sans-serif" font-size="18" font-weight="bold" fill="#adb5bd" text-anchor="middle" letter-spacing="8">CORRIDOR</text>
+          <text x="700" y="292" font-family="system-ui, sans-serif" font-size="18" font-weight="bold" fill="#94a3b8" text-anchor="middle" letter-spacing="8">CORRIDOR</text>
 
           <g id="room-rect-101" class="room-group available"><rect x="100" y="90" width="80" height="150" class="room-rect"/><text x="140" y="160" class="room-text">Room 101</text><text id="status-text-101" x="140" y="178" class="sub-text">Vacant</text></g>
-          <rect x="180" y="90" width="80" height="150" class="cr-rect"/><text x="220" y="170" font-family="system-ui, sans-serif" font-size="16" font-weight="bold" fill="#1c7ed6" text-anchor="middle" pointer-events="none">CR</text>
+          <rect x="180" y="90" width="80" height="150" class="cr-rect"/><text x="220" y="170" font-family="system-ui, sans-serif" font-size="16" font-weight="bold" fill="#064e3b" text-anchor="middle" pointer-events: none">CR</text>
 
           <g id="room-rect-103" class="room-group booked"><rect x="260" y="90" width="80" height="150" class="room-rect"/><text x="300" y="160" class="room-text">Room 103</text><text id="status-text-103" x="300" y="178" class="sub-text">Occupied</text></g>
           <g id="room-rect-105" class="room-group available"><rect x="340" y="90" width="80" height="150" class="room-rect"/><text x="380" y="160" class="room-text">Room 105</text><text id="status-text-105" x="380" y="178" class="sub-text">Vacant</text></g>
@@ -378,7 +420,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
           <g id="room-rect-115" class="room-group booked"><rect x="740" y="90" width="160" height="150" class="room-rect"/><text x="820" y="160" class="room-text">Room 115</text><text id="status-text-115" x="820" y="178" class="sub-text">Occupied</text></g>
 
-          <rect x="900" y="90" width="100" height="150" class="cr-rect"/><text x="950" y="170" font-family="system-ui, sans-serif" font-size="16" font-weight="bold" fill="#1c7ed6" text-anchor="middle" pointer-events="none">CR</text>
+          <rect x="900" y="90" width="100" height="150" class="cr-rect"/><text x="950" y="170" font-family="system-ui, sans-serif" font-size="16" font-weight="bold" fill="#064e3b" text-anchor="middle" pointer-events: none">CR</text>
 
           <g id="room-rect-117a" class="room-group available"><rect x="1000" y="90" width="80" height="150" class="room-rect"/><text x="1040" y="160" class="room-text">Room 117A</text><text id="status-text-117a" x="1040" y="178" class="sub-text">Vacant</text></g>
           <g id="room-rect-119" class="room-group available"><rect x="1080" y="90" width="80" height="150" class="room-rect"/><text x="1120" y="160" class="room-text">Room 119</text><text id="status-text-119" x="1120" y="178" class="sub-text">Vacant</text></g>
@@ -386,7 +428,7 @@ document.addEventListener('DOMContentLoaded', () => {
           <g id="room-rect-123a" class="room-group available"><rect x="1240" y="90" width="80" height="150" class="room-rect"/><text x="1280" y="160" class="room-text">Room 123A</text><text id="status-text-123a" x="1280" y="178" class="sub-text">Vacant</text></g>
           <g id="room-rect-125" class="room-group available"><rect x="1320" y="90" width="80" height="150" class="room-rect"/><text x="1360" y="160" class="room-text">Room 125</text><text id="status-text-125" x="1360" y="178" class="sub-text">Vacant</text></g>
 
-          <rect x="1400" y="90" width="143" height="150" class="cr-rect"/><text x="1471.5" y="170" font-family="system-ui, sans-serif" font-size="14" font-weight="bold" fill="#1c7ed6" text-anchor="middle" pointer-events="none">CR</text>
+          <rect x="1400" y="90" width="143" height="150" class="cr-rect"/><text x="1471.5" y="170" font-family="system-ui, sans-serif" font-size="14" font-weight="bold" fill="#064e3b" text-anchor="middle" pointer-events: none">CR</text>
 
           <g id="room-rect-lecture" class="room-group booked"><rect x="100" y="330" width="80" height="150" class="room-rect"/><text x="140" y="400" class="room-text">Lecture</text><text id="status-text-lecture" x="140" y="418" class="sub-text">Occupied</text></g>
 
@@ -411,5 +453,7 @@ document.addEventListener('DOMContentLoaded', () => {
         </svg>
       `;
     }
+
+    attachRoomTooltips();
   }
 });
