@@ -11,42 +11,76 @@
   <!-- Replaceable Background Image Container -->
   <div class="bg-image-container"></div>
 
-  <!-- Code-Generated Curved Overlay Frame (No gaps, pickable colors) -->
+  <!-- Curved Frame SVG Overlay -->
   <div class="curved-frame-overlay">
     <svg viewBox="0 0 1440 600" preserveAspectRatio="none">
-      <!-- Gold Accent Swoop -->
-      <path class="swoop-gold-path" d="M0,220 C480,480 960,480 1440,220 L1440,601 L0,601 Z"></path>
-      <!-- Primary Swoop -->
-      <path class="swoop-green-path" d="M0,260 C480,510 960,510 1440,260 L1440,601 L0,601 Z"></path>
+      <path class="swoop-gold-path" d="M0,320 C320,580 600,280 1020,500 C1220,600 1360,450 1440,400 L1440,601 L0,601 Z"></path>
+      <path class="swoop-green-path" d="M0,380 C280,620 640,340 980,540 C1180,640 1340,490 1440,440 L1440,601 L0,601 Z"></path>
     </svg>
   </div>
 
-  <!-- Centered Liquid Glass Login Card -->
-  <div class="login-card">
+  <!-- Flippable Liquid Glass Card Container -->
+  <div class="login-card" id="cardContainer">
+    <div class="card-inner">
 
-    <div class="login-card-header">
-      <h1 class="mini-logo">FARMS</h1>
-      <hr class="header-divider">
-      <h5 class="login-card-subtitle">Faculty Availability & Room Management System</h5>
-    </div>
+      <!-- FRONT FACE: LOGIN FORM -->
+      <div class="card-face card-front">
+        <div class="login-card-header">
+          <h1 class="mini-logo">FARMS</h1>
+          <hr class="header-divider">
+          <h5 class="login-card-subtitle">Faculty Availability & Room Management System</h5>
+        </div>
 
-    <form action="#" method="POST">
-      <div class="form-group">
-        <label for="username">Username or Email</label>
-        <input type="text" id="username" name="username" placeholder="Enter your username" required>
+        <form id="loginForm">
+          <!-- Auth Feedback Container -->
+          <div id="authMessage" class="auth-message"></div>
+
+          <div class="input-container">
+            <input type="email" id="username" placeholder=" " required />
+            <label for="username">Username or Email</label>
+          </div>
+
+          <div class="input-container">
+            <input type="password" id="password" placeholder=" " required />
+            <label for="password">Password</label>
+          </div>
+
+          <button type="submit" id="loginBtn" class="btn-login">Sign In</button>
+        </form>
+
+        <p class="footer-text">
+          Need an account? 
+          <a href="#" id="openAdminBtn">Contact Admin</a>
+        </p>
       </div>
 
-      <div class="form-group">
-        <label for="password">Password</label>
-        <input type="password" id="password" name="password" placeholder="Enter your password" required>
+      <!-- BACK FACE: CONTACT ADMIN PANEL -->
+      <div class="card-face card-back">
+        <div class="login-card-header">
+          <h1 class="mini-logo">Contact Admin</h1>
+          <hr class="header-divider">
+          <h5 class="login-card-subtitle">Request access or submit an account issue</h5>
+        </div>
+
+        <div class="admin-profile-box">
+          <div class="admin-image-container">
+            <img src="ADMIN jeibog.jpg" alt="Admin Profile" class="admin-avatar-box">
+          </div>
+          
+          <a href="https://www.facebook.com/monjeiii.silvestre" target="_blank" class="btn-contact-me">
+            Contact Me
+          </a>
+        </div>
+
+        <p class="footer-text">
+          Remembered login? 
+          <a href="#" id="closeAdminBtn">Back to Login</a>
+        </p>
       </div>
 
-      <button type="submit" class="btn-login">Sign In</button>
-    </form>
-
-    <div>
-      <p class="footer-text">Need an account? <a href="ContactAdmin.html">Contact Admin</a></p>
     </div>
   </div>
+
+  <script src="index.js"></script>
 </body>
 </html>

@@ -1,188 +1,339 @@
-/* ==========================================================================
-   1. Global Reset & Base Styles
-   ========================================================================== */
+/* ==========================================
+   1. GLOBAL RESET & BASE STYLES
+   ========================================== */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
 }
 
-body {
+body, html {
+  width: 100%;
   min-height: 100vh;
+  margin: 0;
   display: flex;
-  align-items: center;
   justify-content: center;
-  position: relative;
+  align-items: center;
   overflow: hidden;
-  background-color: #0f172a; /* Fallback dark background */
 }
 
-/* ==========================================================================
-   2. Background Image & Curved SVG Frame Overlay
-   ========================================================================== */
 .bg-image-container {
   position: absolute;
-  inset: 0;
-  background: url('https://images.unsplash.com/photo-1541829070764-84a7d30dd3f3?q=80&w=1920') no-repeat center center/cover;
-  z-index: 1;
-  //background: linear-gradient(to bottom, rgba(15, 23, 42, 0.7), rgba(15, 23, 42, 0.9)), url('bg.jpg') no-repeat center center/cover;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url('bg.jpg') no-repeat center center/cover;
+  z-index: -2;
 }
 
+/* Curved Frame SVG Overlay */
 .curved-frame-overlay {
   position: absolute;
   bottom: 0;
   left: 0;
   width: 100%;
-  height: 60vh;
-  z-index: 2;
+  height: 100%;
   pointer-events: none;
+  z-index: -1;
 }
 
 .curved-frame-overlay svg {
   width: 100%;
   height: 100%;
-  display: block;
 }
 
-/* Pickable Accent Swoop Colors */
 .swoop-gold-path {
-  fill: #f59e0b; /* Accent Gold */
+  fill: #f59e0b;
   opacity: 0.85;
 }
 
 .swoop-green-path {
-  fill: #065f46; /* Primary Green */
+  fill: #064e3b;
   opacity: 0.95;
 }
 
-/* ==========================================================================
-   3. Glassmorphism Login Card
-   ========================================================================== */
+/* ==========================================
+   2. DYNAMIC 3D FLIP CARD 
+   ========================================== */
 .login-card {
-  position: relative;
-  z-index: 3;
+  perspective: 1000px;
   width: 100%;
-  max-width: 420px;
-  margin: 20px;
-  padding: 40px 32px;
-  background: rgba(255, 255, 255, 0.15);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  border-radius: 20px;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-  color: #ffffff;
+  max-width: 380px;
+  margin: auto;
+  z-index: 10;
 }
 
-/* Header Elements */
+.card-inner {
+  position: relative;
+  width: 100%;
+  /* Smooth height resizing and flip transition */
+  transition: transform 0.6s cubic-bezier(0.4, 0.2, 0.2, 1), height 0.4s ease-in-out;
+  transform-style: preserve-3d;
+}
+
+.login-card.flipped .card-inner {
+  transform: rotateY(180deg);
+}
+
+/* Shared Face Setup with Higher Opacity */
+.card-face {
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 32px 24px;
+  
+  /* Semi-opaque glass backdrop */
+  background: rgba(255, 255, 255, 0.55);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  border-radius: 20px;
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+  box-sizing: border-box;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+.card-front {
+  position: relative;
+  z-index: 2;
+  transform: rotateY(0deg);
+}
+
+.card-back {
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform: rotateY(180deg);
+}
+
+/* ==========================================
+   3. BRANDING & HEADER TYPOGRAPHY
+   ========================================== */
 .login-card-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   text-align: center;
-  margin-bottom: 28px;
+  width: 100%;
+  margin-bottom: 0;
 }
 
 .mini-logo {
-  font-size: 36px;
-  font-weight: 800;
-  letter-spacing: 2px;
+  margin: 0;
+  font-size: 2.2rem;
+  font-weight: 900;
   color: #ffffff;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  letter-spacing: 2px;
+  line-height: 1;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 .header-divider {
+  width: 100%;
   border: none;
   height: 2px;
-  background: linear-gradient(90deg, transparent, #f59e0b, transparent);
-  margin: 5px 0;
+  background-color: #f59e0b;
+  margin: 8px auto;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
 }
 
 .login-card-subtitle {
-  font-size: 10px;
-  font-weight: 500;
+  margin: 0 auto;
+  font-size: 0.62rem;
+  font-weight: 700;
+  color: #f8fafc;
+  white-space: nowrap;
   text-transform: uppercase;
-  letter-spacing: 1px;
-  color: rgba(255, 255, 255, 0.85);
-  margin-bottom: 40px;
+  letter-spacing: 0.8px;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
 }
 
-/* ==========================================================================
-   4. Form Controls & Inputs
-   ========================================================================== */
-.form-group {
+/* ==========================================
+   4. FORM & FLOATING LABEL INPUTS
+   ========================================== */
+.card-face form {
+  width: 100%;
+  margin: 20px 0;
+}
+
+.input-container {
+  position: relative;
   margin-bottom: 20px;
+  width: 100%;
+}
+
+.input-container input {
+  width: 100%;
+  padding: 14px 16px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: #0f172a;
+  background-color: rgba(255, 255, 255, 0.85);
+  border: 1.5px solid rgba(6, 78, 59, 0.4);
+  border-radius: 10px;
+  outline: none;
+  transition: all 0.2s ease-in-out;
+}
+
+.input-container input:focus {
+  border-color: #064e3b;
+  background-color: #ffffff;
+  box-shadow: 0 0 0 3px rgba(6, 78, 59, 0.15);
+}
+
+.input-container label {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 0.9rem;
+  color: #475569;
+  pointer-events: none;
+  transition: all 0.2s ease-in-out;
+  padding: 0 6px;
+  border-radius: 4px;
+}
+
+.input-container input:focus ~ label,
+.input-container input:not(:placeholder-shown) ~ label {
+  top: 0;
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #064e3b;
+  background-color: #ffffff;
+}
+
+/* ==========================================
+   5. BOXED ADMIN PROFILE & BUTTONS
+   ========================================== */
+.admin-profile-box {
   display: flex;
   flex-direction: column;
-}
-
-.form-group label {
-  font-size: 13px;
-  font-weight: 600;
-  margin-bottom: 8px;
-  color: rgba(255, 255, 255, 0.9);
-}
-
-.form-group input {
+  align-items: center;
   width: 100%;
-  padding: 12px 16px;
-  border-radius: 10px;
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  background: rgba(255, 255, 255, 0.2);
+  margin: 20px 0;
+  gap: 16px;
+}
+
+.admin-image-container {
+  width: 140px;
+  height: 140px;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 2px solid #064e3b;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.admin-avatar-box {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.btn-contact-me {
+  display: inline-block;
+  width: 100%;
+  padding: 12px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  text-align: center;
   color: #ffffff;
-  font-size: 14px;
-  outline: none;
-  transition: all 0.3s ease;
-}
-
-.form-group input::placeholder {
-  color: rgba(255, 255, 255, 0.6);
-}
-
-.form-group input:focus {
-  background: rgba(255, 255, 255, 0.3);
-  border-color: #f59e0b;
-  box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.3);
-}
-
-/* Sign In Button */
-.btn-login {
-  width: 100%;
-  padding: 14px;
-  margin-top: 10px;
+  background-color: #064e3b;
   border: none;
   border-radius: 10px;
-  background: #065f46;
-  color: #ffffff;
-  font-size: 16px;
-  font-weight: 700;
+  text-decoration: none;
   cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.1s ease;
-  box-shadow: 0 4px 12px rgba(6, 95, 70, 0.4);
+  transition: all 0.2s ease-in-out;
+  box-shadow: 0 4px 12px rgba(6, 78, 59, 0.25);
+}
+
+.btn-contact-me:hover {
+  background-color: #043e2e;
+  transform: translateY(-1px);
+}
+
+.btn-login {
+  width: 100%;
+  padding: 12px;
+  font-size: 1rem;
+  font-weight: 700;
+  color: #ffffff;
+  background-color: #064e3b;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  box-shadow: 0 4px 12px rgba(6, 78, 59, 0.25);
 }
 
 .btn-login:hover {
-  background: #047857;
+  background-color: #043e2e;
 }
 
-.btn-login:active {
-  transform: scale(0.98);
-}
-
-/* ==========================================================================
-   5. Footer Link
-   ========================================================================== */
 .footer-text {
+  margin-top: 0;
   text-align: center;
-  margin-top: 24px;
-  font-size: 13px;
-  color: rgba(255, 255, 255, 0.8);
+  font-size: 0.85rem;
+  color: #ffffff;
+  font-weight: 500;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
 }
 
 .footer-text a {
-  color: #fbbf24;
+  color: #f59e0b;
+  font-weight: 700;
   text-decoration: none;
-  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.2s;
 }
 
 .footer-text a:hover {
   text-decoration: underline;
+  opacity: 0.9;
+}
+
+
+/* ==========================================
+   6. AUTHENTICATION MESSAGES
+   ========================================== */
+.auth-message {
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-align: center;
+  border-radius: 8px;
+  transition: all 0.2s ease-in-out;
+  margin-bottom: 0;
+  padding: 0;
+}
+
+.auth-message.error {
+  color: #991b1b;
+  background-color: rgba(254, 226, 226, 0.9);
+  border: 1px solid #f87171;
+  padding: 10px 12px;
+  margin-bottom: 16px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.auth-message.success {
+  color: #065f46;
+  background-color: rgba(209, 250, 229, 0.9);
+  border: 1px solid #34d399;
+  padding: 10px 12px;
+  margin-bottom: 16px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Disabled state when authenticating */
+.btn-login:disabled {
+  background-color: #043e2e;
+  opacity: 0.7;
+  cursor: not-allowed;
 }
