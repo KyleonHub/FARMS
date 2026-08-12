@@ -1,4 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
+  // === 1. CARD FLIP & DYNAMIC HEIGHT LOGIC ===
   const card = document.getElementById('cardContainer');
   if (!card) return;
 
@@ -8,9 +9,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const openBtn = document.getElementById('openAdminBtn');
   const closeBtn = document.getElementById('closeAdminBtn');
 
-  // ==========================================
-  // 1. DYNAMIC CARD HEIGHT CALCULATION
-  // ==========================================
   const updateCardHeight = () => {
     if (card.classList.contains('flipped')) {
       cardInner.style.height = `${backFace.offsetHeight}px`;
@@ -19,10 +17,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   };
 
-  // Set initial height on page load
   updateCardHeight();
 
-  // Flip to Contact Admin
   if (openBtn) {
     openBtn.addEventListener('click', (e) => {
       e.preventDefault();
@@ -31,7 +27,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Flip back to Login
   if (closeBtn) {
     closeBtn.addEventListener('click', (e) => {
       e.preventDefault();
@@ -42,56 +37,81 @@ document.addEventListener('DOMContentLoaded', () => {
 
   window.addEventListener('resize', updateCardHeight);
 
-  // ==========================================
-  // 2. MOCK AUTHENTICATION LOGIC
-  // ==========================================
+  // === 2. PASSWORD VISIBILITY TOGGLE ===
+  const passwordInput = document.getElementById('password');
+  const togglePasswordBtn = document.getElementById('togglePasswordBtn');
+  const eyeIcon = document.getElementById('eyeIcon');
+
+  if (togglePasswordBtn && passwordInput) {
+    togglePasswordBtn.addEventListener('click', () => {
+      const isPassword = passwordInput.getAttribute('type') === 'password';
+      passwordInput.setAttribute('type', isPassword ? 'text' : 'password');
+
+      // Update Eye Icon Graphic (Open vs Hidden)
+      if (isPassword) {
+        eyeIcon.innerHTML = `
+          <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path>
+          <line x1="1" y1="1" x2="23" y2="23"></line>
+        `;
+      } else {
+        eyeIcon.innerHTML = `
+          <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+          <circle cx="12" cy="12" r="3"></circle>
+        `;
+      }
+    });
+  }
+
+  // === 3. MOCK AUTHENTICATION WITH LOADING STATE ===
+  const MOCK_USER = {
+    email: 'admin1@gmail.com',
+    password: 'password123'
+  };
+
   const loginForm = document.getElementById('loginForm');
   const usernameInput = document.getElementById('username');
-  const passwordInput = document.getElementById('password');
-  const authMessage = document.getElementById('authMessage');
-  const loginBtn = document.getElementById('loginBtn');
-
-  // Mock Credentials
-  const MOCK_USER = 'admin1@gmail.com';
-  const MOCK_PASS = 'password123';
+  const messageBox = document.getElementById('loginMessage');
+  const signInBtn = document.getElementById('signInBtn');
+  const btnText = signInBtn.querySelector('.btn-text');
+  const btnSpinner = signInBtn.querySelector('.btn-spinner');
 
   if (loginForm) {
     loginForm.addEventListener('submit', (e) => {
       e.preventDefault();
 
-      const enteredUser = usernameInput.value.trim();
-      const enteredPass = passwordInput.value;
+      const enteredEmail = usernameInput.value.trim();
+      const enteredPassword = passwordInput.value.trim();
 
-      // Show loading state on button
-      loginBtn.disabled = true;
-      loginBtn.textContent = 'Authenticating...';
-      authMessage.className = 'auth-message';
-      authMessage.textContent = '';
+      // Clear alert messages and show spinner state
+      messageBox.className = 'login-message';
+      messageBox.textContent = '';
+      signInBtn.disabled = true;
+      btnText.textContent = 'Authenticating...';
+      btnSpinner.classList.remove('hidden');
 
+      // Simulate network request delay (800ms)
       setTimeout(() => {
-        if (enteredUser === MOCK_USER && enteredPass === MOCK_PASS) {
-          // Success State
-          authMessage.className = 'auth-message success';
-          authMessage.textContent = 'Login successful! Redirecting...';
-          loginBtn.textContent = 'Success!';
-          
-          // Simulate redirection after 1.5 seconds
+        btnSpinner.classList.add('hidden');
+        signInBtn.disabled = false;
+        btnText.textContent = 'Sign In';
+
+        if (enteredEmail === MOCK_USER.email && enteredPassword === MOCK_USER.password) {
+          messageBox.classList.add('success');
+          messageBox.textContent = 'Login successful! Redirecting...';
+          signInBtn.disabled = true;
+
+          updateCardHeight();
+
           setTimeout(() => {
-            alert('Welcome back, Admin! (Redirecting to Dashboard...)');
-            // window.location.href = 'dashboard.html'; // Replace with actual route later
-          }, 1200);
+            alert('Simulation: Logged in successfully!');
+          }, 1000);
 
         } else {
-          // Failure State
-          authMessage.className = 'auth-message error';
-          authMessage.textContent = 'Invalid email or password. Try again.';
-          loginBtn.disabled = false;
-          loginBtn.textContent = 'Sign In';
-          
-          // Trigger dynamic height recalculation to fit the error message
+          messageBox.classList.add('error');
+          messageBox.textContent = 'Invalid email or password. Please try again.';
           updateCardHeight();
         }
-      }, 800); // 800ms mock network delay
+      }, 800);
     });
   }
 });

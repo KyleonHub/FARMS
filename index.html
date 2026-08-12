@@ -8,10 +8,10 @@
 </head>
 <body>
 
-  <!-- Replaceable Background Image Container -->
+  <!-- Background Image Container -->
   <div class="bg-image-container"></div>
 
-  <!-- Curved Frame SVG Overlay -->
+  <!-- Code-Generated Curved Overlay Frame -->
   <div class="curved-frame-overlay">
     <svg viewBox="0 0 1440 600" preserveAspectRatio="none">
       <path class="swoop-gold-path" d="M0,320 C320,580 600,280 1020,500 C1220,600 1360,450 1440,400 L1440,601 L0,601 Z"></path>
@@ -32,24 +32,34 @@
         </div>
 
         <form id="loginForm">
-          <!-- Auth Feedback Container -->
-          <div id="authMessage" class="auth-message"></div>
-
           <div class="input-container">
-            <input type="email" id="username" placeholder=" " required />
+            <input type="email" id="username" placeholder=" " autocomplete="username" autofocus required />
             <label for="username">Username or Email</label>
           </div>
 
           <div class="input-container">
-            <input type="password" id="password" placeholder=" " required />
+            <input type="password" id="password" placeholder=" " autocomplete="current-password" required />
             <label for="password">Password</label>
+            <!-- Toggle Password Eye Button -->
+            <button type="button" id="togglePasswordBtn" class="toggle-password" aria-label="Toggle password visibility">
+              <svg id="eyeIcon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                <circle cx="12" cy="12" r="3"></circle>
+              </svg>
+            </button>
           </div>
 
-          <button type="submit" id="loginBtn" class="btn-login">Sign In</button>
+          <!-- Alert message output container -->
+          <div id="loginMessage" class="login-message"></div>
+
+          <button type="submit" class="btn-login" id="signInBtn">
+            <span class="btn-text">Sign In</span>
+            <span class="btn-spinner hidden"></span>
+          </button>
         </form>
 
         <p class="footer-text">
-          Need an account? 
+          Need an account? or having issues?
           <a href="#" id="openAdminBtn">Contact Admin</a>
         </p>
       </div>
@@ -67,13 +77,13 @@
             <img src="ADMIN jeibog.jpg" alt="Admin Profile" class="admin-avatar-box">
           </div>
           
-          <a href="https://www.facebook.com/monjeiii.silvestre" target="_blank" class="btn-contact-me">
+          <a href="https://www.facebook.com/monjeiii.silvestre" target="_blank" rel="noopener noreferrer" class="btn-contact-me">
             Contact Me
           </a>
         </div>
 
         <p class="footer-text">
-          Remembered login? 
+          Remembered your credentials? 
           <a href="#" id="closeAdminBtn">Back to Login</a>
         </p>
       </div>
