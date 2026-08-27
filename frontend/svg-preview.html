@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FARMS - Architectural Master Blueprints &amp; SVG Map Viewer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Plus Jakarta Sans', system-ui, sans-serif; }
+    body {
+      background-color: #0f172a;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 24px;
+      gap: 18px;
+      color: #ffffff;
+    }
+
+    .header-bar {
+      text-align: center;
+    }
+    .header-bar h1 {
+      font-size: 1.5rem;
+      font-weight: 900;
+      color: #34d399;
+      letter-spacing: 0.5px;
+    }
+    .header-bar p {
+      font-size: 0.8rem;
+      color: #94a3b8;
+      margin-top: 2px;
+    }
+
+    .top-controls {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .btn-tab {
+      padding: 9px 18px;
+      border-radius: 10px;
+      border: 1.5px solid #059669;
+      background: #064e3b;
+      color: #ffffff;
+      font-weight: 800;
+      cursor: pointer;
+      font-size: 0.88rem;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .btn-tab.active {
+      background: #10b981;
+      color: #064e3b;
+      box-shadow: 0 0 16px rgba(16, 185, 129, 0.45);
+      border-color: #34d399;
+    }
+
+    .btn-tab.portal-link {
+      background: linear-gradient(135deg, #0284c7, #0369a1);
+      border-color: #38bdf8;
+      text-decoration: none;
+    }
+    .btn-tab.portal-link:hover {
+      background: linear-gradient(135deg, #0369a1, #075985);
+    }
+
+    .map-card {
+      background: #ffffff;
+      padding: 24px;
+      border-radius: 20px;
+      box-shadow: 0 25px 60px rgba(0,0,0,0.6);
+      width: 100%;
+      max-width: 1560px;
+      min-height: 520px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: #0f172a;
+    }
+
+    .map-card svg {
+      width: 100%;
+      height: auto;
+      max-height: 72vh;
+    }
+
+    .room-group, .interactive-bldg {
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+    .room-group:hover .room-rect {
+      fill: #d1fae5 !important;
+      stroke: #059669 !important;
+      stroke-width: 2.5px !important;
+      filter: drop-shadow(0 6px 12px rgba(6, 78, 59, 0.2));
+    }
+    .interactive-bldg:hover .bldg-shell {
+      stroke-width: 3.5px !important;
+      filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.15));
+    }
+  </style>
+</head>
+<body>
+
+  <div class="header-bar">
+    <h1>FARMS Master Architectural SVG Blueprints</h1>
+    <p>Interactive Campus Master Plan &amp; Building Floor Layouts with Blueprint Grid</p>
+  </div>
+
+  <div class="top-controls">
+    <button class="btn-tab active" id="btnCampus">🗺️ Campus Grounds</button>
+    <button class="btn-tab" id="btnF1">🏛️ Pancho Floor 1</button>
+    <button class="btn-tab" id="btnF2">🏛️ Pancho Floor 2</button>
+    <button class="btn-tab" id="btnCBA">🏢 CBA (3 Rooms/Floor)</button>
+    <button class="btn-tab" id="btnHangar">✈️ Hangar (6 Rooms + Apron)</button>
+    <a href="dashboard.html" class="btn-tab portal-link">🚀 Open Live Admin Dashboard</a>
+  </div>
+
+  <div class="map-card" id="mapContainer"></div>
+
+  <script>
+    const svgCampus = `
+      <svg viewBox="0 0 1600 820" width="100%" height="100%" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <pattern id="dotGrid" x="0" y="0" width="28" height="28" patternUnits="userSpaceOnUse">
+            <circle cx="1.5" cy="1.5" r="1.3" fill="#cbd5e1" opacity="0.65"/>
+          </pattern>
+          <linearGradient id="panchoGrad" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#ecfdf5"/><stop offset="100%" stop-color="#d1fae5"/></linearGradient>
+          <linearGradient id="cbaGrad" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#eff6ff"/><stop offset="100%" stop-color="#dbeafe"/></linearGradient>
+          <linearGradient id="hangarGrad" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#f0f9ff"/><stop offset="100%" stop-color="#e0f2fe"/></linearGradient>
+          <filter id="labelShadow" x="-10%" y="-20%" width="120%" height="140%">
+            <feDropShadow dx="0" dy="3" stdDeviation="5" flood-color="#0f172a" flood-opacity="0.16"/>
+          </filter>
+        </defs>
+
+        <rect x="20" y="14" width="1560" height="792" rx="10" fill="url(#dotGrid)" stroke="#cbd5e1" stroke-width="2"/>
+        
+        <g transform="translate(36, 28)">
+          <rect x="0" y="0" width="95" height="28" rx="6" fill="#1e293b"/>
+          <text x="47.5" y="18" font-family="Plus Jakarta Sans, system-ui" font-weight="900" font-size="11" fill="#ffffff" text-anchor="middle">SECTION 1</text>
+        </g>
+
+        <!-- Compass Rose -->
+        <g transform="translate(1530, 52)">
+          <circle cx="0" cy="0" r="24" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5" opacity="0.95"/>
+          <text x="0" y="-9" font-family="Plus Jakarta Sans, system-ui" font-weight="900" font-size="11" fill="#0f172a" text-anchor="middle">N</text>
+          <polygon points="0,-5 3,5 0,3 -3,5" fill="#ef4444"/>
+          <polygon points="0,5 3,-3 0,-1 -3,-3" fill="#94a3b8"/>
+          <text x="0" y="19" font-family="Plus Jakarta Sans" font-weight="700" font-size="8.5" fill="#94a3b8" text-anchor="middle">S</text>
+        </g>
+
+        <!-- Pancho Building -->
+        <g id="campus-pancho" class="interactive-bldg">
+          <path d="M 120 140 L 740 140 L 740 300 L 680 300 L 680 220 L 120 220 Z" fill="url(#panchoGrad)" stroke="#059669" stroke-width="2.5" class="bldg-shell"/>
+          <polygon points="120,140 170,180 120,220" fill="none" stroke="#059669" stroke-width="1.5"/>
+          <line x1="170" y1="180" x2="680" y2="180" stroke="#059669" stroke-width="1.5" opacity="0.6"/>
+
+          <!-- Centered stationary label -->
+          <g transform="translate(235, 155)">
+            <rect x="0" y="0" width="220" height="46" rx="8" fill="#064e3b" filter="url(#labelShadow)"/>
+            <text x="14" y="20" font-family="Plus Jakarta Sans" font-weight="900" font-size="12" fill="#6ee7b7">🏛️ PANCHO BUILDING</text>
+            <text x="14" y="36" font-family="Plus Jakarta Sans" font-weight="700" font-size="9.5" fill="#d1fae5">2 Floors · 50+ Classrooms</text>
+            <rect x="165" y="7" width="45" height="20" rx="10" fill="#10b981"/>
+            <text x="187.5" y="21" font-family="Plus Jakarta Sans" font-weight="900" font-size="9.5" fill="#064e3b" text-anchor="middle">CLICK</text>
+          </g>
+        </g>
+
+        <!-- CBA Building -->
+        <g id="campus-cba" class="interactive-bldg">
+          <rect x="1215" y="90" width="105" height="40" fill="#dbeafe" stroke="#2563eb" stroke-width="2" class="bldg-shell" rx="3"/>
+          <rect x="1230" y="130" width="75" height="280" fill="url(#cbaGrad)" stroke="#2563eb" stroke-width="2.5" class="bldg-shell" rx="4"/>
+          <polygon points="1230,140 1267.5,170 1305,140" fill="none" stroke="#2563eb" stroke-width="1.5"/>
+          <line x1="1267.5" y1="170" x2="1267.5" y2="380" stroke="#2563eb" stroke-width="1.5" opacity="0.6"/>
+
+          <g transform="translate(1165, 475)">
+            <rect x="0" y="0" width="190" height="46" rx="8" fill="#1e3a8a" filter="url(#labelShadow)"/>
+            <text x="14" y="20" font-family="Plus Jakarta Sans" font-weight="900" font-size="12" fill="#93c5fd">🏢 CBA BUILDING</text>
+            <text x="14" y="36" font-family="Plus Jakarta Sans" font-weight="700" font-size="9.5" fill="#bfdbfe">4 Floors · 12 Classrooms</text>
+            <rect x="138" y="7" width="40" height="20" rx="10" fill="#3b82f6"/>
+            <text x="158" y="21" font-family="Plus Jakarta Sans" font-weight="900" font-size="9.5" fill="#ffffff" text-anchor="middle">CLICK</text>
+          </g>
+        </g>
+
+        <!-- Hangar -->
+        <g id="campus-hangar" class="interactive-bldg">
+          <rect x="960" y="440" width="200" height="250" fill="url(#hangarGrad)" stroke="#0284c7" stroke-width="2.5" class="bldg-shell" rx="4"/>
+          <rect x="960" y="555" width="200" height="24" fill="#e0f2fe" stroke="#38bdf8" stroke-width="1.5"/>
+
+          <g transform="translate(975, 375)">
+            <rect x="0" y="0" width="175" height="46" rx="8" fill="#0c4a6e" filter="url(#labelShadow)"/>
+            <text x="14" y="20" font-family="Plus Jakarta Sans" font-weight="900" font-size="12" fill="#7dd3fc">✈️ HANGAR</text>
+            <text x="14" y="36" font-family="Plus Jakarta Sans" font-weight="700" font-size="9.5" fill="#bae6fd">1 Storey · 6 Aviation Bays</text>
+            <rect x="126" y="7" width="40" height="20" rx="10" fill="#0284c7"/>
+            <text x="146" y="21" font-family="Plus Jakarta Sans" font-weight="900" font-size="9.5" fill="#ffffff" text-anchor="middle">CLICK</text>
+          </g>
+        </g>
+
+        <!-- Props -->
+        <g id="campus-prop-gym">
+          <rect x="745" y="440" width="185" height="240" fill="#f8fafc" stroke="#94a3b8" stroke-width="2" rx="4"/>
+          <text x="835" y="522" font-family="Plus Jakarta Sans" font-weight="800" font-size="12" fill="#64748b" text-anchor="middle">COVERED COURT</text>
+          <text x="835" y="540" font-family="Plus Jakarta Sans" font-weight="600" font-size="9.5" fill="#94a3b8" text-anchor="middle">Gymnasium · Prop Structure</text>
+        </g>
+
+        <g id="campus-prop-pavilion">
+          <polygon points="190,395 340,395 340,375 480,375 480,395 560,395 560,545 510,545 510,565 370,565 370,545 190,545" fill="#f8fafc" stroke="#94a3b8" stroke-width="2"/>
+          <text x="375" y="456" font-family="Plus Jakarta Sans" font-weight="800" font-size="11" fill="#64748b" text-anchor="middle">ACADEMIC PAVILION</text>
+          <text x="375" y="472" font-family="Plus Jakarta Sans" font-weight="600" font-size="9.5" fill="#94a3b8" text-anchor="middle">Admin &amp; Student Services · Prop</text>
+        </g>
+      </svg>
+    `;
+
+    const svgPanchoF1 = `
+      <svg viewBox="0 0 1560 490" width="100%" height="100%" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <pattern id="floorGridP" width="28" height="28" patternUnits="userSpaceOnUse">
+            <path d="M 28 0 L 0 0 0 28" fill="none" stroke="#e2e8f0" stroke-width="0.75"/>
+            <circle cx="0" cy="0" r="1.1" fill="#10b981" opacity="0.3"/>
+          </pattern>
+        </defs>
+        <rect x="15" y="10" width="1530" height="465" rx="14" fill="url(#floorGridP)" stroke="#cbd5e1" stroke-width="2.5"/>
+        <text x="780" y="55" font-family="Plus Jakarta Sans" font-weight="900" font-size="24" fill="#064e3b" text-anchor="middle">🏛️ PANCHO BUILDING — 1ST FLOOR ARCHITECTURAL BLUEPRINT</text>
+        <path d="M 40 170 L 1450 170 L 1450 215 L 1380 215 L 1380 445 L 1340 445 L 1340 215 L 40 215 Z" fill="#f1f5f9" stroke="#cbd5e1" stroke-width="1.5"/>
+
+        <!-- Top Row -->
+        <g class="room-group"><rect x="40" y="90" width="90" height="80" rx="6" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.8" class="room-rect"/><text x="85" y="135" font-family="Plus Jakarta Sans" font-weight="900" font-size="13" fill="#0f172a" text-anchor="middle">101</text></g>
+        <rect x="135" y="90" width="40" height="80" rx="4" fill="#dbeafe" stroke="#3b82f6" stroke-width="1.5"/><text x="155" y="135" font-family="Plus Jakarta Sans" font-weight="800" font-size="9.5" fill="#1e3a8a" text-anchor="middle">CR</text>
+        <g class="room-group"><rect x="180" y="90" width="80" height="80" rx="6" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.8" class="room-rect"/><text x="220" y="135" font-family="Plus Jakarta Sans" font-weight="900" font-size="13" fill="#0f172a" text-anchor="middle">103</text></g>
+        <g class="room-group"><rect x="265" y="90" width="80" height="80" rx="6" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.8" class="room-rect"/><text x="305" y="135" font-family="Plus Jakarta Sans" font-weight="900" font-size="13" fill="#0f172a" text-anchor="middle">105</text></g>
+        <g class="room-group"><rect x="350" y="90" width="80" height="80" rx="6" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.8" class="room-rect"/><text x="390" y="135" font-family="Plus Jakarta Sans" font-weight="900" font-size="13" fill="#0f172a" text-anchor="middle">107</text></g>
+        <g class="room-group"><rect x="435" y="90" width="80" height="80" rx="6" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.8" class="room-rect"/><text x="475" y="135" font-family="Plus Jakarta Sans" font-weight="900" font-size="13" fill="#0f172a" text-anchor="middle">109</text></g>
+        <g class="room-group"><rect x="520" y="90" width="80" height="80" rx="6" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.8" class="room-rect"/><text x="560" y="135" font-family="Plus Jakarta Sans" font-weight="900" font-size="13" fill="#0f172a" text-anchor="middle">111</text></g>
+        <g class="room-group"><rect x="605" y="90" width="100" height="80" rx="6" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.8" class="room-rect"/><text x="655" y="135" font-family="Plus Jakarta Sans" font-weight="900" font-size="13" fill="#0f172a" text-anchor="middle">113</text></g>
+        <g class="room-group"><rect x="710" y="90" width="100" height="80" rx="6" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.8" class="room-rect"/><text x="760" y="135" font-family="Plus Jakarta Sans" font-weight="900" font-size="13" fill="#0f172a" text-anchor="middle">115</text></g>
+        <rect x="815" y="90" width="70" height="80" rx="4" fill="#dbeafe" stroke="#3b82f6" stroke-width="1.5"/><text x="850" y="135" font-family="Plus Jakarta Sans" font-size="9" fill="#1e3a8a" text-anchor="middle">Restroom</text>
+        <g class="room-group"><rect x="890" y="90" width="90" height="80" rx="6" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.8" class="room-rect"/><text x="935" y="135" font-family="Plus Jakarta Sans" font-weight="900" font-size="13" fill="#0f172a" text-anchor="middle">117A</text></g>
+        <g class="room-group"><rect x="985" y="90" width="90" height="80" rx="6" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.8" class="room-rect"/><text x="1030" y="135" font-family="Plus Jakarta Sans" font-weight="900" font-size="13" fill="#0f172a" text-anchor="middle">119</text></g>
+        <g class="room-group"><rect x="1080" y="90" width="90" height="80" rx="6" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.8" class="room-rect"/><text x="1125" y="135" font-family="Plus Jakarta Sans" font-weight="900" font-size="13" fill="#0f172a" text-anchor="middle">121</text></g>
+        <g class="room-group"><rect x="1175" y="90" width="90" height="80" rx="6" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.8" class="room-rect"/><text x="1220" y="135" font-family="Plus Jakarta Sans" font-weight="900" font-size="13" fill="#0f172a" text-anchor="middle">123A</text></g>
+        <g class="room-group"><rect x="1270" y="90" width="90" height="80" rx="6" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.8" class="room-rect"/><text x="1315" y="135" font-family="Plus Jakarta Sans" font-weight="900" font-size="13" fill="#0f172a" text-anchor="middle">125</text></g>
+
+        <!-- Bottom Row -->
+        <g class="room-group"><rect x="40" y="215" width="90" height="80" rx="6" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.8" class="room-rect"/><text font-family="Plus Jakarta Sans" font-weight="900" font-size="13" fill="#0f172a" text-anchor="middle" x="85" y="248"><tspan x="85" dy="0">Lecture</tspan><tspan x="85" dy="16">Room</tspan></text></g>
+        <rect x="135" y="215" width="40" height="80" rx="4" fill="#ecfdf5" stroke="#10b981" stroke-width="1.5"/>
+        <g class="room-group"><rect x="180" y="215" width="70" height="80" rx="6" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.8" class="room-rect"/><text x="215" y="260" font-family="Plus Jakarta Sans" font-weight="900" font-size="13" fill="#0f172a" text-anchor="middle">102</text></g>
+        <g class="room-group"><rect x="255" y="215" width="70" height="80" rx="6" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.8" class="room-rect"/><text x="290" y="260" font-family="Plus Jakarta Sans" font-weight="900" font-size="13" fill="#0f172a" text-anchor="middle">104</text></g>
+        <g class="room-group"><rect x="330" y="215" width="70" height="80" rx="6" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.8" class="room-rect"/><text x="365" y="260" font-family="Plus Jakarta Sans" font-weight="900" font-size="13" fill="#0f172a" text-anchor="middle">106</text></g>
+        <g class="room-group"><rect x="405" y="215" width="70" height="80" rx="6" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.8" class="room-rect"/><text x="440" y="260" font-family="Plus Jakarta Sans" font-weight="900" font-size="13" fill="#0f172a" text-anchor="middle">108</text></g>
+        <g class="room-group"><rect x="480" y="215" width="190" height="80" rx="6" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.8" class="room-rect"/><text font-family="Plus Jakarta Sans" font-weight="900" font-size="13" fill="#0f172a" text-anchor="middle" x="575" y="248"><tspan x="575" dy="0">🧪 Science</tspan><tspan x="575" dy="16">Laboratory</tspan></text></g>
+        <g class="room-group"><rect x="675" y="215" width="65" height="80" rx="6" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.8" class="room-rect"/><text x="707.5" y="260" font-family="Plus Jakarta Sans" font-weight="900" font-size="13" fill="#0f172a" text-anchor="middle">112A</text></g>
+        <g class="room-group"><rect x="745" y="215" width="65" height="80" rx="6" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.8" class="room-rect"/><text x="777.5" y="260" font-family="Plus Jakarta Sans" font-weight="900" font-size="13" fill="#0f172a" text-anchor="middle">112B</text></g>
+        <rect x="815" y="215" width="70" height="80" rx="4" fill="#ecfdf5" stroke="#10b981" stroke-width="1.5"/>
+        <g class="room-group"><rect x="890" y="215" width="70" height="80" rx="6" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.8" class="room-rect"/><text x="925" y="260" font-family="Plus Jakarta Sans" font-weight="900" font-size="13" fill="#0f172a" text-anchor="middle">114</text></g>
+        <g class="room-group"><rect x="965" y="215" width="70" height="80" rx="6" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.8" class="room-rect"/><text x="1000" y="260" font-family="Plus Jakarta Sans" font-weight="900" font-size="13" fill="#0f172a" text-anchor="middle">116</text></g>
+        <g class="room-group"><rect x="1040" y="215" width="70" height="80" rx="6" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.8" class="room-rect"/><text x="1075" y="260" font-family="Plus Jakarta Sans" font-weight="900" font-size="13" fill="#0f172a" text-anchor="middle">118</text></g>
+        <g class="room-group"><rect x="1115" y="215" width="70" height="80" rx="6" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.8" class="room-rect"/><text x="1150" y="260" font-family="Plus Jakarta Sans" font-weight="900" font-size="13" fill="#0f172a" text-anchor="middle">122</text></g>
+        <g class="room-group"><rect x="1190" y="215" width="90" height="80" rx="6" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.8" class="room-rect"/><text x="1235" y="260" font-family="Plus Jakarta Sans" font-weight="900" font-size="13" fill="#0f172a" text-anchor="middle">103</text></g>
+        <g class="room-group"><rect x="1380" y="215" width="70" height="100" rx="6" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.8" class="room-rect"/><text x="1415" y="270" font-family="Plus Jakarta Sans" font-weight="900" font-size="13" fill="#0f172a" text-anchor="middle">📚 Library</text></g>
+        <g class="room-group"><rect x="1380" y="320" width="70" height="110" rx="6" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.8" class="room-rect"/><text font-family="Plus Jakarta Sans" font-weight="900" font-size="13" fill="#0f172a" text-anchor="middle" x="1415" y="370"><tspan x="1415" dy="0">🎬 Multimedia</tspan><tspan x="1415" dy="16">Room</tspan></text></g>
+      </svg>
+    `;
+
+    const svgCBA = `
+      <svg viewBox="0 0 1280 340" width="100%" height="100%" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <pattern id="floorGridCBA" width="25" height="25" patternUnits="userSpaceOnUse">
+            <path d="M 25 0 L 0 0 0 25" fill="none" stroke="#e2e8f0" stroke-width="0.75"/>
+            <circle cx="0" cy="0" r="1" fill="#cbd5e1" opacity="0.8"/>
+          </pattern>
+        </defs>
+        <rect x="15" y="10" width="1250" height="315" rx="12" fill="url(#floorGridCBA)" stroke="#cbd5e1" stroke-width="2"/>
+        <text x="60" y="60" font-family="Plus Jakarta Sans" font-weight="900" font-size="18" fill="#1e3a8a">🏢 CBA BUILDING — LEVEL 1 BLUEPRINT (3 ROOMS)</text>
+        <rect x="60" y="95" width="1160" height="180" fill="#f8fafc" stroke="#cbd5e1" stroke-dasharray="4,4" stroke-width="1.5" rx="8"/>
+        
+        <rect x="75" y="105" width="90" height="160" rx="6" fill="#ecfdf5" stroke="#10b981" stroke-width="1.5"/>
+        <text x="120" y="190" font-family="Plus Jakarta Sans" font-weight="900" font-size="11" fill="#047857" text-anchor="middle">STAIRS W</text>
+
+        <g class="room-group"><rect x="180" y="105" width="270" height="160" rx="8" fill="#ffffff" stroke="#cbd5e1" stroke-width="2" class="room-rect"/><text x="315" y="175" font-family="Plus Jakarta Sans" font-weight="900" font-size="16" fill="#0f172a" text-anchor="middle">CBA 101</text><text x="315" y="198" font-family="Plus Jakarta Sans" font-weight="700" font-size="11" fill="#64748b" text-anchor="middle">Lecture Hall</text></g>
+        <g class="room-group"><rect x="465" y="105" width="270" height="160" rx="8" fill="#ffffff" stroke="#cbd5e1" stroke-width="2" class="room-rect"/><text x="600" y="175" font-family="Plus Jakarta Sans" font-weight="900" font-size="16" fill="#0f172a" text-anchor="middle">CBA 102</text><text x="600" y="198" font-family="Plus Jakarta Sans" font-weight="700" font-size="11" fill="#64748b" text-anchor="middle">Computer Lab</text></g>
+        <g class="room-group"><rect x="750" y="105" width="270" height="160" rx="8" fill="#ffffff" stroke="#cbd5e1" stroke-width="2" class="room-rect"/><text x="885" y="175" font-family="Plus Jakarta Sans" font-weight="900" font-size="16" fill="#0f172a" text-anchor="middle">CBA 103</text><text x="885" y="198" font-family="Plus Jakarta Sans" font-weight="700" font-size="11" fill="#64748b" text-anchor="middle">Business Lab</text></g>
+
+        <rect x="1035" y="105" width="85" height="160" rx="6" fill="#ecfdf5" stroke="#10b981" stroke-width="1.5"/>
+        <text x="1077.5" y="190" font-family="Plus Jakarta Sans" font-weight="900" font-size="11" fill="#047857" text-anchor="middle">STAIRS E</text>
+        <rect x="1130" y="105" width="70" height="160" rx="6" fill="#dbeafe" stroke="#3b82f6" stroke-width="1.5"/>
+        <text x="1165" y="190" font-family="Plus Jakarta Sans" font-weight="900" font-size="14" fill="#1e40af" text-anchor="middle">CR</text>
+      </svg>
+    `;
+
+    const svgHangar = `
+      <svg viewBox="0 0 1380 560" width="100%" height="100%" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <pattern id="floorGridHangar" width="30" height="30" patternUnits="userSpaceOnUse">
+            <path d="M 30 0 L 0 0 0 30" fill="none" stroke="#e2e8f0" stroke-width="0.8"/>
+            <circle cx="0" cy="0" r="1.2" fill="#0284c7" opacity="0.3"/>
+          </pattern>
+        </defs>
+
+        <rect x="15" y="10" width="1350" height="540" rx="14" fill="url(#floorGridHangar)" stroke="#cbd5e1" stroke-width="2.5"/>
+
+        <!-- Title Banner -->
+        <g transform="translate(45, 45)">
+          <rect width="1290" height="42" rx="8" fill="#0c4a6e"/>
+          <text x="20" y="27" font-family="Plus Jakarta Sans, system-ui" font-weight="900" font-size="17" fill="#7dd3fc">✈️ HANGAR COMPLEX — 1 STOREY MASTER BLUEPRINT (6 ROOMS + CENTRAL ASSEMBLY BAY)</text>
+        </g>
+
+        <!-- LEFT WING (004, 005, 006) -->
+        <g class="room-group"><rect x="45" y="105" width="290" height="130" rx="8" fill="#ffffff" stroke="#cbd5e1" stroke-width="2" class="room-rect"/><text x="190" y="165" font-family="Plus Jakarta Sans" font-weight="900" font-size="16" fill="#0f172a" text-anchor="middle">Hangar 004</text><text x="190" y="188" font-family="Plus Jakarta Sans" font-weight="700" font-size="11" fill="#64748b" text-anchor="middle">UAV &amp; Drone Diagnostics</text></g>
+        <g class="room-group"><rect x="45" y="250" width="290" height="130" rx="8" fill="#ffffff" stroke="#cbd5e1" stroke-width="2" class="room-rect"/><text x="190" y="310" font-family="Plus Jakarta Sans" font-weight="900" font-size="16" fill="#0f172a" text-anchor="middle">Hangar 005</text><text x="190" y="333" font-family="Plus Jakarta Sans" font-weight="700" font-size="11" fill="#64748b" text-anchor="middle">Composite Materials &amp; Fabrication</text></g>
+        <g class="room-group"><rect x="45" y="395" width="290" height="130" rx="8" fill="#ffffff" stroke="#cbd5e1" stroke-width="2" class="room-rect"/><text x="190" y="455" font-family="Plus Jakarta Sans" font-weight="900" font-size="16" fill="#0f172a" text-anchor="middle">Hangar 006</text><text x="190" y="478" font-family="Plus Jakarta Sans" font-weight="700" font-size="11" fill="#64748b" text-anchor="middle">Aircraft Systems &amp; Assembly</text></g>
+
+        <!-- MIDDLE EQUAL SPACE -->
+        <g transform="translate(355, 105)">
+          <rect width="670" height="420" fill="#f8fafc" stroke="#94a3b8" stroke-dasharray="6,6" stroke-width="2" rx="10"/>
+          <line x1="40" y1="210" x2="630" y2="210" stroke="#cbd5e1" stroke-width="3" stroke-dasharray="14,10"/>
+          <circle cx="335" cy="210" r="85" fill="#f0f9ff" stroke="#38bdf8" stroke-width="2" stroke-dasharray="6,4"/>
+          <text x="335" y="195" font-family="Plus Jakarta Sans, system-ui" font-size="17" font-weight="900" fill="#0369a1" text-anchor="middle">🛫 CENTRAL AIRCRAFT HANGAR BAY</text>
+          <text x="335" y="218" font-family="Plus Jakarta Sans, system-ui" font-size="12" font-weight="700" fill="#0284c7" text-anchor="middle">Main Assembly, Propulsion Taxiway &amp; Heavy Ground Staging</text>
+        </g>
+
+        <!-- RIGHT WING (003, 002, 001) -->
+        <g class="room-group"><rect x="1045" y="105" width="290" height="130" rx="8" fill="#ffffff" stroke="#cbd5e1" stroke-width="2" class="room-rect"/><text x="1190" y="165" font-family="Plus Jakarta Sans" font-weight="900" font-size="16" fill="#0f172a" text-anchor="middle">Hangar 003</text><text x="1190" y="188" font-family="Plus Jakarta Sans" font-weight="700" font-size="11" fill="#64748b" text-anchor="middle">Flight Simulation &amp; Nav Lab</text></g>
+        <g class="room-group"><rect x="1045" y="250" width="290" height="130" rx="8" fill="#ffffff" stroke="#cbd5e1" stroke-width="2" class="room-rect"/><text x="1190" y="310" font-family="Plus Jakarta Sans" font-weight="900" font-size="16" fill="#0f172a" text-anchor="middle">Hangar 002</text><text x="1190" y="333" font-family="Plus Jakarta Sans" font-weight="700" font-size="11" fill="#64748b" text-anchor="middle">Avionics &amp; Radar Lab</text></g>
+        <g class="room-group"><rect x="1045" y="395" width="290" height="130" rx="8" fill="#ffffff" stroke="#cbd5e1" stroke-width="2" class="room-rect"/><text x="1190" y="455" font-family="Plus Jakarta Sans" font-weight="900" font-size="16" fill="#0f172a" text-anchor="middle">Hangar 001</text><text x="1190" y="478" font-family="Plus Jakarta Sans" font-weight="700" font-size="11" fill="#64748b" text-anchor="middle">Aviation Powerplants Bay</text></g>
+      </svg>
+    `;
+
+    const container = document.getElementById('mapContainer');
+    const tabs = document.querySelectorAll('.btn-tab:not(.portal-link)');
+
+    function showMap(svg) {
+      container.innerHTML = svg;
+    }
+
+    document.getElementById('btnCampus').addEventListener('click', (e) => {
+      tabs.forEach(t => t.classList.remove('active'));
+      e.target.classList.add('active');
+      showMap(svgCampus);
+    });
+
+    document.getElementById('btnF1').addEventListener('click', (e) => {
+      tabs.forEach(t => t.classList.remove('active'));
+      e.target.classList.add('active');
+      showMap(svgPanchoF1);
+    });
+
+    document.getElementById('btnF2').addEventListener('click', (e) => {
+      tabs.forEach(t => t.classList.remove('active'));
+      e.target.classList.add('active');
+      showMap(svgPanchoF1);
+    });
+
+    document.getElementById('btnCBA').addEventListener('click', (e) => {
+      tabs.forEach(t => t.classList.remove('active'));
+      e.target.classList.add('active');
+      showMap(svgCBA);
+    });
+
+    document.getElementById('btnHangar').addEventListener('click', (e) => {
+      tabs.forEach(t => t.classList.remove('active'));
+      e.target.classList.add('active');
+      showMap(svgHangar);
+    });
+
+    // Initialize
+    showMap(svgCampus);
+  </script>
+</body>
+</html>

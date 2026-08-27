@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FARMS - Faculty Availability & Room Management System</title>
+  <link rel="stylesheet" href="login.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- Background Image Container with Foggy Mist Overlay -->
+  <div class="bg-image-container">
+    <div class="fog-layer fog-mist-1"></div>
+    <div class="fog-layer fog-mist-2"></div>
+    <div class="fog-orb orb-gold"></div>
+    <div class="fog-orb orb-green"></div>
+    <div class="fog-orb orb-teal"></div>
+  </div>
+
+  <!-- Decorative Dynamic Yellow Swoosh & Curved SVG Overlay -->
+  <div class="curved-frame-overlay">
+    <svg viewBox="0 0 1440 900" preserveAspectRatio="none" class="ambient-swoosh-svg">
+      <defs>
+        <linearGradient id="goldSwooshGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#fef08a" stop-opacity="0.95" />
+          <stop offset="45%" stop-color="#f59e0b" stop-opacity="0.88" />
+          <stop offset="100%" stop-color="#d97706" stop-opacity="0.75" />
+        </linearGradient>
+        <linearGradient id="yellowGlowSwoosh" x1="0%" y1="50%" x2="100%" y2="50%">
+          <stop offset="0%" stop-color="#fef08a" stop-opacity="0.8" />
+          <stop offset="50%" stop-color="#facc15" stop-opacity="0.6" />
+          <stop offset="100%" stop-color="#eab308" stop-opacity="0.1" />
+        </linearGradient>
+        <linearGradient id="emeraldWaveGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#059669" stop-opacity="0.92" />
+          <stop offset="100%" stop-color="#043c2e" stop-opacity="0.97" />
+        </linearGradient>
+        <filter id="fogGlow" x="-20%" y="-20%" width="140%" height="140%">
+          <feGaussianBlur stdDeviation="30" result="blur" />
+          <feComposite in="SourceGraphic" in2="blur" operator="over" />
+        </filter>
+      </defs>
+
+      <!-- Atmospheric Ambient Yellow Swoosh Ribbon -->
+      <path d="M-80,240 C320,80 580,500 980,180 C1260,-40 1400,320 1600,160" 
+            fill="none" stroke="url(#yellowGlowSwoosh)" stroke-width="110" stroke-linecap="round" filter="url(#fogGlow)" opacity="0.5" />
+
+      <!-- Dynamic Random Gold Swoosh Wave Crossing Across Page -->
+      <path class="random-gold-swoosh" 
+            d="M-80,460 C240,680 480,220 880,540 C1140,760 1380,360 1550,400 L1550,950 L-80,950 Z" 
+            fill="url(#goldSwooshGrad)"></path>
+
+      <!-- Foreground Deep Emerald Fluid Wave with Foggy Edge -->
+      <path class="fluid-emerald-swoosh" 
+            d="M-80,540 C320,740 620,380 960,640 C1220,840 1380,520 1550,580 L1550,950 L-80,950 Z" 
+            fill="url(#emeraldWaveGrad)"></path>
+    </svg>
+  </div>
+
+  <!-- 3D Liquid Glassmorphic Flip Card Container -->
+  <div class="login-card" id="cardContainer">
+    <div class="card-inner">
+
+      <!-- FRONT FACE: LOGIN PORTAL -->
+      <div class="card-face card-front">
+        <div class="login-card-header">
+          <div class="brand-badge-pill">CAMPUS SYSTEM</div>
+          <h1 class="mini-logo">FARMS</h1>
+          <hr class="header-divider">
+          <h5 class="login-card-subtitle">Faculty Availability & Room Management System</h5>
+        </div>
+
+        <form id="loginForm" autocomplete="on">
+          <div class="input-container">
+            <input type="text" id="username" placeholder=" " autocomplete="username" value="admin@farms.edu" required />
+            <label for="username">Email or Admin ID</label>
+            <span class="input-icon">👤</span>
+          </div>
+
+          <div class="input-container">
+            <input type="password" id="password" placeholder=" " autocomplete="current-password" value="admin123" required />
+            <label for="password">Password</label>
+            <button type="button" id="togglePasswordBtn" class="toggle-password" aria-label="Toggle password visibility">
+              <svg id="eyeIcon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                <circle cx="12" cy="12" r="3"></circle>
+              </svg>
+            </button>
+          </div>
+
+          <div class="form-aux-row">
+            <label class="remember-label">
+              <input type="checkbox" id="rememberMe" checked />
+              <span>Remember me</span>
+            </label>
+            <a href="#" class="forgot-link" id="forgotPwdBtn">Forgot Password?</a>
+          </div>
+
+          <!-- Alert message output container -->
+          <div id="loginMessage" class="login-message"></div>
+
+          <button type="submit" class="btn-login" id="signInBtn">
+            <span class="btn-text">Sign In to Dashboard</span>
+            <span class="btn-spinner hidden"></span>
+          </button>
+        </form>
+
+        <div class="demo-credentials-hint">
+          <span>💡 <strong>Demo Credentials:</strong> <code>admin@farms.edu</code> / <code>admin123</code></span>
+        </div>
+
+        <p class="footer-text">
+          Need an account or having issues?
+          <a href="#" id="openAdminBtn">Contact Admin</a>
+        </p>
+      </div>
+
+      <!-- BACK FACE: CONTACT ADMIN PANEL -->
+      <div class="card-face card-back">
+        <div class="login-card-header">
+          <div class="brand-badge-pill gold">SUPPORT & ACCESS</div>
+          <h1 class="mini-logo">Contact Admin</h1>
+          <hr class="header-divider">
+          <h5 class="login-card-subtitle">Request access or report system issues</h5>
+        </div>
+
+        <div class="admin-profile-box">
+          <div class="admin-image-container">
+            <img src="ADMIN jeibog.jpg" alt="System Administrator" class="admin-avatar-box" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'100\' height=\'100\' viewBox=\'0 0 24 24\' fill=\'%23064e3b\'><circle cx=\'12\' cy=\'8\' r=\'4\'/><path d=\'M20 21a8 8 0 0 0-16 0\'/></svg>'">
+          </div>
+          
+          <div class="admin-profile-info">
+            <h4>Engr. Monjei Silvestre</h4>
+            <p>FARMS System Administrator</p>
+            <span class="online-badge"><i class="dot"></i> Available on Campus</span>
+          </div>
+
+          <div class="contact-actions-grid">
+            <a href="https://www.facebook.com/monjeiii.silvestre" target="_blank" rel="noopener noreferrer" class="btn-contact-me">
+              <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+              Message via Facebook
+            </a>
+            <a href="mailto:admin@farms.edu" class="btn-contact-email">
+              <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+              Email Helpdesk
+            </a>
+          </div>
+        </div>
+
+        <p class="footer-text">
+          Remembered your credentials? 
+          <a href="#" id="closeAdminBtn">Back to Login</a>
+        </p>
+      </div>
+
+    </div>
+  </div>
+
+  <script src="login.js"></script>
+</body>
+</html>
