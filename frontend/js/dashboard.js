@@ -2326,12 +2326,269 @@ document.addEventListener('DOMContentLoaded', () => {
   updateTimestamp();
   setInterval(updateTimestamp, 1000); // 1000ms ticker for live seconds
 
+  // ==========================================================
+  // 14.5 DEDICATED MOBILE ROOM STATUS MATRIX & BOTTOM SHEET
+  // ==========================================================
+  let activeMobileBldg = 'Pancho Building';
+  let activeMobileStatus = 'all';
+  let activeMobileFloor = 'all';
+  let mobileSearchQuery = '';
+  let activeMobileSheetRoom = null;
+
+  const mobileRoomsFeed = document.getElementById('mobileRoomsFeed');
+  const mobileFloorPillsWrap = document.getElementById('mobileFloorPillsWrap');
+  const mobileRoomSearchInput = document.getElementById('mobileRoomSearchInput');
+  const btnMobileSearchClear = document.getElementById('btnMobileSearchClear');
+  const mobileSheetBackdrop = document.getElementById('mobileSheetBackdrop');
+  const mobileRoomSheet = document.getElementById('mobileRoomSheet');
+  const btnMobileSheetClose = document.getElementById('btnMobileSheetClose');
+  const btnSheetInspectFull = document.getElementById('btnSheetInspectFull');
+  const btnSheetQuickAction = document.getElementById('btnSheetQuickAction');
+
+  function updateMobileVitals() {
+    const freeRooms = rooms.filter(r => r.status === 'vacant').length;
+    const occRooms = rooms.filter(r => r.status === 'occupied').length;
+    const mCountFree = document.getElementById('mCountFree');
+    const mCountOcc = document.getElementById('mCountOcc');
+    const mCountTotal = document.getElementById('mCountTotal');
+    if (mCountFree) mCountFree.textContent = freeRooms;
+    if (mCountOcc) mCountOcc.textContent = occRooms;
+    if (mCountTotal) mCountTotal.textContent = rooms.length;
+
+    // Building badges
+    const panchoFree = rooms.filter(r => r.building === 'Pancho Building' && r.status === 'vacant').length;
+    const cbaFree = rooms.filter(r => r.building === 'CBA Building' && r.status === 'vacant').length;
+    const hangarFree = rooms.filter(r => r.building === 'Hangar' && r.status === 'vacant').length;
+    const mBldgFreePancho = document.getElementById('mBldgFreePancho');
+    const mBldgFreeCBA = document.getElementById('mBldgFreeCBA');
+    const mBldgFreeHangar = document.getElementById('mBldgFreeHangar');
+    if (mBldgFreePancho) mBldgFreePancho.textContent = `${panchoFree} Free`;
+    if (mBldgFreeCBA) mBldgFreeCBA.textContent = `${cbaFree} Free`;
+    if (mBldgFreeHangar) mBldgFreeHangar.textContent = `${hangarFree} Free`;
+  }
+
+  function renderMobileFloorPills() {
+    if (!mobileFloorPillsWrap) return;
+    const floorsCount = (BUILDINGS_DATA[activeMobileBldg] && BUILDINGS_DATA[activeMobileBldg].floors) || 1;
+    let html = `<button class="m-floor-btn ${activeMobileFloor === 'all' ? 'active' : ''}" data-floor="all">ALL</button>`;
+    for (let f = 1; f <= floorsCount; f++) {
+      html += `<button class="m-floor-btn ${activeMobileFloor === String(f) ? 'active' : ''}" data-floor="${f}">L${f}</button>`;
+    }
+    mobileFloorPillsWrap.innerHTML = html;
+
+    mobileFloorPillsWrap.querySelectorAll('.m-floor-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        activeMobileFloor = btn.getAttribute('data-floor');
+        renderMobileFloorPills();
+        renderMobileRoomFeed();
+      });
+    });
+  }
+
+  function renderMobileRoomFeed() {
+    if (!mobileRoomsFeed) return;
+    updateMobileVitals();
+
+    let filtered = rooms.filter(r => {
+      const matchBldg = r.building === activeMobileBldg;
+      const matchFloor = activeMobileFloor === 'all' || String(r.floor) === String(activeMobileFloor);
+      const matchStatus = activeMobileStatus === 'all' || 
+        (activeMobileStatus === 'available' && r.status === 'vacant') ||
+        (activeMobileStatus === 'occupied' && r.status === 'occupied') ||
+        (activeMobileStatus === 'maintenance' && r.status === 'maintenance');
+      
+      let matchSearch = true;
+      if (mobileSearchQuery.trim()) {
+        const q = mobileSearchQuery.toLowerCase();
+        matchSearch = (r.room && r.room.toLowerCase().includes(q)) ||
+                      (r.type && r.type.toLowerCase().includes(q)) ||
+                      (r.occupant && r.occupant.toLowerCase().includes(q)) ||
+                      (r.building && r.building.toLowerCase().includes(q));
+      }
+      return matchBldg && matchFloor && matchStatus && matchSearch;
+    });
+
+    if (filtered.length === 0) {
+      mobileRoomsFeed.innerHTML = `
+        <div style="grid-column: 1 / -1; padding: 24px 16px; text-align: center; background: #f8fafc; border: 2px dashed #000000; border-radius: 12px;">
+          <p style="font-weight: 900; margin: 0 0 4px 0; color: #000000;">No Rooms Found</p>
+          <span style="font-size: 0.76rem; color: #64748b;">Try adjusting your status, floor, or search filter.</span>
+        </div>
+      `;
+      return;
+    }
+
+    mobileRoomsFeed.innerHTML = filtered.map(r => {
+      const statusClass = r.status === 'vacant' ? 'available' : r.status === 'occupied' ? 'occupied' : 'maintenance';
+      const statusLabel = r.status === 'vacant' ? '🟢 FREE' : r.status === 'occupied' ? '🔴 IN-USE' : '🟡 MAINT';
+      const occupantDisplay = r.status === 'occupied' ? (r.occupant !== 'None' ? r.occupant : 'Active Class') : (r.status === 'vacant' ? 'Vacant & Ready' : 'Under Maintenance');
+
+      return `
+        <div class="mobile-room-card" data-room-id="${r.id}">
+          <div class="m-card-top">
+            <span class="m-card-code">${r.room}</span>
+            <span class="m-card-badge ${statusClass}">${statusLabel}</span>
+          </div>
+          <div class="m-card-type">${r.type || 'Classroom'}</div>
+          <div class="m-card-occupant">${occupantDisplay}</div>
+          <div class="m-card-bottom">
+            <span>Level ${r.floor}</span>
+            <span>👥 ${r.capacity || 45} Max</span>
+          </div>
+        </div>
+      `;
+    }).join('');
+
+    mobileRoomsFeed.querySelectorAll('.mobile-room-card').forEach(card => {
+      card.addEventListener('click', () => {
+        const rId = card.getAttribute('data-room-id');
+        const found = rooms.find(r => r.id === rId);
+        if (found) {
+          openMobileRoomSheet(found);
+        }
+      });
+    });
+  }
+
+  function openMobileRoomSheet(roomObj) {
+    activeMobileSheetRoom = roomObj;
+    const sheetRoomBadge = document.getElementById('sheetRoomBadge');
+    const sheetRoomName = document.getElementById('sheetRoomName');
+    const sheetRoomMeta = document.getElementById('sheetRoomMeta');
+    const sheetRoomBody = document.getElementById('sheetRoomBody');
+    const btnSheetQuickAction = document.getElementById('btnSheetQuickAction');
+
+    if (sheetRoomBadge) sheetRoomBadge.textContent = roomObj.room;
+    if (sheetRoomName) sheetRoomName.textContent = `${roomObj.room} (${roomObj.type || 'Room'})`;
+    if (sheetRoomMeta) sheetRoomMeta.textContent = `${roomObj.building} · Level ${roomObj.floor}`;
+
+    const isFree = roomObj.status === 'vacant';
+    const isOcc = roomObj.status === 'occupied';
+
+    if (sheetRoomBody) {
+      sheetRoomBody.innerHTML = `
+        <div class="mobile-sheet-stat-card" style="border-left: 5px solid ${isFree ? '#22c55e' : (isOcc ? '#ef4444' : '#f59e0b')};">
+          <div class="mobile-sheet-stat-label">Current Status</div>
+          <div class="mobile-sheet-stat-value" style="font-weight:900;">
+            ${isFree ? '🟢 Available for Immediate Use' : (isOcc ? '🔴 Currently In-Use' : '🟠 Facility Under Maintenance')}
+          </div>
+        </div>
+
+        <div class="mobile-sheet-stat-card">
+          <div class="mobile-sheet-stat-label">Assigned Faculty / Subject</div>
+          <div class="mobile-sheet-stat-value">${roomObj.occupant !== 'None' ? roomObj.occupant : 'None (Room Unassigned)'}</div>
+        </div>
+
+        <div class="mobile-sheet-stat-card">
+          <div class="mobile-sheet-stat-label">Schedule &amp; Time Window</div>
+          <div class="mobile-sheet-stat-value">${roomObj.schedule !== '--' ? roomObj.schedule : 'Available all periods'}</div>
+        </div>
+
+        <div class="mobile-sheet-stat-card">
+          <div class="mobile-sheet-stat-label">Room Capacity &amp; Equipment</div>
+          <div class="mobile-sheet-stat-value">${roomObj.capacity || 45} Seats · ${roomObj.equipment || 'Standard Setup'}</div>
+        </div>
+      `;
+    }
+
+    if (btnSheetQuickAction) {
+      btnSheetQuickAction.textContent = isFree ? '🔴 Mark In-Use / Book' : '🟢 Free Up & Release Room';
+    }
+
+    if (mobileSheetBackdrop) mobileSheetBackdrop.classList.remove('hidden');
+    if (mobileRoomSheet) mobileRoomSheet.classList.remove('hidden');
+  }
+
+  function closeMobileRoomSheet() {
+    if (mobileSheetBackdrop) mobileSheetBackdrop.classList.add('hidden');
+    if (mobileRoomSheet) mobileRoomSheet.classList.add('hidden');
+    activeMobileSheetRoom = null;
+  }
+
+  if (btnMobileSheetClose) btnMobileSheetClose.addEventListener('click', closeMobileRoomSheet);
+  if (mobileSheetBackdrop) mobileSheetBackdrop.addEventListener('click', closeMobileRoomSheet);
+
+  if (btnSheetInspectFull) {
+    btnSheetInspectFull.addEventListener('click', () => {
+      if (activeMobileSheetRoom) {
+        const target = activeMobileSheetRoom;
+        closeMobileRoomSheet();
+        openRoomModal(target);
+      }
+    });
+  }
+
+  if (btnSheetQuickAction) {
+    btnSheetQuickAction.addEventListener('click', () => {
+      if (!activeMobileSheetRoom) return;
+      const target = activeMobileSheetRoom;
+      const willBeOcc = target.status === 'vacant';
+      target.status = willBeOcc ? 'occupied' : 'vacant';
+      target.occupant = willBeOcc ? 'Quick Reserved (Mobile)' : 'None';
+      target.schedule = willBeOcc ? 'Current Period' : '--';
+
+      localStorage.setItem('farms_rooms_v4', JSON.stringify(rooms));
+      updateKPIs();
+      renderListView();
+      renderMatrixView();
+      renderMobileRoomFeed();
+      closeMobileRoomSheet();
+      showToast(`${target.room} status updated to ${target.status === 'vacant' ? '🟢 Available' : '🔴 In-Use'}`);
+    });
+  }
+
+  // Mobile Building Chips listeners
+  document.querySelectorAll('.mobile-bldg-chip').forEach(chip => {
+    chip.addEventListener('click', () => {
+      document.querySelectorAll('.mobile-bldg-chip').forEach(c => c.classList.remove('active'));
+      chip.classList.add('active');
+      activeMobileBldg = chip.getAttribute('data-bldg');
+      activeMobileFloor = 'all';
+      renderMobileFloorPills();
+      renderMobileRoomFeed();
+    });
+  });
+
+  // Mobile Status Filter buttons
+  document.querySelectorAll('.m-status-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.m-status-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      activeMobileStatus = btn.getAttribute('data-status');
+      renderMobileRoomFeed();
+    });
+  });
+
+  // Mobile Live Search input
+  if (mobileRoomSearchInput) {
+    mobileRoomSearchInput.addEventListener('input', (e) => {
+      mobileSearchQuery = e.target.value;
+      if (btnMobileSearchClear) {
+        btnMobileSearchClear.classList.toggle('hidden', !mobileSearchQuery);
+      }
+      renderMobileRoomFeed();
+    });
+  }
+
+  if (btnMobileSearchClear) {
+    btnMobileSearchClear.addEventListener('click', () => {
+      if (mobileRoomSearchInput) {
+        mobileRoomSearchInput.value = '';
+        mobileSearchQuery = '';
+        btnMobileSearchClear.classList.add('hidden');
+        renderMobileRoomFeed();
+      }
+    });
+  }
+
   // ==========================================
   // 15. BOOTSTRAP INITIALIZATION
   // ==========================================
   updateKPIs();
   renderListView();
   renderMatrixView();
+  renderMobileFloorPills();
+  renderMobileRoomFeed();
   renderNotifications();
   renderAccessRequests();
   renderTimelineLogs();
