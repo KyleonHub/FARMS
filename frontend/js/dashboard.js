@@ -349,19 +349,62 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  // ==========================================
+  // 2.6 MOBILE UI VIEW SIMULATOR / TOGGLE
+  // ==========================================
+  const btnToggleMobileMode = document.getElementById('btnToggleMobileMode');
+  const savedMobileMode = localStorage.getItem('farms_mobile_mode') === 'true';
+
+  function applyMobileMode(isMobile) {
+    if (isMobile) {
+      document.body.classList.add('force-mobile-view');
+      if (btnToggleMobileMode) {
+        btnToggleMobileMode.classList.add('active');
+        const phoneIcon = btnToggleMobileMode.querySelector('.icon-phone');
+        const desktopIcon = btnToggleMobileMode.querySelector('.icon-desktop');
+        if (phoneIcon) phoneIcon.style.display = 'none';
+        if (desktopIcon) desktopIcon.style.display = 'inline-block';
+        btnToggleMobileMode.setAttribute('title', 'Switch to Desktop UI View (💻)');
+      }
+    } else {
+      document.body.classList.remove('force-mobile-view');
+      if (btnToggleMobileMode) {
+        btnToggleMobileMode.classList.remove('active');
+        const phoneIcon = btnToggleMobileMode.querySelector('.icon-phone');
+        const desktopIcon = btnToggleMobileMode.querySelector('.icon-desktop');
+        if (phoneIcon) phoneIcon.style.display = 'inline-block';
+        if (desktopIcon) desktopIcon.style.display = 'none';
+        btnToggleMobileMode.setAttribute('title', 'Switch to Mobile UI View (📱)');
+      }
+    }
+    localStorage.setItem('farms_mobile_mode', isMobile);
+  }
+
+  if (savedMobileMode) {
+    applyMobileMode(true);
+  }
+
+  if (btnToggleMobileMode) {
+    btnToggleMobileMode.addEventListener('click', () => {
+      const isMobile = document.body.classList.contains('force-mobile-view');
+      applyMobileMode(!isMobile);
+      showToast(!isMobile ? '📱 Mobile UI View Activated' : '💻 Desktop UI View Restored');
+    });
+  }
+
   // ── Retractable Sidebar Logic ──
   const sidebarToggleBtn = document.getElementById('sidebarToggleBtn');
   const appLayout = document.querySelector('.admin-app-layout');
   const sidebarBackdrop = document.getElementById('sidebarBackdrop');
 
   const savedSidebarState = localStorage.getItem('farms_sidebar_collapsed') === 'true';
-  if (savedSidebarState && window.innerWidth > 768 && appLayout) {
+  if (savedSidebarState && window.innerWidth > 768 && !document.body.classList.contains('force-mobile-view') && appLayout) {
     appLayout.classList.add('sidebar-collapsed');
   }
 
   if (sidebarToggleBtn && appLayout) {
     sidebarToggleBtn.addEventListener('click', () => {
-      if (window.innerWidth <= 768) {
+      if (window.innerWidth <= 768 || document.body.classList.contains('force-mobile-view')) {
         appLayout.classList.toggle('sidebar-mobile-open');
       } else {
         appLayout.classList.toggle('sidebar-collapsed');
