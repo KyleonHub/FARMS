@@ -557,6 +557,45 @@ input, select, textarea {
   }
 }
 
+/* ── Theme Toggle Button (Light/Dark Mode) ── */
+.theme-toggle-btn {
+  width: 38px;
+  height: 38px;
+  border-radius: var(--radius-sm);
+  background: #ffffff;
+  border: 2px solid #000000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  box-shadow: 2px 2px 0px #000000;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  color: #000000;
+  font-size: 1.05rem;
+  user-select: none;
+  flex-shrink: 0;
+}
+.theme-toggle-btn:hover {
+  background: #f4f4f5;
+  transform: translate(-1px, -1px);
+  box-shadow: 3px 3px 0px #000000;
+}
+.theme-toggle-btn .sun-icon {
+  display: none;
+}
+.theme-toggle-btn .moon-icon {
+  display: inline-block;
+  line-height: 1;
+}
+[data-theme="dark"] .theme-toggle-btn .sun-icon {
+  display: inline-block;
+  line-height: 1;
+}
+[data-theme="dark"] .theme-toggle-btn .moon-icon {
+  display: none;
+}
+
 .notif-wrapper { position: relative; }
 .topbar-icon-btn {
   width: 38px;
@@ -4781,12 +4820,28 @@ input, select, textarea {
 
   /* Top Header Adjustments */
   .admin-topbar {
-    padding: 10px 14px !important;
+    padding: 8px 12px !important;
+    gap: 8px !important;
+    height: auto !important;
+    min-height: 56px !important;
+  }
+
+  .topbar-left-cluster {
+    gap: 8px !important;
+    max-width: none !important;
+  }
+
+  .topbar-right-cluster {
     gap: 8px !important;
   }
 
   .topbar-search-container {
     flex: 1 !important;
+    width: auto !important;
+  }
+
+  .topbar-clock-widget {
+    display: none !important;
   }
 
   .search-kbd-chip {
@@ -4807,9 +4862,30 @@ input, select, textarea {
 
   /* Main Scroll Content Padding for Bottom Nav */
   .admin-scroll-content {
-    padding: 14px 12px 85px 12px !important;
+    padding: 12px 10px 85px 10px !important;
     overflow-y: auto !important;
     -webkit-overflow-scrolling: touch !important;
+  }
+
+  .section-card-header {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 10px !important;
+    padding: 12px 14px !important;
+  }
+
+  .segmented-view-toggle,
+  .facilities-tab-toggle {
+    width: 100% !important;
+    display: flex !important;
+  }
+
+  .seg-btn,
+  .fac-tab-btn {
+    flex: 1 !important;
+    text-align: center !important;
+    padding: 8px 6px !important;
+    font-size: 0.78rem !important;
   }
 
   .dashboard-greeting-row {
@@ -4848,6 +4924,13 @@ input, select, textarea {
     gap: 16px !important;
   }
 
+  /* Live Status Container: Responsive Natural Height */
+  .live-status-container {
+    height: auto !important;
+    min-height: auto !important;
+    padding: 12px !important;
+  }
+
   /* Blueprint & Room Matrix Container */
   .live-status-layout.fixed-bounds {
     flex-direction: column !important;
@@ -4859,12 +4942,12 @@ input, select, textarea {
     width: 100% !important;
     min-width: 100% !important;
     border-right: none !important;
-    border-bottom: 1.5px solid var(--slate-200) !important;
+    border-bottom: 2px solid #000000 !important;
     max-height: none !important;
   }
 
   .status-display-main {
-    min-height: 380px !important;
+    min-height: 400px !important;
     overflow-x: auto !important;
     -webkit-overflow-scrolling: touch !important;
   }
@@ -4906,7 +4989,7 @@ input, select, textarea {
     gap: 6px !important;
   }
 
-  /* Activate Mobile Bottom Nav Bar */
+  /* Activate Mobile Bottom Nav Bar — Neo-Brutalist Light Mode */
   .mobile-bottom-nav {
     display: flex !important;
     position: fixed !important;
@@ -4914,12 +4997,10 @@ input, select, textarea {
     left: 0 !important;
     right: 0 !important;
     height: 64px !important;
-    background: rgba(4, 60, 46, 0.96) !important;
-    backdrop-filter: blur(16px) !important;
-    -webkit-backdrop-filter: blur(16px) !important;
-    border-top: 1px solid rgba(255, 255, 255, 0.15) !important;
+    background: #ffffff !important;
+    border-top: 2.5px solid #000000 !important;
     z-index: 999 !important;
-    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.3) !important;
+    box-shadow: 0 -4px 0px #000000 !important;
   }
 
   .mobile-nav-tab {
@@ -4928,12 +5009,12 @@ input, select, textarea {
     flex-direction: column !important;
     align-items: center !important;
     justify-content: center !important;
-    color: #a7f3d0 !important;
+    color: #64748b !important;
     text-decoration: none !important;
     font-size: 0.68rem !important;
-    font-weight: 700 !important;
+    font-weight: 800 !important;
     gap: 3px !important;
-    transition: all 0.18s ease !important;
+    transition: all 0.15s ease !important;
     position: relative !important;
   }
 
@@ -4941,16 +5022,16 @@ input, select, textarea {
     width: 20px !important;
     height: 20px !important;
     stroke: currentColor !important;
-    transition: all 0.18s ease !important;
+    transition: all 0.15s ease !important;
   }
 
   .mobile-nav-tab.active {
-    color: #ffffff !important;
-    font-weight: 800 !important;
+    color: #000000 !important;
+    font-weight: 900 !important;
   }
 
   .mobile-nav-tab.active .mobile-nav-icon {
-    stroke: #34d399 !important;
+    stroke: #000000 !important;
     transform: translateY(-2px) scale(1.1) !important;
   }
 
@@ -4958,11 +5039,11 @@ input, select, textarea {
     content: '' !important;
     position: absolute !important;
     bottom: 6px !important;
-    width: 16px !important;
-    height: 3px !important;
-    background: #34d399 !important;
+    width: 18px !important;
+    height: 3.5px !important;
+    background: #84cc16 !important;
     border-radius: 999px !important;
-    box-shadow: 0 0 8px #34d399 !important;
+    border: 1px solid #000000 !important;
   }
 
   .mobile-tab-badge {
