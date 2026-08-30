@@ -2369,7 +2369,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function renderMobileFloorPills() {
     if (!mobileFloorPillsWrap) return;
-    const floorsCount = (BUILDINGS_DATA[activeMobileBldg] && BUILDINGS_DATA[activeMobileBldg].floors) || 1;
+    const floorsCount = (BUILDING_CONFIG[activeMobileBldg] && BUILDING_CONFIG[activeMobileBldg].floors) || 1;
     let html = `<button class="m-floor-btn ${activeMobileFloor === 'all' ? 'active' : ''}" data-floor="all">ALL</button>`;
     for (let f = 1; f <= floorsCount; f++) {
       html += `<button class="m-floor-btn ${activeMobileFloor === String(f) ? 'active' : ''}" data-floor="${f}">L${f}</button>`;
