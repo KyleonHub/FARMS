@@ -5081,6 +5081,13 @@ body.force-mobile-view .admin-main-wrapper {
 }
 
 @media (max-width: 768px) {
+  /* Hide the top 4 KPI cards, top overview header, and desktop map switcher on mobile */
+  #view-dashboard > .section-card-header,
+  #view-dashboard > .kpi-stats-grid,
+  .live-status-container > .section-card-header {
+    display: none !important;
+  }
+
   .svg-map-wrapper,
   .list-directory-wrapper,
   .matrix-directory-wrapper,
@@ -5091,7 +5098,7 @@ body.force-mobile-view .admin-main-wrapper {
   .mobile-room-matrix-wrapper {
     display: flex !important;
     flex-direction: column;
-    gap: 12px;
+    gap: 10px;
     width: 100%;
   }
 
@@ -5120,6 +5127,13 @@ body.force-mobile-view .admin-main-wrapper {
   }
 }
 
+/* Hide desktop top headers and 4 KPI boxes in forced mobile simulation */
+body.force-mobile-view #view-dashboard > .section-card-header,
+body.force-mobile-view #view-dashboard > .kpi-stats-grid,
+body.force-mobile-view .live-status-container > .section-card-header {
+  display: none !important;
+}
+
 body.force-mobile-view .svg-map-wrapper,
 body.force-mobile-view .list-directory-wrapper,
 body.force-mobile-view .matrix-directory-wrapper,
@@ -5130,7 +5144,7 @@ body.force-mobile-view .status-filter-sidebar {
 body.force-mobile-view .mobile-room-matrix-wrapper {
   display: flex !important;
   flex-direction: column;
-  gap: 12px;
+  gap: 10px;
   width: 100%;
 }
 
@@ -5158,27 +5172,29 @@ body.force-mobile-view .live-status-layout.fixed-bounds {
   min-height: auto !important;
 }
 
-/* ── Mobile Vitals Strip ── */
+/* ── Mobile Vitals Strip (Full-Width Responsive 3-Col HUD) ── */
 .mobile-vitals-strip {
-  display: flex;
-  gap: 8px;
-  align-items: center;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 6px;
+  width: 100%;
 }
 .m-vital-pill {
-  flex: 1;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 5px;
-  padding: 6px 8px;
+  gap: 4px;
+  padding: 7px 4px;
   background: #ffffff;
-  border: 1.5px solid #000000;
-  border-radius: 8px;
-  box-shadow: 1.5px 1.5px 0px #000000;
-  font-size: 0.72rem;
-  font-weight: 800;
+  border: 2px solid #000000;
+  border-radius: 9px;
+  box-shadow: 2px 2px 0px #000000;
+  font-size: 0.7rem;
+  font-weight: 900;
   color: #000000;
   white-space: nowrap;
+  min-width: 0;
+  text-align: center;
 }
 .m-vital-pill.available {
   background: #dcfce7;
@@ -5193,12 +5209,13 @@ body.force-mobile-view .live-status-layout.fixed-bounds {
   height: 6px;
   border-radius: 50%;
   background: #22c55e;
+  flex-shrink: 0;
 }
 .m-vital-dot.red {
   background: #ef4444;
 }
 
-/* ── Mobile Search Bar ── */
+/* ── Mobile Search Bar (Responsive High Contrast) ── */
 .mobile-search-bar {
   display: flex;
   align-items: center;
@@ -5218,9 +5235,9 @@ body.force-mobile-view .live-status-layout.fixed-bounds {
   border: 2px solid #000000;
   border-radius: 10px;
   box-shadow: 2px 2px 0px #000000;
-  padding: 0 34px 0 36px;
+  padding: 0 32px 0 36px;
   font-family: inherit;
-  font-size: 0.84rem;
+  font-size: 0.82rem;
   font-weight: 700;
   color: #000000;
   outline: none;
@@ -5239,21 +5256,21 @@ body.force-mobile-view .live-status-layout.fixed-bounds {
   cursor: pointer;
 }
 
-/* ── Mobile Building Selector Chips ── */
+/* ── Mobile Building Selector Chips (3-Column Equal Responsive Grid) ── */
 .mobile-bldg-chips-scroll {
-  display: flex;
-  gap: 8px;
-  overflow-x: auto;
-  padding-bottom: 2px;
-  -webkit-overflow-scrolling: touch;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 6px;
+  width: 100%;
+  overflow: visible;
 }
 .mobile-bldg-chip {
-  flex: 1;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 6px;
-  padding: 8px 10px;
+  gap: 3px;
+  padding: 7px 4px;
   background: #ffffff;
   border: 2px solid #000000;
   border-radius: 10px;
@@ -5262,6 +5279,7 @@ body.force-mobile-view .live-status-layout.fixed-bounds {
   transition: all 0.15s ease;
   font-family: inherit;
   white-space: nowrap;
+  min-width: 0;
 }
 .mobile-bldg-chip:active,
 .mobile-bldg-chip:hover {
@@ -5274,18 +5292,18 @@ body.force-mobile-view .live-status-layout.fixed-bounds {
   box-shadow: 2.5px 2.5px 0px #84cc16;
 }
 .m-bldg-icon {
-  font-size: 0.95rem;
+  font-size: 0.92rem;
 }
 .m-bldg-name {
-  font-size: 0.82rem;
+  font-size: 0.8rem;
   font-weight: 900;
 }
 .m-bldg-badge {
   font-size: 0.62rem;
   font-weight: 900;
-  padding: 2px 6px;
-  border-radius: 6px;
-  border: 1px solid #000000;
+  padding: 1px 5px;
+  border-radius: 5px;
+  border: 1.2px solid #000000;
 }
 .m-bldg-badge.free {
   background: #d9f99d;
@@ -5296,28 +5314,31 @@ body.force-mobile-view .live-status-layout.fixed-bounds {
   color: #000000;
 }
 
-/* ── Mobile Filter Strip (Status + Floor) ── */
+/* ── Mobile Filter Strip (Status + Floor Perfectly Aligned) ── */
 .mobile-filters-row {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 8px;
-  flex-wrap: wrap;
+  gap: 6px;
+  width: 100%;
 }
 .mobile-status-pills {
   display: flex;
-  gap: 5px;
+  gap: 4px;
+  flex: 1;
 }
 .m-status-btn {
-  padding: 5px 9px;
+  flex: 1;
+  padding: 6px 3px;
   background: #ffffff;
-  border: 1.5px solid #000000;
-  border-radius: 7px;
+  border: 2px solid #000000;
+  border-radius: 8px;
   box-shadow: 1.5px 1.5px 0px #000000;
   font-family: inherit;
   font-size: 0.72rem;
   font-weight: 900;
   cursor: pointer;
+  text-align: center;
   transition: all 0.12s ease;
 }
 .m-status-btn.active {
@@ -5328,13 +5349,13 @@ body.force-mobile-view .live-status-layout.fixed-bounds {
 
 .mobile-floor-pills {
   display: flex;
-  gap: 5px;
+  gap: 4px;
 }
 .m-floor-btn {
-  padding: 5px 8px;
+  padding: 6px 8px;
   background: #f4f4f5;
-  border: 1.5px solid #000000;
-  border-radius: 7px;
+  border: 2px solid #000000;
+  border-radius: 8px;
   box-shadow: 1.5px 1.5px 0px #000000;
   font-family: inherit;
   font-size: 0.72rem;
@@ -5346,11 +5367,12 @@ body.force-mobile-view .live-status-layout.fixed-bounds {
   color: #000000;
 }
 
-/* ── Mobile Rooms Touch Cards Grid ── */
+/* ── Mobile Rooms Touch Cards Grid (Crisp 2-Column Neo-Brutalist Cards) ── */
 .mobile-rooms-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 10px;
+  gap: 8px;
+  width: 100%;
 }
 @media (max-width: 360px) {
   .mobile-rooms-grid {
