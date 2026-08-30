@@ -7,7 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="dashboard.css">
+  <link rel="stylesheet" href="css/dashboard.css">
 </head>
 <body>
 
@@ -18,17 +18,14 @@
         <!-- Brand Header -->
         <div class="sidebar-brand-unified">
           <div class="brand-seal-icon">
-            <svg viewBox="0 0 100 100" width="38" height="38">
-              <circle cx="50" cy="50" r="46" fill="#043c2e" stroke="#eab308" stroke-width="4"/>
-              <circle cx="50" cy="50" r="38" fill="none" stroke="#ca8a04" stroke-width="1.5" stroke-dasharray="4,2"/>
-              <path d="M50 20 L58 36 L76 36 L62 48 L68 66 L50 54 L32 66 L38 48 L24 36 L42 36 Z" fill="#facc15"/>
-              <circle cx="50" cy="50" r="12" fill="#047857" stroke="#ca8a04" stroke-width="2"/>
-              <text x="50" y="54" font-family="Plus Jakarta Sans, system-ui" font-size="10" font-weight="900" fill="#ffffff" text-anchor="middle">BSU</text>
+            <svg viewBox="0 0 40 40" width="38" height="38">
+              <rect width="40" height="40" rx="10" fill="#a3e635" stroke="#000000" stroke-width="2"/>
+              <path d="M20 7 L23.8 14.8 L32.5 16 L26.2 22 L27.7 30.6 L20 26.5 L12.3 30.6 L13.8 22 L7.5 16 L16.2 14.8 Z" fill="#000000"/>
             </svg>
           </div>
           <div class="brand-text-block">
             <h1 class="brand-main-title">FARMS</h1>
-            <p class="brand-sub-title">Faculty Availability and<br>Room Management System</p>
+            <p class="brand-sub-title">Faculty Availability<br>and Room Management<br>System</p>
           </div>
         </div>
 
@@ -91,24 +88,67 @@
           </a>
         </nav>
       </div>
+
+      <!-- Institutional Footer Badge -->
+      <div class="sidebar-footer-card">
+        <div class="sidebar-campus-pill">
+          <span class="campus-status-dot"></span>
+          <span>BSU Main Campus</span>
+        </div>
+        <div class="sidebar-version-tag">FARMS v2.4 • System Active</div>
+      </div>
     </aside>
+
+    <!-- Mobile/Desktop Backdrop Overlay -->
+    <div class="sidebar-backdrop" id="sidebarBackdrop"></div>
 
     <!-- ── Main Content Area ── -->
     <div class="admin-main-wrapper">
-      <!-- ── Top Header Bar ── -->
+      <!-- ── Top Header Bar (Simplified & Maximized Live Clock) ── -->
       <header class="admin-topbar">
-        <div class="topbar-search-container">
-          <span class="search-magnifier">🔍</span>
-          <input type="text" id="adminSearch" placeholder="Search facilities, faculty, or rooms..." autocomplete="off">
-          <button id="clearSearchBtn" class="clear-search-btn" style="display:none;">✕</button>
-          
-          <div id="searchDropdown" class="search-dropdown hidden">
-            <div class="search-dropdown-header">MATCHED FACILITIES &amp; SCHEDULES</div>
-            <div id="searchResultsList"></div>
+        <div class="topbar-left-cluster">
+          <button class="sidebar-toggle-btn" id="sidebarToggleBtn" title="Toggle Sidebar" aria-label="Toggle Sidebar">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round">
+              <line x1="3" y1="6" x2="21" y2="6"/>
+              <line x1="3" y1="12" x2="21" y2="12"/>
+              <line x1="3" y1="18" x2="21" y2="18"/>
+            </svg>
+          </button>
+
+          <div class="topbar-search-container">
+            <span class="search-magnifier">🔍</span>
+            <input type="text" id="adminSearch" placeholder="Search facilities, faculty, or rooms..." autocomplete="off">
+            <kbd class="search-kbd-chip">Ctrl K</kbd>
+            <button id="clearSearchBtn" class="clear-search-btn" style="display:none;">✕</button>
+            
+            <div id="searchDropdown" class="search-dropdown hidden">
+              <div class="search-dropdown-header">MATCHED FACILITIES &amp; SCHEDULES</div>
+              <div id="searchResultsList"></div>
+            </div>
           </div>
         </div>
 
-        <div class="topbar-actions">
+        <!-- ── Maximized Executive Live Clock Display (With Seconds) ── -->
+        <div class="topbar-clock-widget" id="liveTimestampWidget" title="BSU Campus Realtime Synchronization">
+          <div class="clock-display-core">
+            <span class="clock-time-digits" id="clockTimeDigits">12:00:00</span>
+            <span class="clock-ampm-badge" id="clockAmPm">AM</span>
+          </div>
+          <div class="clock-date-sub" id="clockDateSub">
+            Loading date...
+          </div>
+          <!-- Hidden legacy span for script fallback -->
+          <span id="liveTimestamp" style="display:none;"></span>
+        </div>
+
+        <!-- ── Right Actions Cluster (Simplified & Polished) ── -->
+        <div class="topbar-right-cluster">
+          <!-- Dark / Light Theme Toggle (Circular Icon Button) -->
+          <button class="theme-toggle-btn" id="themeToggleBtn" title="Toggle Dark/Light Mode" aria-label="Toggle Theme">
+            <span class="theme-icon sun-icon">☀️</span>
+            <span class="theme-icon moon-icon">🌙</span>
+          </button>
+
           <div class="notif-wrapper">
             <button class="topbar-icon-btn" id="notifBellBtn" title="Notifications">
               <span>🔔</span>
@@ -123,9 +163,12 @@
             </div>
           </div>
 
-          <div class="user-profile-btn">
+          <div class="user-profile-btn" title="Admin Account">
             <div class="user-avatar-circle">A</div>
-            <span class="user-display-name">Admin Portal</span>
+            <div class="user-meta-block">
+              <span class="user-display-name">Admin Portal</span>
+              <span class="user-status-indicator">● Active</span>
+            </div>
           </div>
         </div>
       </header>
@@ -137,21 +180,22 @@
              VIEW 1: MODULAR DASHBOARD
              ==================================================== -->
         <section id="view-dashboard" class="content-view active">
-          
-          <div class="dashboard-greeting-row">
-            <div>
-              <h2 class="page-section-heading">Campus Operations Hub</h2>
-              <p class="page-section-sub">Palanca National High School — Live Facility Matrix</p>
+          <!-- Campus Telemetry & Key Metrics Header -->
+          <div class="section-card-header" style="margin-bottom: 4px;">
+            <div class="section-title-wrap">
+              <span class="section-title-bar" style="background:var(--lime-500);"></span>
+              <div>
+                <h3 class="section-main-title">Campus Operations Overview &amp; Vitals</h3>
+                <p style="font-size:0.78rem; color:var(--slate-500); margin:0;">Real-time occupancy metrics, facility load, and pending authorization queue</p>
+              </div>
             </div>
-            <div class="header-tag-pill" id="liveTimestamp">
-              Wednesday, Aug 26, 2026 — 10:00 PM
-            </div>
+            <span class="context-live-tag" style="background:#000000; color:var(--lime-400);">● LIVE TELEMETRY</span>
           </div>
 
-          <!-- KPI Metric Cards Grid (3 Rich Executive Summary Cards) -->
-          <div class="kpi-stats-grid kpi-three-cards">
+          <!-- KPI Metric Cards Grid (4 High-Density Maximalist Telemetry Cards) -->
+          <div class="kpi-stats-grid kpi-four-cards">
             
-            <!-- Card 1: Active Classes & Campus Occupancy -->
+            <!-- Card 1: Active Classes & Campus Load -->
             <div class="kpi-card-v2 card-classes-theme">
               <div class="kpi-v2-main">
                 <div class="kpi-header-row">
@@ -186,7 +230,7 @@
               </div>
             </div>
 
-            <!-- Card 2: Vacant Rooms & Booking Capacity -->
+            <!-- Card 2: Vacant Rooms & Capacity -->
             <div class="kpi-card-v2 card-vacant-theme">
               <div class="kpi-v2-main">
                 <div class="kpi-header-row">
@@ -208,7 +252,7 @@
               </div>
             </div>
 
-            <!-- Card 3: Access Permits & Pending Actions -->
+            <!-- Card 3: Access Permits & Pending Authorization -->
             <div class="kpi-card-v2 card-pending-amber">
               <div class="kpi-v2-main">
                 <div class="kpi-header-row">
@@ -216,7 +260,7 @@
                   <span class="kpi-micro-tag pending">⚡ ACTION REQUIRED</span>
                 </div>
                 <div class="kpi-v2-big-num" id="statPendingRequests">5</div>
-                <div class="kpi-v2-sub dark-amber">Requires Approval · <strong style="color:#78350f;">Fast Response</strong></div>
+                <div class="kpi-v2-sub dark-amber">Requires Approval · <strong style="color:#78350f;">Fast Track Queue</strong></div>
               </div>
               <div class="kpi-v2-widget">
                 <div class="pending-warning-badge">
@@ -229,160 +273,340 @@
               </div>
             </div>
 
+            <!-- Card 4: Facility Hardware & IoT Telemetry -->
+            <div class="kpi-card-v2 card-telemetry-cyan">
+              <div class="kpi-v2-main">
+                <div class="kpi-header-row">
+                  <span class="kpi-v2-title">System Status</span>
+                  <span class="kpi-micro-tag cyber">⚡ 99.4% ONLINE</span>
+                </div>
+                <div class="kpi-v2-big-num" style="color:#0284c7;">68/68</div>
+                <div class="kpi-v2-sub blue">Smart Locks Active · <strong style="color:#0369a1;">52 AV Ready</strong></div>
+              </div>
+              <div class="kpi-v2-widget">
+                <div class="telemetry-spark-box">
+                  <div class="telemetry-chip-row"><span class="t-dot online"></span> <span>RFID Locks: OK</span></div>
+                  <div class="telemetry-chip-row"><span class="t-dot online"></span> <span>Smart AV: 98%</span></div>
+                  <div class="telemetry-chip-row"><span class="t-dot opt"></span> <span>Grid: Optimal</span></div>
+                </div>
+              </div>
+            </div>
+
           </div>
 
           <!-- Modular Live Status Section -->
           <div class="modular-card live-status-container">
             <div class="section-card-header">
               <div class="section-title-wrap">
-                <span class="section-title-bar"></span>
-                <h3>Live Room Status &amp; Interactive Vector Maps</h3>
+                <h3 class="section-main-title">Live Room Status &amp; Interactive Vector Maps</h3>
               </div>
               <div class="segmented-view-toggle">
-                <button class="seg-btn active" id="btnSvgView">🗺️ Vector Map</button>
-                <button class="seg-btn" id="btnListView">📋 Directory List</button>
+                <button class="seg-btn active" id="btnSvgView">📖 Vector Map</button>
+                <button class="seg-btn" id="btnListView">📑 Directory List</button>
               </div>
             </div>
 
             <!-- Fixed Height Bounds Layout (Thinner Sidebar 215px) -->
             <div class="live-status-layout fixed-bounds">
               
-              <!-- ── Thinner 0.75x Adaptive Sidebar (215px) ── -->
+              <!-- ── Overhauled High-Density Comic-Maximalist Adaptive Sidebar ── -->
               <aside class="status-filter-sidebar" id="adaptiveSidebar">
                 
-                <!-- Dynamic Context Pill -->
-                <div class="sidebar-context-badge">
-                  <span class="context-icon" id="sidebarContextIcon">🗺️</span>
-                  <div>
-                    <div class="context-sub">ACTIVE VIEW</div>
+                <!-- 1. Top Neo-Brutalist Radar Header -->
+                <div class="sidebar-context-badge" id="sidebarContextBadge">
+                  <div class="context-badge-icon" id="sidebarContextIcon">★</div>
+                  <div class="context-badge-text">
+                    <div class="context-sub">CAMPUS RADAR // V3</div>
                     <div class="context-text" id="sidebarContextTitle">Campus Grounds</div>
                   </div>
+                  <span class="context-live-tag" id="sidebarContextTag">● 3 ACTIVE</span>
                 </div>
 
-                <div class="sidebar-divider" id="campusBlockDivider" style="margin: 10px 0;"></div>
-
-                <!-- 1. Campus Mode Context -->
+                <!-- 2. Campus Overview Mode Content (Clean & Space-Saving) -->
                 <div id="sidebarCampusBlock" class="filter-block">
-                  <span class="filter-block-label">EXPLORE BLUEPRINTS</span>
+                  <!-- Grounds Quick Telemetry Ribbon (Campus Overview Only) -->
+                  <div class="sidebar-vitals-strip">
+                    <div class="vital-slot"><span class="vital-lbl">ZONES</span><strong class="vital-val" id="sidebarStripZones">3 ACTIVE</strong></div>
+                    <div class="vital-slot green"><span class="vital-lbl">AVAILABLE</span><strong class="vital-val" id="sidebarStripVacant">-- RMS</strong></div>
+                    <div class="vital-slot dark"><span class="vital-lbl">IN-USE</span><strong class="vital-val" id="sidebarStripOcc">-- RMS</strong></div>
+                  </div>
+
+                  <div class="filter-header-row" style="margin-top: 4px;">
+                    <span class="filter-block-label">EXPLORE BLUEPRINTS</span>
+                    <span class="filter-count-badge" id="activeBldgCountBadge">3 ACTIVE</span>
+                  </div>
+                  
                   <div class="quick-bldg-jumps">
-                    <button class="bldg-jump-btn pancho" data-jump="Pancho Building">
-                      <span class="bldg-dot" style="background:#059669;"></span>
-                      <div class="jump-info">
-                        <strong>Pancho Building</strong>
-                        <small>2 Floors · 50 Classrooms</small>
+                    <!-- Pancho -->
+                    <button class="bldg-jump-btn pancho" data-jump="Pancho Building" id="sideCardPancho">
+                      <div class="bldg-jump-top-row">
+                        <span class="bldg-dot" style="background:#84cc16;"></span>
+                        <div class="jump-info">
+                          <strong>Pancho Building</strong>
+                          <small id="panchoSubText">2 Floors · 67 Rooms</small>
+                        </div>
+                        <span class="jump-chip green" id="panchoFreeChip">-- FREE</span>
+                        <span class="jump-arrow">→</span>
                       </div>
-                      <span class="jump-arrow">→</span>
+                      <div class="bldg-card-meter">
+                        <div id="panchoMeterFill" class="bldg-meter-fill green" style="width: 50%;"></div>
+                      </div>
+                      <div class="bldg-meter-meta">
+                        <span id="panchoMeterVac">-- Free</span>
+                        <span id="panchoMeterOcc">-- In-Use</span>
+                      </div>
+                      <div class="bldg-floor-chips">
+                        <span class="bldg-chip-tag" onclick="event.stopPropagation(); window.openBldgFloor('Pancho Building', 1);">Level 1</span>
+                        <span class="bldg-chip-tag" onclick="event.stopPropagation(); window.openBldgFloor('Pancho Building', 2);">Level 2</span>
+                      </div>
                     </button>
-                    <button class="bldg-jump-btn cba" data-jump="CBA Building">
-                      <span class="bldg-dot" style="background:#2563eb;"></span>
-                      <div class="jump-info">
-                        <strong>CBA Building</strong>
-                        <small>4 Floors · 3 Rooms / Flr</small>
+
+                    <!-- CBA -->
+                    <button class="bldg-jump-btn cba" data-jump="CBA Building" id="sideCardCba">
+                      <div class="bldg-jump-top-row">
+                        <span class="bldg-dot" style="background:#a855f7;"></span>
+                        <div class="jump-info">
+                          <strong>CBA Building</strong>
+                          <small id="cbaSubText">4 Floors · 12 Rooms</small>
+                        </div>
+                        <span class="jump-chip purple" id="cbaFreeChip">-- FREE</span>
+                        <span class="jump-arrow">→</span>
                       </div>
-                      <span class="jump-arrow">→</span>
+                      <div class="bldg-card-meter">
+                        <div id="cbaMeterFill" class="bldg-meter-fill purple" style="width: 50%;"></div>
+                      </div>
+                      <div class="bldg-meter-meta">
+                        <span id="cbaMeterVac">-- Free</span>
+                        <span id="cbaMeterOcc">-- In-Use</span>
+                      </div>
+                      <div class="bldg-floor-chips">
+                        <span class="bldg-chip-tag" onclick="event.stopPropagation(); window.openBldgFloor('CBA Building', 1);">L1</span>
+                        <span class="bldg-chip-tag" onclick="event.stopPropagation(); window.openBldgFloor('CBA Building', 2);">L2</span>
+                        <span class="bldg-chip-tag" onclick="event.stopPropagation(); window.openBldgFloor('CBA Building', 3);">L3</span>
+                        <span class="bldg-chip-tag" onclick="event.stopPropagation(); window.openBldgFloor('CBA Building', 4);">L4</span>
+                      </div>
                     </button>
-                    <button class="bldg-jump-btn hangar" data-jump="Hangar">
-                      <span class="bldg-dot" style="background:#0284c7;"></span>
-                      <div class="jump-info">
-                        <strong>Hangar Complex</strong>
-                        <small>1 Storey · 6 Aviation Bays</small>
+
+                    <!-- Hangar (Blue Theme) -->
+                    <button class="bldg-jump-btn hangar" data-jump="Hangar" id="sideCardHangar">
+                      <div class="bldg-jump-top-row">
+                        <span class="bldg-dot" style="background:#0284c7;"></span>
+                        <div class="jump-info">
+                          <strong>Hangar Complex</strong>
+                          <small id="hangarSubText">1 Storey · 6 Aviation Bays</small>
+                        </div>
+                        <span class="jump-chip cyan" id="hangarFreeChip">-- FREE</span>
+                        <span class="jump-arrow">→</span>
                       </div>
-                      <span class="jump-arrow">→</span>
+                      <div class="bldg-card-meter">
+                        <div id="hangarMeterFill" class="bldg-meter-fill cyan" style="width: 50%;"></div>
+                      </div>
+                      <div class="bldg-meter-meta">
+                        <span id="hangarMeterVac">-- Free</span>
+                        <span id="hangarMeterOcc">-- In-Use</span>
+                      </div>
+                      <div class="bldg-floor-chips">
+                        <span class="bldg-chip-tag" onclick="event.stopPropagation(); window.openBldgFloor('Hangar', 1);">Level 1 · Aviation Hall</span>
+                      </div>
                     </button>
                   </div>
                 </div>
 
-                <!-- 2. Building Floor Plan Mode Context -->
+                <!-- 4. Building Floor Plan Mode Context (Redesigned & Clean) -->
                 <div id="sidebarBuildingBlock" class="filter-block hidden">
-                  <div class="building-context-card" id="bldgContextHero">
-                    <div class="bldg-hero-header">
-                      <h4 id="bldgHeroTitle">Pancho Building</h4>
-                      <span class="bldg-hero-badge" id="bldgHeroBadge">2 Floors</span>
-                    </div>
-                    <p class="bldg-hero-sub" id="bldgHeroOccSummary">24 Available • 14 In-Use</p>
-                  </div>
-
-                  <div class="floor-stats-widget" style="margin-top:10px;">
-                    <div class="floor-metric-row">
-                      <span>Floor Available:</span>
-                      <strong style="color:#059669;" id="floorVacantCount">12</strong>
-                    </div>
-                    <div class="floor-metric-row">
-                      <span>Floor Occupied:</span>
-                      <strong style="color:#f43f5e;" id="floorOccupiedCount">8</strong>
+                  <!-- Unified Hero Card -->
+                  <div class="bldg-view-hero-card" id="bldgContextHero">
+                    <div class="bldg-view-top-nav">
+                      <div class="bldg-view-title-row">
+                        <div class="bldg-view-icon-box" id="bldgHeroIcon">🏛️</div>
+                        <div class="bldg-view-title-wrap">
+                          <h3 id="bldgHeroTitle">Pancho Building</h3>
+                          <p id="bldgHeroOccSummary">24 Available · 14 In-Use</p>
+                        </div>
+                      </div>
+                      <span class="bldg-hero-flr-tag" id="bldgHeroBadge">LEVEL 1</span>
                     </div>
                   </div>
 
-                  <div class="sidebar-divider" style="margin: 12px 0 8px 0;"></div>
+                  <!-- 1. Room Filters & Search Card (Top) -->
+                  <div class="bldg-view-section">
+                    <span class="clean-section-lbl">ROOM FILTERS &amp; SEARCH</span>
+                    
+                    <div class="sidebar-search-box" style="margin-top:4px; margin-bottom:6px;">
+                      <span class="sidebar-search-icon">🔍</span>
+                      <input type="text" id="floorRoomSearch" placeholder="Find room number (e.g. 101)..." autocomplete="off" />
+                      <button id="clearFloorRoomSearch" class="btn-clear-search">✕</button>
+                    </div>
 
-                  <span class="filter-block-label">FLOOR LEVELS</span>
-                  <div class="floor-selector-pills" id="storeySelector"></div>
+                    <div class="sidebar-quick-filter-bar" style="margin-bottom:0;">
+                      <button class="quick-filter-chip active" data-room-filter="all">⚡ ALL</button>
+                      <button class="quick-filter-chip free" data-room-filter="vacant"><span class="leg-dot available"></span> FREE</button>
+                      <button class="quick-filter-chip busy" data-room-filter="occupied"><span class="leg-dot occupied"></span> IN-USE</button>
+                    </div>
+                  </div>
 
-                  <div class="sidebar-divider" style="margin: 10px 0;"></div>
+                  <!-- 2. Floor Selection & Metrics Card (Below Room Filters) -->
+                  <div class="bldg-view-section">
+                    <div class="section-label-row">
+                      <span class="clean-section-lbl">FLOOR SELECTION</span>
+                      <div class="floor-metric-pills">
+                        <span class="floor-pill-stat free"><strong id="floorVacantCount">18</strong> Free</span>
+                        <span class="floor-pill-stat occ"><strong id="floorOccupiedCount">10</strong> In-Use</span>
+                      </div>
+                    </div>
+                    <div class="floor-selector-grid" id="storeySelector"></div>
+                  </div>
 
-                  <button id="backToCampusBtn" class="back-to-campus-pill">
-                    <span>← Return to Grounds</span>
+                  <!-- 3. Separate Standalone Status Protocols / Legend Section Card -->
+                  <div class="bldg-view-section">
+                    <div class="section-label-row">
+                      <span class="clean-section-lbl">STATUS PROTOCOLS</span>
+                      <span class="legend-barcode" style="font-size:0.65rem; color:#94a3b8;">|||| | ||</span>
+                    </div>
+                    <div class="bldg-legend-grid">
+                      <div class="leg-card available">
+                        <div class="leg-card-header">
+                          <span class="leg-dot available"></span>
+                          <strong>Available</strong>
+                        </div>
+                        <small>Vacant &amp; Open</small>
+                      </div>
+                      <div class="leg-card occupied">
+                        <div class="leg-card-header">
+                          <span class="leg-dot occupied"></span>
+                          <strong>In-Use</strong>
+                        </div>
+                        <small>Class In Session</small>
+                      </div>
+                      <div class="leg-card maintenance">
+                        <div class="leg-card-header">
+                          <span class="leg-dot maintenance"></span>
+                          <strong>Maint</strong>
+                        </div>
+                        <small>Service / Prep</small>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- 4. Bottom Return to Campus Map Action -->
+                  <button id="backToCampusBtn" class="bldg-full-back-btn">
+                    <span>← RETURN TO CAMPUS MAP</span>
                   </button>
                 </div>
 
-                <!-- 3. List Directory Mode Context -->
-                <div id="sidebarListBlock" class="filter-block hidden">
-                  <span class="filter-block-label">SEARCH DIRECTORY</span>
-                  <div class="filter-search-box">
-                    <input type="text" id="roomFilterSearch" placeholder="Search room or faculty..." class="filter-input-text">
+                <!-- 5. List Directory Mode Context (Maximalist Comic Style) -->
+                <div id="sidebarListBlock" class="filter-block hidden" style="height:100%; display:flex; flex-direction:column; gap:8px;">
+                  
+                  <!-- Top Search Box -->
+                  <div class="bldg-view-section" style="padding: 8px 10px;">
+                    <div class="section-label-row">
+                      <span class="clean-section-lbl">SEARCH DIRECTORY</span>
+                      <span class="filter-count-badge">LIVE QUERY</span>
+                    </div>
+                    <div class="sidebar-search-box" style="margin-top:5px; margin-bottom:0;">
+                      <span class="sidebar-search-icon">🔍</span>
+                      <input type="text" id="roomFilterSearch" placeholder="Search room or faculty..." autocomplete="off">
+                    </div>
+                  </div>
+
+                  <!-- Quick Filter Presets Strip -->
+                  <div class="sidebar-quick-filter-bar" style="margin: 0; display:flex; gap:6px;">
+                    <button class="quick-filter-chip active" id="btnDirSelectAll" type="button">⚡ ALL</button>
+                    <button class="quick-filter-chip free" id="btnDirFreeOnly" type="button"><span class="leg-dot available"></span> FREE</button>
+                    <button class="quick-filter-chip busy" id="btnDirBusyOnly" type="button"><span class="leg-dot occupied"></span> BUSY</button>
                   </div>
                   
-                  <div class="sidebar-divider" style="margin: 8px 0;"></div>
-
-                  <span class="filter-block-label">FILTER BY BUILDING</span>
-                  <div class="checkbox-group">
-                    <label class="custom-chk">
-                      <input type="checkbox" checked class="bldg-chk" data-bldg="Pancho Building">
-                      <span class="chk-dot" style="background:#059669;"></span>
-                      <span class="chk-label">Pancho Building</span>
-                    </label>
-                    <label class="custom-chk">
-                      <input type="checkbox" checked class="bldg-chk" data-bldg="CBA Building">
-                      <span class="chk-dot" style="background:#2563eb;"></span>
-                      <span class="chk-label">CBA Building</span>
-                    </label>
-                    <label class="custom-chk">
-                      <input type="checkbox" checked class="bldg-chk" data-bldg="Hangar">
-                      <span class="chk-dot" style="background:#0284c7;"></span>
-                      <span class="chk-label">Hangar Complex</span>
-                    </label>
+                  <!-- Building Filter Cards -->
+                  <div class="bldg-view-section" style="padding: 8px 10px;">
+                    <div class="section-label-row">
+                      <span class="clean-section-lbl">FILTER BY BUILDING</span>
+                      <span class="filter-count-badge">3 ZONES</span>
+                    </div>
+                    <div class="comic-checkbox-list" style="display:flex; flex-direction:column; gap:6px; margin-top:5px;">
+                      <label class="comic-filter-card">
+                        <div class="comic-chk-left">
+                          <input type="checkbox" checked class="bldg-chk" data-bldg="Pancho Building">
+                          <span class="comic-chk-box"></span>
+                          <span class="bldg-indicator-dot" style="background:#84cc16;"></span>
+                          <strong class="comic-card-title">Pancho Building</strong>
+                        </div>
+                        <span class="comic-mini-pill green">67 RMS</span>
+                      </label>
+                      
+                      <label class="comic-filter-card">
+                        <div class="comic-chk-left">
+                          <input type="checkbox" checked class="bldg-chk" data-bldg="CBA Building">
+                          <span class="comic-chk-box"></span>
+                          <span class="bldg-indicator-dot" style="background:#a855f7;"></span>
+                          <strong class="comic-card-title">CBA Building</strong>
+                        </div>
+                        <span class="comic-mini-pill purple">12 RMS</span>
+                      </label>
+                      
+                      <label class="comic-filter-card">
+                        <div class="comic-chk-left">
+                          <input type="checkbox" checked class="bldg-chk" data-bldg="Hangar">
+                          <span class="comic-chk-box"></span>
+                          <span class="bldg-indicator-dot" style="background:#06b6d4;"></span>
+                          <strong class="comic-card-title">Hangar Complex</strong>
+                        </div>
+                        <span class="comic-mini-pill cyan">6 BAYS</span>
+                      </label>
+                    </div>
                   </div>
 
-                  <div class="sidebar-divider" style="margin: 8px 0;"></div>
-
-                  <span class="filter-block-label">FILTER BY STATUS</span>
-                  <div class="checkbox-group">
-                    <label class="custom-chk">
-                      <input type="checkbox" checked class="status-chk" data-status="vacant">
-                      <span class="chk-dot" style="background:#10b981;"></span>
-                      <span class="chk-label">Available</span>
-                    </label>
-                    <label class="custom-chk">
-                      <input type="checkbox" checked class="status-chk" data-status="occupied">
-                      <span class="chk-dot" style="background:#f43f5e;"></span>
-                      <span class="chk-label">In-Use / Occupied</span>
-                    </label>
-                    <label class="custom-chk">
-                      <input type="checkbox" checked class="status-chk" data-status="maintenance">
-                      <span class="chk-dot" style="background:#f59e0b;"></span>
-                      <span class="chk-label">Under Maintenance</span>
-                    </label>
+                  <!-- Status Filter Cards -->
+                  <div class="bldg-view-section" style="padding: 8px 10px;">
+                    <div class="section-label-row">
+                      <span class="clean-section-lbl">FILTER BY STATUS</span>
+                      <span class="filter-count-badge">PROTOCOLS</span>
+                    </div>
+                    <div class="comic-checkbox-list" style="display:flex; flex-direction:column; gap:6px; margin-top:5px;">
+                      <label class="comic-filter-card">
+                        <div class="comic-chk-left">
+                          <input type="checkbox" checked class="status-chk" data-status="vacant">
+                          <span class="comic-chk-box"></span>
+                          <span class="leg-dot available"></span>
+                          <strong class="comic-card-title">Available</strong>
+                        </div>
+                        <span class="comic-mini-pill green">VACANT</span>
+                      </label>
+                      
+                      <label class="comic-filter-card">
+                        <div class="comic-chk-left">
+                          <input type="checkbox" checked class="status-chk" data-status="occupied">
+                          <span class="comic-chk-box"></span>
+                          <span class="leg-dot occupied"></span>
+                          <strong class="comic-card-title">In-Use</strong>
+                        </div>
+                        <span class="comic-mini-pill red">OCCUPIED</span>
+                      </label>
+                      
+                      <label class="comic-filter-card">
+                        <div class="comic-chk-left">
+                          <input type="checkbox" checked class="status-chk" data-status="maintenance">
+                          <span class="comic-chk-box"></span>
+                          <span class="leg-dot maintenance"></span>
+                          <strong class="comic-card-title">Maintenance</strong>
+                        </div>
+                        <span class="comic-mini-pill orange">OFFLINE</span>
+                      </label>
+                    </div>
                   </div>
-                </div>
 
-                <div class="sidebar-divider" style="margin-top:auto; margin-bottom:10px;"></div>
+                  <!-- Directory Telemetry Widget at Base -->
+                  <div class="bldg-view-hero-card" style="margin-top:auto; padding:8px 10px; gap:4px;">
+                    <div class="section-label-row">
+                      <span class="clean-section-lbl" style="color:#0f172a;">DIRECTORY TELEMETRY</span>
+                      <span class="pulse-dot-green">● LIVE</span>
+                    </div>
+                    <div class="sidebar-vitals-strip" style="margin-top:2px;">
+                      <div class="vital-slot"><span class="vital-lbl">LISTED</span><strong class="vital-val" id="dirMatchedCount">68</strong></div>
+                      <div class="vital-slot green"><span class="vital-lbl">FREE</span><strong class="vital-val" id="dirFreeCount">54</strong></div>
+                      <div class="vital-slot dark"><span class="vital-lbl">IN-USE</span><strong class="vital-val" id="dirOccCount">14</strong></div>
+                    </div>
+                  </div>
 
-                <!-- Legend Key -->
-                <div class="map-legend-block">
-                  <span class="filter-block-label">STATUS KEY</span>
-                  <div class="legend-item"><span class="legend-swatch" style="background:#d1fae5; border:1px solid #10b981;"></span> <span>Available</span></div>
-                  <div class="legend-item"><span class="legend-swatch" style="background:#ffe4e6; border:1px solid #f43f5e;"></span> <span>In-Use / Booked</span></div>
-                  <div class="legend-item"><span class="legend-swatch" style="background:#fef3c7; border:1px solid #f59e0b;"></span> <span>Maintenance</span></div>
                 </div>
               </aside>
 
@@ -394,199 +618,492 @@
                   
                   <!-- Campus Overview View -->
                   <div id="campusMap" class="campus-svg-view">
-                    <svg viewBox="0 0 1600 820" width="100%" height="100%" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
+                    <svg viewBox="0 0 1600 860" width="100%" height="100%" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
                       <defs>
-                        <!-- Blueprint Coordinate Grid (High-Visibility Engineering Grid) -->
-                        <pattern id="campusBpGrid" width="32" height="32" patternUnits="userSpaceOnUse">
-                          <path d="M 32 0 L 0 0 0 32" fill="none" stroke="#cbd5e1" stroke-width="1.35"/>
-                          <circle cx="0" cy="0" r="1.6" fill="#64748b" opacity="0.85"/>
+                        <!-- Architectural Blueprint & Halftone Dot Patterns -->
+                        <pattern id="campusBpGrid" width="24" height="24" patternUnits="userSpaceOnUse">
+                          <path d="M 24 0 L 0 0 0 24" fill="none" stroke="#e2e8f0" stroke-width="0.75"/>
+                          <circle cx="0" cy="0" r="1.2" fill="#cbd5e1" opacity="0.7"/>
                         </pattern>
-                        <filter id="labelShadow" x="-10%" y="-20%" width="120%" height="140%">
-                          <feDropShadow dx="0" dy="3" stdDeviation="5" flood-color="#0f172a" flood-opacity="0.16"/>
-                        </filter>
+                        
+                        <pattern id="halftoneDots" width="12" height="12" patternUnits="userSpaceOnUse">
+                          <circle cx="6" cy="6" r="1.5" fill="#000000" opacity="0.08"/>
+                        </pattern>
+
+                        <pattern id="rafterHatch" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+                          <line x1="0" y1="0" x2="0" y2="8" stroke="#000000" stroke-width="1"/>
+                        </pattern>
                       </defs>
 
-                      <!-- Background Canvas & Grid Pattern -->
-                      <rect x="20" y="14" width="1560" height="792" rx="6" fill="#ffffff" stroke="#64748b" stroke-width="3.5"/>
-                      <rect x="20" y="14" width="1560" height="792" fill="url(#campusBpGrid)"/>
+                      <!-- Outer Canvas & Blueprint Dot Canvas Background -->
+                      <rect x="8" y="8" width="1584" height="844" rx="12" fill="#fafaf9" stroke="#000000" stroke-width="3"/>
+                      <rect x="8" y="8" width="1584" height="844" fill="url(#campusBpGrid)"/>
+                      <rect x="8" y="8" width="1584" height="844" fill="url(#halftoneDots)"/>
 
-                      <!-- Section 1 Badge -->
-                      <g transform="translate(36, 28)">
-                        <rect x="0" y="0" width="90" height="28" rx="6" fill="#1e293b"/>
-                        <text x="45" y="18" font-family="Plus Jakarta Sans, system-ui" font-weight="900" font-size="11" fill="#ffffff" text-anchor="middle">SECTION 1</text>
+                      <!-- Heavy Comic/CAD Section Border Framing -->
+                      <rect x="30" y="38" width="1540" height="794" fill="none" stroke="#000000" stroke-width="3" rx="8"/>
+
+                      <!-- "SECTION 1 // CAMPUS BLUEPRINT" Top-Left Comic Tag -->
+                      <g id="cad-section-badge" transform="translate(30, 14)">
+                        <rect width="240" height="36" rx="8" fill="#000000" stroke="#000000" stroke-width="2.5"/>
+                        <text x="120" y="24" fill="#ffffff" font-family="Plus Jakarta Sans, monospace" font-weight="900" font-size="14" text-anchor="middle" letter-spacing="0.5">⚡ SECTION 1 : GROUNDS</text>
                       </g>
 
-                      <!-- 1. PANCHO BUILDING (Top L-Shape Wireframe Blueprint) -->
-                      <g id="campus-pancho" class="interactive-bldg" data-bldg="Pancho Building">
-                        <!-- Main L-Type Structure Shell -->
-                        <polygon points="120,140 740,140 740,300 680,300 680,220 120,220" fill="#ecfdf5" stroke="#059669" stroke-width="3.5" class="bldg-shell"/>
-                        <!-- Roof Lines & Trusses -->
-                        <polygon points="120,140 170,180 120,220" fill="none" stroke="#059669" stroke-width="2"/>
-                        <polygon points="680,140 740,140 740,200 680,180" fill="none" stroke="#059669" stroke-width="2"/>
-                        <polygon points="680,220 740,220 740,300 680,300" fill="none" stroke="#059669" stroke-width="2"/>
-                        <polygon points="680,300 710,270 740,300" fill="none" stroke="#059669" stroke-width="2"/>
-                        <line x1="170" y1="180" x2="680" y2="180" stroke="#059669" stroke-width="2"/>
+                      <!-- Top Right Comic Sector Badge & Compass -->
+                      <g transform="translate(1360, 14)">
+                        <rect width="210" height="36" rx="8" fill="#84cc16" stroke="#000000" stroke-width="2.5"/>
+                        <text x="105" y="24" fill="#000000" font-family="Plus Jakarta Sans, monospace" font-weight="900" font-size="13.5" text-anchor="middle">✦ BULSU CAD · 2026</text>
+                      </g>
+
+                      <!-- Comic Blueprint Dimension Markings -->
+                      <g font-family="Plus Jakarta Sans, monospace" font-size="11" font-weight="900" fill="#475569">
+                        <text x="50" y="72">X: 120.940° E  |  Y: 14.852° N</text>
+                        <text x="1410" y="818" text-anchor="end">SCALE: 1:500 ARCHITECTURAL VECTOR</text>
+                      </g>
+
+                      <!-- ── 🛣️ CAMPUS ROAD NETWORK & CENTRAL BOULEVARD (No Crosswalks) ── -->
+                      <g id="campusRoadsLayer">
+                        <!-- Main East-West Boulevard (Clean Straight Run, Ending at CBA) -->
+                        <rect x="30" y="350" width="1190" height="60" fill="#f1f5f9" stroke="#000000" stroke-width="3"/>
+                        <line x1="30" y1="350" x2="1220" y2="350" stroke="#000000" stroke-width="3"/>
+                        <line x1="30" y1="410" x2="1220" y2="410" stroke="#000000" stroke-width="3"/>
+
+                        <!-- Road Center Dashed Lines (Bright Yellow Comic Asphalt Striping) -->
+                        <line x1="35" y1="380" x2="1215" y2="380" stroke="#eab308" stroke-width="3.5" stroke-dasharray="20,14"/>
+
+                        <!-- Comic Road Surface Telemetry Text -->
+                        <text x="80" y="398" font-family="Plus Jakarta Sans, monospace" font-size="11.5" font-weight="900" fill="#94a3b8" letter-spacing="1">▲ MAIN CAMPUS BOULEVARD // 15 KM/H MAX</text>
+                      </g>
+
+                      <!-- ── 1. 🏛️ PANCHO BUILDING (Top Left - Lime Green Themed) ── -->
+                      <g id="campus-pancho" class="interactive-bldg" data-bldg="Pancho Building" style="cursor:pointer;">
+                        <!-- Comic Drop Shadow for Pancho -->
+                        <polygon points="125,145 715,145 715,315 655,315 655,235 125,235" fill="#000000"/>
                         
-                        <!-- Roof Slicing Segments -->
-                        <line x1="140" y1="140" x2="140" y2="220" stroke="#10b981" stroke-width="1.2" opacity="0.7"/>
-                        <line x1="160" y1="140" x2="160" y2="220" stroke="#10b981" stroke-width="1.2" opacity="0.7"/>
-                        <line x1="180" y1="140" x2="180" y2="220" stroke="#10b981" stroke-width="1.2" opacity="0.7"/>
-                        <line x1="200" y1="140" x2="200" y2="220" stroke="#10b981" stroke-width="1.2" opacity="0.7"/>
-                        <line x1="220" y1="140" x2="220" y2="220" stroke="#10b981" stroke-width="1.2" opacity="0.7"/>
-                        <line x1="240" y1="140" x2="240" y2="220" stroke="#10b981" stroke-width="1.2" opacity="0.7"/>
-                        <line x1="260" y1="140" x2="260" y2="220" stroke="#10b981" stroke-width="1.2" opacity="0.7"/>
-                        <line x1="280" y1="140" x2="280" y2="220" stroke="#10b981" stroke-width="1.2" opacity="0.7"/>
-                        <line x1="300" y1="140" x2="300" y2="220" stroke="#10b981" stroke-width="1.2" opacity="0.7"/>
-                        <line x1="320" y1="140" x2="320" y2="220" stroke="#10b981" stroke-width="1.2" opacity="0.7"/>
-                        <line x1="340" y1="140" x2="340" y2="220" stroke="#10b981" stroke-width="1.2" opacity="0.7"/>
-                        <line x1="360" y1="140" x2="360" y2="220" stroke="#10b981" stroke-width="1.2" opacity="0.7"/>
-                        <line x1="380" y1="140" x2="380" y2="220" stroke="#10b981" stroke-width="1.2" opacity="0.7"/>
-                        <line x1="400" y1="140" x2="400" y2="220" stroke="#10b981" stroke-width="1.2" opacity="0.7"/>
+                        <!-- Pancho Main Floor / Roof Polygon (Lime Green Tint) -->
+                        <polygon points="120,140 710,140 710,310 650,310 650,230 120,230" fill="#ecfccb" stroke="#000000" stroke-width="3"/>
 
-                        <!-- Center Stair Tower Outcrop -->
-                        <rect x="420" y="118" width="40" height="22" fill="#d1fae5" stroke="#059669" stroke-width="2" rx="2"/>
-                        <rect x="420" y="220" width="40" height="22" fill="#d1fae5" stroke="#059669" stroke-width="2" rx="2"/>
+                        <!-- Longitudinal Center Ridgeline -->
+                        <line x1="165" y1="185" x2="680" y2="185" stroke="#000000" stroke-width="2.5"/>
+                        <!-- Left Hip Roof Triangular Slope Lines -->
+                        <line x1="120" y1="140" x2="165" y2="185" stroke="#000000" stroke-width="2.5"/>
+                        <line x1="120" y1="230" x2="165" y2="185" stroke="#000000" stroke-width="2.5"/>
+                        <!-- Right Corner Hip Roof Slope Lines -->
+                        <line x1="650" y1="140" x2="680" y2="185" stroke="#000000" stroke-width="2.5"/>
+                        <line x1="650" y1="230" x2="680" y2="185" stroke="#000000" stroke-width="2.5"/>
+                        <!-- Vertical Wing Center Ridgeline & Bottom Hip -->
+                        <line x1="680" y1="185" x2="680" y2="280" stroke="#000000" stroke-width="2.5"/>
+                        <line x1="650" y1="310" x2="680" y2="280" stroke="#000000" stroke-width="2.5"/>
+                        <line x1="710" y1="310" x2="680" y2="280" stroke="#000000" stroke-width="2.5"/>
 
-                        <line x1="480" y1="140" x2="480" y2="220" stroke="#10b981" stroke-width="1.2" opacity="0.7"/>
-                        <line x1="500" y1="140" x2="500" y2="220" stroke="#10b981" stroke-width="1.2" opacity="0.7"/>
-                        <line x1="520" y1="140" x2="520" y2="220" stroke="#10b981" stroke-width="1.2" opacity="0.7"/>
-                        <line x1="540" y1="140" x2="540" y2="220" stroke="#10b981" stroke-width="1.2" opacity="0.7"/>
-                        <line x1="560" y1="140" x2="560" y2="220" stroke="#10b981" stroke-width="1.2" opacity="0.7"/>
-                        <line x1="580" y1="140" x2="580" y2="220" stroke="#10b981" stroke-width="1.2" opacity="0.7"/>
-                        <line x1="600" y1="140" x2="600" y2="220" stroke="#10b981" stroke-width="1.2" opacity="0.7"/>
-                        <line x1="620" y1="140" x2="620" y2="220" stroke="#10b981" stroke-width="1.2" opacity="0.7"/>
-                        <line x1="640" y1="140" x2="640" y2="220" stroke="#10b981" stroke-width="1.2" opacity="0.7"/>
-                        <line x1="660" y1="140" x2="660" y2="220" stroke="#10b981" stroke-width="1.2" opacity="0.7"/>
+                        <!-- Pancho Roof Rafter Hatching Lines (Exact CAD Blueprint Style) -->
+                        <g stroke="#000000" stroke-width="1.2" opacity="0.85">
+                          <!-- West Wing Rafters -->
+                          <line x1="140" y1="140" x2="140" y2="230"/><line x1="160" y1="140" x2="160" y2="230"/>
+                          <line x1="180" y1="140" x2="180" y2="230"/><line x1="200" y1="140" x2="200" y2="230"/>
+                          <line x1="220" y1="140" x2="220" y2="230"/><line x1="240" y1="140" x2="240" y2="230"/>
+                          <line x1="260" y1="140" x2="260" y2="230"/><line x1="280" y1="140" x2="280" y2="230"/>
+                          <line x1="300" y1="140" x2="300" y2="230"/><line x1="320" y1="140" x2="320" y2="230"/>
+                          <line x1="340" y1="140" x2="340" y2="230"/><line x1="360" y1="140" x2="360" y2="230"/>
+                          <line x1="380" y1="140" x2="380" y2="230"/><line x1="400" y1="140" x2="400" y2="230"/>
 
-                        <!-- Vertical Leg Segments -->
-                        <line x1="680" y1="240" x2="740" y2="240" stroke="#10b981" stroke-width="1.2" opacity="0.7"/>
-                        <line x1="680" y1="260" x2="740" y2="260" stroke="#10b981" stroke-width="1.2" opacity="0.7"/>
-                        <line x1="680" y1="280" x2="740" y2="280" stroke="#10b981" stroke-width="1.2" opacity="0.7"/>
+                          <!-- East Wing Rafters -->
+                          <line x1="450" y1="140" x2="450" y2="230"/><line x1="470" y1="140" x2="470" y2="230"/>
+                          <line x1="490" y1="140" x2="490" y2="230"/><line x1="510" y1="140" x2="510" y2="230"/>
+                          <line x1="530" y1="140" x2="530" y2="230"/><line x1="550" y1="140" x2="550" y2="230"/>
+                          <line x1="570" y1="140" x2="570" y2="230"/><line x1="590" y1="140" x2="590" y2="230"/>
+                          <line x1="610" y1="140" x2="610" y2="230"/><line x1="630" y1="140" x2="630" y2="230"/>
 
-                        <!-- Interactive Label HUD Pill (Moved UP above Pancho Building) -->
-                        <g transform="translate(130, 45)">
-                          <rect x="0" y="0" width="340" height="74" rx="16" fill="#064e3b" filter="url(#labelShadow)"/>
-                          <text x="22" y="34" font-family="Plus Jakarta Sans" font-weight="900" font-size="19" fill="#6ee7b7">🏛️ PANCHO BUILDING</text>
-                          <text x="22" y="58" font-family="Plus Jakarta Sans" font-weight="700" font-size="14" fill="#d1fae5">2 Floors · 50+ Classrooms</text>
-                          <rect x="235" y="16" width="85" height="42" rx="21" fill="#10b981"/>
-                          <text x="277.5" y="42" font-family="Plus Jakarta Sans" font-weight="900" font-size="15" fill="#064e3b" text-anchor="middle">CLICK</text>
+                          <!-- Vertical L-Wing Horizontal Rafters -->
+                          <line x1="650" y1="245" x2="710" y2="245"/><line x1="650" y1="260" x2="710" y2="260"/>
+                          <line x1="650" y1="275" x2="710" y2="275"/><line x1="650" y1="290" x2="710" y2="290"/>
+                        </g>
+
+                        <!-- Center Stairwell North & South Projections -->
+                        <g fill="#d9f99d" stroke="#000000" stroke-width="2">
+                          <rect x="410" y="125" width="35" height="16"/>
+                          <line x1="410" y1="129" x2="445" y2="129" stroke-width="1.2"/>
+                          <line x1="410" y1="133" x2="445" y2="133" stroke-width="1.2"/>
+                          <line x1="410" y1="137" x2="445" y2="137" stroke-width="1.2"/>
+
+                          <rect x="410" y="229" width="35" height="24"/>
+                          <line x1="410" y1="235" x2="445" y2="235" stroke-width="1.2"/>
+                          <line x1="410" y1="241" x2="445" y2="241" stroke-width="1.2"/>
+                          <line x1="410" y1="247" x2="445" y2="247" stroke-width="1.2"/>
+                        </g>
+
+                        <!-- Pancho Title Badge -->
+                        <g transform="translate(240, 68)">
+                          <rect x="0" y="0" width="280" height="52" rx="26" fill="#ffffff" stroke="#000000" stroke-width="3.5"/>
+                          <circle cx="28" cy="26" r="16" fill="#84cc16" stroke="#000000" stroke-width="2.5"/>
+                          <text x="28" y="32" font-family="Plus Jakarta Sans" font-weight="900" font-size="14" fill="#000000" text-anchor="middle">★</text>
+                          <text x="58" y="34" font-family="Plus Jakarta Sans" font-weight="900" font-size="17" fill="#000000">PANCHO BUILDING</text>
                         </g>
                       </g>
 
-                      <!-- 2. CBA BUILDING (Eastern Vertical Blueprint) -->
-                      <g id="campus-cba" class="interactive-bldg" data-bldg="CBA Building">
-                        <!-- Label HUD Pill (2x Doubled Size, Positioned Above CBA) -->
-                        <g transform="translate(1120, 15)">
-                          <rect x="0" y="0" width="330" height="74" rx="16" fill="#1e3a8a" filter="url(#labelShadow)"/>
-                          <text x="22" y="34" font-family="Plus Jakarta Sans" font-weight="900" font-size="19" fill="#93c5fd">🏢 CBA BUILDING</text>
-                          <text x="22" y="58" font-family="Plus Jakarta Sans" font-weight="700" font-size="14" fill="#bfdbfe">4 Floors · 12 Classrooms</text>
-                          <rect x="225" y="16" width="85" height="42" rx="21" fill="#3b82f6"/>
-                          <text x="267.5" y="42" font-family="Plus Jakarta Sans" font-weight="900" font-size="15" fill="#ffffff" text-anchor="middle">CLICK</text>
+                      <!-- ── 2. 🏛️ ADMINISTRATOR BUILDING (Bottom Left - Unclickable Static Blueprint View) ── -->
+                      <g id="campus-prop-pavilion" class="static-bldg" style="cursor:default;">
+                        <!-- Comic Drop Shadow for Admin Building -->
+                        <polygon points="214,494 564,494 564,644 424,644 424,669 384,669 384,644 214,644" fill="#000000"/>
+
+                        <!-- Admin Building Outer Stepped Wall Body -->
+                        <polygon points="210,490 560,490 560,640 420,640 420,665 380,665 380,640 210,640" fill="#ffffff" stroke="#000000" stroke-width="3"/>
+
+                        <!-- North Entrance Canopy & Recesses -->
+                        <rect x="300" y="475" width="120" height="15" fill="#f8fafc" stroke="#000000" stroke-width="2"/>
+                        <rect x="530" y="480" width="30" height="15" fill="#f8fafc" stroke="#000000" stroke-width="2"/>
+
+                        <!-- Interior Room Partitions & Hallways (Exact Blueprint Style) -->
+                        <g fill="#ffffff" stroke="#000000" stroke-width="1.8">
+                          <!-- Top Row of Offices -->
+                          <rect x="220" y="500" width="45" height="40"/>
+                          <rect x="265" y="500" width="45" height="40"/>
+                          <rect x="310" y="500" width="75" height="40"/>
+                          <rect x="385" y="500" width="85" height="40"/>
+                          <rect x="470" y="500" width="45" height="40"/>
+                          
+                          <!-- Top-Right Stairwell with Stair Steps -->
+                          <rect x="515" y="500" width="35" height="40"/>
+                          <line x1="515" y1="508" x2="550" y2="508" stroke-width="1"/>
+                          <line x1="515" y1="516" x2="550" y2="516" stroke-width="1"/>
+                          <line x1="515" y1="524" x2="550" y2="524" stroke-width="1"/>
+                          <line x1="515" y1="532" x2="550" y2="532" stroke-width="1"/>
+
+                          <!-- Central Corridor / Hallway -->
+                          <rect x="220" y="540" width="330" height="30"/>
+
+                          <!-- Bottom Row of Offices & Departments -->
+                          <rect x="220" y="570" width="55" height="60"/>
+                          <rect x="275" y="570" width="70" height="60"/>
+                          
+                          <!-- Center-Bottom Stairwell with Steps -->
+                          <rect x="345" y="570" width="45" height="60"/>
+                          <line x1="345" y1="580" x2="390" y2="580" stroke-width="1"/>
+                          <line x1="345" y1="590" x2="390" y2="590" stroke-width="1"/>
+                          <line x1="345" y1="600" x2="390" y2="600" stroke-width="1"/>
+                          <line x1="345" y1="610" x2="390" y2="610" stroke-width="1"/>
+                          <line x1="345" y1="620" x2="390" y2="620" stroke-width="1"/>
+
+                          <!-- West Stairwell (Left End) with Steps -->
+                          <rect x="220" y="540" width="35" height="30"/>
+                          <line x1="220" y1="546" x2="255" y2="546" stroke-width="1"/>
+                          <line x1="220" y1="552" x2="255" y2="552" stroke-width="1"/>
+                          <line x1="220" y1="558" x2="255" y2="558" stroke-width="1"/>
+                          <line x1="220" y1="564" x2="255" y2="564" stroke-width="1"/>
+
+                          <rect x="390" y="570" width="80" height="60"/>
+                          <rect x="470" y="570" width="80" height="60"/>
                         </g>
 
-                        <rect x="1215" y="100" width="105" height="40" fill="#dbeafe" stroke="#2563eb" stroke-width="2.5" class="bldg-shell" rx="3"/>
-                        <rect x="1230" y="140" width="75" height="280" fill="#eff6ff" stroke="#2563eb" stroke-width="3.5" class="bldg-shell" rx="4"/>
-                        
-                        <!-- Roof Lines & Hip Corners -->
-                        <polygon points="1230,150 1267.5,180 1305,150" fill="none" stroke="#2563eb" stroke-width="2"/>
-                        <line x1="1267.5" y1="180" x2="1267.5" y2="390" stroke="#2563eb" stroke-width="2"/>
-                        <polygon points="1230,420 1267.5,390 1305,420" fill="none" stroke="#2563eb" stroke-width="2"/>
-
-                        <!-- Structural Column Nodes -->
-                        <rect x="1215" y="100" width="10" height="10" fill="#dbeafe" stroke="#2563eb" stroke-width="1.8"/>
-                        <rect x="1255" y="100" width="10" height="10" fill="#dbeafe" stroke="#2563eb" stroke-width="1.8"/>
-                        <rect x="1290" y="100" width="10" height="10" fill="#dbeafe" stroke="#2563eb" stroke-width="1.8"/>
-                        <rect x="1310" y="100" width="10" height="10" fill="#dbeafe" stroke="#2563eb" stroke-width="1.8"/>
-
-                        <rect x="1215" y="170" width="10" height="10" fill="#dbeafe" stroke="#2563eb" stroke-width="1.8"/>
-                        <rect x="1215" y="240" width="10" height="10" fill="#dbeafe" stroke="#2563eb" stroke-width="1.8"/>
-                        <rect x="1215" y="310" width="10" height="10" fill="#dbeafe" stroke="#2563eb" stroke-width="1.8"/>
-                        <rect x="1215" y="380" width="10" height="10" fill="#dbeafe" stroke="#2563eb" stroke-width="1.8"/>
-
-                        <rect x="1295" y="170" width="10" height="10" fill="#dbeafe" stroke="#2563eb" stroke-width="1.8"/>
-                        <rect x="1295" y="240" width="10" height="10" fill="#dbeafe" stroke="#2563eb" stroke-width="1.8"/>
-                        <rect x="1295" y="310" width="10" height="10" fill="#dbeafe" stroke="#2563eb" stroke-width="1.8"/>
-                        <rect x="1295" y="380" width="10" height="10" fill="#dbeafe" stroke="#2563eb" stroke-width="1.8"/>
-
-                        <!-- South Annex Outcrop -->
-                        <polygon points="1260,420 1335,420 1335,475 1260,475" fill="#eff6ff" stroke="#2563eb" stroke-width="2.5"/>
-                        <line x1="1260" y1="420" x2="1335" y2="475" stroke="#2563eb" stroke-width="2"/>
-                      </g>
-
-                      <!-- 3. HANGAR BUILDING (Bottom-Right Ribbed Blueprint) -->
-                      <g id="campus-hangar" class="interactive-bldg" data-bldg="Hangar">
-                        <rect x="960" y="440" width="200" height="250" fill="#f0f9ff" stroke="#0284c7" stroke-width="3.5" class="bldg-shell" rx="4"/>
-                        <line x1="1060" y1="435" x2="1060" y2="695" stroke="#0284c7" stroke-width="3"/>
-                        <rect x="960" y="555" width="200" height="24" fill="#e0f2fe" stroke="#38bdf8" stroke-width="2"/>
-                        
-                        <!-- Roof Rib Lines -->
-                        <line x1="960" y1="450" x2="1160" y2="450" stroke="#38bdf8" stroke-width="1.2" opacity="0.6"/>
-                        <line x1="960" y1="460" x2="1160" y2="460" stroke="#38bdf8" stroke-width="1.2" opacity="0.6"/>
-                        <line x1="960" y1="470" x2="1160" y2="470" stroke="#38bdf8" stroke-width="1.2" opacity="0.6"/>
-                        <line x1="960" y1="480" x2="1160" y2="480" stroke="#38bdf8" stroke-width="1.2" opacity="0.6"/>
-                        <line x1="960" y1="490" x2="1160" y2="490" stroke="#38bdf8" stroke-width="1.2" opacity="0.6"/>
-                        <line x1="960" y1="500" x2="1160" y2="500" stroke="#38bdf8" stroke-width="1.2" opacity="0.6"/>
-                        <line x1="960" y1="510" x2="1160" y2="510" stroke="#38bdf8" stroke-width="1.2" opacity="0.6"/>
-                        <line x1="960" y1="520" x2="1160" y2="520" stroke="#38bdf8" stroke-width="1.2" opacity="0.6"/>
-                        <line x1="960" y1="530" x2="1160" y2="530" stroke="#38bdf8" stroke-width="1.2" opacity="0.6"/>
-                        <line x1="960" y1="540" x2="1160" y2="540" stroke="#38bdf8" stroke-width="1.2" opacity="0.6"/>
-
-                        <line x1="960" y1="590" x2="1160" y2="590" stroke="#38bdf8" stroke-width="1.2" opacity="0.6"/>
-                        <line x1="960" y1="600" x2="1160" y2="600" stroke="#38bdf8" stroke-width="1.2" opacity="0.6"/>
-                        <line x1="960" y1="610" x2="1160" y2="610" stroke="#38bdf8" stroke-width="1.2" opacity="0.6"/>
-                        <line x1="960" y1="620" x2="1160" y2="620" stroke="#38bdf8" stroke-width="1.2" opacity="0.6"/>
-                        <line x1="960" y1="630" x2="1160" y2="630" stroke="#38bdf8" stroke-width="1.2" opacity="0.6"/>
-                        <line x1="960" y1="640" x2="1160" y2="640" stroke="#38bdf8" stroke-width="1.2" opacity="0.6"/>
-                        <line x1="960" y1="650" x2="1160" y2="650" stroke="#38bdf8" stroke-width="1.2" opacity="0.6"/>
-                        <line x1="960" y1="660" x2="1160" y2="660" stroke="#38bdf8" stroke-width="1.2" opacity="0.6"/>
-                        <line x1="960" y1="670" x2="1160" y2="670" stroke="#38bdf8" stroke-width="1.2" opacity="0.6"/>
-                        <line x1="960" y1="680" x2="1160" y2="680" stroke="#38bdf8" stroke-width="1.2" opacity="0.6"/>
-
-                        <!-- Label HUD Pill (2x Doubled Size) -->
-                        <g transform="translate(895, 350)">
-                          <rect x="0" y="0" width="320" height="74" rx="16" fill="#0c4a6e" filter="url(#labelShadow)"/>
-                          <text x="22" y="34" font-family="Plus Jakarta Sans" font-weight="900" font-size="19" fill="#7dd3fc">✈️ HANGAR</text>
-                          <text x="22" y="58" font-family="Plus Jakarta Sans" font-weight="700" font-size="14" fill="#bae6fd">1 Storey · 6 Aviation Bays</text>
-                          <rect x="215" y="16" width="85" height="42" rx="21" fill="#0284c7"/>
-                          <text x="257.5" y="42" font-family="Plus Jakarta Sans" font-weight="900" font-size="15" fill="#ffffff" text-anchor="middle">CLICK</text>
+                        <!-- Admin Title Badge (Below Administrator Building - Unclickable Muted Slate) -->
+                        <g transform="translate(180, 675)">
+                          <rect x="0" y="0" width="370" height="52" rx="26" fill="#ffffff" stroke="#000000" stroke-width="3.5"/>
+                          <circle cx="28" cy="26" r="16" fill="#94a3b8" stroke="#000000" stroke-width="2.5"/>
+                          <text x="28" y="32" font-family="Plus Jakarta Sans" font-weight="900" font-size="14" fill="#ffffff" text-anchor="middle">🏛️</text>
+                          <text x="58" y="34" font-family="Plus Jakarta Sans" font-weight="900" font-size="17" fill="#475569">ADMINISTRATOR BUILDING</text>
                         </g>
                       </g>
 
-                      <!-- 4. GYMNASIUM / COVERED COURT (Bottom-Center Hip Roof) -->
-                      <g id="campus-prop-gym">
-                        <rect x="745" y="440" width="185" height="240" fill="#f8fafc" stroke="#64748b" stroke-width="2.8" rx="4"/>
-                        <!-- Hip Roof Trusses -->
-                        <line x1="745" y1="440" x2="837.5" y2="490" stroke="#64748b" stroke-width="2"/>
-                        <line x1="930" y1="440" x2="837.5" y2="490" stroke="#64748b" stroke-width="2"/>
-                        <line x1="837.5" y1="490" x2="837.5" y2="630" stroke="#64748b" stroke-width="2"/>
-                        <line x1="745" y1="680" x2="837.5" y2="630" stroke="#64748b" stroke-width="2"/>
-                        <line x1="930" y1="680" x2="837.5" y2="630" stroke="#64748b" stroke-width="2"/>
-                        <line x1="745" y1="560" x2="930" y2="560" stroke="#64748b" stroke-width="2"/>
+                      <!-- ── 3. 🏟️ ACTIVITY CENTER / GYMNASIUM (Bottom Center - Unclickable Static View) ── -->
+                      <g id="campus-prop-gym" class="static-bldg" style="cursor:default;">
+                        <!-- Comic Drop Shadow for Gym -->
+                        <rect x="734" y="524" width="190" height="280" rx="4" fill="#000000"/>
 
-                        <!-- Structural Columns -->
-                        <rect x="740" y="435" width="10" height="10" fill="#ffffff" stroke="#64748b" stroke-width="1.8"/>
-                        <rect x="740" y="490" width="10" height="10" fill="#ffffff" stroke="#64748b" stroke-width="1.8"/>
-                        <rect x="740" y="545" width="10" height="10" fill="#ffffff" stroke="#64748b" stroke-width="1.8"/>
-                        <rect x="740" y="600" width="10" height="10" fill="#ffffff" stroke="#64748b" stroke-width="1.8"/>
-                        <rect x="740" y="655" width="10" height="10" fill="#ffffff" stroke="#64748b" stroke-width="1.8"/>
-                        <rect x="740" y="675" width="10" height="10" fill="#ffffff" stroke="#64748b" stroke-width="1.8"/>
+                        <!-- Gym Main Body Rectangle -->
+                        <rect x="730" y="520" width="190" height="280" rx="4" fill="#ffffff" stroke="#000000" stroke-width="3"/>
 
-                        <rect x="925" y="435" width="10" height="10" fill="#ffffff" stroke="#64748b" stroke-width="1.8"/>
-                        <rect x="925" y="490" width="10" height="10" fill="#ffffff" stroke="#64748b" stroke-width="1.8"/>
-                        <rect x="925" y="545" width="10" height="10" fill="#ffffff" stroke="#64748b" stroke-width="1.8"/>
-                        <rect x="925" y="600" width="10" height="10" fill="#ffffff" stroke="#64748b" stroke-width="1.8"/>
-                        <rect x="925" y="655" width="10" height="10" fill="#ffffff" stroke="#64748b" stroke-width="1.8"/>
-                        <rect x="925" y="675" width="10" height="10" fill="#ffffff" stroke="#64748b" stroke-width="1.8"/>
+                        <!-- Hip Roof Ridgelines & Triangular Caps -->
+                        <line x1="730" y1="520" x2="825" y2="565" stroke="#000000" stroke-width="2.5"/>
+                        <line x1="920" y1="520" x2="825" y2="565" stroke="#000000" stroke-width="2.5"/>
+                        <line x1="825" y1="565" x2="825" y2="755" stroke="#000000" stroke-width="2.5"/>
+                        <line x1="730" y1="800" x2="825" y2="755" stroke="#000000" stroke-width="2.5"/>
+                        <line x1="920" y1="800" x2="825" y2="755" stroke="#000000" stroke-width="2.5"/>
 
-                        <text x="837.5" y="555" font-family="Plus Jakarta Sans" font-weight="900" font-size="11.5" fill="#475569" text-anchor="middle">COVERED COURT</text>
-                        <text x="837.5" y="572" font-family="Plus Jakarta Sans" font-weight="700" font-size="9" fill="#94a3b8" text-anchor="middle">Gymnasium Prop</text>
+                        <!-- Transverse Structural Center Line -->
+                        <line x1="730" y1="660" x2="920" y2="660" stroke="#000000" stroke-width="2" stroke-dasharray="6,4"/>
+
+                        <!-- 6 Column Pedestals (Left Edge) & 6 Column Pedestals (Right Edge) -->
+                        <g fill="#ffffff" stroke="#000000" stroke-width="2">
+                          <!-- Left Pedestals -->
+                          <rect x="724" y="516" width="12" height="12"/>
+                          <rect x="724" y="568" width="12" height="12"/>
+                          <rect x="724" y="620" width="12" height="12"/>
+                          <rect x="724" y="672" width="12" height="12"/>
+                          <rect x="724" y="724" width="12" height="12"/>
+                          <rect x="724" y="792" width="12" height="12"/>
+
+                          <!-- Right Pedestals -->
+                          <rect x="914" y="516" width="12" height="12"/>
+                          <rect x="914" y="568" width="12" height="12"/>
+                          <rect x="914" y="620" width="12" height="12"/>
+                          <rect x="914" y="672" width="12" height="12"/>
+                          <rect x="914" y="724" width="12" height="12"/>
+                          <rect x="914" y="792" width="12" height="12"/>
+                        </g>
+
+                        <!-- Gym Title Badge (Below Gym/Arena - Unclickable Muted Slate) -->
+                        <g transform="translate(680, 805)">
+                          <rect x="0" y="0" width="260" height="48" rx="24" fill="#ffffff" stroke="#000000" stroke-width="3.5"/>
+                          <circle cx="26" cy="24" r="15" fill="#94a3b8" stroke="#000000" stroke-width="2.5"/>
+                          <text x="26" y="29.5" font-family="Plus Jakarta Sans" font-weight="900" font-size="13" fill="#ffffff" text-anchor="middle">🏟️</text>
+                          <text x="54" y="31" font-family="Plus Jakarta Sans" font-weight="900" font-size="16.5" fill="#475569">ACTIVITY CENTER</text>
+                        </g>
                       </g>
 
-                      <!-- 5. ACADEMIC PAVILION & COMPLEX (Bottom-Left Blueprint) -->
-                      <g id="campus-prop-pavilion">
-                        <polygon points="190,395 340,395 340,375 480,375 480,395 560,395 560,545 510,545 510,565 370,565 370,545 190,545" fill="#f8fafc" stroke="#64748b" stroke-width="2.8"/>
-                        <text x="375" y="456" font-family="Plus Jakarta Sans" font-weight="900" font-size="11.5" fill="#475569" text-anchor="middle">ACADEMIC PAVILION</text>
-                        <text x="375" y="472" font-family="Plus Jakarta Sans" font-weight="700" font-size="9" fill="#94a3b8" text-anchor="middle">Admin &amp; Student Services · Prop</text>
+                      <!-- ── 4. ✈️ HANGAR COMPLEX (Bottom Right - Sky Blue Themed) ── -->
+                      <g id="campus-hangar" class="interactive-bldg" data-bldg="Hangar" style="cursor:pointer;">
+                        <!-- Comic Drop Shadow for Hangar -->
+                        <polygon points="965,535 1165,535 1165,805 965,805" fill="#000000"/>
+
+                        <!-- Main Stepped Hangar Boundary (Sky Blue Tint) -->
+                        <polygon points="960,530 1160,530 1160,800 960,800" fill="#e0f2fe" stroke="#000000" stroke-width="3"/>
+
+                        <!-- Central Monitor Raised Clerestory Ridge with Hatching -->
+                        <rect x="960" y="650" width="200" height="28" fill="#bae6fd" stroke="#000000" stroke-width="2.5"/>
+                        <g stroke="#000000" stroke-width="1.5">
+                          <line x1="970" y1="650" x2="970" y2="678"/><line x1="985" y1="650" x2="985" y2="678"/>
+                          <line x1="1000" y1="650" x2="1000" y2="678"/><line x1="1015" y1="650" x2="1015" y2="678"/>
+                          <line x1="1030" y1="650" x2="1030" y2="678"/><line x1="1045" y1="650" x2="1045" y2="678"/>
+                          <line x1="1060" y1="650" x2="1060" y2="678"/><line x1="1075" y1="650" x2="1075" y2="678"/>
+                          <line x1="1090" y1="650" x2="1090" y2="678"/><line x1="1105" y1="650" x2="1105" y2="678"/>
+                          <line x1="1120" y1="650" x2="1120" y2="678"/><line x1="1135" y1="650" x2="1135" y2="678"/>
+                          <line x1="1150" y1="650" x2="1150" y2="678"/>
+                        </g>
+
+                        <!-- North & South Corrugated Ribbed Roof Horizontal Lines -->
+                        <g stroke="#000000" stroke-width="1.3" opacity="0.85">
+                          <line x1="960" y1="545" x2="1160" y2="545"/><line x1="960" y1="558" x2="1160" y2="558"/>
+                          <line x1="960" y1="571" x2="1160" y2="571"/><line x1="960" y1="584" x2="1160" y2="584"/>
+                          <line x1="960" y1="597" x2="1160" y2="597"/><line x1="960" y1="610" x2="1160" y2="610"/>
+                          <line x1="960" y1="623" x2="1160" y2="623"/><line x1="960" y1="636" x2="1160" y2="636"/>
+
+                          <line x1="960" y1="692" x2="1160" y2="692"/><line x1="960" y1="706" x2="1160" y2="706"/>
+                          <line x1="960" y1="720" x2="1160" y2="720"/><line x1="960" y1="734" x2="1160" y2="734"/>
+                          <line x1="960" y1="748" x2="1160" y2="748"/><line x1="960" y1="762" x2="1160" y2="762"/>
+                          <line x1="960" y1="776" x2="1160" y2="776"/><line x1="960" y1="790" x2="1160" y2="790"/>
+                        </g>
+
+                        <!-- Central Longitudinal Ridge -->
+                        <line x1="1060" y1="530" x2="1060" y2="800" stroke="#000000" stroke-width="2.5"/>
+
+                        <!-- Hangar Title Badge -->
+                        <g transform="translate(940, 805)">
+                          <rect x="0" y="0" width="250" height="48" rx="24" fill="#ffffff" stroke="#000000" stroke-width="3.5"/>
+                          <circle cx="26" cy="24" r="15" fill="#0284c7" stroke="#000000" stroke-width="2.5"/>
+                          <text x="26" y="29.5" font-family="Plus Jakarta Sans" font-weight="900" font-size="13" fill="#ffffff" text-anchor="middle">✈️</text>
+                          <text x="54" y="31" font-family="Plus Jakarta Sans" font-weight="900" font-size="16.5" fill="#000000">HANGAR COMPLEX</text>
+                        </g>
+                      </g>
+
+                      <!-- ── 5. 🏢 CBA BUILDING (Top Right Vertical Tower - Clean Hip-Roof Comic Style) ── -->
+                      <g id="campus-cba" class="interactive-bldg" data-bldg="CBA Building" style="cursor:pointer;">
+                        <!-- Comic Drop Shadow for CBA -->
+                        <polygon points="1225,145 1325,145 1325,545 1225,545" fill="#000000"/>
+
+                        <!-- Main Vertical CBA Building Body (Pastel Purple) -->
+                        <polygon points="1220,140 1320,140 1320,540 1220,540" fill="#f3e8ff" stroke="#000000" stroke-width="3"/>
+
+                        <!-- Longitudinal Center Ridgeline -->
+                        <line x1="1270" y1="185" x2="1270" y2="495" stroke="#000000" stroke-width="2.5"/>
+
+                        <!-- Top & Bottom Hip Roof Slope Lines (Matching Pancho Style) -->
+                        <line x1="1220" y1="140" x2="1270" y2="185" stroke="#000000" stroke-width="2.5"/>
+                        <line x1="1320" y1="140" x2="1270" y2="185" stroke="#000000" stroke-width="2.5"/>
+                        <line x1="1220" y1="540" x2="1270" y2="495" stroke="#000000" stroke-width="2.5"/>
+                        <line x1="1320" y1="540" x2="1270" y2="495" stroke="#000000" stroke-width="2.5"/>
+
+                        <!-- Horizontal Roof Rafter Hatching Lines (Clean Architectural Vector) -->
+                        <g stroke="#000000" stroke-width="1.2" opacity="0.85">
+                          <line x1="1220" y1="160" x2="1320" y2="160"/><line x1="1220" y1="180" x2="1320" y2="180"/>
+                          <line x1="1220" y1="200" x2="1320" y2="200"/><line x1="1220" y1="220" x2="1320" y2="220"/>
+                          <line x1="1220" y1="240" x2="1320" y2="240"/><line x1="1220" y1="260" x2="1320" y2="260"/>
+                          <line x1="1220" y1="280" x2="1320" y2="280"/><line x1="1220" y1="300" x2="1320" y2="300"/>
+                          <line x1="1220" y1="320" x2="1320" y2="320"/><line x1="1220" y1="340" x2="1320" y2="340"/>
+                          <line x1="1220" y1="360" x2="1320" y2="360"/><line x1="1220" y1="380" x2="1320" y2="380"/>
+                          <line x1="1220" y1="400" x2="1320" y2="400"/><line x1="1220" y1="420" x2="1320" y2="420"/>
+                          <line x1="1220" y1="440" x2="1320" y2="440"/><line x1="1220" y1="460" x2="1320" y2="460"/>
+                          <line x1="1220" y1="480" x2="1320" y2="480"/><line x1="1220" y1="500" x2="1320" y2="500"/>
+                          <line x1="1220" y1="520" x2="1320" y2="520"/>
+                        </g>
+
+                        <!-- West & East Architectural Stairwell Projections (Matching Pancho) -->
+                        <g fill="#e9d5ff" stroke="#000000" stroke-width="2">
+                          <!-- West Stairwell -->
+                          <rect x="1204" y="325" width="16" height="35"/>
+                          <line x1="1204" y1="333" x2="1220" y2="333" stroke-width="1.2"/>
+                          <line x1="1204" y1="341" x2="1220" y2="341" stroke-width="1.2"/>
+                          <line x1="1204" y1="349" x2="1220" y2="349" stroke-width="1.2"/>
+
+                          <!-- East Stairwell -->
+                          <rect x="1320" y="325" width="16" height="35"/>
+                          <line x1="1320" y1="333" x2="1336" y2="333" stroke-width="1.2"/>
+                          <line x1="1320" y1="341" x2="1336" y2="341" stroke-width="1.2"/>
+                          <line x1="1320" y1="349" x2="1336" y2="349" stroke-width="1.2"/>
+                        </g>
+
+                        <!-- CBA Title Badge -->
+                        <g transform="translate(1140, 68)">
+                          <rect x="0" y="0" width="250" height="52" rx="26" fill="#ffffff" stroke="#000000" stroke-width="3.5"/>
+                          <circle cx="28" cy="26" r="16" fill="#a855f7" stroke="#000000" stroke-width="2.5"/>
+                          <text x="28" y="32" font-family="Plus Jakarta Sans" font-weight="900" font-size="14" fill="#ffffff" text-anchor="middle">🏢</text>
+                          <text x="58" y="34" font-family="Plus Jakarta Sans" font-weight="900" font-size="17" fill="#000000">CBA BUILDING</text>
+                        </g>
+                      </g>
+
+                      <!-- ── 🌳 GORGEOUS COMIC TREES & BOTANICAL CANOPIES ── -->
+                      <g id="campusTreesLayer">
+                        <!-- Helper macro template for a comic tree:
+                             - Drop shadow
+                             - Puffy organic lobed canopy (#84cc16, 2.5px black stroke)
+                             - Top-left lime highlight (#bef264)
+                             - Bottom-right shadow rim (#4d7c0f)
+                             - Center trunk node (#3f6212) -->
+
+                        <!-- North Trees (West of Pancho) -->
+                        <g class="comic-tree-group" transform="translate(170, 305)">
+                          <ellipse cx="2" cy="4" rx="20" ry="12" fill="#000000" opacity="0.18"/>
+                          <path d="M 0,-18 C 10,-20 18,-12 18,-2 C 22,7 15,18 3,18 C -7,18 -18,15 -18,4 C -20,-6 -12,-18 0,-18 Z" fill="#84cc16" stroke="#000000" stroke-width="2.5"/>
+                          <path d="M -7,-12 C -2,-16 7,-14 9,-7 C 3,-5 -4,-5 -7,-12 Z" fill="#bef264"/>
+                          <path d="M -3,11 C 3,13 10,11 12,4 C 8,11 1,11 -3,11 Z" fill="#4d7c0f" opacity="0.8"/>
+                          <circle cx="0" cy="-1" r="2.5" fill="#3f6212"/>
+                        </g>
+                        <g class="comic-tree-group" transform="translate(215, 305)">
+                          <ellipse cx="2" cy="4" rx="20" ry="12" fill="#000000" opacity="0.18"/>
+                          <path d="M 0,-18 C 10,-20 18,-12 18,-2 C 22,7 15,18 3,18 C -7,18 -18,15 -18,4 C -20,-6 -12,-18 0,-18 Z" fill="#84cc16" stroke="#000000" stroke-width="2.5"/>
+                          <path d="M -7,-12 C -2,-16 7,-14 9,-7 C 3,-5 -4,-5 -7,-12 Z" fill="#bef264"/>
+                          <path d="M -3,11 C 3,13 10,11 12,4 C 8,11 1,11 -3,11 Z" fill="#4d7c0f" opacity="0.8"/>
+                          <circle cx="0" cy="-1" r="2.5" fill="#3f6212"/>
+                        </g>
+
+                        <!-- West Border Trees -->
+                        <g class="comic-tree-group" transform="translate(65, 295)">
+                          <ellipse cx="2" cy="4" rx="20" ry="12" fill="#000000" opacity="0.18"/>
+                          <path d="M 0,-18 C 10,-20 18,-12 18,-2 C 22,7 15,18 3,18 C -7,18 -18,15 -18,4 C -20,-6 -12,-18 0,-18 Z" fill="#84cc16" stroke="#000000" stroke-width="2.5"/>
+                          <path d="M -7,-12 C -2,-16 7,-14 9,-7 C 3,-5 -4,-5 -7,-12 Z" fill="#bef264"/>
+                          <circle cx="0" cy="-1" r="2.5" fill="#3f6212"/>
+                        </g>
+                        <g class="comic-tree-group" transform="translate(65, 455)">
+                          <ellipse cx="2" cy="4" rx="20" ry="12" fill="#000000" opacity="0.18"/>
+                          <path d="M 0,-18 C 10,-20 18,-12 18,-2 C 22,7 15,18 3,18 C -7,18 -18,15 -18,4 C -20,-6 -12,-18 0,-18 Z" fill="#84cc16" stroke="#000000" stroke-width="2.5"/>
+                          <path d="M -7,-12 C -2,-16 7,-14 9,-7 C 3,-5 -4,-5 -7,-12 Z" fill="#bef264"/>
+                          <circle cx="0" cy="-1" r="2.5" fill="#3f6212"/>
+                        </g>
+                        <g class="comic-tree-group" transform="translate(65, 515)">
+                          <ellipse cx="2" cy="4" rx="20" ry="12" fill="#000000" opacity="0.18"/>
+                          <path d="M 0,-18 C 10,-20 18,-12 18,-2 C 22,7 15,18 3,18 C -7,18 -18,15 -18,4 C -20,-6 -12,-18 0,-18 Z" fill="#84cc16" stroke="#000000" stroke-width="2.5"/>
+                          <path d="M -7,-12 C -2,-16 7,-14 9,-7 C 3,-5 -4,-5 -7,-12 Z" fill="#bef264"/>
+                          <circle cx="0" cy="-1" r="2.5" fill="#3f6212"/>
+                        </g>
+
+                        <!-- Central Courtyard Orchard (Between Pancho & Gym) -->
+                        <g class="comic-tree-group" transform="translate(800, 235)">
+                          <ellipse cx="2" cy="4" rx="20" ry="12" fill="#000000" opacity="0.18"/>
+                          <path d="M 0,-18 C 10,-20 18,-12 18,-2 C 22,7 15,18 3,18 C -7,18 -18,15 -18,4 C -20,-6 -12,-18 0,-18 Z" fill="#84cc16" stroke="#000000" stroke-width="2.5"/>
+                          <path d="M -7,-12 C -2,-16 7,-14 9,-7 C 3,-5 -4,-5 -7,-12 Z" fill="#bef264"/>
+                          <circle cx="0" cy="-1" r="2.5" fill="#3f6212"/>
+                        </g>
+                        <g class="comic-tree-group" transform="translate(850, 235)">
+                          <ellipse cx="2" cy="4" rx="20" ry="12" fill="#000000" opacity="0.18"/>
+                          <path d="M 0,-18 C 10,-20 18,-12 18,-2 C 22,7 15,18 3,18 C -7,18 -18,15 -18,4 C -20,-6 -12,-18 0,-18 Z" fill="#84cc16" stroke="#000000" stroke-width="2.5"/>
+                          <path d="M -7,-12 C -2,-16 7,-14 9,-7 C 3,-5 -4,-5 -7,-12 Z" fill="#bef264"/>
+                          <circle cx="0" cy="-1" r="2.5" fill="#3f6212"/>
+                        </g>
+                        <g class="comic-tree-group" transform="translate(900, 235)">
+                          <ellipse cx="2" cy="4" rx="20" ry="12" fill="#000000" opacity="0.18"/>
+                          <path d="M 0,-18 C 10,-20 18,-12 18,-2 C 22,7 15,18 3,18 C -7,18 -18,15 -18,4 C -20,-6 -12,-18 0,-18 Z" fill="#84cc16" stroke="#000000" stroke-width="2.5"/>
+                          <path d="M -7,-12 C -2,-16 7,-14 9,-7 C 3,-5 -4,-5 -7,-12 Z" fill="#bef264"/>
+                          <circle cx="0" cy="-1" r="2.5" fill="#3f6212"/>
+                        </g>
+                        <g class="comic-tree-group" transform="translate(950, 235)">
+                          <ellipse cx="2" cy="4" rx="20" ry="12" fill="#000000" opacity="0.18"/>
+                          <path d="M 0,-18 C 10,-20 18,-12 18,-2 C 22,7 15,18 3,18 C -7,18 -18,15 -18,4 C -20,-6 -12,-18 0,-18 Z" fill="#84cc16" stroke="#000000" stroke-width="2.5"/>
+                          <path d="M -7,-12 C -2,-16 7,-14 9,-7 C 3,-5 -4,-5 -7,-12 Z" fill="#bef264"/>
+                          <circle cx="0" cy="-1" r="2.5" fill="#3f6212"/>
+                        </g>
+
+                        <!-- South Lawn Trees (Bottom of Admin) -->
+                        <g class="comic-tree-group" transform="translate(230, 745)">
+                          <ellipse cx="2" cy="4" rx="20" ry="12" fill="#000000" opacity="0.18"/>
+                          <path d="M 0,-18 C 10,-20 18,-12 18,-2 C 22,7 15,18 3,18 C -7,18 -18,15 -18,4 C -20,-6 -12,-18 0,-18 Z" fill="#84cc16" stroke="#000000" stroke-width="2.5"/>
+                          <path d="M -7,-12 C -2,-16 7,-14 9,-7 C 3,-5 -4,-5 -7,-12 Z" fill="#bef264"/>
+                          <circle cx="0" cy="-1" r="2.5" fill="#3f6212"/>
+                        </g>
+                        <g class="comic-tree-group" transform="translate(300, 745)">
+                          <ellipse cx="2" cy="4" rx="20" ry="12" fill="#000000" opacity="0.18"/>
+                          <path d="M 0,-18 C 10,-20 18,-12 18,-2 C 22,7 15,18 3,18 C -7,18 -18,15 -18,4 C -20,-6 -12,-18 0,-18 Z" fill="#84cc16" stroke="#000000" stroke-width="2.5"/>
+                          <path d="M -7,-12 C -2,-16 7,-14 9,-7 C 3,-5 -4,-5 -7,-12 Z" fill="#bef264"/>
+                          <circle cx="0" cy="-1" r="2.5" fill="#3f6212"/>
+                        </g>
+                        <g class="comic-tree-group" transform="translate(470, 745)">
+                          <ellipse cx="2" cy="4" rx="20" ry="12" fill="#000000" opacity="0.18"/>
+                          <path d="M 0,-18 C 10,-20 18,-12 18,-2 C 22,7 15,18 3,18 C -7,18 -18,15 -18,4 C -20,-6 -12,-18 0,-18 Z" fill="#84cc16" stroke="#000000" stroke-width="2.5"/>
+                          <path d="M -7,-12 C -2,-16 7,-14 9,-7 C 3,-5 -4,-5 -7,-12 Z" fill="#bef264"/>
+                          <circle cx="0" cy="-1" r="2.5" fill="#3f6212"/>
+                        </g>
+                        <g class="comic-tree-group" transform="translate(540, 745)">
+                          <ellipse cx="2" cy="4" rx="20" ry="12" fill="#000000" opacity="0.18"/>
+                          <path d="M 0,-18 C 10,-20 18,-12 18,-2 C 22,7 15,18 3,18 C -7,18 -18,15 -18,4 C -20,-6 -12,-18 0,-18 Z" fill="#84cc16" stroke="#000000" stroke-width="2.5"/>
+                          <path d="M -7,-12 C -2,-16 7,-14 9,-7 C 3,-5 -4,-5 -7,-12 Z" fill="#bef264"/>
+                          <circle cx="0" cy="-1" r="2.5" fill="#3f6212"/>
+                        </g>
+
+                        <!-- East Border Trees (East of CBA Tower) -->
+                        <g class="comic-tree-group" transform="translate(1420, 220)">
+                          <ellipse cx="2" cy="4" rx="20" ry="12" fill="#000000" opacity="0.18"/>
+                          <path d="M 0,-18 C 10,-20 18,-12 18,-2 C 22,7 15,18 3,18 C -7,18 -18,15 -18,4 C -20,-6 -12,-18 0,-18 Z" fill="#84cc16" stroke="#000000" stroke-width="2.5"/>
+                          <path d="M -7,-12 C -2,-16 7,-14 9,-7 C 3,-5 -4,-5 -7,-12 Z" fill="#bef264"/>
+                          <circle cx="0" cy="-1" r="2.5" fill="#3f6212"/>
+                        </g>
+                        <g class="comic-tree-group" transform="translate(1420, 280)">
+                          <ellipse cx="2" cy="4" rx="20" ry="12" fill="#000000" opacity="0.18"/>
+                          <path d="M 0,-18 C 10,-20 18,-12 18,-2 C 22,7 15,18 3,18 C -7,18 -18,15 -18,4 C -20,-6 -12,-18 0,-18 Z" fill="#84cc16" stroke="#000000" stroke-width="2.5"/>
+                          <path d="M -7,-12 C -2,-16 7,-14 9,-7 C 3,-5 -4,-5 -7,-12 Z" fill="#bef264"/>
+                          <circle cx="0" cy="-1" r="2.5" fill="#3f6212"/>
+                        </g>
+                        <g class="comic-tree-group" transform="translate(1420, 340)">
+                          <ellipse cx="2" cy="4" rx="20" ry="12" fill="#000000" opacity="0.18"/>
+                          <path d="M 0,-18 C 10,-20 18,-12 18,-2 C 22,7 15,18 3,18 C -7,18 -18,15 -18,4 C -20,-6 -12,-18 0,-18 Z" fill="#84cc16" stroke="#000000" stroke-width="2.5"/>
+                          <path d="M -7,-12 C -2,-16 7,-14 9,-7 C 3,-5 -4,-5 -7,-12 Z" fill="#bef264"/>
+                          <circle cx="0" cy="-1" r="2.5" fill="#3f6212"/>
+                        </g>
+                        <g class="comic-tree-group" transform="translate(1420, 460)">
+                          <ellipse cx="2" cy="4" rx="20" ry="12" fill="#000000" opacity="0.18"/>
+                          <path d="M 0,-18 C 10,-20 18,-12 18,-2 C 22,7 15,18 3,18 C -7,18 -18,15 -18,4 C -20,-6 -12,-18 0,-18 Z" fill="#84cc16" stroke="#000000" stroke-width="2.5"/>
+                          <path d="M -7,-12 C -2,-16 7,-14 9,-7 C 3,-5 -4,-5 -7,-12 Z" fill="#bef264"/>
+                          <circle cx="0" cy="-1" r="2.5" fill="#3f6212"/>
+                        </g>
+
+                        <!-- Trees in Bottom-Right Space (East of Hangar) -->
+                        <g class="comic-tree-group" transform="translate(1260, 640)">
+                          <ellipse cx="2" cy="4" rx="20" ry="12" fill="#000000" opacity="0.18"/>
+                          <path d="M 0,-18 C 10,-20 18,-12 18,-2 C 22,7 15,18 3,18 C -7,18 -18,15 -18,4 C -20,-6 -12,-18 0,-18 Z" fill="#84cc16" stroke="#000000" stroke-width="2.5"/>
+                          <path d="M -7,-12 C -2,-16 7,-14 9,-7 C 3,-5 -4,-5 -7,-12 Z" fill="#bef264"/>
+                          <circle cx="0" cy="-1" r="2.5" fill="#3f6212"/>
+                        </g>
+                        <g class="comic-tree-group" transform="translate(1360, 630)">
+                          <ellipse cx="2" cy="4" rx="20" ry="12" fill="#000000" opacity="0.18"/>
+                          <path d="M 0,-18 C 10,-20 18,-12 18,-2 C 22,7 15,18 3,18 C -7,18 -18,15 -18,4 C -20,-6 -12,-18 0,-18 Z" fill="#84cc16" stroke="#000000" stroke-width="2.5"/>
+                          <path d="M -7,-12 C -2,-16 7,-14 9,-7 C 3,-5 -4,-5 -7,-12 Z" fill="#bef264"/>
+                          <circle cx="0" cy="-1" r="2.5" fill="#3f6212"/>
+                        </g>
+                        <g class="comic-tree-group" transform="translate(1460, 640)">
+                          <ellipse cx="2" cy="4" rx="20" ry="12" fill="#000000" opacity="0.18"/>
+                          <path d="M 0,-18 C 10,-20 18,-12 18,-2 C 22,7 15,18 3,18 C -7,18 -18,15 -18,4 C -20,-6 -12,-18 0,-18 Z" fill="#84cc16" stroke="#000000" stroke-width="2.5"/>
+                          <path d="M -7,-12 C -2,-16 7,-14 9,-7 C 3,-5 -4,-5 -7,-12 Z" fill="#bef264"/>
+                          <circle cx="0" cy="-1" r="2.5" fill="#3f6212"/>
+                        </g>
+                        <g class="comic-tree-group" transform="translate(1310, 710)">
+                          <ellipse cx="2" cy="4" rx="20" ry="12" fill="#000000" opacity="0.18"/>
+                          <path d="M 0,-18 C 10,-20 18,-12 18,-2 C 22,7 15,18 3,18 C -7,18 -18,15 -18,4 C -20,-6 -12,-18 0,-18 Z" fill="#84cc16" stroke="#000000" stroke-width="2.5"/>
+                          <path d="M -7,-12 C -2,-16 7,-14 9,-7 C 3,-5 -4,-5 -7,-12 Z" fill="#bef264"/>
+                          <circle cx="0" cy="-1" r="2.5" fill="#3f6212"/>
+                        </g>
+                        <g class="comic-tree-group" transform="translate(1410, 710)">
+                          <ellipse cx="2" cy="4" rx="20" ry="12" fill="#000000" opacity="0.18"/>
+                          <path d="M 0,-18 C 10,-20 18,-12 18,-2 C 22,7 15,18 3,18 C -7,18 -18,15 -18,4 C -20,-6 -12,-18 0,-18 Z" fill="#84cc16" stroke="#000000" stroke-width="2.5"/>
+                          <path d="M -7,-12 C -2,-16 7,-14 9,-7 C 3,-5 -4,-5 -7,-12 Z" fill="#bef264"/>
+                          <circle cx="0" cy="-1" r="2.5" fill="#3f6212"/>
+                        </g>
                       </g>
 
                       <!-- Stationary Occupancy Rings Layer -->
@@ -625,51 +1142,21 @@
                   <div class="matrix-body-scroll-wrap" id="matrixBody"></div>
                 </div>
 
-                <!-- Futuristic Sci-Fi HUD Callout & 45-deg Leader Line (150px angled + 50px horizontal) -->
-                <div id="hudCalloutContainer" class="hud-callout-layer hidden">
-                  <svg id="hudLeaderSvg" class="hud-leader-svg">
-                    <defs>
-                      <filter id="hudNeonGlow" x="-50%" y="-50%" width="200%" height="200%">
-                        <feGaussianBlur stdDeviation="3.5" result="blur" />
-                        <feMerge>
-                          <feMergeNode in="blur" />
-                          <feMergeNode in="SourceGraphic" />
-                        </feMerge>
-                      </filter>
-                    </defs>
-                    <!-- Pulsing Anchor Target at Hover Origin -->
-                    <circle id="hudAnchorRing" cx="0" cy="0" r="7" fill="none" stroke="#10b981" stroke-width="2" opacity="0.9" class="hud-ping-ring"/>
-                    <circle id="hudAnchorDot" cx="0" cy="0" r="3.5" fill="#10b981"/>
-                    
-                    <!-- 45-degree Dynamic Angled Line + Horizontal Tether Line -->
-                    <polyline id="hudLeaderLine" points="0,0 106,-106 156,-106" fill="none" stroke="#047857" stroke-width="2.5" opacity="0.75" filter="url(#hudNeonGlow)"/>
-                    <!-- Animated Cyber Laser Energy Beam -->
-                    <polyline id="hudLaserPulse" points="0,0 106,-106 156,-106" fill="none" stroke="#34d399" stroke-width="2.5" stroke-dasharray="14 16" class="hud-laser-stream"/>
-                    <circle id="hudJointDot" cx="106" cy="-106" r="3.5" fill="#34d399"/>
-                    <circle id="hudEndDot" cx="156" cy="-106" r="4" fill="#10b981"/>
-                  </svg>
-
-                  <!-- Futuristic Cyber HUD Card Container -->
-                  <div id="roomTooltip" class="futuristic-hud-card">
-                    <div class="hud-card-header">
-                      <span class="hud-tech-badge">SYS.LOC // TARGET LOCK</span>
-                      <span class="hud-tech-decor">◈ ◈ ◈</span>
+                <!-- Clean Modern Campus Map Hover Popover -->
+                <div id="hudCalloutContainer" class="campus-map-popover hidden">
+                  <div id="roomTooltip" class="modern-campus-card">
+                    <div class="popover-top-row">
+                      <strong id="tooltipRoom" class="popover-bldg-title">Pancho Building</strong>
+                      <span id="tooltipStatus" class="popover-status-badge vacant">● Operational</span>
                     </div>
-                    <div class="hud-card-title-row">
-                      <strong id="tooltipRoom" class="hud-room-title">Room</strong>
-                      <div id="tooltipStatus" class="tooltip-status vacant">AVAILABLE</div>
+                    <div class="popover-subtitle" id="tooltipOccupant">50 Classrooms &amp; Laboratories</div>
+                    <div class="popover-meta-row">
+                      <span id="tooltipSchedule" class="popover-meta-item">⏱ Open: 7:00 AM - 9:00 PM</span>
                     </div>
-                    <div class="hud-card-divider"></div>
-                    <div class="hud-card-body">
-                      <div id="tooltipOccupant" class="hud-data-row">Occupant: None</div>
-                      <div id="tooltipSchedule" class="hud-data-row secondary">Schedule: --</div>
-                      <div id="tooltipDetail" class="hud-action-hint">👉 Click to manage</div>
+                    <div class="popover-footer" id="tooltipDetail">
+                      <span>Click building to open floor layout</span>
+                      <span class="popover-arrow">→</span>
                     </div>
-                    <!-- Cyber corner accent brackets -->
-                    <span class="hud-corner top-left"></span>
-                    <span class="hud-corner top-right"></span>
-                    <span class="hud-corner bottom-left"></span>
-                    <span class="hud-corner bottom-right"></span>
                   </div>
                 </div>
 
@@ -684,60 +1171,112 @@
                     <span class="dock-divider">|</span>
                     <span class="dock-info-text" id="dockRoomSchedule">Open Schedule</span>
                   </div>
-                  <div class="dock-pill-action">
-                    <span class="dock-action-tag" id="dockActionHint">👉 Click to Manage</span>
+                </div>
+
+              </div> <!-- statusDisplayMain -->
+
+            </div> <!-- live-status-layout -->
+          </div> <!-- modular-card live-status-container -->
+
+          <!-- Real-Time Authorizations & Operation Controls Bento Grid -->
+          <div class="admin-bento-grid">
+              
+              <!-- Bento Column A: Fast-Track Access Request Authorization Queue -->
+              <div class="modular-card auth-queue-card">
+                <div class="section-card-header">
+                  <div class="section-title-wrap">
+                    <span class="section-title-bar"></span>
+                    <div>
+                      <h3>Fast-Track Access Authorization</h3>
+                      <p style="font-size:0.74rem; color:var(--slate-500); margin:0;">Live queue of incoming faculty and department permit applications</p>
+                    </div>
+                  </div>
+                  <div style="display:flex; align-items:center; gap:8px;">
+                    <span class="auth-queue-counter-tag"><strong id="authQueuePendingCount">5</strong> Pending</span>
+                    <button class="header-action-btn primary" id="btnNewRequest">+ New Permit</button>
+                  </div>
+                </div>
+                <div class="table-card-body scrollable-sub-table">
+                  <table class="modular-table auth-queue-table">
+                    <thead>
+                      <tr>
+                        <th>Requester</th>
+                        <th>Facility</th>
+                        <th>Time Window</th>
+                        <th>Purpose / Event</th>
+                        <th>Status</th>
+                        <th style="text-align:right;">Decision</th>
+                      </tr>
+                    </thead>
+                    <tbody id="accessRequestsTableBody"></tbody>
+                  </table>
+                </div>
+              </div>
+
+              <!-- Bento Column B: Live Facility Event Stream & Quick Operations Deck -->
+              <div class="bento-right-stack">
+                
+                <!-- Card B1: Live Audit Trail & Status Ticker -->
+                <div class="modular-card live-stream-card">
+                  <div class="section-card-header">
+                    <div class="section-title-wrap">
+                      <span class="section-title-bar" style="background:#0284c7;"></span>
+                      <div>
+                        <h3>Live Audit Stream</h3>
+                        <p style="font-size:0.74rem; color:var(--slate-500); margin:0;">Real-time campus room status transitions</p>
+                      </div>
+                    </div>
+                    <span class="header-tag-pill" style="color:#0284c7; background:rgba(2,132,199,0.1);">● REALTIME</span>
+                  </div>
+                  <div class="timeline-scroll-container bento-timeline">
+                    <div class="timeline-list" id="activityTimelineList"></div>
                   </div>
                 </div>
 
-              </div>
-
-            </div>
-          </div>
-
-          <!-- Bottom Row Split Grid: Requests & Activity -->
-          <div class="dashboard-split-grid">
-            
-            <!-- Mini Access Requests Card -->
-            <div class="modular-card">
-              <div class="section-card-header">
-                <div class="section-title-wrap">
-                  <span class="section-title-bar"></span>
-                  <h3>Pending Access Requests</h3>
+                <!-- Card B2: Quick Operations & Dispatch Tile Deck -->
+                <div class="modular-card dispatch-deck-card">
+                  <div class="section-card-header" style="padding-bottom:10px;">
+                    <div class="section-title-wrap">
+                      <span class="section-title-bar" style="background:#7c3aed;"></span>
+                      <h4 style="font-size:0.92rem; margin:0; font-weight:800;">Quick Operations &amp; Dispatch</h4>
+                    </div>
+                    <span style="font-size:0.68rem; font-weight:700; color:var(--slate-400);">SYSTEM SHORTCUTS</span>
+                  </div>
+                  <div class="dispatch-tiles-grid">
+                    <button class="dispatch-tile" id="btnDispatchAssign">
+                      <span class="dispatch-icon">⚡</span>
+                      <div class="dispatch-text">
+                        <strong>Quick Assign</strong>
+                        <small>Assign Room Slot</small>
+                      </div>
+                    </button>
+                    <button class="dispatch-tile" id="btnDispatchReset">
+                      <span class="dispatch-icon">🔄</span>
+                      <div class="dispatch-text">
+                        <strong>Reset Filters</strong>
+                        <small>Clear Map State</small>
+                      </div>
+                    </button>
+                    <button class="dispatch-tile" id="btnDispatchExport">
+                      <span class="dispatch-icon">📋</span>
+                      <div class="dispatch-text">
+                        <strong>Export Audit</strong>
+                        <small>Download Logs</small>
+                      </div>
+                    </button>
+                    <button class="dispatch-tile" id="btnDispatchBroadcast">
+                      <span class="dispatch-icon">📢</span>
+                      <div class="dispatch-text">
+                        <strong>Broadcast</strong>
+                        <small>Campus Notice</small>
+                      </div>
+                    </button>
+                  </div>
                 </div>
-                <button class="header-action-btn primary" id="btnNewRequest">+ New Request</button>
-              </div>
-              <div class="table-card-body scrollable-sub-table">
-                <table class="modular-table">
-                  <thead>
-                    <tr>
-                      <th>Requester</th>
-                      <th>Room</th>
-                      <th>Date / Time</th>
-                      <th>Purpose</th>
-                      <th>Status</th>
-                      <th>Action</th>
-                    </tr>
-                  </thead>
-                  <tbody id="accessRequestsTableBody"></tbody>
-                </table>
-              </div>
-            </div>
 
-            <!-- Mini Live Activity Stream Card -->
-            <div class="modular-card">
-              <div class="section-card-header">
-                <div class="section-title-wrap">
-                  <span class="section-title-bar"></span>
-                  <h3>Recent Facility Logs</h3>
-                </div>
-                <span class="header-tag-pill">Realtime Audit</span>
-              </div>
-              <div class="timeline-scroll-container">
-                <div class="timeline-list" id="activityTimelineList"></div>
-              </div>
-            </div>
+              </div> <!-- bento-right-stack -->
 
-          </div>
+            </div> <!-- admin-bento-grid -->
 
         </section>
 
@@ -1119,6 +1658,6 @@
   <!-- Toast Notification Container -->
   <div id="toastContainer" class="toast-container"></div>
 
-  <script src="dashboard.js"></script>
+  <script src="js/dashboard.js"></script>
 </body>
 </html>

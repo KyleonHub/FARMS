@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FARMS - Student Information &amp; Classroom Finder Portal</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/dashboard.css">
+</head>
+<body>
+
+  <div class="admin-app-layout">
+    <!-- ── Left Student Navigation Sidebar ── -->
+    <aside class="admin-sidebar">
+      <div class="sidebar-top-section">
+        <!-- Brand Header -->
+        <div class="sidebar-brand-unified">
+          <div class="brand-seal-icon">
+            <svg viewBox="0 0 100 100" width="38" height="38">
+              <circle cx="50" cy="50" r="46" fill="#043c2e" stroke="#eab308" stroke-width="4"/>
+              <circle cx="50" cy="50" r="38" fill="none" stroke="#ca8a04" stroke-width="1.5" stroke-dasharray="4,2"/>
+              <path d="M50 20 L58 36 L76 36 L62 48 L68 66 L50 54 L32 66 L38 48 L24 36 L42 36 Z" fill="#facc15"/>
+              <circle cx="50" cy="50" r="12" fill="#047857" stroke="#ca8a04" stroke-width="2"/>
+              <text x="50" y="54" font-family="Plus Jakarta Sans, system-ui" font-size="10" font-weight="900" fill="#ffffff" text-anchor="middle">BSU</text>
+            </svg>
+          </div>
+          <div class="brand-text-block">
+            <h1 class="brand-main-title">FARMS</h1>
+            <p class="brand-sub-title">Student Room Finder &amp;<br>Class Availability System</p>
+          </div>
+        </div>
+
+        <!-- Navigation Menu Items -->
+        <nav class="sidebar-nav">
+          <a href="#dashboard" class="nav-item active" data-view="dashboard">
+            <svg class="nav-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/>
+              <rect x="14" y="14" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/>
+            </svg>
+            <span>Room Finder</span>
+          </a>
+
+          <a href="#myschedule" class="nav-item" data-view="myschedule">
+            <svg class="nav-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+              <line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>
+              <path d="M8 14h.01M12 14h.01M16 14h.01M8 18h.01M12 18h.01M16 18h.01"/>
+            </svg>
+            <span>My Class Schedule</span>
+          </a>
+
+          <a href="#matrix" class="nav-item" data-view="matrix">
+            <svg class="nav-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M3 21h18M5 21V7l7-4 7 4v14M9 10h1M14 10h1M9 14h1M14 14h1M9 18h1M14 18h1"/>
+            </svg>
+            <span>Campus Room Matrix</span>
+          </a>
+
+          <a href="#faculty" class="nav-item" data-view="faculty">
+            <svg class="nav-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/>
+              <rect x="8" y="2" width="8" height="4" rx="1" ry="1"/>
+              <path d="M9 14h6"/><path d="M9 18h6"/><path d="M9 10h6"/>
+            </svg>
+            <span>Faculty Directory</span>
+          </a>
+
+          <a href="login.html" class="nav-item sign-out-nav-item">
+            <svg class="nav-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/>
+            </svg>
+            <span>Sign Out</span>
+          </a>
+        </nav>
+      </div>
+
+      <!-- Institutional Footer Badge -->
+      <div class="sidebar-footer-card">
+        <div class="sidebar-campus-pill">
+          <span class="campus-status-dot"></span>
+          <span>BSU Student Portal</span>
+        </div>
+        <div class="sidebar-version-tag">FARMS v2.4 • System Active</div>
+      </div>
+    </aside>
+
+    <!-- Mobile/Desktop Backdrop Overlay -->
+    <div class="sidebar-backdrop" id="sidebarBackdrop"></div>
+
+    <!-- ── Main Content Area ── -->
+    <div class="admin-main-wrapper">
+      <!-- ── Top Header Bar ── -->
+      <header class="admin-topbar">
+        <button class="sidebar-toggle-btn" id="sidebarToggleBtn" title="Toggle Sidebar" aria-label="Toggle Sidebar">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round">
+            <line x1="3" y1="6" x2="21" y2="6"/>
+            <line x1="3" y1="12" x2="21" y2="12"/>
+            <line x1="3" y1="18" x2="21" y2="18"/>
+          </svg>
+        </button>
+
+        <div class="topbar-search-container" style="width: 440px;">
+          <span class="search-magnifier">🔍</span>
+          <input type="text" id="studentSearch" placeholder="Search by Subject (e.g. CS101, BIO102) or Professor..." autocomplete="off">
+          <button id="clearSearchBtn" class="clear-search-btn" style="display:none;">✕</button>
+          
+          <div id="searchDropdown" class="search-dropdown hidden">
+            <div class="search-dropdown-header">MATCHED CLASSROOMS &amp; LABS</div>
+            <div id="searchResultsList"></div>
+          </div>
+        </div>
+
+        <div class="topbar-actions">
+          <!-- Dark / Light Theme Toggle -->
+          <button class="theme-toggle-btn" id="themeToggleBtn" title="Toggle Dark/Light Mode" aria-label="Toggle Theme">
+            <span class="theme-icon sun-icon">☀️</span>
+            <span class="theme-icon moon-icon">🌙</span>
+            <span class="theme-label" id="themeLabelText">Dark Mode</span>
+          </button>
+
+          <div class="user-profile-btn">
+            <div class="user-avatar-circle" style="background:#2563eb; color:#fff;">S</div>
+            <span class="user-display-name">Student Portal</span>
+          </div>
+        </div>
+      </header>
+
+      <!-- ── Scrollable View Container ── -->
+      <main class="admin-scroll-content">
+
+        <!-- ====================================================
+             VIEW 1: STUDENT ROOM FINDER & VECTOR MAP
+             ==================================================== -->
+        <section id="view-dashboard" class="content-view active">
+          
+          <div class="dashboard-greeting-row">
+            <div>
+              <h2 class="page-section-heading">Student Classroom &amp; Facility Locator</h2>
+              <p class="page-section-sub">Find where your classes are currently held, locate professors, and find open study spaces on campus.</p>
+            </div>
+          </div>
+
+          <!-- Top Row: 3 Student KPI Cards -->
+          <div class="kpi-three-grid">
+            
+            <!-- Card 1: Next Enrolled Class -->
+            <div class="kpi-card-v2 card-classes-theme">
+              <div class="kpi-v2-main">
+                <div class="kpi-header-row">
+                  <span class="kpi-v2-title">Next Class</span>
+                  <span class="kpi-micro-tag active">● STARTING SOON</span>
+                </div>
+                <div class="kpi-v2-big-num" style="font-size:1.8rem; line-height:1.2;">CS101</div>
+                <div class="kpi-v2-sub green">Room: <strong>CBA 102</strong> · Prof. Santos (01:30 PM)</div>
+              </div>
+              <div class="kpi-v2-widget">
+                <div class="pending-warning-badge" style="background:rgba(16,185,129,0.2);">
+                  <span style="font-size:1.6rem;">🏫</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Card 2: Open Campus Study Facilities -->
+            <div class="kpi-card-v2 card-vacant-theme">
+              <div class="kpi-v2-main">
+                <div class="kpi-header-row">
+                  <span class="kpi-v2-title">Study Rooms Free</span>
+                  <span class="kpi-micro-tag ready">● OPEN ACCESS</span>
+                </div>
+                <div class="kpi-v2-big-num">18</div>
+                <div class="kpi-v2-sub green">Library &amp; Vacant Classrooms Available</div>
+              </div>
+              <div class="kpi-v2-widget ring-gauge-widget">
+                <svg viewBox="0 0 80 80" width="76" height="76">
+                  <circle cx="40" cy="40" r="32" fill="none" stroke="#e2e8f0" stroke-width="6.5"/>
+                  <circle cx="40" cy="40" r="32" fill="none" stroke="#0ea5e9" stroke-width="6.5"
+                          stroke-dasharray="201" stroke-dashoffset="80"
+                          stroke-linecap="round" transform="rotate(-90 40 40)"/>
+                  <text x="40" y="38" font-family="Plus Jakarta Sans, system-ui" font-weight="900" font-size="14" fill="#0f172a" text-anchor="middle">18</text>
+                  <text x="40" y="50" font-family="Plus Jakarta Sans, system-ui" font-weight="700" font-size="8" fill="#64748b" text-anchor="middle">Free Rooms</text>
+                </svg>
+              </div>
+            </div>
+
+            <!-- Card 3: Active Faculty Checked In -->
+            <div class="kpi-card-v2 card-pending-amber">
+              <div class="kpi-v2-main">
+                <div class="kpi-header-row">
+                  <span class="kpi-v2-title">Faculty On Campus</span>
+                  <span class="kpi-micro-tag pending">👨‍🏫 AVAILABLE</span>
+                </div>
+                <div class="kpi-v2-big-num">34</div>
+                <div class="kpi-v2-sub dark-amber">Consultation &amp; Class Hours Active</div>
+              </div>
+              <div class="kpi-v2-widget">
+                <div class="pending-warning-badge" style="background:rgba(245,158,11,0.2);">
+                  <span style="font-size:1.6rem;">📍</span>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Modular Live Status Map Section -->
+          <div class="modular-card live-status-container">
+            <div class="section-card-header">
+              <div class="section-title-wrap">
+                <span class="section-title-bar"></span>
+                <h3>Interactive Campus Vector Blueprint Map</h3>
+              </div>
+              <div class="segmented-view-toggle">
+                <button class="seg-btn active" id="btnSvgView">🗺️ Vector Map</button>
+                <button class="seg-btn" id="btnListView">📋 Directory List</button>
+              </div>
+            </div>
+
+            <div class="live-status-layout fixed-bounds">
+              
+              <!-- Adaptive Sidebar -->
+              <aside class="status-filter-sidebar" id="adaptiveSidebar">
+                <div class="sidebar-context-badge">
+                  <span class="context-icon" id="contextIcon">🗺️</span>
+                  <div class="context-info">
+                    <span class="context-sub">ACTIVE VIEW</span>
+                    <strong class="context-text" id="contextMainLabel">Campus Overview</strong>
+                  </div>
+                </div>
+
+                <div id="sidebarCampusBlock" class="filter-block">
+                  <span class="filter-block-label">EXPLORE BLUEPRINTS</span>
+                  <div class="quick-bldg-jumps">
+                    <button class="bldg-jump-btn pancho" data-jump="Pancho Building">
+                      <span class="bldg-dot" style="background:#059669;"></span>
+                      <div class="jump-info">
+                        <strong>Pancho Building</strong>
+                        <small>2 Floors · 50 Classrooms</small>
+                      </div>
+                      <span class="jump-arrow">→</span>
+                    </button>
+                    <button class="bldg-jump-btn cba" data-jump="CBA Building">
+                      <span class="bldg-dot" style="background:#2563eb;"></span>
+                      <div class="jump-info">
+                        <strong>CBA Building</strong>
+                        <small>4 Floors · 3 Rooms / Flr</small>
+                      </div>
+                      <span class="jump-arrow">→</span>
+                    </button>
+                    <button class="bldg-jump-btn hangar" data-jump="Hangar">
+                      <span class="bldg-dot" style="background:#0284c7;"></span>
+                      <div class="jump-info">
+                        <strong>Hangar Complex</strong>
+                        <small>1 Storey · 6 Rooms + Central Hall</small>
+                      </div>
+                      <span class="jump-arrow">→</span>
+                    </button>
+                  </div>
+                </div>
+
+                <div id="sidebarBuildingBlock" class="filter-block hidden">
+                  <div class="building-context-card" id="bldgContextHero">
+                    <div class="bldg-hero-header">
+                      <h4 id="bldgHeroTitle">Pancho Building</h4>
+                      <span class="bldg-hero-badge" id="bldgHeroBadge">2 Floors</span>
+                    </div>
+                    <p class="bldg-hero-sub">Live Classroom Status</p>
+                  </div>
+
+                  <span class="filter-block-label" style="margin-top:10px;">FLOOR LEVELS</span>
+                  <div class="floor-selector-pills" id="storeySelector"></div>
+                  <div class="sidebar-divider" style="margin: 10px 0;"></div>
+                  <button id="backToCampusBtn" class="back-to-campus-pill">← Return to Grounds</button>
+                </div>
+
+                <div class="filter-block" style="margin-top:auto;">
+                  <span class="filter-block-label">STATUS KEY</span>
+                  <div class="legend-compact">
+                    <div class="leg-item"><span class="leg-dot available"></span> Available / Open</div>
+                    <div class="leg-item"><span class="leg-dot inuse"></span> Class in Session</div>
+                    <div class="leg-item"><span class="leg-dot maintenance"></span> Maintenance</div>
+                  </div>
+                </div>
+              </aside>
+
+              <!-- Main Canvas -->
+              <div class="status-display-main">
+                
+                <!-- Campus Map -->
+                <div id="campusMap" class="svg-map-wrapper">
+                  <svg viewBox="0 0 1380 620" width="100%" height="100%" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                      <pattern id="campusBpGrid" width="30" height="30" patternUnits="userSpaceOnUse">
+                        <path d="M 30 0 L 0 0 0 30" fill="none" stroke="#cbd5e1" stroke-width="1.35"/>
+                        <circle cx="0" cy="0" r="1.6" fill="#64748b" opacity="0.9"/>
+                      </pattern>
+                      <filter id="bldgShadow" x="-10%" y="-10%" width="120%" height="120%">
+                        <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#043c2e" flood-opacity="0.08"/>
+                      </filter>
+                    </defs>
+
+                    <rect x="0" y="0" width="1380" height="620" fill="#ffffff"/>
+                    <rect x="0" y="0" width="1380" height="620" fill="url(#campusBpGrid)"/>
+                    <rect x="2" y="2" width="1376" height="616" fill="none" stroke="#043c2e" stroke-width="3.5" opacity="0.85"/>
+
+                    <!-- Pancho Building -->
+                    <g id="campus-pancho" class="interactive-bldg" data-bldg="Pancho Building" style="cursor:pointer;">
+                      <polygon points="50,110 500,110 500,240 50,240" fill="#ecfdf5" stroke="#047857" stroke-width="3" filter="url(#bldgShadow)" class="bldg-shell"/>
+                      <polygon points="500,165 590,165 590,390 500,390" fill="#ecfdf5" stroke="#047857" stroke-width="3" class="bldg-shell"/>
+                      <text x="275" y="180" font-family="Plus Jakarta Sans" font-weight="900" font-size="20" fill="#064e3b" text-anchor="middle">🏛️ PANCHO BUILDING</text>
+                      <text x="275" y="202" font-family="Plus Jakarta Sans" font-weight="700" font-size="12" fill="#047857" text-anchor="middle">2 Floors · 50 Facilities</text>
+                    </g>
+
+                    <!-- CBA Building -->
+                    <g id="campus-cba" class="interactive-bldg" data-bldg="CBA Building" style="cursor:pointer;">
+                      <polygon points="740,110 1310,110 1310,240 740,240" fill="#eff6ff" stroke="#1d4ed8" stroke-width="3" filter="url(#bldgShadow)" class="bldg-shell"/>
+                      <text x="1025" y="180" font-family="Plus Jakarta Sans" font-weight="900" font-size="20" fill="#1e3a8a" text-anchor="middle">🏢 CBA BUILDING</text>
+                      <text x="1025" y="202" font-family="Plus Jakarta Sans" font-weight="700" font-size="12" fill="#2563eb" text-anchor="middle">4 Floors · 12 Classrooms</text>
+                    </g>
+
+                    <!-- Hangar Complex -->
+                    <g id="campus-hangar" class="interactive-bldg" data-bldg="Hangar" style="cursor:pointer;">
+                      <rect x="50" y="320" width="410" height="230" rx="10" fill="#f0fdf4" stroke="#0284c7" stroke-width="3" filter="url(#bldgShadow)" class="bldg-shell"/>
+                      <text x="255" y="430" font-family="Plus Jakarta Sans" font-weight="900" font-size="20" fill="#0369a1" text-anchor="middle">✈️ HANGAR COMPLEX</text>
+                      <text x="255" y="455" font-family="Plus Jakarta Sans" font-weight="700" font-size="12" fill="#0284c7" text-anchor="middle">1 Storey · 6 Rooms + Central Hall</text>
+                    </g>
+
+                    <!-- Covered Court & Pavilion -->
+                    <g id="campus-prop-gym">
+                      <rect x="740" y="320" width="310" height="230" rx="10" fill="#f8fafc" stroke="#94a3b8" stroke-width="2" stroke-dasharray="4,4"/>
+                      <text x="895" y="440" font-family="Plus Jakarta Sans" font-weight="900" font-size="17" fill="#64748b" text-anchor="middle">🏀 COVERED COURT</text>
+                    </g>
+                    <g id="campus-prop-pavilion">
+                      <polygon points="1090,320 1310,320 1310,550 1090,550" fill="#f8fafc" stroke="#94a3b8" stroke-width="2" stroke-dasharray="4,4"/>
+                      <text x="1200" y="440" font-family="Plus Jakarta Sans" font-weight="900" font-size="17" fill="#64748b" text-anchor="middle">🎪 PAVILION</text>
+                    </g>
+                  </svg>
+                </div>
+
+                <!-- Building Floor Plan Container -->
+                <div id="buildingMap" class="svg-map-wrapper hidden">
+                  <div id="floorPlanContent"></div>
+                </div>
+
+                <!-- Floating Telemetry Capsule on Floor Plans -->
+                <div id="floorTelemetryDock" class="floor-telemetry-dock hidden">
+                  <div class="dock-pill-main">
+                    <span class="dock-dot"></span>
+                    <strong class="dock-room-name" id="dockRoomName">Room</strong>
+                    <span id="dockRoomStatus" class="tooltip-status vacant">AVAILABLE</span>
+                    <span class="dock-divider">|</span>
+                    <span class="dock-info-text" id="dockRoomOccupant">None</span>
+                    <span class="dock-divider">|</span>
+                    <span class="dock-info-text" id="dockRoomSchedule">Open Schedule</span>
+                  </div>
+                  <div class="dock-pill-action">
+                    <span class="dock-action-tag" id="dockActionHint">👉 Click for Info</span>
+                  </div>
+                </div>
+
+              </div>
+
+            </div>
+          </div>
+
+        </section>
+
+        <!-- ====================================================
+             VIEW 2: MY CLASS SCHEDULE
+             ==================================================== -->
+        <section id="view-myschedule" class="content-view">
+          <div class="modular-card">
+            <div class="section-card-header">
+              <div class="section-title-wrap">
+                <span class="section-title-bar"></span>
+                <h3>My Enrolled Subject Timetable</h3>
+              </div>
+            </div>
+            <div class="table-card-body">
+              <table class="modular-table">
+                <thead>
+                  <tr>
+                    <th>Day &amp; Time</th>
+                    <th>Subject Code</th>
+                    <th>Subject Description</th>
+                    <th>Professor In-Charge</th>
+                    <th>Room Location</th>
+                    <th>Building &amp; Floor</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><strong>Mon/Wed 08:30 AM - 10:00 AM</strong></td>
+                    <td><strong style="color:#2563eb;">CS101</strong></td>
+                    <td>Introduction to Programming</td>
+                    <td>Prof. Santos</td>
+                    <td><strong>CBA 102</strong></td>
+                    <td>CBA Building (Floor 1)</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Tue/Thu 01:30 PM - 03:30 PM</strong></td>
+                    <td><strong style="color:#059669;">BIO102</strong></td>
+                    <td>General Biology Laboratory</td>
+                    <td>Dr. Lim</td>
+                    <td><strong>Science Lab</strong></td>
+                    <td>Pancho Building (Floor 1)</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Friday 09:00 AM - 12:00 PM</strong></td>
+                    <td><strong style="color:#d97706;">AERO101</strong></td>
+                    <td>Fundamentals of Aeronautics</td>
+                    <td>Engr. Cruz</td>
+                    <td><strong>Hangar 001</strong></td>
+                    <td>Hangar Complex</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- ====================================================
+             VIEW 3: ROOM MATRIX VIEW
+             ==================================================== -->
+        <section id="view-matrix" class="content-view">
+          <div class="modular-card">
+            <div class="section-card-header">
+              <div class="section-title-wrap">
+                <span class="section-title-bar"></span>
+                <h3>Campus Room Availability Matrix</h3>
+              </div>
+            </div>
+            <div class="matrix-filter-bar">
+              <div class="matrix-filter-group">
+                <span>Filter Building:</span>
+                <select id="matrixBldgSelect" class="matrix-filter-select">
+                  <option value="all">All Campus Buildings</option>
+                  <option value="Pancho Building">Pancho Building</option>
+                  <option value="CBA Building">CBA Building</option>
+                  <option value="Hangar">Hangar</option>
+                </select>
+              </div>
+              <div class="matrix-legend-row">
+                <span class="mleg-pill available">● Available for Study</span>
+                <span class="mleg-pill occupied">● Class in Session</span>
+                <span class="mleg-pill maintenance">● Maintenance</span>
+              </div>
+            </div>
+            <div class="matrix-directory-wrapper" style="padding:18px;">
+              <div class="matrix-body-scroll-wrap" id="studentMatrixContainer"></div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ====================================================
+             VIEW 4: FACULTY DIRECTORY
+             ==================================================== -->
+        <section id="view-faculty" class="content-view">
+          <div class="modular-card">
+            <div class="section-card-header">
+              <div class="section-title-wrap">
+                <span class="section-title-bar"></span>
+                <h3>Faculty Availability &amp; Consultation Directory</h3>
+              </div>
+            </div>
+            <div class="table-card-body">
+              <table class="modular-table">
+                <thead>
+                  <tr>
+                    <th>Faculty Name</th>
+                    <th>Department</th>
+                    <th>Current Location</th>
+                    <th>Status</th>
+                    <th>Consultation Hours</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><strong>Prof. Santos</strong></td>
+                    <td>Computer Science</td>
+                    <td><strong>CBA 102</strong> (Floor 1)</td>
+                    <td><span class="status-pill-badge badge-occupied">● In Class</span></td>
+                    <td>03:30 PM - 05:00 PM</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Dr. Lim</strong></td>
+                    <td>Natural Sciences</td>
+                    <td><strong>Science Lab</strong> (Pancho Flr 1)</td>
+                    <td><span class="status-pill-badge badge-occupied">● Lab Session</span></td>
+                    <td>10:00 AM - 12:00 PM</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Engr. Cruz</strong></td>
+                    <td>Aeronautical Eng.</td>
+                    <td><strong>Hangar 001</strong></td>
+                    <td><span class="status-pill-badge badge-available">● In Office</span></td>
+                    <td>01:00 PM - 04:00 PM</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+      </main>
+    </div>
+  </div>
+
+  <!-- Room Info Modal (Read-Only) -->
+  <div class="room-modal-backdrop hidden" id="roomModalBackdrop">
+    <div class="room-modal-card">
+      <div class="room-modal-header">
+        <div class="modal-title-wrap">
+          <h3 id="modalRoomTitle">Room Details</h3>
+          <span class="modal-bldg-badge" id="modalBldgBadge">Pancho Building</span>
+        </div>
+        <button class="modal-close-btn" id="modalCloseBtn">✕</button>
+      </div>
+
+      <div class="modal-status-banner available" id="modalStatusBanner">
+        <span class="status-dot"></span>
+        <strong id="modalStatusText">AVAILABLE ROOM</strong>
+      </div>
+
+      <div class="modal-specs-grid">
+        <div class="spec-cell"><span class="spec-lbl">CAPACITY</span><strong class="spec-val" id="modalCapacity">45 Seats</strong></div>
+        <div class="spec-cell"><span class="spec-lbl">FACULTY / OCCUPANT</span><strong class="spec-val" id="modalOccupant">None</strong></div>
+        <div class="spec-cell"><span class="spec-lbl">CURRENT SUBJECT</span><strong class="spec-val" id="modalSchedule">--</strong></div>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/student.js"></script>
+</body>
+</html>

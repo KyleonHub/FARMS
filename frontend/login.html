@@ -4,60 +4,19 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>FARMS - Faculty Availability & Room Management System</title>
-  <link rel="stylesheet" href="login.css">
+  <link rel="stylesheet" href="css/login.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 </head>
 <body>
 
-  <!-- Background Image Container with Foggy Mist Overlay -->
+  <!-- Fullscreen Campus Architectural Background Overlay -->
   <div class="bg-image-container">
-    <div class="fog-layer fog-mist-1"></div>
-    <div class="fog-layer fog-mist-2"></div>
+    <div class="bg-overlay-tint"></div>
     <div class="fog-orb orb-gold"></div>
     <div class="fog-orb orb-green"></div>
     <div class="fog-orb orb-teal"></div>
-  </div>
-
-  <!-- Decorative Dynamic Yellow Swoosh & Curved SVG Overlay -->
-  <div class="curved-frame-overlay">
-    <svg viewBox="0 0 1440 900" preserveAspectRatio="none" class="ambient-swoosh-svg">
-      <defs>
-        <linearGradient id="goldSwooshGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stop-color="#fef08a" stop-opacity="0.95" />
-          <stop offset="45%" stop-color="#f59e0b" stop-opacity="0.88" />
-          <stop offset="100%" stop-color="#d97706" stop-opacity="0.75" />
-        </linearGradient>
-        <linearGradient id="yellowGlowSwoosh" x1="0%" y1="50%" x2="100%" y2="50%">
-          <stop offset="0%" stop-color="#fef08a" stop-opacity="0.8" />
-          <stop offset="50%" stop-color="#facc15" stop-opacity="0.6" />
-          <stop offset="100%" stop-color="#eab308" stop-opacity="0.1" />
-        </linearGradient>
-        <linearGradient id="emeraldWaveGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stop-color="#059669" stop-opacity="0.92" />
-          <stop offset="100%" stop-color="#043c2e" stop-opacity="0.97" />
-        </linearGradient>
-        <filter id="fogGlow" x="-20%" y="-20%" width="140%" height="140%">
-          <feGaussianBlur stdDeviation="30" result="blur" />
-          <feComposite in="SourceGraphic" in2="blur" operator="over" />
-        </filter>
-      </defs>
-
-      <!-- Atmospheric Ambient Yellow Swoosh Ribbon -->
-      <path d="M-80,240 C320,80 580,500 980,180 C1260,-40 1400,320 1600,160" 
-            fill="none" stroke="url(#yellowGlowSwoosh)" stroke-width="110" stroke-linecap="round" filter="url(#fogGlow)" opacity="0.5" />
-
-      <!-- Dynamic Random Gold Swoosh Wave Crossing Across Page -->
-      <path class="random-gold-swoosh" 
-            d="M-80,460 C240,680 480,220 880,540 C1140,760 1380,360 1550,400 L1550,950 L-80,950 Z" 
-            fill="url(#goldSwooshGrad)"></path>
-
-      <!-- Foreground Deep Emerald Fluid Wave with Foggy Edge -->
-      <path class="fluid-emerald-swoosh" 
-            d="M-80,540 C320,740 620,380 960,640 C1220,840 1380,520 1550,580 L1550,950 L-80,950 Z" 
-            fill="url(#emeraldWaveGrad)"></path>
-    </svg>
   </div>
 
   <!-- 3D Liquid Glassmorphic Flip Card Container -->
@@ -67,16 +26,16 @@
       <!-- FRONT FACE: LOGIN PORTAL -->
       <div class="card-face card-front">
         <div class="login-card-header">
-          <div class="brand-badge-pill">CAMPUS SYSTEM</div>
+          <div class="brand-badge-pill">🏛️ BULACAN STATE UNIVERSITY</div>
           <h1 class="mini-logo">FARMS</h1>
           <hr class="header-divider">
-          <h5 class="login-card-subtitle">Faculty Availability & Room Management System</h5>
+          <h5 class="login-card-subtitle">Faculty Availability &amp; Room Management System</h5>
         </div>
 
         <form id="loginForm" autocomplete="on">
           <div class="input-container">
             <input type="text" id="username" placeholder=" " autocomplete="username" value="admin@farms.edu" required />
-            <label for="username">Email or Admin ID</label>
+            <label for="username">Email or Institutional ID</label>
             <span class="input-icon">👤</span>
           </div>
 
@@ -108,8 +67,29 @@
           </button>
         </form>
 
+        <!-- Divider with Guest Access Option -->
+        <div class="auth-divider">
+          <span>or continue without an account</span>
+        </div>
+
+        <!-- Option to Log In as Guest (View Available Rooms Only) -->
+        <button type="button" class="btn-guest" id="guestLoginBtn" title="Explore room availability in view-only guest mode">
+          <span class="btn-guest-icon">👀</span>
+          <div class="btn-guest-content">
+            <strong class="btn-guest-title">Continue as Guest</strong>
+            <small class="btn-guest-sub">View live room availability &amp; campus maps</small>
+          </div>
+          <span class="btn-guest-arrow">→</span>
+        </button>
+
+        <!-- Demo Quick-Fill Credentials -->
         <div class="demo-credentials-hint">
-          <span>💡 <strong>Demo Credentials:</strong> <code>admin@farms.edu</code> / <code>admin123</code></span>
+          <div class="demo-hint-title">⚡ Quick 1-Click Demo Login:</div>
+          <div class="demo-pills-row">
+            <button type="button" class="demo-pill admin-pill" data-email="admin@farms.edu" data-pass="admin123" title="Auto-fill Admin Account">🛡️ Admin</button>
+            <button type="button" class="demo-pill faculty-pill" data-email="faculty@farms.edu" data-pass="faculty123" title="Auto-fill Faculty Account">👨‍🏫 Faculty</button>
+            <button type="button" class="demo-pill student-pill" data-email="student@farms.edu" data-pass="student123" title="Auto-fill Student Account">🎓 Student</button>
+          </div>
         </div>
 
         <p class="footer-text">
@@ -121,7 +101,7 @@
       <!-- BACK FACE: CONTACT ADMIN PANEL -->
       <div class="card-face card-back">
         <div class="login-card-header">
-          <div class="brand-badge-pill gold">SUPPORT & ACCESS</div>
+          <div class="brand-badge-pill gold">SUPPORT &amp; ACCESS</div>
           <h1 class="mini-logo">Contact Admin</h1>
           <hr class="header-divider">
           <h5 class="login-card-subtitle">Request access or report system issues</h5>
@@ -129,7 +109,7 @@
 
         <div class="admin-profile-box">
           <div class="admin-image-container">
-            <img src="ADMIN jeibog.jpg" alt="System Administrator" class="admin-avatar-box" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'100\' height=\'100\' viewBox=\'0 0 24 24\' fill=\'%23064e3b\'><circle cx=\'12\' cy=\'8\' r=\'4\'/><path d=\'M20 21a8 8 0 0 0-16 0\'/></svg>'">
+            <img src="assets/images/ADMIN jeibog.jpg" alt="System Administrator" class="admin-avatar-box" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'100\' height=\'100\' viewBox=\'0 0 24 24\' fill=\'%23064e3b\'><circle cx=\'12\' cy=\'8\' r=\'4\'/><path d=\'M20 21a8 8 0 0 0-16 0\'/></svg>'">
           </div>
           
           <div class="admin-profile-info">
@@ -159,6 +139,6 @@
     </div>
   </div>
 
-  <script src="login.js"></script>
+  <script src="js/login.js"></script>
 </body>
 </html>
