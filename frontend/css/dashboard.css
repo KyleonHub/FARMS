@@ -1502,11 +1502,19 @@ input, select, textarea {
   box-shadow: 1.5px 1.5px 0px #000000;
 }
 .pulse-dot-green {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: #84cc16;
-  border: 1.5px solid #000000;
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  padding: 1px 6px;
+  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+  font-size: 0.62rem;
+  font-weight: 900;
+  color: #14532d;
+  background: #dcfce7;
+  border: 1.2px solid #000000;
+  border-radius: 999px;
+  box-shadow: 1px 1px 0px #000000;
+  white-space: nowrap;
   flex-shrink: 0;
 }
 .bldg-jump-btn:hover,
