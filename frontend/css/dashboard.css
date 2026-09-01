@@ -972,6 +972,81 @@ input, select, textarea {
   box-shadow: 6px 6px 0px #000000;
 }
 
+/* ── Themed KPI Cards in Light Mode ── */
+.kpi-card-v2.card-classes-theme {
+  background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+}
+.kpi-card-v2.card-classes-theme .kpi-v2-title {
+  color: #14532d;
+}
+.kpi-card-v2.card-classes-theme .kpi-v2-big-num {
+  color: #15803d;
+}
+.kpi-card-v2.card-classes-theme .kpi-v2-sub {
+  color: #166534;
+}
+.kpi-card-v2.card-classes-theme:hover {
+  box-shadow: 6px 6px 0px #16a34a;
+}
+
+.kpi-card-v2.card-vacant-theme {
+  background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+}
+.kpi-card-v2.card-vacant-theme .kpi-v2-title {
+  color: #0369a1;
+}
+.kpi-card-v2.card-vacant-theme .kpi-v2-big-num {
+  color: #0284c7;
+}
+.kpi-card-v2.card-vacant-theme .kpi-v2-sub {
+  color: #0369a1;
+}
+.kpi-card-v2.card-vacant-theme:hover {
+  box-shadow: 6px 6px 0px #0284c7;
+}
+
+.kpi-card-v2.card-pending-amber,
+.kpi-card-v2.card-pending-theme {
+  background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
+}
+.kpi-card-v2.card-pending-amber .kpi-v2-title,
+.kpi-card-v2.card-pending-theme .kpi-v2-title {
+  color: #92400e;
+}
+.kpi-card-v2.card-pending-amber .kpi-v2-big-num,
+.kpi-card-v2.card-pending-theme .kpi-v2-big-num {
+  color: #d97706;
+}
+.kpi-card-v2.card-pending-amber .kpi-v2-sub,
+.kpi-card-v2.card-pending-theme .kpi-v2-sub {
+  color: #b45309;
+}
+.kpi-card-v2.card-pending-amber:hover,
+.kpi-card-v2.card-pending-theme:hover {
+  box-shadow: 6px 6px 0px #d97706;
+}
+
+.kpi-card-v2.card-telemetry-cyan,
+.kpi-card-v2.card-system-theme {
+  background: linear-gradient(135deg, #faf5ff 0%, #f3e8ff 100%);
+}
+.kpi-card-v2.card-telemetry-cyan .kpi-v2-title,
+.kpi-card-v2.card-system-theme .kpi-v2-title {
+  color: #6b21a8;
+}
+.kpi-card-v2.card-telemetry-cyan .kpi-v2-big-num,
+.kpi-card-v2.card-system-theme .kpi-v2-big-num {
+  color: #7c3aed;
+}
+.kpi-card-v2.card-telemetry-cyan .kpi-v2-sub,
+.kpi-card-v2.card-system-theme .kpi-v2-sub {
+  color: #6b21a8;
+}
+.kpi-card-v2.card-telemetry-cyan:hover,
+.kpi-card-v2.card-system-theme:hover {
+  box-shadow: 6px 6px 0px #7c3aed;
+}
+
 .kpi-v2-main {
   display: flex;
   flex-direction: column;
@@ -1007,16 +1082,16 @@ input, select, textarea {
   color: #000000;
 }
 .kpi-micro-tag.ready {
-  background: #ffffff;
-  color: #000000;
+  background: #bae6fd;
+  color: #0369a1;
 }
 .kpi-micro-tag.pending {
   background: var(--orange-600);
   color: #ffffff;
 }
 .kpi-micro-tag.cyber {
-  background: #ffffff;
-  color: #000000;
+  background: #e9d5ff;
+  color: #6b21a8;
 }
 
 .kpi-v2-big-num {
@@ -1260,37 +1335,65 @@ input, select, textarea {
   letter-spacing: 0.5px;
 }
 
-/* Grounds Quick Telemetry Ribbon */
+/* Grounds Quick Telemetry Ribbon in Light Mode */
 .sidebar-vitals-strip {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
   background: #f8fafc;
   border: 2px solid #000000;
   border-radius: 10px;
-  padding: 6px 10px;
-  justify-content: space-between;
-  box-shadow: 2px 2px 0px #000000;
+  padding: 5px;
+  gap: 4px;
+  box-shadow: 2.5px 2.5px 0px #000000;
 }
 .vital-slot {
   display: flex;
   flex-direction: column;
-  gap: 1px;
+  align-items: center;
+  justify-content: center;
+  background: #ffffff;
+  border: 1.5px solid #000000;
+  border-radius: 7px;
+  padding: 5px 3px;
+  box-shadow: 1px 1px 0px #000000;
+  text-align: center;
 }
 .vital-lbl {
   font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
-  font-size: 0.65rem;
+  font-size: 0.62rem;
   font-weight: 900;
-  color: #475569;
-  letter-spacing: 0.5px;
+  color: #64748b;
+  letter-spacing: 0.3px;
   text-transform: uppercase;
+  margin-bottom: 2px;
 }
 .vital-val {
   font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
-  font-size: 0.95rem;
+  font-size: 0.85rem;
   font-weight: 900;
-  color: #000000;
+  color: #0f172a;
+  white-space: nowrap;
 }
-.vital-slot.green .vital-val { color: #15803d; }
-.vital-slot.dark .vital-val { color: #000000; }
+.vital-slot.green {
+  background: #dcfce7;
+  border-color: #000000;
+}
+.vital-slot.green .vital-lbl {
+  color: #15803d;
+}
+.vital-slot.green .vital-val {
+  color: #14532d;
+}
+.vital-slot.dark {
+  background: #fee2e2;
+  border-color: #000000;
+}
+.vital-slot.dark .vital-lbl {
+  color: #b91c1c;
+}
+.vital-slot.dark .vital-val {
+  color: #991b1b;
+}
 
 .filter-header-row {
   display: flex;
@@ -1448,12 +1551,81 @@ input, select, textarea {
   padding: 10px 12px;
   background: #ffffff;
   border: 2px solid #000000;
-  border-radius: 10px;
+  border-radius: 12px;
   box-shadow: 2.5px 2.5px 0px #000000;
   text-align: left;
   cursor: pointer;
   transition: all 0.15s ease;
   width: 100%;
+}
+
+/* 1. Pancho Card (Light Emerald/Lime Theme) */
+.bldg-jump-btn.pancho {
+  background: linear-gradient(135deg, #f7fee7 0%, #ecfccb 100%);
+}
+.bldg-jump-btn.pancho:hover,
+.bldg-jump-btn.pancho.sidebar-highlighted {
+  background: #dcfce7;
+  border-color: #000000;
+  box-shadow: 4px 4px 0px #84cc16;
+  transform: translate(-1.5px, -1.5px);
+}
+.bldg-jump-btn.pancho .bldg-chip-tag {
+  background: #d9f99d;
+  color: #14532d;
+  border: 1.5px solid #000000;
+  box-shadow: 1px 1px 0px #000000;
+}
+.bldg-jump-btn.pancho .bldg-chip-tag:hover {
+  background: #84cc16;
+  color: #000000;
+  border-color: #000000;
+}
+
+/* 2. CBA Card (Light Purple/Lavender Theme) */
+.bldg-jump-btn.cba {
+  background: linear-gradient(135deg, #faf5ff 0%, #f3e8ff 100%);
+}
+.bldg-jump-btn.cba:hover,
+.bldg-jump-btn.cba.sidebar-highlighted {
+  background: #f3e8ff;
+  border-color: #000000;
+  box-shadow: 4px 4px 0px #a855f7;
+  transform: translate(-1.5px, -1.5px);
+}
+.bldg-jump-btn.cba .bldg-chip-tag {
+  background: #e9d5ff;
+  color: #581c87;
+  border: 1.5px solid #000000;
+  box-shadow: 1px 1px 0px #000000;
+}
+.bldg-jump-btn.cba .bldg-chip-tag:hover {
+  background: #c084fc;
+  color: #000000;
+  border-color: #000000;
+}
+
+/* 3. Hangar Card (Light Cyan/Sky Theme) */
+.bldg-jump-btn.hangar {
+  background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+}
+.bldg-jump-btn.hangar:hover,
+.bldg-jump-btn.hangar.sidebar-highlighted {
+  background: #e0f2fe;
+  border-color: #000000;
+  box-shadow: 4px 4px 0px #0284c7;
+  transform: translate(-1.5px, -1.5px);
+}
+.bldg-jump-btn.hangar .bldg-chip-tag {
+  background: #bae6fd;
+  color: #0369a1;
+  border: 1.5px solid #000000;
+  box-shadow: 1px 1px 0px #000000;
+}
+.bldg-jump-btn.hangar .bldg-chip-tag:hover {
+  background: #38bdf8;
+  color: #000000;
+  border-color: #000000;
 }
 
 .bldg-floor-chips {
@@ -1516,24 +1688,6 @@ input, select, textarea {
   box-shadow: 1px 1px 0px #000000;
   white-space: nowrap;
   flex-shrink: 0;
-}
-.bldg-jump-btn:hover,
-.bldg-jump-btn.sidebar-highlighted {
-  transform: translate(-1.5px, -1.5px);
-  box-shadow: 4px 4px 0px #000000;
-  background: #f8fafc;
-}
-.bldg-jump-btn.pancho.sidebar-highlighted {
-  border-color: #84cc16;
-  box-shadow: 4px 4px 0px #84cc16;
-}
-.bldg-jump-btn.cba.sidebar-highlighted {
-  border-color: #a855f7;
-  box-shadow: 4px 4px 0px #a855f7;
-}
-.bldg-jump-btn.hangar.sidebar-highlighted {
-  border-color: #0284c7;
-  box-shadow: 4px 4px 0px #0284c7;
 }
 
 .bldg-jump-top-row {
