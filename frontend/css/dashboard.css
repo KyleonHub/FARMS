@@ -3924,7 +3924,7 @@ input, select, textarea {
 
 /* ── Adaptive Sidebar in Dark Mode (Layer 2 Surface) ── */
 [data-theme="dark"] .status-filter-sidebar {
-  background: #0b1222;
+  background: #080e1b;
   border: 2.5px solid #000000;
   box-shadow: 4px 4px 0px #000000;
 }
@@ -3933,7 +3933,7 @@ input, select, textarea {
   background: #a3e635;
   color: #000000;
   border: 2px solid #000000;
-  box-shadow: 2px 2px 0px #000000;
+  box-shadow: 2.5px 2.5px 0px #000000;
 }
 
 [data-theme="dark"] .context-text {
@@ -3945,28 +3945,113 @@ input, select, textarea {
 }
 
 [data-theme="dark"] .filter-count-badge {
-  background: #16223b;
+  background: #141f34;
   color: #a3e635;
   border: 1.5px solid #000000;
+  box-shadow: 1.5px 1.5px 0px #000000;
 }
 
 [data-theme="dark"] .bldg-view-section,
 [data-theme="dark"] .bldg-view-hero-card {
-  background: #0f182c;
+  background: #0d1527;
   border: 2px solid #000000;
   box-shadow: 2.5px 2.5px 0px #000000;
 }
 
+/* ── Building Jump Cards in Sidebar (Themed Gradient Shading) ── */
 [data-theme="dark"] .bldg-jump-btn {
-  background: #0f182c;
+  background: #0e172a;
   border: 2px solid #000000;
-  box-shadow: 2px 2px 0px #000000;
+  border-radius: 12px;
+  box-shadow: 3px 3px 0px #000000;
+  transition: all 0.15s ease;
 }
 
-[data-theme="dark"] .bldg-jump-btn:hover {
-  background: #182744;
-  box-shadow: 3px 3px 0px #000000;
-  transform: translate(-1px, -1px);
+/* 1. Pancho Card (Emerald Theme) */
+[data-theme="dark"] .bldg-jump-btn.pancho,
+[data-theme="dark"] #sideCardPancho {
+  background: linear-gradient(145deg, #091712 0%, #10241b 100%);
+  border: 2px solid #000000;
+}
+[data-theme="dark"] .bldg-jump-btn.pancho:hover,
+[data-theme="dark"] .bldg-jump-btn.pancho.sidebar-highlighted {
+  background: linear-gradient(145deg, #0d221a 0%, #153326 100%);
+  border-color: #84cc16;
+  box-shadow: 4px 4px 0px #84cc16;
+  transform: translate(-1.5px, -1.5px);
+}
+[data-theme="dark"] .bldg-jump-btn.pancho .bldg-card-meter {
+  background: #05100c;
+  border: 1.5px solid #000000;
+}
+[data-theme="dark"] .bldg-jump-btn.pancho .bldg-chip-tag {
+  background: #11291d;
+  color: #86efac;
+  border: 1.5px solid #22c55e;
+  box-shadow: 1.5px 1.5px 0px #000000;
+}
+[data-theme="dark"] .bldg-jump-btn.pancho .bldg-chip-tag:hover {
+  background: #a3e635;
+  color: #000000;
+  border-color: #000000;
+}
+
+/* 2. CBA Card (Purple Theme) */
+[data-theme="dark"] .bldg-jump-btn.cba,
+[data-theme="dark"] #sideCardCba {
+  background: linear-gradient(145deg, #140b24 0%, #1c1032 100%);
+  border: 2px solid #000000;
+}
+[data-theme="dark"] .bldg-jump-btn.cba:hover,
+[data-theme="dark"] .bldg-jump-btn.cba.sidebar-highlighted {
+  background: linear-gradient(145deg, #1d0f33 0%, #271646 100%);
+  border-color: #a855f7;
+  box-shadow: 4px 4px 0px #a855f7;
+  transform: translate(-1.5px, -1.5px);
+}
+[data-theme="dark"] .bldg-jump-btn.cba .bldg-card-meter {
+  background: #0a0413;
+  border: 1.5px solid #000000;
+}
+[data-theme="dark"] .bldg-jump-btn.cba .bldg-chip-tag {
+  background: #221238;
+  color: #d8b4fe;
+  border: 1.5px solid #a855f7;
+  box-shadow: 1.5px 1.5px 0px #000000;
+}
+[data-theme="dark"] .bldg-jump-btn.cba .bldg-chip-tag:hover {
+  background: #c084fc;
+  color: #000000;
+  border-color: #000000;
+}
+
+/* 3. Hangar Card (Cyan Theme) */
+[data-theme="dark"] .bldg-jump-btn.hangar,
+[data-theme="dark"] #sideCardHangar {
+  background: linear-gradient(145deg, #071626 0%, #0d2136 100%);
+  border: 2px solid #000000;
+}
+[data-theme="dark"] .bldg-jump-btn.hangar:hover,
+[data-theme="dark"] .bldg-jump-btn.hangar.sidebar-highlighted {
+  background: linear-gradient(145deg, #0b223a 0%, #132f4e 100%);
+  border-color: #0284c7;
+  box-shadow: 4px 4px 0px #0284c7;
+  transform: translate(-1.5px, -1.5px);
+}
+[data-theme="dark"] .bldg-jump-btn.hangar .bldg-card-meter {
+  background: #030a13;
+  border: 1.5px solid #000000;
+}
+[data-theme="dark"] .bldg-jump-btn.hangar .bldg-chip-tag {
+  background: #0d243b;
+  color: #7dd3fc;
+  border: 1.5px solid #0284c7;
+  box-shadow: 1.5px 1.5px 0px #000000;
+}
+[data-theme="dark"] .bldg-jump-btn.hangar .bldg-chip-tag:hover {
+  background: #38bdf8;
+  color: #000000;
+  border-color: #000000;
 }
 
 [data-theme="dark"] .jump-info strong {
@@ -3981,19 +4066,27 @@ input, select, textarea {
   color: #a3e635;
 }
 
+[data-theme="dark"] .bldg-meter-meta {
+  color: #8392a8;
+}
+
+/* ── Sidebar Telemetry Ribbon in Dark Mode ── */
 [data-theme="dark"] .sidebar-vitals-strip {
-  background: #0c1424;
+  background: #090e1a;
   border: 2px solid #000000;
   box-shadow: 2px 2px 0px #000000;
+  gap: 5px;
 }
 
 [data-theme="dark"] .vital-slot {
-  background: #111b30;
-  border: 1.5px solid #000000;
+  background: #0f182c;
+  border: 1.5px solid #1a2842;
+  border-radius: 8px;
+  padding: 5px 8px;
 }
 
 [data-theme="dark"] .vital-lbl {
-  color: #94a3b8;
+  color: #8392a8;
 }
 
 [data-theme="dark"] .vital-val {
@@ -4001,15 +4094,15 @@ input, select, textarea {
 }
 
 [data-theme="dark"] .vital-slot.green {
-  background: #062114;
-  border-color: #166534;
+  background: #062315;
+  border-color: #15803d;
 }
 [data-theme="dark"] .vital-slot.green .vital-val {
   color: #4ade80;
 }
 
 [data-theme="dark"] .vital-slot.dark {
-  background: #240a12;
+  background: #250912;
   border-color: #9f1239;
 }
 [data-theme="dark"] .vital-slot.dark .vital-val {
