@@ -5314,108 +5314,116 @@ body.force-mobile-view .live-status-layout.fixed-bounds {
   color: #000000;
 }
 
-/* ── Mobile Filter Controls Strip (Fixed 2-Column Grid Split) ── */
+/* ── Mobile Filter Controls Strip (Guaranteed Single Straight Line Row) ── */
 .mobile-filters-row {
-  display: grid;
-  grid-template-columns: 53% 47%;
-  gap: 6px;
-  width: 100%;
-  align-items: center;
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  gap: 5px !important;
+  width: 100% !important;
+  flex-wrap: nowrap !important;
 }
 
-/* 1. Status Column (Fixed 3-Button Slot - NEVER shifts or resizes) */
+/* 1. Status Column (Left Cluster) */
 .mobile-status-pills {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 4px;
-  width: 100%;
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  gap: 4px !important;
+  flex: 1.15 1 auto !important;
+  flex-wrap: nowrap !important;
 }
 .m-status-btn {
-  height: 36px;
-  padding: 0 2px;
-  background: #ffffff;
-  border: 2px solid #000000;
-  border-radius: 8px;
-  box-shadow: 1.5px 1.5px 0px #000000;
-  font-family: inherit;
-  font-size: 0.7rem;
-  font-weight: 900;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  white-space: nowrap;
-  transition: all 0.12s ease;
+  flex: 1 !important;
+  height: 36px !important;
+  padding: 0 4px !important;
+  background: #ffffff !important;
+  border: 2px solid #000000 !important;
+  border-radius: 8px !important;
+  box-shadow: 1.5px 1.5px 0px #000000 !important;
+  font-family: inherit !important;
+  font-size: 0.7rem !important;
+  font-weight: 900 !important;
+  cursor: pointer !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-align: center !important;
+  white-space: nowrap !important;
+  transition: all 0.12s ease !important;
 }
 .m-status-btn:active {
-  transform: translate(1px, 1px);
-  box-shadow: 1px 1px 0px #000000;
+  transform: translate(1px, 1px) !important;
+  box-shadow: 1px 1px 0px #000000 !important;
 }
 .m-status-btn.active {
-  background: #000000;
-  color: #ffffff;
-  box-shadow: 2px 2px 0px #84cc16;
+  background: #000000 !important;
+  color: #ffffff !important;
+  box-shadow: 2px 2px 0px #84cc16 !important;
 }
 
-/* 2. Floor / Level Column (Fixed Space Slot - floor buttons adapt inside its fixed boundaries) */
+/* 2. Floor / Level Column (Right Cluster) */
 .mobile-floor-pills {
-  display: flex;
-  gap: 3px;
-  width: 100%;
-  height: 36px;
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  gap: 3px !important;
+  flex: 0.85 1 auto !important;
+  flex-wrap: nowrap !important;
+  height: 36px !important;
 }
 .m-floor-btn {
-  flex: 1;
-  min-width: 0;
-  height: 36px;
-  padding: 0 2px;
-  background: #f4f4f5;
-  border: 2px solid #000000;
-  border-radius: 8px;
-  box-shadow: 1.5px 1.5px 0px #000000;
-  font-family: inherit;
-  font-size: 0.72rem;
-  font-weight: 900;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  white-space: nowrap;
-  transition: all 0.12s ease;
+  flex: 1 !important;
+  min-width: 24px !important;
+  height: 36px !important;
+  padding: 0 4px !important;
+  background: #f4f4f5 !important;
+  border: 2px solid #000000 !important;
+  border-radius: 8px !important;
+  box-shadow: 1.5px 1.5px 0px #000000 !important;
+  font-family: inherit !important;
+  font-size: 0.72rem !important;
+  font-weight: 900 !important;
+  cursor: pointer !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-align: center !important;
+  white-space: nowrap !important;
+  transition: all 0.12s ease !important;
 }
 .m-floor-btn:active {
-  transform: translate(1px, 1px);
-  box-shadow: 1px 1px 0px #000000;
+  transform: translate(1px, 1px) !important;
+  box-shadow: 1px 1px 0px #000000 !important;
 }
 .m-floor-btn.active {
-  background: var(--lime-400);
-  color: #000000;
-  box-shadow: 2px 2px 0px #000000;
+  background: var(--lime-400) !important;
+  color: #000000 !important;
+  box-shadow: 2px 2px 0px #000000 !important;
 }
 
 /* Dark Mode Overrides */
 [data-theme="dark"] .m-status-btn {
-  background: #162032;
-  border-color: #000000;
-  color: #ffffff;
+  background: #162032 !important;
+  border-color: #000000 !important;
+  color: #ffffff !important;
 }
 [data-theme="dark"] .m-status-btn.active {
-  background: #a3e635;
-  color: #000000;
-  box-shadow: 2px 2px 0px #000000;
+  background: #a3e635 !important;
+  color: #000000 !important;
+  box-shadow: 2px 2px 0px #000000 !important;
 }
 
 [data-theme="dark"] .m-floor-btn {
-  background: #162032;
-  border-color: #000000;
-  color: #94a3b8;
+  background: #162032 !important;
+  border-color: #000000 !important;
+  color: #94a3b8 !important;
 }
 [data-theme="dark"] .m-floor-btn.active {
-  background: #a3e635;
-  color: #000000;
-  box-shadow: 2px 2px 0px #000000;
+  background: #a3e635 !important;
+  color: #000000 !important;
+  box-shadow: 2px 2px 0px #000000 !important;
 }
 
 /* ── Mobile Rooms Touch Cards Grid (Crisp 2-Column Neo-Brutalist Cards) ── */
