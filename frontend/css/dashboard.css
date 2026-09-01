@@ -3940,8 +3940,13 @@ input, select, textarea {
   color: #000000;
 }
 
+[data-theme="dark"] .filter-block-label,
 [data-theme="dark"] .clean-section-lbl {
-  color: #cbd5e1;
+  color: #f8fafc !important;
+  font-weight: 900 !important;
+  font-size: 0.74rem !important;
+  letter-spacing: 0.5px !important;
+  text-transform: uppercase !important;
 }
 
 [data-theme="dark"] .filter-count-badge {
@@ -3949,6 +3954,7 @@ input, select, textarea {
   color: #a3e635;
   border: 1.5px solid #000000;
   box-shadow: 1.5px 1.5px 0px #000000;
+  font-weight: 900;
 }
 
 [data-theme="dark"] .bldg-view-section,
@@ -4070,43 +4076,69 @@ input, select, textarea {
   color: #8392a8;
 }
 
-/* ── Sidebar Telemetry Ribbon in Dark Mode ── */
+/* ── Sidebar Telemetry Ribbon in Dark Mode (Solid Neo-Brutalist Tiles) ── */
 [data-theme="dark"] .sidebar-vitals-strip {
-  background: #090e1a;
-  border: 2px solid #000000;
-  box-shadow: 2px 2px 0px #000000;
-  gap: 5px;
+  display: grid !important;
+  grid-template-columns: repeat(3, 1fr) !important;
+  background: #090e1b !important;
+  border: 2px solid #000000 !important;
+  border-radius: 10px !important;
+  box-shadow: 2.5px 2.5px 0px #000000 !important;
+  padding: 5px !important;
+  gap: 4px !important;
 }
 
 [data-theme="dark"] .vital-slot {
-  background: #0f182c;
-  border: 1.5px solid #1a2842;
-  border-radius: 8px;
-  padding: 5px 8px;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  background: #121c32 !important;
+  border: 1.5px solid #000000 !important;
+  border-radius: 7px !important;
+  padding: 5px 3px !important;
+  box-shadow: 1px 1px 0px #000000 !important;
+  text-align: center !important;
 }
 
-[data-theme="dark"] .vital-lbl {
-  color: #8392a8;
+[data-theme="dark"] .vital-slot .vital-lbl {
+  color: #94a3b8 !important;
+  font-size: 0.62rem !important;
+  font-weight: 900 !important;
+  letter-spacing: 0.3px !important;
+  text-transform: uppercase !important;
+  margin-bottom: 2px !important;
 }
 
-[data-theme="dark"] .vital-val {
-  color: #ffffff;
+[data-theme="dark"] .vital-slot .vital-val {
+  color: #ffffff !important;
+  font-size: 0.85rem !important;
+  font-weight: 900 !important;
+  white-space: nowrap !important;
 }
 
+/* Available (Free) Slot - Solid Emerald Accent */
 [data-theme="dark"] .vital-slot.green {
-  background: #062315;
-  border-color: #15803d;
+  background: #0d3822 !important;
+  border: 1.5px solid #000000 !important;
+}
+[data-theme="dark"] .vital-slot.green .vital-lbl {
+  color: #86efac !important;
 }
 [data-theme="dark"] .vital-slot.green .vital-val {
-  color: #4ade80;
+  color: #4ade80 !important;
 }
 
+/* In-Use (Occupied) Slot - Solid Crimson Accent */
 [data-theme="dark"] .vital-slot.dark {
-  background: #250912;
-  border-color: #9f1239;
+  background: #3d0c18 !important;
+  border: 1.5px solid #000000 !important;
+}
+[data-theme="dark"] .vital-slot.dark .vital-lbl {
+  color: #fda4af !important;
 }
 [data-theme="dark"] .vital-slot.dark .vital-val {
-  color: #fb7185;
+  color: #fb7185 !important;
 }
 
 /* ── Comic Filter Cards in Dark Mode (Layer 3 Surface) ── */
