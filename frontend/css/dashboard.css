@@ -4193,35 +4193,214 @@ input, select, textarea {
   color: #ffffff;
 }
 
+/* ══════════════════════════════════════════════════════════
+   §DM-BUILDING-VIEW Building Floor Plan Sidebar — Dark Mode
+   ══════════════════════════════════════════════════════════ */
+
+/* 1. Building Hero Context Card */
+[data-theme="dark"] .bldg-view-hero-card {
+  background: linear-gradient(145deg, #0d1527 0%, #131e36 100%) !important;
+  border: 2.5px solid #000000 !important;
+  box-shadow: 3px 3px 0px #000000 !important;
+}
+
+[data-theme="dark"] .bldg-view-icon-box {
+  background: #a3e635 !important;
+  border: 2px solid #000000 !important;
+  box-shadow: 2px 2px 0px #000000 !important;
+  color: #000000 !important;
+}
+[data-theme="dark"] .bldg-view-hero-card.cba .bldg-view-icon-box {
+  background: #c084fc !important;
+}
+[data-theme="dark"] .bldg-view-hero-card.hangar .bldg-view-icon-box {
+  background: #38bdf8 !important;
+}
+
+[data-theme="dark"] .bldg-view-title-wrap h3,
+[data-theme="dark"] #bldgHeroTitle {
+  color: #f8fafc !important;
+  font-weight: 900 !important;
+}
+
+[data-theme="dark"] .bldg-view-title-wrap p,
+[data-theme="dark"] #bldgHeroOccSummary {
+  color: #94a3b8 !important;
+  font-weight: 700 !important;
+}
+
+[data-theme="dark"] .bldg-hero-flr-tag {
+  background: #182744 !important;
+  color: #a3e635 !important;
+  border: 1.5px solid #000000 !important;
+  box-shadow: 1.5px 1.5px 0px #000000 !important;
+  font-weight: 900 !important;
+}
+
+/* 2. Building View Section Cards */
+[data-theme="dark"] .bldg-view-section {
+  background: #0d1527 !important;
+  border: 2px solid #000000 !important;
+  box-shadow: 2.5px 2.5px 0px #000000 !important;
+}
+
+/* Search input & clear button inside building view */
+[data-theme="dark"] #floorRoomSearch {
+  background: #070d18 !important;
+  color: #f8fafc !important;
+  border: 2px solid #000000 !important;
+  box-shadow: 2px 2px 0px #000000 !important;
+}
+[data-theme="dark"] #floorRoomSearch::placeholder {
+  color: #64748b !important;
+}
+[data-theme="dark"] #floorRoomSearch:focus {
+  border-color: #a3e635 !important;
+  outline: none !important;
+}
+
+/* Quick Filter Chips (⚡ ALL, 🟢 FREE, 🔴 IN-USE) */
+[data-theme="dark"] .quick-filter-chip {
+  background: #0f182c !important;
+  color: #cbd5e1 !important;
+  border: 2px solid #000000 !important;
+  box-shadow: 1.5px 1.5px 0px #000000 !important;
+  font-weight: 900 !important;
+}
+[data-theme="dark"] .quick-filter-chip:hover {
+  background: #182744 !important;
+  color: #ffffff !important;
+  transform: translate(-1px, -1px) !important;
+}
+[data-theme="dark"] .quick-filter-chip.active {
+  background: #a3e635 !important;
+  color: #000000 !important;
+  border-color: #000000 !important;
+  box-shadow: 2px 2px 0px #000000 !important;
+}
+[data-theme="dark"] .quick-filter-chip.active span.leg-dot {
+  border-color: #000000 !important;
+}
+
+/* 3. Floor Selection Metrics & Buttons */
+[data-theme="dark"] .floor-metric-pills .floor-pill-stat.free {
+  background: #0d3822 !important;
+  color: #4ade80 !important;
+  border: 1.5px solid #000000 !important;
+  box-shadow: 1px 1px 0px #000000 !important;
+  font-weight: 900 !important;
+}
+[data-theme="dark"] .floor-metric-pills .floor-pill-stat.occ {
+  background: #3d0c18 !important;
+  color: #fb7185 !important;
+  border: 1.5px solid #000000 !important;
+  box-shadow: 1px 1px 0px #000000 !important;
+  font-weight: 900 !important;
+}
+
+/* Floor Level Pill Buttons */
 [data-theme="dark"] .floor-pill-btn {
-  background: #0f182c;
-  border: 2px solid #000000;
-  color: #cbd5e1;
-  box-shadow: 2px 2px 0px #000000;
+  background: #0f182c !important;
+  color: #f1f5f9 !important;
+  border: 2px solid #000000 !important;
+  box-shadow: 2px 2px 0px #000000 !important;
 }
-
+[data-theme="dark"] .floor-pill-btn .flr-free-badge {
+  color: #4ade80 !important;
+  font-weight: 900 !important;
+}
 [data-theme="dark"] .floor-pill-btn:hover {
-  background: #182744;
-  color: #ffffff;
+  background: #182744 !important;
+  color: #ffffff !important;
+  box-shadow: 3px 3px 0px #000000 !important;
+  transform: translate(-1px, -1px) !important;
 }
-
 [data-theme="dark"] .floor-pill-btn.active {
-  background: #a3e635;
-  color: #000000;
-  font-weight: 900;
-  box-shadow: 2.5px 2.5px 0px #000000;
+  background: #a3e635 !important;
+  color: #000000 !important;
+  border-color: #000000 !important;
+  box-shadow: 3px 3px 0px #000000 !important;
+}
+[data-theme="dark"] .floor-pill-btn.active strong,
+[data-theme="dark"] .floor-pill-btn.active span {
+  color: #000000 !important;
+}
+[data-theme="dark"] .floor-pill-btn.active .flr-free-badge {
+  color: #000000 !important;
+  font-weight: 900 !important;
+}
+[data-theme="dark"] .floor-pill-btn.active small {
+  color: #000000 !important;
+  opacity: 0.8 !important;
 }
 
-[data-theme="dark"] .back-to-campus-pill {
-  background: #0f182c;
-  border: 2px solid #000000;
-  color: #38bdf8;
-  box-shadow: 2px 2px 0px #000000;
+/* 4. Status Protocols Legend Cards (Solid Dark Neo-Brutalist Surfaces) */
+[data-theme="dark"] .leg-card {
+  border: 2px solid #000000 !important;
+  border-radius: 9px !important;
+  box-shadow: 2px 2px 0px #000000 !important;
+}
+[data-theme="dark"] .leg-card.available {
+  background: #0d3822 !important;
+}
+[data-theme="dark"] .leg-card.available strong {
+  color: #4ade80 !important;
+}
+[data-theme="dark"] .leg-card.available small {
+  color: #86efac !important;
 }
 
-[data-theme="dark"] .back-to-campus-pill:hover {
-  background: #38bdf8;
-  color: #000000;
+[data-theme="dark"] .leg-card.occupied {
+  background: #3d0c18 !important;
+}
+[data-theme="dark"] .leg-card.occupied strong {
+  color: #fb7185 !important;
+}
+[data-theme="dark"] .leg-card.occupied small {
+  color: #fda4af !important;
+}
+
+[data-theme="dark"] .leg-card.maintenance {
+  background: #361a04 !important;
+}
+[data-theme="dark"] .leg-card.maintenance strong {
+  color: #fbbf24 !important;
+}
+[data-theme="dark"] .leg-card.maintenance small {
+  color: #fde68a !important;
+}
+
+[data-theme="dark"] .leg-dot.available {
+  background: #4ade80 !important;
+  border: 1.5px solid #000000 !important;
+  box-shadow: 0 0 6px rgba(74, 222, 128, 0.4) !important;
+}
+[data-theme="dark"] .leg-dot.occupied {
+  background: #fb7185 !important;
+  border: 1.5px solid #000000 !important;
+  box-shadow: 0 0 6px rgba(251, 113, 133, 0.4) !important;
+}
+[data-theme="dark"] .leg-dot.maintenance {
+  background: #fbbf24 !important;
+  border: 1.5px solid #000000 !important;
+  box-shadow: 0 0 6px rgba(251, 191, 36, 0.4) !important;
+}
+
+/* 5. Return to Campus Map Button */
+[data-theme="dark"] .back-to-campus-pill,
+[data-theme="dark"] #backToCampusBtn {
+  background: #0d1527 !important;
+  border: 2px solid #000000 !important;
+  color: #a3e635 !important;
+  box-shadow: 3px 3px 0px #000000 !important;
+  font-weight: 900 !important;
+}
+[data-theme="dark"] .back-to-campus-pill:hover,
+[data-theme="dark"] #backToCampusBtn:hover {
+  background: #a3e635 !important;
+  color: #000000 !important;
+  box-shadow: 4px 4px 0px #000000 !important;
+  transform: translate(-1.5px, -1.5px) !important;
 }
 
 /* ── Directory List Table in Dark Mode (Layered Alternating Shading) ── */

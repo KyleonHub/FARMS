@@ -1429,7 +1429,7 @@ document.addEventListener('DOMContentLoaded', () => {
       btn.className = `floor-pill-btn ${i === activeFloor ? 'active' : ''}`;
       btn.innerHTML = `
         <span style="display:flex; align-items:center; gap:6px;"><strong>Level ${i}</strong> <small style="font-size:0.68rem; font-weight:700; opacity:0.75;">(${flrRooms.length} Rooms)</small></span>
-        <span style="font-size:0.72rem; font-weight:900; color:${i === activeFloor ? '#84cc16' : '#15803d'};">${vac} Free</span>
+        <span class="flr-free-badge">${vac} Free</span>
       `;
 
       btn.addEventListener('click', () => {
