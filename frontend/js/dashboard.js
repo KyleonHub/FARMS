@@ -1112,25 +1112,19 @@ document.addEventListener('DOMContentLoaded', () => {
           <!-- Room 1 (CBA X01) -->
           <g class="room-group ${getRoomStateClass(building, room1, floor)}" data-bldg="${building}" data-room="${room1}" data-floor="${floor}">
             <rect x="180" y="90" width="270" height="215" rx="8" class="room-rect"/>
-            <text x="315" y="180" font-family="Plus Jakarta Sans" font-weight="900" font-size="18" fill="#0f172a" text-anchor="middle" class="room-text">${room1}</text>
-            <text x="315" y="210" font-family="Plus Jakarta Sans" font-weight="800" font-size="12" fill="#64748b" text-anchor="middle" class="sub-text">${room1Type}</text>
-            <text x="315" y="250" font-family="Plus Jakarta Sans" font-size="11" font-weight="900" fill="#059669" text-anchor="middle">Click to Manage</text>
+            <text x="315" y="205" font-family="Plus Jakarta Sans" font-weight="900" font-size="22" fill="#0f172a" text-anchor="middle" class="room-text">${room1}</text>
           </g>
 
           <!-- Room 2 (CBA X02) -->
           <g class="room-group ${getRoomStateClass(building, room2, floor)}" data-bldg="${building}" data-room="${room2}" data-floor="${floor}">
             <rect x="470" y="90" width="270" height="215" rx="8" class="room-rect"/>
-            <text x="605" y="180" font-family="Plus Jakarta Sans" font-weight="900" font-size="18" fill="#0f172a" text-anchor="middle" class="room-text">${room2}</text>
-            <text x="605" y="210" font-family="Plus Jakarta Sans" font-weight="800" font-size="12" fill="#64748b" text-anchor="middle" class="sub-text">${room2Type}</text>
-            <text x="605" y="250" font-family="Plus Jakarta Sans" font-size="11" font-weight="900" fill="#059669" text-anchor="middle">Click to Manage</text>
+            <text x="605" y="205" font-family="Plus Jakarta Sans" font-weight="900" font-size="22" fill="#0f172a" text-anchor="middle" class="room-text">${room2}</text>
           </g>
 
           <!-- Room 3 (CBA X03) -->
           <g class="room-group ${getRoomStateClass(building, room3, floor)}" data-bldg="${building}" data-room="${room3}" data-floor="${floor}">
             <rect x="760" y="90" width="270" height="215" rx="8" class="room-rect"/>
-            <text x="895" y="180" font-family="Plus Jakarta Sans" font-weight="900" font-size="18" fill="#0f172a" text-anchor="middle" class="room-text">${room3}</text>
-            <text x="895" y="210" font-family="Plus Jakarta Sans" font-weight="800" font-size="12" fill="#64748b" text-anchor="middle" class="sub-text">${room3Type}</text>
-            <text x="895" y="250" font-family="Plus Jakarta Sans" font-size="11" font-weight="900" fill="#059669" text-anchor="middle">Click to Manage</text>
+            <text x="895" y="205" font-family="Plus Jakarta Sans" font-weight="900" font-size="22" fill="#0f172a" text-anchor="middle" class="room-text">${room3}</text>
           </g>
 
           <!-- East Stairs & Restroom -->
@@ -1154,9 +1148,9 @@ document.addEventListener('DOMContentLoaded', () => {
     } else if (building === 'Hangar') {
       // HANGAR 1 STOREY, 6 ROOMS (Clean Architectural Layout):
       // Left Wing (Bottom to Top: 001, 002, 003):
-      //   - Bottom: Hangar 001 (Aviation Powerplants Bay)
-      //   - Middle: Hangar 002 (Avionics & Mechanical Lab)
-      //   - Top:    Hangar 003 (Flight Simulation & Nav Lab)
+      //   - Bottom: Hangar 001
+      //   - Middle: Hangar 002
+      //   - Top:    Hangar 003
       // Right Wing: Hangar 004, Hangar 005, Hangar 006
       // Middle: Clean Central Hall
       floorPlanContent.innerHTML = `
@@ -1183,25 +1177,19 @@ document.addEventListener('DOMContentLoaded', () => {
           <!-- Hangar 003 (Top Left) -->
           <g class="room-group ${getRoomStateClass(building, 'Hangar 003', 1)}" data-bldg="${building}" data-room="Hangar 003" data-floor="1">
             <rect x="45" y="65" width="290" height="150" rx="8" class="room-rect"/>
-            <text x="190" y="125" font-family="Plus Jakarta Sans" font-weight="900" font-size="16" fill="#0f172a" text-anchor="middle" class="room-text">Hangar 003</text>
-            <text x="190" y="150" font-family="Plus Jakarta Sans" font-weight="800" font-size="11" fill="#64748b" text-anchor="middle" class="sub-text">Flight Simulation &amp; Nav Lab</text>
-            <text x="190" y="180" font-family="Plus Jakarta Sans" font-size="10" font-weight="900" fill="#059669" text-anchor="middle">Click to Manage</text>
+            <text x="190" y="148" font-family="Plus Jakarta Sans" font-weight="900" font-size="22" fill="#0f172a" text-anchor="middle" class="room-text">Hangar 003</text>
           </g>
 
           <!-- Hangar 002 (Middle Left) -->
           <g class="room-group ${getRoomStateClass(building, 'Hangar 002', 1)}" data-bldg="${building}" data-room="Hangar 002" data-floor="1">
             <rect x="45" y="230" width="290" height="150" rx="8" class="room-rect"/>
-            <text x="190" y="290" font-family="Plus Jakarta Sans" font-weight="900" font-size="16" fill="#0f172a" text-anchor="middle" class="room-text">Hangar 002</text>
-            <text x="190" y="315" font-family="Plus Jakarta Sans" font-weight="800" font-size="11" fill="#64748b" text-anchor="middle" class="sub-text">Avionics &amp; Mechanical Lab</text>
-            <text x="190" y="345" font-family="Plus Jakarta Sans" font-size="10" font-weight="900" fill="#059669" text-anchor="middle">Click to Manage</text>
+            <text x="190" y="313" font-family="Plus Jakarta Sans" font-weight="900" font-size="22" fill="#0f172a" text-anchor="middle" class="room-text">Hangar 002</text>
           </g>
 
           <!-- Hangar 001 (Bottom Left) -->
           <g class="room-group ${getRoomStateClass(building, 'Hangar 001', 1)}" data-bldg="${building}" data-room="Hangar 001" data-floor="1">
             <rect x="45" y="395" width="290" height="150" rx="8" class="room-rect"/>
-            <text x="190" y="455" font-family="Plus Jakarta Sans" font-weight="900" font-size="16" fill="#0f172a" text-anchor="middle" class="room-text">Hangar 001</text>
-            <text x="190" y="480" font-family="Plus Jakarta Sans" font-weight="800" font-size="11" fill="#64748b" text-anchor="middle" class="sub-text">Aviation Powerplants Bay</text>
-            <text x="190" y="510" font-family="Plus Jakarta Sans" font-size="10" font-weight="900" fill="#059669" text-anchor="middle">Click to Manage</text>
+            <text x="190" y="478" font-family="Plus Jakarta Sans" font-weight="900" font-size="22" fill="#0f172a" text-anchor="middle" class="room-text">Hangar 001</text>
           </g>
 
           <!-- ================= MIDDLE AREA (CLEAN CENTRAL HANGAR HALL) ================= -->
@@ -1214,25 +1202,19 @@ document.addEventListener('DOMContentLoaded', () => {
           <!-- Hangar 004 (Top Right) -->
           <g class="room-group ${getRoomStateClass(building, 'Hangar 004', 1)}" data-bldg="${building}" data-room="Hangar 004" data-floor="1">
             <rect x="1045" y="65" width="290" height="150" rx="8" class="room-rect"/>
-            <text x="1190" y="125" font-family="Plus Jakarta Sans" font-weight="900" font-size="16" fill="#0f172a" text-anchor="middle" class="room-text">Hangar 004</text>
-            <text x="1190" y="150" font-family="Plus Jakarta Sans" font-weight="800" font-size="11" fill="#64748b" text-anchor="middle" class="sub-text">Drone &amp; UAV Diagnostics Lab</text>
-            <text x="1190" y="180" font-family="Plus Jakarta Sans" font-size="10" font-weight="900" fill="#059669" text-anchor="middle">Click to Manage</text>
+            <text x="1190" y="148" font-family="Plus Jakarta Sans" font-weight="900" font-size="22" fill="#0f172a" text-anchor="middle" class="room-text">Hangar 004</text>
           </g>
 
           <!-- Hangar 005 (Middle Right) -->
           <g class="room-group ${getRoomStateClass(building, 'Hangar 005', 1)}" data-bldg="${building}" data-room="Hangar 005" data-floor="1">
             <rect x="1045" y="230" width="290" height="150" rx="8" class="room-rect"/>
-            <text x="1190" y="290" font-family="Plus Jakarta Sans" font-weight="900" font-size="16" fill="#0f172a" text-anchor="middle" class="room-text">Hangar 005</text>
-            <text x="1190" y="315" font-family="Plus Jakarta Sans" font-weight="800" font-size="11" fill="#64748b" text-anchor="middle" class="sub-text">Composite Materials &amp; Fabrication</text>
-            <text x="1190" y="345" font-family="Plus Jakarta Sans" font-size="10" font-weight="900" fill="#059669" text-anchor="middle">Click to Manage</text>
+            <text x="1190" y="313" font-family="Plus Jakarta Sans" font-weight="900" font-size="22" fill="#0f172a" text-anchor="middle" class="room-text">Hangar 005</text>
           </g>
 
           <!-- Hangar 006 (Bottom Right) -->
           <g class="room-group ${getRoomStateClass(building, 'Hangar 006', 1)}" data-bldg="${building}" data-room="Hangar 006" data-floor="1">
             <rect x="1045" y="395" width="290" height="150" rx="8" class="room-rect"/>
-            <text x="1190" y="455" font-family="Plus Jakarta Sans" font-weight="900" font-size="16" fill="#0f172a" text-anchor="middle" class="room-text">Hangar 006</text>
-            <text x="1190" y="480" font-family="Plus Jakarta Sans" font-weight="800" font-size="11" fill="#64748b" text-anchor="middle" class="sub-text">Aircraft Systems &amp; Assembly</text>
-            <text x="1190" y="510" font-family="Plus Jakarta Sans" font-size="10" font-weight="900" fill="#059669" text-anchor="middle">Click to Manage</text>
+            <text x="1190" y="478" font-family="Plus Jakarta Sans" font-weight="900" font-size="22" fill="#0f172a" text-anchor="middle" class="room-text">Hangar 006</text>
           </g>
         </svg>
       `;
