@@ -1063,16 +1063,16 @@ body.force-mobile-view .sidebar-close-btn {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 20px;
-  padding: 14px 22px;
+  gap: 22px;
+  padding: 16px 24px;
 }
 
 .capacity-seg {
   flex: 1;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  gap: 6px;
+  justify-content: center;
+  gap: 8px;
   height: 100%;
 }
 
@@ -1083,7 +1083,7 @@ body.force-mobile-view .sidebar-close-btn {
 }
 
 .kpi-v2-title {
-  font-size: 1rem;
+  font-size: 1.05rem;
   font-weight: 900;
   color: #000000;
   letter-spacing: -0.3px;
@@ -1118,20 +1118,22 @@ body.force-mobile-view .sidebar-close-btn {
 
 .capacity-center-divider {
   width: 2px;
-  height: 90px;
+  height: 96px;
   background: #000000;
   opacity: 0.15;
   border-radius: 2px;
   margin: 0 6px;
   flex-shrink: 0;
+  align-self: center;
 }
 
 .capacity-bldg-breakdown {
   display: flex;
   flex-direction: column;
-  gap: 7px;
+  justify-content: center;
+  gap: 9px;
   flex: 1;
-  min-width: 175px;
+  min-width: 180px;
 }
 
 .bldg-stat-row {
@@ -1142,10 +1144,10 @@ body.force-mobile-view .sidebar-close-btn {
 }
 
 .bldg-stat-dot {
-  width: 10px;
-  height: 10px;
+  width: 14px;
+  height: 14px;
   border-radius: 50%;
-  border: 1.8px solid #000000;
+  border: 2px solid #000000;
   flex-shrink: 0;
 }
 .bldg-stat-dot.dot-cba { background: #c084fc; }
@@ -1153,8 +1155,8 @@ body.force-mobile-view .sidebar-close-btn {
 .bldg-stat-dot.dot-pancho { background: #84cc16; }
 
 .bldg-stat-name {
-  width: 52px;
-  font-size: 0.84rem;
+  width: 54px;
+  font-size: 0.86rem;
   color: #000000;
   font-weight: 900;
   letter-spacing: -0.2px;
@@ -1162,18 +1164,18 @@ body.force-mobile-view .sidebar-close-btn {
 
 .bldg-stat-track {
   flex: 1;
-  height: 11px;
+  height: 16px;
   background: #f8fafc;
-  border: 1.8px solid #000000;
-  border-radius: 5px;
-  box-shadow: 1.5px 1.5px 0px #000000;
+  border: 2px solid #000000;
+  border-radius: 6px;
+  box-shadow: 2px 2px 0px #000000;
   overflow: hidden;
   min-width: 55px;
 }
 
 .bldg-stat-fill {
   height: 100%;
-  border-radius: 1px;
+  border-radius: 2px;
   transition: width 0.4s ease;
 }
 .bldg-stat-fill.purple { background: #c084fc; }
@@ -1181,7 +1183,7 @@ body.force-mobile-view .sidebar-close-btn {
 .bldg-stat-fill.lime { background: #84cc16; }
 
 .bldg-stat-val {
-  font-size: 0.92rem;
+  font-size: 0.95rem;
   font-weight: 900;
   color: #000000;
   min-width: 22px;
@@ -1192,23 +1194,24 @@ body.force-mobile-view .sidebar-close-btn {
 .capacity-pie-legend {
   display: flex;
   flex-direction: column;
-  gap: 7px;
+  justify-content: center;
+  gap: 9px;
   flex: 1;
-  min-width: 110px;
+  min-width: 120px;
 }
 
 .pie-leg-item {
   display: flex;
   align-items: center;
-  gap: 7px;
+  gap: 8px;
   font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
 }
 
 .pie-leg-dot {
-  width: 10px;
-  height: 10px;
+  width: 14px;
+  height: 14px;
   border-radius: 50%;
-  border: 1.8px solid #000000;
+  border: 2px solid #000000;
   flex-shrink: 0;
 }
 .pie-leg-dot.dot-free { background: #0284c7; }
@@ -1216,14 +1219,14 @@ body.force-mobile-view .sidebar-close-btn {
 .pie-leg-dot.dot-maint { background: #f59e0b; }
 
 .pie-leg-label {
-  font-size: 0.84rem;
+  font-size: 0.86rem;
   font-weight: 900;
   color: #000000;
-  width: 48px;
+  width: 50px;
 }
 
 .pie-leg-val {
-  font-size: 0.92rem;
+  font-size: 0.95rem;
   font-weight: 900;
   color: #000000;
   min-width: 22px;
@@ -1233,8 +1236,15 @@ body.force-mobile-view .sidebar-close-btn {
 .capacity-metric-row.vacant-pie-row {
   justify-content: space-between;
   align-items: center;
-  gap: 16px;
+  gap: 18px;
   padding: 0;
+}
+
+.capacity-gauge-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
 }
 
 .capacity-gauge-wrap {
