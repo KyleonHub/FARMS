@@ -4632,9 +4632,9 @@ body.force-mobile-view .sidebar-close-btn {
 /* ── Segmented Tab Toggles in Dark Mode ── */
 [data-theme="dark"] .segmented-view-toggle,
 [data-theme="dark"] .facilities-tab-toggle {
-  background: #1c1b1b;
-  border: 2px solid #3a3939;
-  box-shadow: 2.5px 2.5px 0px #000000;
+  background: #1c1b1b !important;
+  border: 2.5px solid #484848 !important;
+  box-shadow: 3px 3px 0px #000000 !important;
 }
 
 [data-theme="dark"] .seg-btn,
@@ -4644,18 +4644,18 @@ body.force-mobile-view .sidebar-close-btn {
 
 [data-theme="dark"] .seg-btn.active,
 [data-theme="dark"] .fac-tab-btn.active {
-  background: #ccff00;
+  background: #ccff00 !important;
   color: #000000 !important;
-  border: 1.8px solid #000000;
-  box-shadow: 1.5px 1.5px 0px #000000;
-  font-weight: 900;
+  border: 2px solid #000000 !important;
+  box-shadow: 2px 2px 0px #000000 !important;
+  font-weight: 900 !important;
 }
 
 /* ── Adaptive Sidebar in Dark Mode (Layer 2 Surface) ── */
 [data-theme="dark"] .status-filter-sidebar {
-  background: #131313;
-  border: 2.5px solid #3a3939;
-  box-shadow: 4px 4px 0px #000000;
+  background: #1c1b1b !important;
+  border: 2.5px solid #484848 !important;
+  box-shadow: 4px 4px 0px #000000 !important;
 }
 
 [data-theme="dark"] .sidebar-context-badge {
@@ -4689,8 +4689,8 @@ body.force-mobile-view .sidebar-close-btn {
 [data-theme="dark"] .bldg-view-section,
 [data-theme="dark"] .bldg-view-hero-card {
   background: #1c1b1b;
-  border: 2px solid #3a3939;
-  box-shadow: 2.5px 2.5px 0px #000000;
+  border: 2px solid #484848;
+  box-shadow: 3px 3px 0px #000000;
 }
 
 /* ── Building Jump Cards in Sidebar (Overriding light gradient rules) ── */
@@ -4701,8 +4701,8 @@ body.force-mobile-view .sidebar-close-btn {
 [data-theme="dark"] #sideCardPancho,
 [data-theme="dark"] #sideCardCba,
 [data-theme="dark"] #sideCardHangar {
-  background: #1c1b1b !important;
-  border: 2px solid #3a3939 !important;
+  background: #242424 !important;
+  border: 2px solid #484848 !important;
   border-radius: 12px;
   box-shadow: 3px 3px 0px #000000 !important;
   transition: all 0.15s ease;
@@ -4713,7 +4713,7 @@ body.force-mobile-view .sidebar-close-btn {
 [data-theme="dark"] .bldg-jump-btn.cba:hover,
 [data-theme="dark"] .bldg-jump-btn.hangar:hover,
 [data-theme="dark"] .bldg-jump-btn.sidebar-highlighted {
-  background: #3a3939 !important;
+  background: #2e2e2e !important;
   border-color: #ccff00 !important;
   box-shadow: 4px 4px 0px #ccff00 !important;
   transform: translate(-1.5px, -1.5px);
@@ -4732,12 +4732,53 @@ body.force-mobile-view .sidebar-close-btn {
   color: #d4d4d4 !important;
 }
 
+/* Floor chips and category tags in Jump Cards */
 [data-theme="dark"] .bldg-chip-tag,
 [data-theme="dark"] .bldg-flr-chip,
 [data-theme="dark"] .bldg-jump-btn .bldg-chip-tag {
-  background: #3a3939 !important;
+  background: #333333 !important;
+  color: #ffffff !important;
+  border: 1.5px solid #484848 !important;
+  box-shadow: 1.5px 1.5px 0px #000000 !important;
+}
+
+[data-theme="dark"] .bldg-jump-btn.pancho .bldg-flr-chip,
+[data-theme="dark"] #sideCardPancho .bldg-flr-chip {
+  background: rgba(132, 204, 22, 0.18) !important;
   color: #ccff00 !important;
-  border: 1.5px solid #3a3939 !important;
+  border: 1.5px solid #84cc16 !important;
+}
+
+[data-theme="dark"] .bldg-jump-btn.cba .bldg-flr-chip,
+[data-theme="dark"] #sideCardCba .bldg-flr-chip {
+  background: rgba(192, 132, 252, 0.18) !important;
+  color: #c084fc !important;
+  border: 1.5px solid #c084fc !important;
+}
+
+[data-theme="dark"] .bldg-jump-btn.hangar .bldg-flr-chip,
+[data-theme="dark"] #sideCardHangar .bldg-flr-chip {
+  background: rgba(56, 189, 248, 0.18) !important;
+  color: #38bdf8 !important;
+  border: 1.5px solid #38bdf8 !important;
+}
+
+[data-theme="dark"] .jump-chip.green {
+  background: #84cc16 !important;
+  color: #000000 !important;
+  border: 1.5px solid #000000 !important;
+  box-shadow: 1.5px 1.5px 0px #000000 !important;
+}
+[data-theme="dark"] .jump-chip.purple {
+  background: #c084fc !important;
+  color: #000000 !important;
+  border: 1.5px solid #000000 !important;
+  box-shadow: 1.5px 1.5px 0px #000000 !important;
+}
+[data-theme="dark"] .jump-chip.cyan {
+  background: #38bdf8 !important;
+  color: #000000 !important;
+  border: 1.5px solid #000000 !important;
   box-shadow: 1.5px 1.5px 0px #000000 !important;
 }
 
@@ -5154,17 +5195,17 @@ body.force-mobile-view .sidebar-close-btn {
 
 /* ── Vector Map Canvas in Dark Mode ── */
 [data-theme="dark"] .status-display-main {
-  background-color: #131313;
-  border: 2.5px solid #3a3939;
+  background-color: #1c1b1b;
+  border: 2.5px solid #484848;
   box-shadow: 4px 4px 0px #000000;
 }
 
 /* Campus Overview Map */
 [data-theme="dark"] #campusMap svg > rect:first-of-type,
 [data-theme="dark"] #campusMap svg > rect[fill="#fafaf9"] {
-  fill: #131313 !important;
-  stroke: #3a3939 !important;
-  stroke-width: 3px !important;
+  fill: #1c1b1b !important;
+  stroke: #484848 !important;
+  stroke-width: 2.5px !important;
 }
 
 [data-theme="dark"] #campusBpGrid path {
@@ -6855,6 +6896,6 @@ body.force-mobile-view .mobile-bottom-nav {
 [data-theme="dark"] .status-filter-sidebar,
 [data-theme="dark"] .status-display-main {
   background: #1c1b1b;
-  border-color: #3a3939;
+  border: 2.5px solid #484848 !important;
   box-shadow: 4px 4px 0px #000000 !important;
 }
