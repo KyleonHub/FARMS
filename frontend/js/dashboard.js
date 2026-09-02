@@ -1089,14 +1089,10 @@ document.addEventListener('DOMContentLoaded', () => {
           <rect width="100%" height="100%" fill="#fafaf9"/>
           <rect width="100%" height="100%" fill="url(#floorGridCBA)"/>
 
-          <!-- Comic CAD Top Badges -->
-          <g transform="translate(35, 20)">
-            <rect width="210" height="32" rx="7" fill="#000000"/>
-            <text x="105" y="21" font-family="Plus Jakarta Sans" font-weight="900" font-size="12" fill="#84cc16" text-anchor="middle">LEVEL ${floor} : CBA WING</text>
-          </g>
-          <g transform="translate(1055, 20)">
-            <rect width="180" height="32" rx="7" fill="#84cc16" stroke="#000000" stroke-width="2"/>
-            <text x="90" y="21" font-family="Plus Jakarta Sans" font-weight="900" font-size="12" fill="#000000" text-anchor="middle">BULSU CBA CAD</text>
+          <!-- Central Floor Identifier Badge -->
+          <g transform="translate(525, 14)" class="svg-floor-center-badge">
+            <rect width="230" height="34" rx="8" fill="#000000" stroke="#000000" stroke-width="2"/>
+            <text x="115" y="22" font-family="Plus Jakarta Sans" font-weight="900" font-size="13" fill="#ffffff" text-anchor="middle" letter-spacing="0.8">LEVEL ${floor} · CBA WING</text>
           </g>
 
           <!-- Hallway & Corridors -->
@@ -1176,14 +1172,10 @@ document.addEventListener('DOMContentLoaded', () => {
           <rect width="100%" height="100%" fill="#fafaf9"/>
           <rect width="100%" height="100%" fill="url(#floorGridHangar)"/>
 
-          <!-- Comic CAD Top Badges -->
-          <g transform="translate(35, 20)">
-            <rect width="250" height="32" rx="7" fill="#000000"/>
-            <text x="125" y="21" font-family="Plus Jakarta Sans" font-weight="900" font-size="12" fill="#84cc16" text-anchor="middle">HANGAR COMPLEX // LEVEL 1</text>
-          </g>
-          <g transform="translate(1145, 20)">
-            <rect width="190" height="32" rx="7" fill="#84cc16" stroke="#000000" stroke-width="2"/>
-            <text x="95" y="21" font-family="Plus Jakarta Sans" font-weight="900" font-size="12" fill="#000000" text-anchor="middle">BULSU HANGAR CAD</text>
+          <!-- Central Floor Identifier Badge -->
+          <g transform="translate(560, 14)" class="svg-floor-center-badge">
+            <rect width="260" height="34" rx="8" fill="#000000" stroke="#000000" stroke-width="2"/>
+            <text x="130" y="22" font-family="Plus Jakarta Sans" font-weight="900" font-size="13" fill="#ffffff" text-anchor="middle" letter-spacing="0.8">HANGAR COMPLEX · LEVEL 1</text>
           </g>
 
           <!-- ================= LEFT WING (BOTTOM TO TOP: 001, 002, 003) ================= -->
@@ -1259,14 +1251,10 @@ document.addEventListener('DOMContentLoaded', () => {
             <rect width="100%" height="100%" fill="#fafaf9"/>
             <rect width="100%" height="100%" fill="url(#floorGridPancho)"/>
 
-            <!-- Comic CAD Top Badges -->
-            <g transform="translate(35, 20)">
-              <rect width="220" height="32" rx="7" fill="#000000"/>
-              <text x="110" y="21" font-family="Plus Jakarta Sans" font-weight="900" font-size="12" fill="#84cc16" text-anchor="middle">LEVEL 1 : GROUND FLOOR</text>
-            </g>
-            <g transform="translate(1335, 20)">
-              <rect width="190" height="32" rx="7" fill="#84cc16" stroke="#000000" stroke-width="2"/>
-              <text x="95" y="21" font-family="Plus Jakarta Sans" font-weight="900" font-size="12" fill="#000000" text-anchor="middle">BULSU PANCHO CAD</text>
+            <!-- Central Floor Identifier Badge -->
+            <g transform="translate(650, 14)" class="svg-floor-center-badge">
+              <rect width="260" height="34" rx="8" fill="#000000" stroke="#000000" stroke-width="2"/>
+              <text x="130" y="22" font-family="Plus Jakarta Sans" font-weight="900" font-size="13" fill="#ffffff" text-anchor="middle" letter-spacing="0.8">LEVEL 1 · GROUND FLOOR</text>
             </g>
 
             <!-- Corridor / Hallway -->
@@ -1369,14 +1357,10 @@ document.addEventListener('DOMContentLoaded', () => {
             <rect width="100%" height="100%" fill="#fafaf9"/>
             <rect width="100%" height="100%" fill="url(#floorGridPanchoF2)"/>
 
-            <!-- Comic CAD Top Badges -->
-            <g transform="translate(35, 20)">
-              <rect width="220" height="32" rx="7" fill="#000000"/>
-              <text x="110" y="21" font-family="Plus Jakarta Sans" font-weight="900" font-size="12" fill="#84cc16" text-anchor="middle">LEVEL 2 : SECOND FLOOR</text>
-            </g>
-            <g transform="translate(1335, 20)">
-              <rect width="190" height="32" rx="7" fill="#84cc16" stroke="#000000" stroke-width="2"/>
-              <text x="95" y="21" font-family="Plus Jakarta Sans" font-weight="900" font-size="12" fill="#000000" text-anchor="middle">BULSU PANCHO CAD</text>
+            <!-- Central Floor Identifier Badge -->
+            <g transform="translate(650, 14)" class="svg-floor-center-badge">
+              <rect width="260" height="34" rx="8" fill="#000000" stroke="#000000" stroke-width="2"/>
+              <text x="130" y="22" font-family="Plus Jakarta Sans" font-weight="900" font-size="13" fill="#ffffff" text-anchor="middle" letter-spacing="0.8">LEVEL 2 · SECOND FLOOR</text>
             </g>
 
             <!-- Corridor / Hallway -->

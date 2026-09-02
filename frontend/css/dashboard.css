@@ -915,10 +915,19 @@ body.force-mobile-view .sidebar-close-btn {
 .building-svg-view svg,
 #floorPlanContent svg {
   width: 100% !important;
-  height: 100% !important;
-  max-width: 100% !important;
   max-height: 100% !important;
   display: block;
+}
+
+.svg-floor-center-badge rect {
+  fill: #000000;
+  stroke: #000000;
+}
+.svg-floor-center-badge text {
+  fill: #ffffff !important;
+  font-family: inherit;
+  font-weight: 900;
+  letter-spacing: 0.8px;
 }
 
 
@@ -5229,6 +5238,14 @@ body.force-mobile-view .sidebar-close-btn {
 }
 [data-theme="dark"] #floorPlanContent svg text[fill="#64748b"] {
   fill: #d4d4d4 !important;
+}
+
+[data-theme="dark"] .svg-floor-center-badge rect {
+  fill: #1c1b1b !important;
+  stroke: #3a3939 !important;
+}
+[data-theme="dark"] .svg-floor-center-badge text {
+  fill: #ccff00 !important;
 }
 
 /* ── Modal Dialog in Dark Mode ── */
