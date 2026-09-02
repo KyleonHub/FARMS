@@ -899,8 +899,8 @@ document.addEventListener('DOMContentLoaded', () => {
       if (barFillOcc) barFillOcc.style.width = `${Math.round((occupiedRooms / totalRooms) * 100)}%`;
       if (barFillMaint) barFillMaint.style.width = `${Math.round((maintenanceRooms / totalRooms) * 100)}%`;
 
-      // Multi-Segment Comic Pie Calculations (Radius = 28, Circumference C = 175.93)
-      const C = 175.93;
+      // Modern Multi-Segment Donut Calculations (Radius = 32, Circumference C = 201.06)
+      const C = 201.06;
       const freeLen = (vacantRooms / totalRooms) * C;
       const occLen = (occupiedRooms / totalRooms) * C;
       const maintLen = (maintenanceRooms / totalRooms) * C;

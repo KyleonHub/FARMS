@@ -212,21 +212,22 @@
           </div>
 
           <!-- KPI Metric Cards Grid (4 High-Density Maximalist Telemetry Cards) -->
-          <!-- KPI Metric Cards Grid (Neo-Brutalist Telemetry Grid) -->
+          <!-- KPI Metric Cards Grid (Professional Enterprise SaaS Grid) -->
           <div class="kpi-stats-grid kpi-four-cards">
             
-            <!-- Unified Card 1 & 2: Campus Live Capacity & Room Workstation -->
+            <!-- Card 1: Campus Capacity & Occupancy Telemetry -->
             <div class="kpi-card-v2 unified-capacity-hero">
-              <!-- Left Segment: In-Use / Active Sessions -->
+              <!-- Left Segment: In-Use / Active Classes -->
               <div class="capacity-seg in-use-seg">
                 <div class="kpi-header-row">
                   <span class="kpi-v2-title">Active Classes</span>
+                  <span class="kpi-status-badge badge-active"><span class="badge-dot"></span> Live</span>
                 </div>
                 <div class="capacity-metric-row">
                   <div class="kpi-v2-big-num in-use-num" id="statActiveClasses">28</div>
                   <div class="capacity-bldg-breakdown">
                     <div class="bldg-stat-row">
-                      <span class="bldg-stat-dot" style="background:#a855f7;"></span>
+                      <span class="bldg-stat-dot dot-cba"></span>
                       <span class="bldg-stat-name">CBA</span>
                       <div class="bldg-stat-track">
                         <div class="bldg-stat-fill purple" id="barFillCba" style="width: 50%;"></div>
@@ -234,7 +235,7 @@
                       <strong class="bldg-stat-val" id="barValCba">4</strong>
                     </div>
                     <div class="bldg-stat-row">
-                      <span class="bldg-stat-dot" style="background:#0284c7;"></span>
+                      <span class="bldg-stat-dot dot-hangar"></span>
                       <span class="bldg-stat-name">Hangar</span>
                       <div class="bldg-stat-track">
                         <div class="bldg-stat-fill cyan" id="barFillHangar" style="width: 33%;"></div>
@@ -242,7 +243,7 @@
                       <strong class="bldg-stat-val" id="barValHangar">2</strong>
                     </div>
                     <div class="bldg-stat-row">
-                      <span class="bldg-stat-dot" style="background:#84cc16;"></span>
+                      <span class="bldg-stat-dot dot-pancho"></span>
                       <span class="bldg-stat-name">Pancho</span>
                       <div class="bldg-stat-track">
                         <div class="bldg-stat-fill lime" id="barFillPancho" style="width: 75%;"></div>
@@ -261,6 +262,7 @@
               <div class="capacity-seg vacant-seg">
                 <div class="kpi-header-row">
                   <span class="kpi-v2-title">Vacant Rooms</span>
+                  <span class="kpi-status-badge badge-vacant"><span class="badge-dot"></span> Ready</span>
                 </div>
                 <div class="capacity-metric-row">
                   <div class="kpi-v2-big-num vacant-num" id="statVacantRooms">55</div>
@@ -268,7 +270,7 @@
                   <!-- Status Line Graphs on Vacant Side -->
                   <div class="capacity-bldg-breakdown status-breakdown">
                     <div class="bldg-stat-row">
-                      <span class="bldg-stat-dot" style="background:#84cc16;"></span>
+                      <span class="bldg-stat-dot dot-free"></span>
                       <span class="bldg-stat-name">Free</span>
                       <div class="bldg-stat-track">
                         <div class="bldg-stat-fill lime" id="barFillFree" style="width: 65%;"></div>
@@ -276,7 +278,7 @@
                       <strong class="bldg-stat-val" id="barValFree">55</strong>
                     </div>
                     <div class="bldg-stat-row">
-                      <span class="bldg-stat-dot" style="background:#f43f5e;"></span>
+                      <span class="bldg-stat-dot dot-occ"></span>
                       <span class="bldg-stat-name">In-Use</span>
                       <div class="bldg-stat-track">
                         <div class="bldg-stat-fill rose" id="barFillOcc" style="width: 33%;"></div>
@@ -284,7 +286,7 @@
                       <strong class="bldg-stat-val" id="barValOcc">28</strong>
                     </div>
                     <div class="bldg-stat-row">
-                      <span class="bldg-stat-dot" style="background:#f59e0b;"></span>
+                      <span class="bldg-stat-dot dot-maint"></span>
                       <span class="bldg-stat-name">Maint</span>
                       <div class="bldg-stat-track">
                         <div class="bldg-stat-fill amber" id="barFillMaint" style="width: 5%;"></div>
@@ -293,38 +295,29 @@
                     </div>
                   </div>
 
-                  <!-- Detailed Comic Pie / Donut Chart -->
+                  <!-- Professional Metric Donut Chart -->
                   <div class="capacity-gauge-wrap">
-                    <svg viewBox="0 0 92 92" width="82" height="82" class="comic-pie-svg">
-                      <!-- Drop shadow -->
-                      <circle cx="49" cy="49" r="37" fill="#000000" opacity="0.18"/>
-                      
-                      <!-- Outer Comic Outline -->
-                      <circle cx="46" cy="46" r="37" fill="#ffffff" stroke="#000000" stroke-width="2.2"/>
-                      
+                    <svg viewBox="0 0 92 92" width="76" height="76" class="pro-donut-svg">
                       <!-- Base Track -->
-                      <circle cx="46" cy="46" r="28" fill="none" stroke="#f1f5f9" stroke-width="11"/>
+                      <circle cx="46" cy="46" r="32" fill="none" stroke="#f1f5f9" stroke-width="8"/>
                       
-                      <!-- In-Use Segment (Red) -->
-                      <circle cx="46" cy="46" r="28" fill="none" stroke="#f43f5e" stroke-width="11"
-                              id="pieSegOcc" stroke-dasharray="176" stroke-dashoffset="116"
-                              stroke-linecap="butt" transform="rotate(-90 46 46)"/>
+                      <!-- In-Use Segment (Red/Rose) -->
+                      <circle cx="46" cy="46" r="32" fill="none" stroke="#f43f5e" stroke-width="8"
+                              id="pieSegOcc" stroke-dasharray="201.06" stroke-dashoffset="130"
+                              transform="rotate(-90 46 46)"/>
                       
                       <!-- Maintenance Segment (Amber) -->
-                      <circle cx="46" cy="46" r="28" fill="none" stroke="#f59e0b" stroke-width="11"
-                              id="pieSegMaint" stroke-dasharray="176" stroke-dashoffset="170"
-                              stroke-linecap="butt" transform="rotate(-90 46 46)"/>
+                      <circle cx="46" cy="46" r="32" fill="none" stroke="#f59e0b" stroke-width="8"
+                              id="pieSegMaint" stroke-dasharray="201.06" stroke-dashoffset="190"
+                              transform="rotate(-90 46 46)"/>
 
-                      <!-- Free Segment (Lime) -->
-                      <circle cx="46" cy="46" r="28" fill="none" stroke="#84cc16" stroke-width="11"
-                              id="pieSegFree" stroke-dasharray="176" stroke-dashoffset="60"
-                              stroke-linecap="butt" transform="rotate(-90 46 46)"/>
+                      <!-- Free Segment (Emerald/Green) -->
+                      <circle cx="46" cy="46" r="32" fill="none" stroke="#10b981" stroke-width="8"
+                              id="pieSegFree" stroke-dasharray="201.06" stroke-dashoffset="70"
+                              transform="rotate(-90 46 46)"/>
 
-                      <!-- Inner Comic Hub Badge -->
-                      <circle cx="46" cy="46" r="20" fill="#ffffff" stroke="#000000" stroke-width="1.8"/>
-                      
-                      <text x="46" y="44" font-family="Plus Jakarta Sans, system-ui" font-weight="900" font-size="16" fill="#0f172a" text-anchor="middle" id="vacantGaugeNum">55</text>
-                      <text x="46" y="55" font-family="Plus Jakarta Sans, system-ui" font-weight="900" font-size="7.5" fill="#64748b" text-anchor="middle" id="vacantGaugeTotal">of 85</text>
+                      <text x="46" y="43" font-family="Plus Jakarta Sans, system-ui, -apple-system, sans-serif" font-weight="800" font-size="16" fill="#0f172a" text-anchor="middle" id="vacantGaugeNum">55</text>
+                      <text x="46" y="55" font-family="Plus Jakarta Sans, system-ui, -apple-system, sans-serif" font-weight="600" font-size="8" fill="#64748b" text-anchor="middle" id="vacantGaugeTotal">of 85</text>
                     </svg>
                   </div>
                 </div>
@@ -332,18 +325,19 @@
               </div>
             </div>
 
-            <!-- Card 3: Access Permits & Pending Authorization -->
+            <!-- Card 2: Access Permits & Pending Authorization -->
             <div class="kpi-card-v2 card-pending-amber" style="cursor:pointer;" onclick="window.switchView ? window.switchView('requests') : document.querySelector('[data-view=requests]')?.click();" title="View Access Requests Queue">
               <div class="kpi-v2-main">
                 <div class="kpi-header-row">
                   <span class="kpi-v2-title">Pending Requests</span>
+                  <span class="kpi-status-badge badge-pending">Action Required</span>
                 </div>
                 <div class="kpi-v2-big-num" id="statPendingRequests">5</div>
-                <div class="kpi-v2-sub dark-amber">Requires Approval · <strong style="color:#78350f;">Queue</strong></div>
+                <div class="kpi-v2-sub dark-amber">Requires Approval · <strong style="color:#b45309;">Review Queue</strong></div>
               </div>
               <div class="kpi-v2-widget">
-                <div class="pending-warning-badge">
-                  <svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="#92400e" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <div class="pending-pro-icon-box">
+                  <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/>
                     <rect x="8" y="2" width="8" height="4" rx="1" ry="1"/>
                     <path d="M12 11v4M12 18h.01"/>
@@ -352,16 +346,16 @@
               </div>
             </div>
 
-            <!-- Card 4: Quick Operations & Dispatch Deck -->
+            <!-- Card 3: Quick Operations & Dispatch Deck -->
             <div class="kpi-card-v2 card-dispatch-kpi" id="topQuickDispatchCard">
               <div class="dispatch-kpi-header">
                 <span class="kpi-v2-title">Quick Operations &amp; Dispatch</span>
-                <span class="dispatch-kpi-tag">OPERATIONS</span>
+                <span class="dispatch-kpi-tag">SHORTCUTS</span>
               </div>
               <div class="dispatch-kpi-grid">
                 <button class="dispatch-kpi-tile" id="btnDispatchAssign" title="Quick Assign Room Slot">
-                  <span class="d-icon">
-                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="19" y1="8" x2="19" y2="14"/><line x1="22" y1="11" x2="16" y2="11"/></svg>
+                  <span class="d-icon icon-assign">
+                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="19" y1="8" x2="19" y2="14"/><line x1="22" y1="11" x2="16" y2="11"/></svg>
                   </span>
                   <div class="d-tile-text">
                     <strong>Quick Assign</strong>
@@ -369,8 +363,8 @@
                   </div>
                 </button>
                 <button class="dispatch-kpi-tile" id="btnDispatchReset" title="Reset Campus Map">
-                  <span class="d-icon">
-                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>
+                  <span class="d-icon icon-reset">
+                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>
                   </span>
                   <div class="d-tile-text">
                     <strong>Reset Map</strong>
@@ -378,8 +372,8 @@
                   </div>
                 </button>
                 <button class="dispatch-kpi-tile" id="btnDispatchExport" title="Download Room Audit Log">
-                  <span class="d-icon">
-                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                  <span class="d-icon icon-export">
+                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
                   </span>
                   <div class="d-tile-text">
                     <strong>Export Audit</strong>
@@ -387,8 +381,8 @@
                   </div>
                 </button>
                 <button class="dispatch-kpi-tile" id="btnDispatchBroadcast" title="Send Broadcast Announcement">
-                  <span class="d-icon">
-                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+                  <span class="d-icon icon-broadcast">
+                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
                   </span>
                   <div class="d-tile-text">
                     <strong>Broadcast</strong>
