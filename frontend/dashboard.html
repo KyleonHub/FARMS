@@ -1370,54 +1370,92 @@
              ==================================================== -->
         <section id="view-facilities" class="content-view">
           
-          <div class="dashboard-greeting-row">
+          <!-- Top Header Row with Segmented View Switcher -->
+          <div class="dashboard-greeting-row facilities-greeting-row">
             <div>
               <h2 class="page-section-heading">Facilities &amp; Visual Matrix</h2>
-              <p class="page-section-sub">Comprehensive Campus Roster &amp; Room Properties Editor</p>
+              <p class="page-section-sub">Comprehensive Campus Roster, Floor Layouts &amp; Live Room Properties</p>
             </div>
             
             <div class="facilities-header-actions">
               <div class="facilities-tab-toggle">
                 <button class="fac-tab-btn active" id="btnFacMatrixTab">
-                  <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle; margin-right:4px;"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+                  <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle; margin-right:4px;"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
                   Visual Matrix
                 </button>
                 <button class="fac-tab-btn" id="btnFacDirectoryTab">
-                  <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle; margin-right:4px;"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
+                  <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle; margin-right:4px;"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
                   Master Directory
                 </button>
               </div>
-              <button class="header-action-btn primary" id="btnAddNewRoom">+ Add Facility</button>
             </div>
           </div>
 
           <!-- PANE A: VISUAL ROOM MATRIX -->
           <div id="paneFacMatrix" class="facilities-pane">
-            <div class="matrix-filter-bar">
-              <div class="matrix-filter-group">
-                <span>Filter Building:</span>
-                <select id="matrixBldgFilter" class="matrix-filter-select">
-                  <option value="all">All Campus Buildings</option>
-                  <option value="Pancho Building">Pancho Building</option>
-                  <option value="CBA Building">CBA Building</option>
-                  <option value="Hangar">Hangar Complex</option>
-                </select>
+            
+            <!-- Neo-Brutalist Command Filter Toolbar -->
+            <div class="matrix-control-toolbar">
+              <!-- Top Row: Instant Search + Building Selectors -->
+              <div class="matrix-toolbar-row primary-row">
+                <!-- Search Bar -->
+                <div class="matrix-search-box">
+                  <span class="m-search-icon">
+                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                  </span>
+                  <input type="text" id="matrixSearchInput" class="matrix-search-input" placeholder="Search by room code, subject, faculty name, or type..." />
+                  <button class="matrix-search-clear hidden" id="btnMatrixSearchClear" title="Clear Search">✕</button>
+                </div>
+
+                <!-- Building Tabs -->
+                <div class="matrix-bldg-pills" id="matrixBldgTabs">
+                  <button class="m-bldg-tab-btn active" data-bldg="all">
+                    <span>All Grounds</span>
+                    <span class="m-tab-badge" id="mTabBadgeAll">85</span>
+                  </button>
+                  <button class="m-bldg-tab-btn" data-bldg="Pancho Building">
+                    <span class="m-bldg-dot dot-pancho"></span>
+                    <span>Pancho</span>
+                    <span class="m-tab-badge green" id="mTabBadgePancho">67</span>
+                  </button>
+                  <button class="m-bldg-tab-btn" data-bldg="CBA Building">
+                    <span class="m-bldg-dot dot-cba"></span>
+                    <span>CBA</span>
+                    <span class="m-tab-badge purple" id="mTabBadgeCBA">12</span>
+                  </button>
+                  <button class="m-bldg-tab-btn" data-bldg="Hangar">
+                    <span class="m-bldg-dot dot-hangar"></span>
+                    <span>Hangar</span>
+                    <span class="m-tab-badge cyan" id="mTabBadgeHangar">6</span>
+                  </button>
+                </div>
               </div>
 
-              <div class="matrix-filter-group">
-                <span>Status Filter:</span>
-                <select id="matrixStatusFilter" class="matrix-filter-select">
-                  <option value="all">All States</option>
-                  <option value="vacant">Available Only</option>
-                  <option value="occupied">Occupied Only</option>
-                  <option value="maintenance">Maintenance Only</option>
-                </select>
-              </div>
+              <!-- Bottom Row: Status Filter Chips & Realtime Vitals -->
+              <div class="matrix-toolbar-row secondary-row">
+                <div class="matrix-status-pills" id="matrixStatusPills">
+                  <span class="m-filter-label">STATUS:</span>
+                  <button class="m-status-chip active" data-status="all">All Rooms</button>
+                  <button class="m-status-chip available" data-status="vacant">
+                    <span class="chip-dot green"></span>
+                    <span>Available</span>
+                  </button>
+                  <button class="m-status-chip occupied" data-status="occupied">
+                    <span class="chip-dot red"></span>
+                    <span>In-Use</span>
+                  </button>
+                  <button class="m-status-chip maintenance" data-status="maintenance">
+                    <span class="chip-dot amber"></span>
+                    <span>Maintenance</span>
+                  </button>
+                </div>
 
-              <div class="matrix-legend-row">
-                <span class="mleg-pill available">● Available</span>
-                <span class="mleg-pill occupied">● Occupied</span>
-                <span class="mleg-pill maintenance">● Maintenance</span>
+                <div class="matrix-telemetry-vitals" id="matrixTelemetryVitals">
+                  <span class="v-pill"><span class="v-label">MATCHED:</span> <strong id="matrixMatchedCount">85</strong></span>
+                  <span class="v-pill green"><span class="v-label">FREE:</span> <strong id="matrixFreeCount">54</strong></span>
+                  <span class="v-pill red"><span class="v-label">IN-USE:</span> <strong id="matrixOccCount">29</strong></span>
+                  <span class="v-pill amber" id="matrixMaintWrap" style="display:none;"><span class="v-label">REPAIR:</span> <strong id="matrixMaintCount">2</strong></span>
+                </div>
               </div>
             </div>
 
@@ -1429,9 +1467,16 @@
           <div id="paneFacDirectory" class="facilities-pane hidden">
             <div class="modular-card directory-editor-card">
               <div class="directory-toolbar">
-                <div style="display:flex; align-items:center; gap:10px;">
-                  <input type="text" id="dirSearchInput" placeholder="Filter by room, floor, faculty, or type..." class="filter-input-text" style="width:340px;">
-                  <span style="font-size:0.75rem; color:#64748b; font-weight:700;">Total Facilities: <strong id="dirTotalCount" style="color:#0f172a;">68</strong></span>
+                <div style="display:flex; align-items:center; gap:12px; width:100%; justify-content:space-between;">
+                  <div style="display:flex; align-items:center; gap:10px; flex:1; max-width:480px;">
+                    <div class="matrix-search-box" style="width:100%;">
+                      <span class="m-search-icon">
+                        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                      </span>
+                      <input type="text" id="dirSearchInput" placeholder="Filter by room, floor, faculty, or type..." class="matrix-search-input" />
+                    </div>
+                  </div>
+                  <span style="font-size:0.8rem; color:#64748b; font-weight:800;">Total Facilities: <strong id="dirTotalCount" style="color:#0f172a; font-size:0.95rem;">85</strong></span>
                 </div>
               </div>
 
@@ -1439,13 +1484,13 @@
                 <table class="modular-table">
                   <thead>
                     <tr>
-                      <th>Room</th>
+                      <th>Room Code &amp; Name</th>
                       <th>Building</th>
                       <th>Floor Level</th>
                       <th>Designation / Type</th>
                       <th>Capacity</th>
                       <th>Status</th>
-                      <th>Current Occupant</th>
+                      <th>Current Occupant / Schedule</th>
                       <th>Actions</th>
                     </tr>
                   </thead>

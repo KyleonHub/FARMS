@@ -1817,69 +1817,214 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Standalone Full Room Matrix Function
+  // ==========================================================
+  // 8.5 STANDALONE FACILITIES & VISUAL ROOM MATRIX (OVERHAULED)
+  // ==========================================================
+  let activeStandaloneBldg = 'all';
+  let activeStandaloneStatus = 'all';
+  let standaloneSearchQuery = '';
+  let activeFloorFilterPerBldg = {}; // { 'Pancho Building': 'all', 'CBA Building': 'all', 'Hangar': 'all' }
+
   function renderStandaloneMatrix() {
     const grid = document.getElementById('standaloneMatrixGrid');
     if (!grid) return;
     grid.innerHTML = '';
 
-    const bldgFilter = document.getElementById('matrixBldgFilter')?.value || 'all';
-    const statusFilter = document.getElementById('matrixStatusFilter')?.value || 'all';
+    // Update building tabs badge counts
+    const totalCount = rooms.length;
+    const panchoTotal = rooms.filter(r => r.building === 'Pancho Building').length;
+    const cbaTotal = rooms.filter(r => r.building === 'CBA Building').length;
+    const hangarTotal = rooms.filter(r => r.building === 'Hangar').length;
+
+    const mTabBadgeAll = document.getElementById('mTabBadgeAll');
+    const mTabBadgePancho = document.getElementById('mTabBadgePancho');
+    const mTabBadgeCBA = document.getElementById('mTabBadgeCBA');
+    const mTabBadgeHangar = document.getElementById('mTabBadgeHangar');
+
+    if (mTabBadgeAll) mTabBadgeAll.textContent = totalCount;
+    if (mTabBadgePancho) mTabBadgePancho.textContent = panchoTotal;
+    if (mTabBadgeCBA) mTabBadgeCBA.textContent = cbaTotal;
+    if (mTabBadgeHangar) mTabBadgeHangar.textContent = hangarTotal;
 
     const bldgs = ['Pancho Building', 'CBA Building', 'Hangar'];
+    const query = standaloneSearchQuery.trim().toLowerCase();
+
+    // Global filtered rooms for top telemetry
+    const globalFiltered = rooms.filter(r => {
+      const matchBldg = activeStandaloneBldg === 'all' || r.building === activeStandaloneBldg;
+      const matchStatus = activeStandaloneStatus === 'all' || r.status === activeStandaloneStatus;
+      let matchQuery = true;
+      if (query) {
+        const code = (r.roomCode || getOrGenerateRoomCode(r)).toLowerCase();
+        const roomName = (r.room || '').toLowerCase();
+        const occupant = (r.occupant || '').toLowerCase();
+        const type = (r.type || '').toLowerCase();
+        const schedule = (r.schedule || '').toLowerCase();
+        const bldg = (r.building || '').toLowerCase();
+        matchQuery = code.includes(query) || roomName.includes(query) || occupant.includes(query) || type.includes(query) || schedule.includes(query) || bldg.includes(query);
+      }
+      return matchBldg && matchStatus && matchQuery;
+    });
+
+    const matrixMatchedCount = document.getElementById('matrixMatchedCount');
+    const matrixFreeCount = document.getElementById('matrixFreeCount');
+    const matrixOccCount = document.getElementById('matrixOccCount');
+    const matrixMaintCount = document.getElementById('matrixMaintCount');
+    const matrixMaintWrap = document.getElementById('matrixMaintWrap');
+
+    const totalFree = globalFiltered.filter(r => r.status === 'vacant').length;
+    const totalOcc = globalFiltered.filter(r => r.status === 'occupied').length;
+    const totalMaint = globalFiltered.filter(r => r.status === 'maintenance').length;
+
+    if (matrixMatchedCount) matrixMatchedCount.textContent = globalFiltered.length;
+    if (matrixFreeCount) matrixFreeCount.textContent = totalFree;
+    if (matrixOccCount) matrixOccCount.textContent = totalOcc;
+    if (matrixMaintCount) matrixMaintCount.textContent = totalMaint;
+    if (matrixMaintWrap) matrixMaintWrap.style.display = totalMaint > 0 ? 'inline-flex' : 'none';
+
+    let totalCardsRendered = 0;
 
     bldgs.forEach(bldgName => {
-      if (bldgFilter !== 'all' && bldgFilter !== bldgName) return;
+      if (activeStandaloneBldg !== 'all' && activeStandaloneBldg !== bldgName) return;
 
       let bldgRooms = rooms.filter(r => r.building === bldgName);
-      if (statusFilter !== 'all') {
-        bldgRooms = bldgRooms.filter(r => r.status === statusFilter);
-      }
-      if (bldgRooms.length === 0) return;
-
-      const card = document.createElement('div');
-      card.className = 'matrix-bldg-card';
       
+      // Filter by status and search
+      let visibleBldgRooms = bldgRooms.filter(r => {
+        const matchStatus = activeStandaloneStatus === 'all' || r.status === activeStandaloneStatus;
+        let matchQuery = true;
+        if (query) {
+          const code = (r.roomCode || getOrGenerateRoomCode(r)).toLowerCase();
+          const roomName = (r.room || '').toLowerCase();
+          const occupant = (r.occupant || '').toLowerCase();
+          const type = (r.type || '').toLowerCase();
+          const schedule = (r.schedule || '').toLowerCase();
+          matchQuery = code.includes(query) || roomName.includes(query) || occupant.includes(query) || type.includes(query) || schedule.includes(query);
+        }
+        return matchStatus && matchQuery;
+      });
+
+      if (visibleBldgRooms.length === 0) return;
+      totalCardsRendered++;
+
+      const themeClass = bldgName === 'Pancho Building' ? 'theme-pancho' : bldgName === 'CBA Building' ? 'theme-cba' : 'theme-hangar';
+      const bldgTagLabel = bldgName === 'Pancho Building' ? '2 Floors · 67 Rooms' : bldgName === 'CBA Building' ? '4 Floors · 12 Rooms' : '1 Floor · 6 Bays';
+
       const occCount = bldgRooms.filter(r => r.status === 'occupied').length;
       const vacCount = bldgRooms.filter(r => r.status === 'vacant').length;
       const mntCount = bldgRooms.filter(r => r.status === 'maintenance').length;
+      const occPct = bldgRooms.length > 0 ? Math.round((occCount / bldgRooms.length) * 100) : 0;
 
-      card.innerHTML = `
-        <div class="matrix-bldg-header">
-          <div style="display:flex; align-items:center; gap:10px;">
-            <h4 style="font-size:1.15rem; font-weight:900; color:#0f172a;">${bldgName}</h4>
-            <span class="matrix-bldg-badge" style="font-size:0.8rem; font-weight:800;">${bldgRooms.length} Facilities</span>
-          </div>
-          <div style="display:flex; gap:12px; font-size:0.85rem; font-weight:900;">
-            <span style="color:#059669;">${vacCount} Available</span>
-            <span style="color:#e11d48;">${occCount} In-Use</span>
-            ${mntCount > 0 ? `<span style="color:#d97706;">${mntCount} Repair</span>` : ''}
+      const card = document.createElement('div');
+      card.className = `matrix-bldg-card ${themeClass}`;
+      
+      // Building Card Header
+      const cardHeader = document.createElement('div');
+      cardHeader.className = 'matrix-bldg-header';
+      cardHeader.innerHTML = `
+        <div class="m-bldg-header-left">
+          <div class="m-bldg-badge-icon"></div>
+          <div>
+            <div class="m-bldg-title-row">
+              <h4 class="m-bldg-title">${bldgName}</h4>
+              <span class="m-bldg-tag">${bldgTagLabel}</span>
+            </div>
+            <div class="m-bldg-meter-wrap">
+              <div class="m-bldg-meter-bar">
+                <div class="m-meter-fill" style="width: ${occPct}%;"></div>
+              </div>
+              <span class="m-meter-text">${occPct}% Occupancy · ${vacCount} Available, ${occCount} In-Use</span>
+            </div>
           </div>
         </div>
-      `;
 
-      const floors = [...new Set(bldgRooms.map(r => r.floor))].sort((a,b) => a - b);
-      floors.forEach(flr => {
-        const flrRooms = bldgRooms.filter(r => r.floor === flr);
+        <div class="m-bldg-header-right">
+          <div class="m-floor-filter-chips" data-bldg="${bldgName}"></div>
+        </div>
+      `;
+      card.appendChild(cardHeader);
+
+      // Floor filter pills for this building
+      const floorFilterContainer = cardHeader.querySelector('.m-floor-filter-chips');
+      const allFloors = [...new Set(bldgRooms.map(r => r.floor))].sort((a,b) => a - b);
+      const selectedFloor = activeFloorFilterPerBldg[bldgName] || 'all';
+
+      let floorPillsHtml = `<button class="m-flr-chip ${selectedFloor === 'all' ? 'active' : ''}" data-flr="all">ALL FLOORS</button>`;
+      allFloors.forEach(f => {
+        const floorRoomCount = bldgRooms.filter(r => r.floor === f).length;
+        floorPillsHtml += `<button class="m-flr-chip ${selectedFloor === String(f) ? 'active' : ''}" data-flr="${f}">LEVEL ${f} <small>(${floorRoomCount})</small></button>`;
+      });
+      floorFilterContainer.innerHTML = floorPillsHtml;
+
+      floorFilterContainer.querySelectorAll('.m-flr-chip').forEach(btn => {
+        btn.addEventListener('click', () => {
+          activeFloorFilterPerBldg[bldgName] = btn.getAttribute('data-flr');
+          renderStandaloneMatrix();
+        });
+      });
+
+      // Filter visible floors based on selected floor
+      const visibleFloors = allFloors.filter(f => selectedFloor === 'all' || String(f) === selectedFloor);
+
+      const floorsContainer = document.createElement('div');
+      floorsContainer.className = 'matrix-floors-stack';
+
+      visibleFloors.forEach(flr => {
+        const flrRooms = visibleBldgRooms.filter(r => r.floor === flr);
         if (flrRooms.length === 0) return;
 
         const flrSection = document.createElement('div');
         flrSection.className = 'matrix-floor-section';
+        
+        const flrVac = flrRooms.filter(r => r.status === 'vacant').length;
+        const flrOcc = flrRooms.filter(r => r.status === 'occupied').length;
+
         flrSection.innerHTML = `
-          <div class="matrix-floor-title" style="font-size:0.95rem; font-weight:900; color:#334155; margin-bottom:10px;">Floor Level ${flr} (${flrRooms.length} Facilities)</div>
+          <div class="matrix-floor-title-row">
+            <div class="m-flr-badge">
+              <span class="m-flr-bullet"></span>
+              <strong>FLOOR LEVEL ${flr}</strong>
+              <span class="m-flr-count">${flrRooms.length} Facilities</span>
+            </div>
+            <div class="m-flr-telemetry">
+              <span class="m-flr-stat free">${flrVac} Free</span>
+              <span class="m-flr-stat inuse">${flrOcc} In-Use</span>
+            </div>
+          </div>
           <div class="matrix-rooms-grid"></div>
         `;
 
         const roomGrid = flrSection.querySelector('.matrix-rooms-grid');
         flrRooms.forEach(roomObj => {
           const cell = document.createElement('div');
-          cell.className = `matrix-room-cell ${roomObj.status}`;
-          cell.style.cursor = 'pointer';
+          const statusClass = roomObj.status === 'vacant' ? 'vacant' : roomObj.status === 'occupied' ? 'occupied' : 'maintenance';
+          const statusPillText = roomObj.status === 'vacant' ? 'AVAILABLE' : roomObj.status === 'occupied' ? 'IN-USE' : 'MAINT';
           const codeDisplay = roomObj.roomCode || getOrGenerateRoomCode(roomObj);
+          
+          let facultyDisplay = 'Available for Booking';
+          if (roomObj.status === 'occupied') {
+            facultyDisplay = roomObj.occupant !== 'None' ? roomObj.occupant : 'Active Class';
+          } else if (roomObj.status === 'maintenance') {
+            facultyDisplay = 'Under Maintenance';
+          }
+
+          cell.className = `matrix-room-cell ${statusClass}`;
           cell.innerHTML = `
-            <span class="matrix-room-dot"></span>
-            <div class="matrix-room-name" style="font-size:0.95rem; font-weight:900;">${codeDisplay}</div>
-            <div class="matrix-room-sub" style="font-size:0.82rem; font-weight:800;">${roomObj.status === 'vacant' ? 'Available' : roomObj.status === 'maintenance' ? 'In Repair' : roomObj.occupant}</div>
+            <div class="m-cell-top">
+              <span class="m-cell-code">${codeDisplay}</span>
+              <span class="m-cell-status-badge ${statusClass}">
+                <span class="m-status-dot"></span>
+                ${statusPillText}
+              </span>
+            </div>
+            <div class="m-cell-middle">
+              <div class="m-cell-occupant" title="${facultyDisplay}">${facultyDisplay}</div>
+              ${roomObj.schedule && roomObj.schedule !== '--' ? `<div class="m-cell-schedule">${roomObj.schedule}</div>` : ''}
+            </div>
+            <div class="m-cell-bottom">
+              <span class="m-cell-type">${roomObj.type || 'Room'}</span>
+              <span class="m-cell-cap">${roomObj.capacity || 40} Seats</span>
+            </div>
           `;
 
           cell.addEventListener('click', () => {
@@ -1889,14 +2034,37 @@ document.addEventListener('DOMContentLoaded', () => {
           roomGrid.appendChild(cell);
         });
 
-        card.appendChild(flrSection);
+        floorsContainer.appendChild(flrSection);
       });
 
+      card.appendChild(floorsContainer);
       grid.appendChild(card);
     });
 
-    if (grid.children.length === 0) {
-      grid.innerHTML = `<div style="padding:40px; text-align:center; color:#64748b; font-size:1.1rem; font-weight:800;">No facilities match the selected filters.</div>`;
+    if (totalCardsRendered === 0) {
+      grid.innerHTML = `
+        <div class="matrix-empty-state">
+          <div class="m-empty-icon">
+            <svg viewBox="0 0 24 24" width="36" height="36" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          </div>
+          <h4>No Facilities Match Your Filters</h4>
+          <p>Try clearing your search query or switching your status filter.</p>
+          <button class="m-empty-reset-btn" id="btnResetMatrixFilters">Reset Matrix Filters</button>
+        </div>
+      `;
+      document.getElementById('btnResetMatrixFilters')?.addEventListener('click', () => {
+        standaloneSearchQuery = '';
+        activeStandaloneBldg = 'all';
+        activeStandaloneStatus = 'all';
+        activeFloorFilterPerBldg = {};
+        const searchInput = document.getElementById('matrixSearchInput');
+        if (searchInput) searchInput.value = '';
+        const clearBtn = document.getElementById('btnMatrixSearchClear');
+        if (clearBtn) clearBtn.classList.add('hidden');
+        document.querySelectorAll('#matrixBldgTabs .m-bldg-tab-btn').forEach(b => b.classList.toggle('active', b.getAttribute('data-bldg') === 'all'));
+        document.querySelectorAll('#matrixStatusPills .m-status-chip').forEach(b => b.classList.toggle('active', b.getAttribute('data-status') === 'all'));
+        renderStandaloneMatrix();
+      });
     }
   }
 
@@ -1910,10 +2078,12 @@ document.addEventListener('DOMContentLoaded', () => {
     let filtered = rooms;
     if (searchVal) {
       filtered = rooms.filter(r => 
+        (r.roomCode && r.roomCode.toLowerCase().includes(searchVal)) ||
         r.room.toLowerCase().includes(searchVal) ||
         r.building.toLowerCase().includes(searchVal) ||
-        r.type.toLowerCase().includes(searchVal) ||
-        r.occupant.toLowerCase().includes(searchVal)
+        (r.type && r.type.toLowerCase().includes(searchVal)) ||
+        (r.occupant && r.occupant.toLowerCase().includes(searchVal)) ||
+        (r.schedule && r.schedule.toLowerCase().includes(searchVal))
       );
     }
 
@@ -1923,15 +2093,17 @@ document.addEventListener('DOMContentLoaded', () => {
       const tr = document.createElement('tr');
       const badgeClass = item.status === 'vacant' ? 'badge-available' : item.status === 'occupied' ? 'badge-occupied' : 'badge-maintenance';
       const badgeText = item.status === 'vacant' ? '• Available' : item.status === 'occupied' ? '• In-Use' : '• Repair';
+      const codeDisplay = item.roomCode || getOrGenerateRoomCode(item);
+      const occupantDisplay = item.status === 'vacant' ? '<span style="color:#059669; font-weight:800;">Available (No Class)</span>' : `<strong>${item.occupant}</strong> ${item.schedule && item.schedule !== '--' ? `<small style="display:block; color:#64748b; font-size:0.75rem;">${item.schedule}</small>` : ''}`;
 
       tr.innerHTML = `
-        <td><strong style="font-size:0.95rem; color:#0f172a;">${item.room}</strong></td>
+        <td><strong style="font-size:0.95rem; color:#0f172a;">${codeDisplay}</strong></td>
         <td>${item.building}</td>
         <td>Floor ${item.floor}</td>
-        <td><span style="background:#f1f5f9; padding:3px 8px; border-radius:6px; font-weight:800; font-size:0.8rem;">${item.type}</span></td>
+        <td><span style="background:#f1f5f9; padding:3px 8px; border-radius:6px; font-weight:800; font-size:0.8rem;">${item.type || 'Classroom'}</span></td>
         <td><strong>${item.capacity || 40}</strong> seats</td>
         <td><span class="status-pill-badge ${badgeClass}">${badgeText}</span></td>
-        <td>${item.status === 'vacant' ? '<span style="color:#059669; font-weight:800;">None (Available)</span>' : `<strong>${item.occupant}</strong>`}</td>
+        <td>${occupantDisplay}</td>
         <td>
           <button class="list-inspect-btn" style="padding:5px 12px; font-size:0.82rem; font-weight:800; border-radius:6px;">Edit / View</button>
         </td>
@@ -1945,11 +2117,53 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Handle matrix filter dropdowns and tabs
-  document.getElementById('matrixBldgFilter')?.addEventListener('change', renderStandaloneMatrix);
-  document.getElementById('matrixStatusFilter')?.addEventListener('change', renderStandaloneMatrix);
+  // Matrix Filter Search Input & Clear
+  const matrixSearchInput = document.getElementById('matrixSearchInput');
+  const btnMatrixSearchClear = document.getElementById('btnMatrixSearchClear');
+
+  if (matrixSearchInput) {
+    matrixSearchInput.addEventListener('input', (e) => {
+      standaloneSearchQuery = e.target.value;
+      if (btnMatrixSearchClear) {
+        btnMatrixSearchClear.classList.toggle('hidden', standaloneSearchQuery.length === 0);
+      }
+      renderStandaloneMatrix();
+    });
+  }
+
+  if (btnMatrixSearchClear) {
+    btnMatrixSearchClear.addEventListener('click', () => {
+      standaloneSearchQuery = '';
+      if (matrixSearchInput) matrixSearchInput.value = '';
+      btnMatrixSearchClear.classList.add('hidden');
+      renderStandaloneMatrix();
+    });
+  }
+
+  // Building Tabs
+  document.querySelectorAll('#matrixBldgTabs .m-bldg-tab-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('#matrixBldgTabs .m-bldg-tab-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      activeStandaloneBldg = btn.getAttribute('data-bldg');
+      renderStandaloneMatrix();
+    });
+  });
+
+  // Status Chips
+  document.querySelectorAll('#matrixStatusPills .m-status-chip').forEach(chip => {
+    chip.addEventListener('click', () => {
+      document.querySelectorAll('#matrixStatusPills .m-status-chip').forEach(c => c.classList.remove('active'));
+      chip.classList.add('active');
+      activeStandaloneStatus = chip.getAttribute('data-status');
+      renderStandaloneMatrix();
+    });
+  });
+
+  // Master Directory Search Input
   document.getElementById('dirSearchInput')?.addEventListener('input', renderMasterDirectory);
   
+  // Facilities Tab Switching (Visual Matrix vs Master Directory)
   document.getElementById('btnFacMatrixTab')?.addEventListener('click', () => {
     document.getElementById('btnFacMatrixTab')?.classList.add('active');
     document.getElementById('btnFacDirectoryTab')?.classList.remove('active');
@@ -1966,7 +2180,7 @@ document.addEventListener('DOMContentLoaded', () => {
     renderMasterDirectory();
   });
 
-  // Handle matrix filter pills
+  // Handle matrix filter pills (Map subview)
   document.querySelectorAll('.matrix-pill-btn').forEach(btn => {
     btn.addEventListener('click', (e) => {
       document.querySelectorAll('.matrix-pill-btn').forEach(b => b.classList.remove('active'));
