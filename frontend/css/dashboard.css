@@ -5871,80 +5871,79 @@ body.force-mobile-view .dashboard-split-grid {
   color: #000000;
 }
 
-/* ── Mobile Filter Controls Strip (Strict Fixed Partition Grid: Zone 1 + Zone 2) ── */
+/* ── Mobile Filter Controls Strip (Status Filter + Floor Selector) ── */
 .mobile-filters-row {
   display: grid !important;
-  grid-template-columns: 53% 47% !important;
-  gap: 6px !important;
+  grid-template-columns: 1fr 1fr !important;
+  gap: 8px !important;
   width: 100% !important;
   align-items: center !important;
   box-sizing: border-box !important;
 }
 
-/* Zone 1 (Left): Status Buttons (STRICT FIXED 53% - NEVER shifts or resizes) */
+/* Status Filter Segment */
 .mobile-status-pills {
   display: grid !important;
-  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  grid-template-columns: repeat(3, 1fr) !important;
   gap: 4px !important;
   width: 100% !important;
-  min-width: 0 !important;
-  max-width: 100% !important;
   box-sizing: border-box !important;
 }
 .m-status-btn {
-  height: 36px !important;
-  padding: 0 2px !important;
+  height: 34px !important;
+  padding: 0 4px !important;
   background: #ffffff !important;
   border: 2px solid #000000 !important;
   border-radius: 8px !important;
   box-shadow: 1.5px 1.5px 0px #000000 !important;
   font-family: inherit !important;
-  font-size: 0.7rem !important;
+  font-size: 0.74rem !important;
   font-weight: 900 !important;
+  letter-spacing: 0.02em !important;
   cursor: pointer !important;
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
   text-align: center !important;
   white-space: nowrap !important;
-  overflow: hidden !important;
-  text-overflow: ellipsis !important;
-  min-width: 0 !important;
   transition: all 0.12s ease !important;
 }
 .m-status-btn:active {
   transform: translate(1px, 1px) !important;
-  box-shadow: 1px 1px 0px #000000 !important;
+  box-shadow: 0.5px 0.5px 0px #000000 !important;
 }
 .m-status-btn.active {
   background: #000000 !important;
   color: #ffffff !important;
-  box-shadow: 2px 2px 0px #84cc16 !important;
+  box-shadow: 2px 2px 0px #000000 !important;
+}
+.m-status-btn[data-status="available"].active {
+  background: #84cc16 !important;
+  color: #000000 !important;
+}
+.m-status-btn[data-status="occupied"].active {
+  background: #f43f5e !important;
+  color: #ffffff !important;
 }
 
-/* Zone 2 (Right): Floor / Level Buttons (STRICT FIXED 47% - Contained in its own fixed zone) */
+/* Floor Level Selector Segment */
 .mobile-floor-pills {
   display: flex !important;
-  flex-direction: row !important;
-  align-items: center !important;
-  gap: 3px !important;
+  gap: 4px !important;
   width: 100% !important;
-  min-width: 0 !important;
-  max-width: 100% !important;
-  height: 36px !important;
+  height: 34px !important;
   box-sizing: border-box !important;
 }
 .m-floor-btn {
-  flex: 1 1 0% !important;
-  min-width: 0 !important;
-  height: 36px !important;
-  padding: 0 2px !important;
-  background: #f4f4f5 !important;
+  flex: 1 !important;
+  height: 34px !important;
+  padding: 0 4px !important;
+  background: #ffffff !important;
   border: 2px solid #000000 !important;
   border-radius: 8px !important;
   box-shadow: 1.5px 1.5px 0px #000000 !important;
   font-family: inherit !important;
-  font-size: 0.72rem !important;
+  font-size: 0.74rem !important;
   font-weight: 900 !important;
   cursor: pointer !important;
   display: flex !important;
@@ -5952,16 +5951,14 @@ body.force-mobile-view .dashboard-split-grid {
   justify-content: center !important;
   text-align: center !important;
   white-space: nowrap !important;
-  overflow: hidden !important;
-  text-overflow: ellipsis !important;
   transition: all 0.12s ease !important;
 }
 .m-floor-btn:active {
   transform: translate(1px, 1px) !important;
-  box-shadow: 1px 1px 0px #000000 !important;
+  box-shadow: 0.5px 0.5px 0px #000000 !important;
 }
 .m-floor-btn.active {
-  background: var(--lime-400) !important;
+  background: #84cc16 !important;
   color: #000000 !important;
   box-shadow: 2px 2px 0px #000000 !important;
 }
