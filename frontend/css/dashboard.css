@@ -3257,6 +3257,7 @@ body.force-mobile-view .sidebar-close-btn {
 
 .modular-table {
   width: 100%;
+  table-layout: fixed;
   border-collapse: separate;
   border-spacing: 0;
   text-align: left;
@@ -3283,6 +3284,7 @@ body.force-mobile-view .sidebar-close-btn {
   border-bottom: 2.5px solid #000000;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
   z-index: 20;
+  white-space: nowrap;
 }
 
 .modular-table tbody td {
@@ -3292,6 +3294,44 @@ body.force-mobile-view .sidebar-close-btn {
   font-size: 0.84rem;
   font-weight: 700;
   vertical-align: middle;
+}
+
+/* Explicit Fixed Column Proportions & Exact Alignments */
+.modular-table th:nth-child(1),
+.modular-table td:nth-child(1) {
+  width: 17%;
+  text-align: left;
+}
+
+.modular-table th:nth-child(2),
+.modular-table td:nth-child(2) {
+  width: 16%;
+  text-align: left;
+}
+
+.modular-table th:nth-child(3),
+.modular-table td:nth-child(3) {
+  width: 15%;
+  text-align: left;
+}
+
+.modular-table th:nth-child(4),
+.modular-table td:nth-child(4) {
+  width: 13%;
+  text-align: left;
+}
+
+.modular-table th:nth-child(5),
+.modular-table td:nth-child(5) {
+  width: 27%;
+  text-align: left;
+}
+
+.modular-table th:nth-child(6),
+.modular-table td:nth-child(6) {
+  width: 12%;
+  text-align: right;
+  padding-right: 20px;
 }
 
 .modular-table tbody tr:nth-child(even) {
@@ -5161,13 +5201,13 @@ body.force-mobile-view .sidebar-close-btn {
 
 [data-theme="dark"] .modular-table thead th {
   background: #131313 !important;
-  color: #ffffff;
-  border-bottom: 2.5px solid #3a3939;
+  color: #ffffff !important;
+  border-bottom: 2.5px solid #52525b;
 }
 
 [data-theme="dark"] .modular-table tbody td {
-  border-bottom: 1.5px solid #3a3939;
-  color: #d4d4d4;
+  border-bottom: 1.5px solid #27272a;
+  color: #ffffff;
 }
 
 [data-theme="dark"] .modular-table tbody tr:nth-child(even) {
@@ -5179,13 +5219,13 @@ body.force-mobile-view .sidebar-close-btn {
 }
 
 [data-theme="dark"] .modular-table tbody tr:hover td {
-  background: #3a3939 !important;
+  background: #27272a !important;
 }
 
 [data-theme="dark"] .table-room-chip {
-  background: #3a3939;
+  background: #242424;
   color: #ffffff;
-  border: 2px solid #3a3939;
+  border: 1.8px solid #52525b;
   box-shadow: 2px 2px 0px #000000;
 }
 
@@ -5193,6 +5233,14 @@ body.force-mobile-view .sidebar-close-btn {
   background: #ccff00;
   color: #000000;
   border-color: #000000;
+}
+
+[data-theme="dark"] .table-bldg-text strong {
+  color: #ffffff !important;
+}
+
+[data-theme="dark"] .table-bldg-text small {
+  color: #a1a1aa !important;
 }
 
 [data-theme="dark"] .bldg-name-cell,
@@ -5220,9 +5268,9 @@ body.force-mobile-view .sidebar-close-btn {
 }
 
 [data-theme="dark"] .dir-capacity-pill {
-  background: #3a3939;
+  background: #242424;
   color: #ffffff;
-  border: 1.5px solid #3a3939;
+  border: 1.5px solid #52525b;
   box-shadow: 1.5px 1.5px 0px #000000;
 }
 
