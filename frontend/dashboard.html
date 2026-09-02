@@ -221,7 +221,7 @@
               <div class="capacity-seg in-use-seg">
                 <div class="kpi-header-row">
                   <span class="kpi-v2-title">Active Classes</span>
-                  <span class="kpi-micro-tag live">● LIVE SESSIONS</span>
+                  <span class="kpi-micro-tag live">● LIVE</span>
                 </div>
                 <div class="capacity-metric-row">
                   <div class="kpi-v2-big-num in-use-num" id="statActiveClasses">28</div>
@@ -252,7 +252,7 @@
                     </div>
                   </div>
                 </div>
-                <div class="kpi-v2-sub">Across 3 Buildings · <strong id="kpiOccRate" style="color:#065f46;">33% Occupancy</strong></div>
+                <span id="kpiOccRate" style="display:none;"></span>
               </div>
 
               <!-- Center Vertical Divider -->
@@ -262,22 +262,22 @@
               <div class="capacity-seg vacant-seg">
                 <div class="kpi-header-row">
                   <span class="kpi-v2-title">Vacant Rooms</span>
-                  <span class="kpi-micro-tag ready">● READY TO ASSIGN</span>
+                  <span class="kpi-micro-tag ready">● READY</span>
                 </div>
                 <div class="capacity-metric-row">
                   <div class="kpi-v2-big-num vacant-num" id="statVacantRooms">55</div>
                   <div class="capacity-gauge-wrap">
-                    <svg viewBox="0 0 76 76" width="68" height="68">
-                      <circle cx="38" cy="38" r="30" fill="none" stroke="#e2e8f0" stroke-width="6.5"/>
-                      <circle cx="38" cy="38" r="30" fill="none" stroke="#84cc16" stroke-width="6.5"
-                              id="vacantRingProgress" stroke-dasharray="188.5" stroke-dashoffset="66"
-                              stroke-linecap="round" transform="rotate(-90 38 38)"/>
-                      <text x="38" y="36" font-family="Plus Jakarta Sans, system-ui" font-weight="900" font-size="15" fill="#0f172a" text-anchor="middle" id="vacantGaugeNum">55</text>
-                      <text x="38" y="48" font-family="Plus Jakarta Sans, system-ui" font-weight="800" font-size="8.5" fill="#64748b" text-anchor="middle" id="vacantGaugeTotal">of 85</text>
+                    <svg viewBox="0 0 84 84" width="76" height="76">
+                      <circle cx="42" cy="42" r="33" fill="none" stroke="#e2e8f0" stroke-width="8"/>
+                      <circle cx="42" cy="42" r="33" fill="none" stroke="#84cc16" stroke-width="8"
+                              id="vacantRingProgress" stroke-dasharray="207.3" stroke-dashoffset="72"
+                              stroke-linecap="round" transform="rotate(-90 42 42)"/>
+                      <text x="42" y="40" font-family="Plus Jakarta Sans, system-ui" font-weight="900" font-size="18" fill="#0f172a" text-anchor="middle" id="vacantGaugeNum">55</text>
+                      <text x="42" y="53" font-family="Plus Jakarta Sans, system-ui" font-weight="900" font-size="9.5" fill="#64748b" text-anchor="middle" id="vacantGaugeTotal">of 85</text>
                     </svg>
                   </div>
                 </div>
-                <div class="kpi-v2-sub green">Available Now · <strong id="kpiFreeRate" style="color:#065f46;">55 / 85 Rooms Free</strong></div>
+                <span id="kpiFreeRate" style="display:none;"></span>
               </div>
             </div>
 

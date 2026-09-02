@@ -1061,10 +1061,13 @@ body.force-mobile-view .sidebar-close-btn {
   grid-column: span 2;
   background: #ffffff;
   display: flex;
-  align-items: stretch;
+  align-items: center;
   justify-content: space-between;
   gap: 16px;
-  padding: 16px 20px;
+  padding: 12px 18px;
+  border: 2.5px solid #000000;
+  border-radius: 16px;
+  box-shadow: 4px 4px 0px #000000;
 }
 .kpi-card-v2.unified-capacity-hero:hover {
   box-shadow: 6px 6px 0px #000000;
@@ -1074,98 +1077,116 @@ body.force-mobile-view .sidebar-close-btn {
   flex: 1;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: center;
   gap: 6px;
+}
+
+.unified-capacity-hero .kpi-v2-title {
+  font-size: 1.05rem;
+  font-weight: 900;
+  color: #000000;
+  letter-spacing: -0.3px;
+}
+
+.unified-capacity-hero .kpi-micro-tag {
+  font-size: 0.68rem;
+  font-weight: 900;
+  padding: 2.5px 9px;
+  border: 1.8px solid #000000;
+  box-shadow: 1.5px 1.5px 0px #000000;
 }
 
 .capacity-metric-row {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 12px;
-  margin: 2px 0;
+  gap: 14px;
 }
 
 .kpi-v2-big-num.in-use-num {
-  font-size: 2.85rem;
+  font-size: 3.2rem;
   font-weight: 900;
   color: #15803d;
-  line-height: 1;
-  letter-spacing: -0.03em;
+  line-height: 0.95;
+  letter-spacing: -0.04em;
   margin: 0;
 }
 
 .kpi-v2-big-num.vacant-num {
-  font-size: 2.85rem;
+  font-size: 3.2rem;
   font-weight: 900;
   color: #0284c7;
-  line-height: 1;
-  letter-spacing: -0.03em;
+  line-height: 0.95;
+  letter-spacing: -0.04em;
   margin: 0;
 }
 
 .capacity-center-divider {
-  width: 1.5px;
+  width: 2px;
+  height: 80px;
   background: #000000;
-  opacity: 0.12;
+  opacity: 0.15;
   border-radius: 2px;
-  margin: 2px 4px;
+  margin: 0 4px;
+  flex-shrink: 0;
 }
 
 .capacity-bldg-breakdown {
   display: flex;
   flex-direction: column;
   gap: 4px;
-  min-width: 112px;
+  flex: 1;
+  max-width: 145px;
 }
 
 .bldg-stat-row {
   display: flex;
   align-items: center;
   gap: 6px;
-  font-size: 0.72rem;
   font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
-  font-weight: 800;
 }
 
 .bldg-stat-dot {
-  width: 7px;
-  height: 7px;
+  width: 9px;
+  height: 9px;
   border-radius: 50%;
+  border: 1.5px solid #000000;
   flex-shrink: 0;
 }
 
 .bldg-stat-name {
-  width: 44px;
-  font-size: 0.68rem;
-  color: #475569;
-  font-weight: 800;
+  width: 48px;
+  font-size: 0.74rem;
+  color: #000000;
+  font-weight: 900;
+  letter-spacing: -0.2px;
 }
 
 .bldg-stat-track {
   flex: 1;
-  height: 6px;
-  background: #f1f5f9;
-  border: 1px solid #000000;
-  border-radius: 3px;
+  height: 9px;
+  background: #f8fafc;
+  border: 1.8px solid #000000;
+  border-radius: 4px;
+  box-shadow: 1px 1px 0px #000000;
   overflow: hidden;
-  min-width: 32px;
+  min-width: 40px;
 }
 
 .bldg-stat-fill {
   height: 100%;
-  border-radius: 2px;
+  border-radius: 1px;
   transition: width 0.3s ease;
 }
-.bldg-stat-fill.purple { background: #a855f7; }
-.bldg-stat-fill.cyan { background: #0284c7; }
+.bldg-stat-fill.purple { background: #c084fc; }
+.bldg-stat-fill.cyan { background: #38bdf8; }
 .bldg-stat-fill.lime { background: #84cc16; }
 
 .bldg-stat-val {
-  font-size: 0.72rem;
+  font-size: 0.82rem;
   font-weight: 900;
-  color: #0f172a;
-  min-width: 16px;
+  color: #000000;
+  min-width: 18px;
   text-align: right;
 }
 
@@ -1173,6 +1194,7 @@ body.force-mobile-view .sidebar-close-btn {
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-shrink: 0;
 }
 
 /* ── Legacy Themed KPI Cards in Light Mode ── */

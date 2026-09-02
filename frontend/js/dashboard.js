@@ -885,7 +885,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (kpiFreeRate) kpiFreeRate.textContent = `${vacantRooms} / ${totalRooms} Rooms Free`;
 
     if (vacantRingProgress && totalRooms > 0) {
-      const circum = 2 * Math.PI * 30; // ~188.5
+      const circum = 2 * Math.PI * 33; // ~207.3
       const offset = circum - (vacantRooms / totalRooms) * circum;
       vacantRingProgress.style.strokeDashoffset = offset;
     }
