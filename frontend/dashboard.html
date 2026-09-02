@@ -659,44 +659,32 @@
                         </pattern>
                       </defs>
 
-                      <!-- Outer Canvas & Blueprint Dot Canvas Background -->
-                      <rect x="8" y="8" width="1584" height="844" rx="12" fill="#fafaf9" stroke="#000000" stroke-width="3"/>
-                      <rect x="8" y="8" width="1584" height="844" fill="url(#campusBpGrid)"/>
-                      <rect x="8" y="8" width="1584" height="844" fill="url(#halftoneDots)"/>
+                      <!-- Canvas Dot Matrix Background (Clean, No Artificial Outer Framing) -->
+                      <rect width="100%" height="100%" fill="#fafaf9"/>
+                      <rect width="100%" height="100%" fill="url(#campusBpGrid)"/>
+                      <rect width="100%" height="100%" fill="url(#halftoneDots)"/>
 
-                      <!-- Heavy Comic/CAD Section Border Framing -->
-                      <rect x="30" y="38" width="1540" height="794" fill="none" stroke="#000000" stroke-width="3" rx="8"/>
-
-                      <!-- "SECTION 1 // CAMPUS BLUEPRINT" Top-Left Comic Tag -->
-                      <g id="cad-section-badge" transform="translate(30, 14)">
-                        <rect width="240" height="36" rx="8" fill="#000000" stroke="#000000" stroke-width="2.5"/>
-                        <text x="120" y="24" fill="#ffffff" font-family="Plus Jakarta Sans, monospace" font-weight="900" font-size="14" text-anchor="middle" letter-spacing="0.5">SECTION 1 : GROUNDS</text>
+                      <!-- Top Left Minimalist Location Coordinates -->
+                      <g font-family="Plus Jakarta Sans, monospace" font-size="11.5" font-weight="800" fill="#64748b" transform="translate(30, 28)">
+                        <text x="0" y="0">X: 120.940° E  |  Y: 14.852° N</text>
                       </g>
 
-                      <!-- Top Right Comic Sector Badge & Compass -->
-                      <g transform="translate(1360, 14)">
-                        <rect width="210" height="36" rx="8" fill="#84cc16" stroke="#000000" stroke-width="2.5"/>
-                        <text x="105" y="24" fill="#000000" font-family="Plus Jakarta Sans, monospace" font-weight="900" font-size="13.5" text-anchor="middle">BULSU CAD · 2026</text>
+                      <!-- Top Right Sector Badge -->
+                      <g transform="translate(1410, 16)">
+                        <rect width="160" height="28" rx="6" fill="#84cc16" stroke="#000000" stroke-width="1.8"/>
+                        <text x="80" y="19" fill="#000000" font-family="Plus Jakarta Sans, monospace" font-weight="900" font-size="12" text-anchor="middle">BULSU CAD · 2026</text>
                       </g>
 
-                      <!-- Comic Blueprint Dimension Markings -->
-                      <g font-family="Plus Jakarta Sans, monospace" font-size="11" font-weight="900" fill="#475569">
-                        <text x="50" y="72">X: 120.940° E  |  Y: 14.852° N</text>
-                        <text x="1410" y="818" text-anchor="end">SCALE: 1:500 ARCHITECTURAL VECTOR</text>
+                      <!-- Bottom Right Blueprint Scale -->
+                      <g font-family="Plus Jakarta Sans, monospace" font-size="11" font-weight="800" fill="#94a3b8">
+                        <text x="1560" y="840" text-anchor="end">SCALE: 1:500 ARCHITECTURAL VECTOR</text>
                       </g>
 
-                      <!-- ── CAMPUS ROAD NETWORK & CENTRAL BOULEVARD (No Crosswalks) ── -->
+                      <!-- ── CAMPUS ROAD NETWORK (Sleek Clean Architectural Boulevard) ── -->
                       <g id="campusRoadsLayer">
-                        <!-- Main East-West Boulevard (Clean Straight Run, Ending at CBA) -->
-                        <rect x="30" y="350" width="1190" height="60" fill="#f1f5f9" stroke="#000000" stroke-width="3"/>
-                        <line x1="30" y1="350" x2="1220" y2="350" stroke="#000000" stroke-width="3"/>
-                        <line x1="30" y1="410" x2="1220" y2="410" stroke="#000000" stroke-width="3"/>
-
-                        <!-- Road Center Dashed Lines (Bright Yellow Comic Asphalt Striping) -->
-                        <line x1="35" y1="380" x2="1215" y2="380" stroke="#eab308" stroke-width="3.5" stroke-dasharray="20,14"/>
-
-                        <!-- Comic Road Surface Telemetry Text -->
-                        <text x="80" y="398" font-family="Plus Jakarta Sans, monospace" font-size="11.5" font-weight="900" fill="#94a3b8" letter-spacing="1">▲ MAIN CAMPUS BOULEVARD // 15 KM/H MAX</text>
+                        <rect x="0" y="352" width="1220" height="56" fill="#f1f5f9" stroke="#cbd5e1" stroke-width="1.5"/>
+                        <line x1="10" y1="380" x2="1215" y2="380" stroke="#eab308" stroke-width="2.5" stroke-dasharray="16,12"/>
+                        <text x="40" y="396" font-family="Plus Jakarta Sans, monospace" font-size="10.5" font-weight="800" fill="#94a3b8" letter-spacing="1">▲ MAIN CAMPUS BOULEVARD // 15 KM/H MAX</text>
                       </g>
 
                       <!-- ── 1. PANCHO BUILDING (Top Left - Lime Green Themed) ── -->
@@ -757,11 +745,11 @@
                         </g>
 
                         <!-- Pancho Title Badge -->
-                        <g transform="translate(240, 68)">
-                          <rect x="0" y="0" width="280" height="52" rx="26" fill="#ffffff" stroke="#000000" stroke-width="3.5"/>
-                          <circle cx="28" cy="26" r="16" fill="#84cc16" stroke="#000000" stroke-width="2.5"/>
-                          <text x="28" y="32" font-family="Plus Jakarta Sans" font-weight="900" font-size="13" fill="#000000" text-anchor="middle">P</text>
-                          <text x="58" y="34" font-family="Plus Jakarta Sans" font-weight="900" font-size="17" fill="#000000">PANCHO BUILDING</text>
+                        <g transform="translate(240, 72)">
+                          <rect x="0" y="0" width="240" height="42" rx="21" fill="#ffffff" stroke="#000000" stroke-width="2"/>
+                          <circle cx="21" cy="21" r="13" fill="#84cc16" stroke="#000000" stroke-width="1.8"/>
+                          <text x="21" y="25.5" font-family="Plus Jakarta Sans" font-weight="900" font-size="11" fill="#000000" text-anchor="middle">P</text>
+                          <text x="46" y="27" font-family="Plus Jakarta Sans" font-weight="900" font-size="14.5" fill="#000000">PANCHO BUILDING</text>
                         </g>
                       </g>
 
@@ -771,14 +759,14 @@
                         <polygon points="214,494 564,494 564,644 424,644 424,669 384,669 384,644 214,644" fill="#000000"/>
 
                         <!-- Admin Building Outer Stepped Wall Body -->
-                        <polygon points="210,490 560,490 560,640 420,640 420,665 380,665 380,640 210,640" fill="#ffffff" stroke="#000000" stroke-width="3"/>
+                        <polygon points="210,490 560,490 560,640 420,640 420,665 380,665 380,640 210,640" fill="#ffffff" stroke="#000000" stroke-width="2.2"/>
 
                         <!-- North Entrance Canopy & Recesses -->
-                        <rect x="300" y="475" width="120" height="15" fill="#f8fafc" stroke="#000000" stroke-width="2"/>
-                        <rect x="530" y="480" width="30" height="15" fill="#f8fafc" stroke="#000000" stroke-width="2"/>
+                        <rect x="300" y="475" width="120" height="15" fill="#f8fafc" stroke="#000000" stroke-width="1.5"/>
+                        <rect x="530" y="480" width="30" height="15" fill="#f8fafc" stroke="#000000" stroke-width="1.5"/>
 
                         <!-- Interior Room Partitions & Hallways (Exact Blueprint Style) -->
-                        <g fill="#ffffff" stroke="#000000" stroke-width="1.8">
+                        <g fill="#ffffff" stroke="#000000" stroke-width="1.5">
                           <!-- Top Row of Offices -->
                           <rect x="220" y="500" width="45" height="40"/>
                           <rect x="265" y="500" width="45" height="40"/>
@@ -821,10 +809,10 @@
 
                         <!-- Admin Title Badge (Below Administrator Building - Unclickable Muted Slate) -->
                         <g transform="translate(180, 675)">
-                          <rect x="0" y="0" width="370" height="52" rx="26" fill="#ffffff" stroke="#000000" stroke-width="3.5"/>
-                          <circle cx="28" cy="26" r="16" fill="#94a3b8" stroke="#000000" stroke-width="2.5"/>
-                          <text x="28" y="32" font-family="Plus Jakarta Sans" font-weight="900" font-size="11" fill="#ffffff" text-anchor="middle">ADM</text>
-                          <text x="58" y="34" font-family="Plus Jakarta Sans" font-weight="900" font-size="17" fill="#475569">ADMINISTRATOR BUILDING</text>
+                          <rect x="0" y="0" width="300" height="42" rx="21" fill="#ffffff" stroke="#000000" stroke-width="2"/>
+                          <circle cx="21" cy="21" r="13" fill="#94a3b8" stroke="#000000" stroke-width="1.8"/>
+                          <text x="21" y="25.5" font-family="Plus Jakarta Sans" font-weight="900" font-size="9.5" fill="#ffffff" text-anchor="middle">ADM</text>
+                          <text x="46" y="27" font-family="Plus Jakarta Sans" font-weight="900" font-size="14.5" fill="#475569">ADMINISTRATOR BUILDING</text>
                         </g>
                       </g>
 
@@ -834,20 +822,20 @@
                         <rect x="734" y="524" width="190" height="280" rx="4" fill="#000000"/>
 
                         <!-- Gym Main Body Rectangle -->
-                        <rect x="730" y="520" width="190" height="280" rx="4" fill="#ffffff" stroke="#000000" stroke-width="3"/>
+                        <rect x="730" y="520" width="190" height="280" rx="4" fill="#ffffff" stroke="#000000" stroke-width="2.2"/>
 
                         <!-- Hip Roof Ridgelines & Triangular Caps -->
-                        <line x1="730" y1="520" x2="825" y2="565" stroke="#000000" stroke-width="2.5"/>
-                        <line x1="920" y1="520" x2="825" y2="565" stroke="#000000" stroke-width="2.5"/>
-                        <line x1="825" y1="565" x2="825" y2="755" stroke="#000000" stroke-width="2.5"/>
-                        <line x1="730" y1="800" x2="825" y2="755" stroke="#000000" stroke-width="2.5"/>
-                        <line x1="920" y1="800" x2="825" y2="755" stroke="#000000" stroke-width="2.5"/>
+                        <line x1="730" y1="520" x2="825" y2="565" stroke="#000000" stroke-width="2"/>
+                        <line x1="920" y1="520" x2="825" y2="565" stroke="#000000" stroke-width="2"/>
+                        <line x1="825" y1="565" x2="825" y2="755" stroke="#000000" stroke-width="2"/>
+                        <line x1="730" y1="800" x2="825" y2="755" stroke="#000000" stroke-width="2"/>
+                        <line x1="920" y1="800" x2="825" y2="755" stroke="#000000" stroke-width="2"/>
 
                         <!-- Transverse Structural Center Line -->
-                        <line x1="730" y1="660" x2="920" y2="660" stroke="#000000" stroke-width="2" stroke-dasharray="6,4"/>
+                        <line x1="730" y1="660" x2="920" y2="660" stroke="#000000" stroke-width="1.5" stroke-dasharray="6,4"/>
 
                         <!-- 6 Column Pedestals (Left Edge) & 6 Column Pedestals (Right Edge) -->
-                        <g fill="#ffffff" stroke="#000000" stroke-width="2">
+                        <g fill="#ffffff" stroke="#000000" stroke-width="1.5">
                           <!-- Left Pedestals -->
                           <rect x="724" y="516" width="12" height="12"/>
                           <rect x="724" y="568" width="12" height="12"/>
@@ -867,10 +855,10 @@
 
                         <!-- Gym Title Badge (Below Gym/Arena - Unclickable Muted Slate) -->
                         <g transform="translate(680, 805)">
-                          <rect x="0" y="0" width="260" height="48" rx="24" fill="#ffffff" stroke="#000000" stroke-width="3.5"/>
-                          <circle cx="26" cy="24" r="15" fill="#94a3b8" stroke="#000000" stroke-width="2.5"/>
-                          <text x="26" y="29.5" font-family="Plus Jakarta Sans" font-weight="900" font-size="11" fill="#ffffff" text-anchor="middle">GYM</text>
-                          <text x="54" y="31" font-family="Plus Jakarta Sans" font-weight="900" font-size="16.5" fill="#475569">ACTIVITY CENTER</text>
+                          <rect x="0" y="0" width="220" height="40" rx="20" fill="#ffffff" stroke="#000000" stroke-width="2"/>
+                          <circle cx="20" cy="20" r="12" fill="#94a3b8" stroke="#000000" stroke-width="1.8"/>
+                          <text x="20" y="24" font-family="Plus Jakarta Sans" font-weight="900" font-size="9" fill="#ffffff" text-anchor="middle">GYM</text>
+                          <text x="42" y="25.5" font-family="Plus Jakarta Sans" font-weight="900" font-size="14" fill="#475569">ACTIVITY CENTER</text>
                         </g>
                       </g>
 
@@ -880,11 +868,11 @@
                         <polygon points="965,535 1165,535 1165,805 965,805" fill="#000000"/>
 
                         <!-- Main Stepped Hangar Boundary (Sky Blue Tint) -->
-                        <polygon points="960,530 1160,530 1160,800 960,800" fill="#e0f2fe" stroke="#000000" stroke-width="3"/>
+                        <polygon points="960,530 1160,530 1160,800 960,800" fill="#e0f2fe" stroke="#000000" stroke-width="2.2"/>
 
                         <!-- Central Monitor Raised Clerestory Ridge with Hatching -->
-                        <rect x="960" y="650" width="200" height="28" fill="#bae6fd" stroke="#000000" stroke-width="2.5"/>
-                        <g stroke="#000000" stroke-width="1.5">
+                        <rect x="960" y="650" width="200" height="28" fill="#bae6fd" stroke="#000000" stroke-width="2"/>
+                        <g stroke="#000000" stroke-width="1.2">
                           <line x1="970" y1="650" x2="970" y2="678"/><line x1="985" y1="650" x2="985" y2="678"/>
                           <line x1="1000" y1="650" x2="1000" y2="678"/><line x1="1015" y1="650" x2="1015" y2="678"/>
                           <line x1="1030" y1="650" x2="1030" y2="678"/><line x1="1045" y1="650" x2="1045" y2="678"/>
@@ -895,7 +883,7 @@
                         </g>
 
                         <!-- North & South Corrugated Ribbed Roof Horizontal Lines -->
-                        <g stroke="#000000" stroke-width="1.3" opacity="0.85">
+                        <g stroke="#000000" stroke-width="1" opacity="0.75">
                           <line x1="960" y1="545" x2="1160" y2="545"/><line x1="960" y1="558" x2="1160" y2="558"/>
                           <line x1="960" y1="571" x2="1160" y2="571"/><line x1="960" y1="584" x2="1160" y2="584"/>
                           <line x1="960" y1="597" x2="1160" y2="597"/><line x1="960" y1="610" x2="1160" y2="610"/>
@@ -908,14 +896,14 @@
                         </g>
 
                         <!-- Central Longitudinal Ridge -->
-                        <line x1="1060" y1="530" x2="1060" y2="800" stroke="#000000" stroke-width="2.5"/>
+                        <line x1="1060" y1="530" x2="1060" y2="800" stroke="#000000" stroke-width="2"/>
 
                         <!-- Hangar Title Badge -->
                         <g transform="translate(940, 805)">
-                          <rect x="0" y="0" width="250" height="48" rx="24" fill="#ffffff" stroke="#000000" stroke-width="3.5"/>
-                          <circle cx="26" cy="24" r="15" fill="#0284c7" stroke="#000000" stroke-width="2.5"/>
-                          <text x="26" y="29.5" font-family="Plus Jakarta Sans" font-weight="900" font-size="12" fill="#ffffff" text-anchor="middle">H</text>
-                          <text x="54" y="31" font-family="Plus Jakarta Sans" font-weight="900" font-size="16.5" fill="#000000">HANGAR COMPLEX</text>
+                          <rect x="0" y="0" width="210" height="40" rx="20" fill="#ffffff" stroke="#000000" stroke-width="2"/>
+                          <circle cx="20" cy="20" r="12" fill="#0284c7" stroke="#000000" stroke-width="1.8"/>
+                          <text x="20" y="24.5" font-family="Plus Jakarta Sans" font-weight="900" font-size="10" fill="#ffffff" text-anchor="middle">H</text>
+                          <text x="42" y="25.5" font-family="Plus Jakarta Sans" font-weight="900" font-size="14" fill="#000000">HANGAR COMPLEX</text>
                         </g>
                       </g>
 
@@ -925,19 +913,19 @@
                         <polygon points="1225,145 1325,145 1325,545 1225,545" fill="#000000"/>
 
                         <!-- Main Vertical CBA Building Body (Pastel Purple) -->
-                        <polygon points="1220,140 1320,140 1320,540 1220,540" fill="#f3e8ff" stroke="#000000" stroke-width="3"/>
+                        <polygon points="1220,140 1320,140 1320,540 1220,540" fill="#f3e8ff" stroke="#000000" stroke-width="2.2"/>
 
                         <!-- Longitudinal Center Ridgeline -->
-                        <line x1="1270" y1="185" x2="1270" y2="495" stroke="#000000" stroke-width="2.5"/>
+                        <line x1="1270" y1="185" x2="1270" y2="495" stroke="#000000" stroke-width="2"/>
 
                         <!-- Top & Bottom Hip Roof Slope Lines (Matching Pancho Style) -->
-                        <line x1="1220" y1="140" x2="1270" y2="185" stroke="#000000" stroke-width="2.5"/>
-                        <line x1="1320" y1="140" x2="1270" y2="185" stroke="#000000" stroke-width="2.5"/>
-                        <line x1="1220" y1="540" x2="1270" y2="495" stroke="#000000" stroke-width="2.5"/>
-                        <line x1="1320" y1="540" x2="1270" y2="495" stroke="#000000" stroke-width="2.5"/>
+                        <line x1="1220" y1="140" x2="1270" y2="185" stroke="#000000" stroke-width="2"/>
+                        <line x1="1320" y1="140" x2="1270" y2="185" stroke="#000000" stroke-width="2"/>
+                        <line x1="1220" y1="540" x2="1270" y2="495" stroke="#000000" stroke-width="2"/>
+                        <line x1="1320" y1="540" x2="1270" y2="495" stroke="#000000" stroke-width="2"/>
 
                         <!-- Horizontal Roof Rafter Hatching Lines (Clean Architectural Vector) -->
-                        <g stroke="#000000" stroke-width="1.2" opacity="0.85">
+                        <g stroke="#000000" stroke-width="1" opacity="0.75">
                           <line x1="1220" y1="160" x2="1320" y2="160"/><line x1="1220" y1="180" x2="1320" y2="180"/>
                           <line x1="1220" y1="200" x2="1320" y2="200"/><line x1="1220" y1="220" x2="1320" y2="220"/>
                           <line x1="1220" y1="240" x2="1320" y2="240"/><line x1="1220" y1="260" x2="1320" y2="260"/>
@@ -951,7 +939,7 @@
                         </g>
 
                         <!-- West & East Architectural Stairwell Projections (Matching Pancho) -->
-                        <g fill="#e9d5ff" stroke="#000000" stroke-width="2">
+                        <g fill="#e9d5ff" stroke="#000000" stroke-width="1.8">
                           <!-- West Stairwell -->
                           <rect x="1204" y="325" width="16" height="35"/>
                           <line x1="1204" y1="333" x2="1220" y2="333" stroke-width="1.2"/>
@@ -966,11 +954,11 @@
                         </g>
 
                         <!-- CBA Title Badge -->
-                        <g transform="translate(1140, 68)">
-                          <rect x="0" y="0" width="250" height="52" rx="26" fill="#ffffff" stroke="#000000" stroke-width="3.5"/>
-                          <circle cx="28" cy="26" r="16" fill="#a855f7" stroke="#000000" stroke-width="2.5"/>
-                          <text x="28" y="32" font-family="Plus Jakarta Sans" font-weight="900" font-size="11" fill="#ffffff" text-anchor="middle">CBA</text>
-                          <text x="58" y="34" font-family="Plus Jakarta Sans" font-weight="900" font-size="17" fill="#000000">CBA BUILDING</text>
+                        <g transform="translate(1140, 72)">
+                          <rect x="0" y="0" width="210" height="42" rx="21" fill="#ffffff" stroke="#000000" stroke-width="2"/>
+                          <circle cx="21" cy="21" r="13" fill="#a855f7" stroke="#000000" stroke-width="1.8"/>
+                          <text x="21" y="25.5" font-family="Plus Jakarta Sans" font-weight="900" font-size="10" fill="#ffffff" text-anchor="middle">CBA</text>
+                          <text x="46" y="27" font-family="Plus Jakarta Sans" font-weight="900" font-size="14.5" fill="#000000">CBA BUILDING</text>
                         </g>
                       </g>
 
@@ -986,14 +974,14 @@
                         <!-- North Trees (West of Pancho) -->
                         <g class="comic-tree-group" transform="translate(170, 305)">
                           <ellipse cx="2" cy="4" rx="20" ry="12" fill="#000000" opacity="0.18"/>
-                          <path d="M 0,-18 C 10,-20 18,-12 18,-2 C 22,7 15,18 3,18 C -7,18 -18,15 -18,4 C -20,-6 -12,-18 0,-18 Z" fill="#84cc16" stroke="#000000" stroke-width="2.5"/>
+                          <path d="M 0,-18 C 10,-20 18,-12 18,-2 C 22,7 15,18 3,18 C -7,18 -18,15 -18,4 C -20,-6 -12,-18 0,-18 Z" fill="#84cc16" stroke="#000000" stroke-width="1.8"/>
                           <path d="M -7,-12 C -2,-16 7,-14 9,-7 C 3,-5 -4,-5 -7,-12 Z" fill="#bef264"/>
                           <path d="M -3,11 C 3,13 10,11 12,4 C 8,11 1,11 -3,11 Z" fill="#4d7c0f" opacity="0.8"/>
                           <circle cx="0" cy="-1" r="2.5" fill="#3f6212"/>
                         </g>
                         <g class="comic-tree-group" transform="translate(215, 305)">
                           <ellipse cx="2" cy="4" rx="20" ry="12" fill="#000000" opacity="0.18"/>
-                          <path d="M 0,-18 C 10,-20 18,-12 18,-2 C 22,7 15,18 3,18 C -7,18 -18,15 -18,4 C -20,-6 -12,-18 0,-18 Z" fill="#84cc16" stroke="#000000" stroke-width="2.5"/>
+                          <path d="M 0,-18 C 10,-20 18,-12 18,-2 C 22,7 15,18 3,18 C -7,18 -18,15 -18,4 C -20,-6 -12,-18 0,-18 Z" fill="#84cc16" stroke="#000000" stroke-width="1.8"/>
                           <path d="M -7,-12 C -2,-16 7,-14 9,-7 C 3,-5 -4,-5 -7,-12 Z" fill="#bef264"/>
                           <path d="M -3,11 C 3,13 10,11 12,4 C 8,11 1,11 -3,11 Z" fill="#4d7c0f" opacity="0.8"/>
                           <circle cx="0" cy="-1" r="2.5" fill="#3f6212"/>
@@ -1002,19 +990,19 @@
                         <!-- West Border Trees -->
                         <g class="comic-tree-group" transform="translate(65, 295)">
                           <ellipse cx="2" cy="4" rx="20" ry="12" fill="#000000" opacity="0.18"/>
-                          <path d="M 0,-18 C 10,-20 18,-12 18,-2 C 22,7 15,18 3,18 C -7,18 -18,15 -18,4 C -20,-6 -12,-18 0,-18 Z" fill="#84cc16" stroke="#000000" stroke-width="2.5"/>
+                          <path d="M 0,-18 C 10,-20 18,-12 18,-2 C 22,7 15,18 3,18 C -7,18 -18,15 -18,4 C -20,-6 -12,-18 0,-18 Z" fill="#84cc16" stroke="#000000" stroke-width="1.8"/>
                           <path d="M -7,-12 C -2,-16 7,-14 9,-7 C 3,-5 -4,-5 -7,-12 Z" fill="#bef264"/>
                           <circle cx="0" cy="-1" r="2.5" fill="#3f6212"/>
                         </g>
                         <g class="comic-tree-group" transform="translate(65, 455)">
                           <ellipse cx="2" cy="4" rx="20" ry="12" fill="#000000" opacity="0.18"/>
-                          <path d="M 0,-18 C 10,-20 18,-12 18,-2 C 22,7 15,18 3,18 C -7,18 -18,15 -18,4 C -20,-6 -12,-18 0,-18 Z" fill="#84cc16" stroke="#000000" stroke-width="2.5"/>
+                          <path d="M 0,-18 C 10,-20 18,-12 18,-2 C 22,7 15,18 3,18 C -7,18 -18,15 -18,4 C -20,-6 -12,-18 0,-18 Z" fill="#84cc16" stroke="#000000" stroke-width="1.8"/>
                           <path d="M -7,-12 C -2,-16 7,-14 9,-7 C 3,-5 -4,-5 -7,-12 Z" fill="#bef264"/>
                           <circle cx="0" cy="-1" r="2.5" fill="#3f6212"/>
                         </g>
                         <g class="comic-tree-group" transform="translate(65, 515)">
                           <ellipse cx="2" cy="4" rx="20" ry="12" fill="#000000" opacity="0.18"/>
-                          <path d="M 0,-18 C 10,-20 18,-12 18,-2 C 22,7 15,18 3,18 C -7,18 -18,15 -18,4 C -20,-6 -12,-18 0,-18 Z" fill="#84cc16" stroke="#000000" stroke-width="2.5"/>
+                          <path d="M 0,-18 C 10,-20 18,-12 18,-2 C 22,7 15,18 3,18 C -7,18 -18,15 -18,4 C -20,-6 -12,-18 0,-18 Z" fill="#84cc16" stroke="#000000" stroke-width="1.8"/>
                           <path d="M -7,-12 C -2,-16 7,-14 9,-7 C 3,-5 -4,-5 -7,-12 Z" fill="#bef264"/>
                           <circle cx="0" cy="-1" r="2.5" fill="#3f6212"/>
                         </g>
@@ -1022,25 +1010,25 @@
                         <!-- Central Courtyard Orchard (Between Pancho & Gym) -->
                         <g class="comic-tree-group" transform="translate(800, 235)">
                           <ellipse cx="2" cy="4" rx="20" ry="12" fill="#000000" opacity="0.18"/>
-                          <path d="M 0,-18 C 10,-20 18,-12 18,-2 C 22,7 15,18 3,18 C -7,18 -18,15 -18,4 C -20,-6 -12,-18 0,-18 Z" fill="#84cc16" stroke="#000000" stroke-width="2.5"/>
+                          <path d="M 0,-18 C 10,-20 18,-12 18,-2 C 22,7 15,18 3,18 C -7,18 -18,15 -18,4 C -20,-6 -12,-18 0,-18 Z" fill="#84cc16" stroke="#000000" stroke-width="1.8"/>
                           <path d="M -7,-12 C -2,-16 7,-14 9,-7 C 3,-5 -4,-5 -7,-12 Z" fill="#bef264"/>
                           <circle cx="0" cy="-1" r="2.5" fill="#3f6212"/>
                         </g>
                         <g class="comic-tree-group" transform="translate(850, 235)">
                           <ellipse cx="2" cy="4" rx="20" ry="12" fill="#000000" opacity="0.18"/>
-                          <path d="M 0,-18 C 10,-20 18,-12 18,-2 C 22,7 15,18 3,18 C -7,18 -18,15 -18,4 C -20,-6 -12,-18 0,-18 Z" fill="#84cc16" stroke="#000000" stroke-width="2.5"/>
+                          <path d="M 0,-18 C 10,-20 18,-12 18,-2 C 22,7 15,18 3,18 C -7,18 -18,15 -18,4 C -20,-6 -12,-18 0,-18 Z" fill="#84cc16" stroke="#000000" stroke-width="1.8"/>
                           <path d="M -7,-12 C -2,-16 7,-14 9,-7 C 3,-5 -4,-5 -7,-12 Z" fill="#bef264"/>
                           <circle cx="0" cy="-1" r="2.5" fill="#3f6212"/>
                         </g>
                         <g class="comic-tree-group" transform="translate(900, 235)">
                           <ellipse cx="2" cy="4" rx="20" ry="12" fill="#000000" opacity="0.18"/>
-                          <path d="M 0,-18 C 10,-20 18,-12 18,-2 C 22,7 15,18 3,18 C -7,18 -18,15 -18,4 C -20,-6 -12,-18 0,-18 Z" fill="#84cc16" stroke="#000000" stroke-width="2.5"/>
+                          <path d="M 0,-18 C 10,-20 18,-12 18,-2 C 22,7 15,18 3,18 C -7,18 -18,15 -18,4 C -20,-6 -12,-18 0,-18 Z" fill="#84cc16" stroke="#000000" stroke-width="1.8"/>
                           <path d="M -7,-12 C -2,-16 7,-14 9,-7 C 3,-5 -4,-5 -7,-12 Z" fill="#bef264"/>
                           <circle cx="0" cy="-1" r="2.5" fill="#3f6212"/>
                         </g>
                         <g class="comic-tree-group" transform="translate(950, 235)">
                           <ellipse cx="2" cy="4" rx="20" ry="12" fill="#000000" opacity="0.18"/>
-                          <path d="M 0,-18 C 10,-20 18,-12 18,-2 C 22,7 15,18 3,18 C -7,18 -18,15 -18,4 C -20,-6 -12,-18 0,-18 Z" fill="#84cc16" stroke="#000000" stroke-width="2.5"/>
+                          <path d="M 0,-18 C 10,-20 18,-12 18,-2 C 22,7 15,18 3,18 C -7,18 -18,15 -18,4 C -20,-6 -12,-18 0,-18 Z" fill="#84cc16" stroke="#000000" stroke-width="1.8"/>
                           <path d="M -7,-12 C -2,-16 7,-14 9,-7 C 3,-5 -4,-5 -7,-12 Z" fill="#bef264"/>
                           <circle cx="0" cy="-1" r="2.5" fill="#3f6212"/>
                         </g>
@@ -1048,25 +1036,25 @@
                         <!-- South Lawn Trees (Bottom of Admin) -->
                         <g class="comic-tree-group" transform="translate(230, 745)">
                           <ellipse cx="2" cy="4" rx="20" ry="12" fill="#000000" opacity="0.18"/>
-                          <path d="M 0,-18 C 10,-20 18,-12 18,-2 C 22,7 15,18 3,18 C -7,18 -18,15 -18,4 C -20,-6 -12,-18 0,-18 Z" fill="#84cc16" stroke="#000000" stroke-width="2.5"/>
+                          <path d="M 0,-18 C 10,-20 18,-12 18,-2 C 22,7 15,18 3,18 C -7,18 -18,15 -18,4 C -20,-6 -12,-18 0,-18 Z" fill="#84cc16" stroke="#000000" stroke-width="1.8"/>
                           <path d="M -7,-12 C -2,-16 7,-14 9,-7 C 3,-5 -4,-5 -7,-12 Z" fill="#bef264"/>
                           <circle cx="0" cy="-1" r="2.5" fill="#3f6212"/>
                         </g>
                         <g class="comic-tree-group" transform="translate(300, 745)">
                           <ellipse cx="2" cy="4" rx="20" ry="12" fill="#000000" opacity="0.18"/>
-                          <path d="M 0,-18 C 10,-20 18,-12 18,-2 C 22,7 15,18 3,18 C -7,18 -18,15 -18,4 C -20,-6 -12,-18 0,-18 Z" fill="#84cc16" stroke="#000000" stroke-width="2.5"/>
+                          <path d="M 0,-18 C 10,-20 18,-12 18,-2 C 22,7 15,18 3,18 C -7,18 -18,15 -18,4 C -20,-6 -12,-18 0,-18 Z" fill="#84cc16" stroke="#000000" stroke-width="1.8"/>
                           <path d="M -7,-12 C -2,-16 7,-14 9,-7 C 3,-5 -4,-5 -7,-12 Z" fill="#bef264"/>
                           <circle cx="0" cy="-1" r="2.5" fill="#3f6212"/>
                         </g>
                         <g class="comic-tree-group" transform="translate(470, 745)">
                           <ellipse cx="2" cy="4" rx="20" ry="12" fill="#000000" opacity="0.18"/>
-                          <path d="M 0,-18 C 10,-20 18,-12 18,-2 C 22,7 15,18 3,18 C -7,18 -18,15 -18,4 C -20,-6 -12,-18 0,-18 Z" fill="#84cc16" stroke="#000000" stroke-width="2.5"/>
+                          <path d="M 0,-18 C 10,-20 18,-12 18,-2 C 22,7 15,18 3,18 C -7,18 -18,15 -18,4 C -20,-6 -12,-18 0,-18 Z" fill="#84cc16" stroke="#000000" stroke-width="1.8"/>
                           <path d="M -7,-12 C -2,-16 7,-14 9,-7 C 3,-5 -4,-5 -7,-12 Z" fill="#bef264"/>
                           <circle cx="0" cy="-1" r="2.5" fill="#3f6212"/>
                         </g>
                         <g class="comic-tree-group" transform="translate(540, 745)">
                           <ellipse cx="2" cy="4" rx="20" ry="12" fill="#000000" opacity="0.18"/>
-                          <path d="M 0,-18 C 10,-20 18,-12 18,-2 C 22,7 15,18 3,18 C -7,18 -18,15 -18,4 C -20,-6 -12,-18 0,-18 Z" fill="#84cc16" stroke="#000000" stroke-width="2.5"/>
+                          <path d="M 0,-18 C 10,-20 18,-12 18,-2 C 22,7 15,18 3,18 C -7,18 -18,15 -18,4 C -20,-6 -12,-18 0,-18 Z" fill="#84cc16" stroke="#000000" stroke-width="1.8"/>
                           <path d="M -7,-12 C -2,-16 7,-14 9,-7 C 3,-5 -4,-5 -7,-12 Z" fill="#bef264"/>
                           <circle cx="0" cy="-1" r="2.5" fill="#3f6212"/>
                         </g>
@@ -1074,25 +1062,25 @@
                         <!-- East Border Trees (East of CBA Tower) -->
                         <g class="comic-tree-group" transform="translate(1420, 220)">
                           <ellipse cx="2" cy="4" rx="20" ry="12" fill="#000000" opacity="0.18"/>
-                          <path d="M 0,-18 C 10,-20 18,-12 18,-2 C 22,7 15,18 3,18 C -7,18 -18,15 -18,4 C -20,-6 -12,-18 0,-18 Z" fill="#84cc16" stroke="#000000" stroke-width="2.5"/>
+                          <path d="M 0,-18 C 10,-20 18,-12 18,-2 C 22,7 15,18 3,18 C -7,18 -18,15 -18,4 C -20,-6 -12,-18 0,-18 Z" fill="#84cc16" stroke="#000000" stroke-width="1.8"/>
                           <path d="M -7,-12 C -2,-16 7,-14 9,-7 C 3,-5 -4,-5 -7,-12 Z" fill="#bef264"/>
                           <circle cx="0" cy="-1" r="2.5" fill="#3f6212"/>
                         </g>
                         <g class="comic-tree-group" transform="translate(1420, 280)">
                           <ellipse cx="2" cy="4" rx="20" ry="12" fill="#000000" opacity="0.18"/>
-                          <path d="M 0,-18 C 10,-20 18,-12 18,-2 C 22,7 15,18 3,18 C -7,18 -18,15 -18,4 C -20,-6 -12,-18 0,-18 Z" fill="#84cc16" stroke="#000000" stroke-width="2.5"/>
+                          <path d="M 0,-18 C 10,-20 18,-12 18,-2 C 22,7 15,18 3,18 C -7,18 -18,15 -18,4 C -20,-6 -12,-18 0,-18 Z" fill="#84cc16" stroke="#000000" stroke-width="1.8"/>
                           <path d="M -7,-12 C -2,-16 7,-14 9,-7 C 3,-5 -4,-5 -7,-12 Z" fill="#bef264"/>
                           <circle cx="0" cy="-1" r="2.5" fill="#3f6212"/>
                         </g>
                         <g class="comic-tree-group" transform="translate(1420, 340)">
                           <ellipse cx="2" cy="4" rx="20" ry="12" fill="#000000" opacity="0.18"/>
-                          <path d="M 0,-18 C 10,-20 18,-12 18,-2 C 22,7 15,18 3,18 C -7,18 -18,15 -18,4 C -20,-6 -12,-18 0,-18 Z" fill="#84cc16" stroke="#000000" stroke-width="2.5"/>
+                          <path d="M 0,-18 C 10,-20 18,-12 18,-2 C 22,7 15,18 3,18 C -7,18 -18,15 -18,4 C -20,-6 -12,-18 0,-18 Z" fill="#84cc16" stroke="#000000" stroke-width="1.8"/>
                           <path d="M -7,-12 C -2,-16 7,-14 9,-7 C 3,-5 -4,-5 -7,-12 Z" fill="#bef264"/>
                           <circle cx="0" cy="-1" r="2.5" fill="#3f6212"/>
                         </g>
                         <g class="comic-tree-group" transform="translate(1420, 460)">
                           <ellipse cx="2" cy="4" rx="20" ry="12" fill="#000000" opacity="0.18"/>
-                          <path d="M 0,-18 C 10,-20 18,-12 18,-2 C 22,7 15,18 3,18 C -7,18 -18,15 -18,4 C -20,-6 -12,-18 0,-18 Z" fill="#84cc16" stroke="#000000" stroke-width="2.5"/>
+                          <path d="M 0,-18 C 10,-20 18,-12 18,-2 C 22,7 15,18 3,18 C -7,18 -18,15 -18,4 C -20,-6 -12,-18 0,-18 Z" fill="#84cc16" stroke="#000000" stroke-width="1.8"/>
                           <path d="M -7,-12 C -2,-16 7,-14 9,-7 C 3,-5 -4,-5 -7,-12 Z" fill="#bef264"/>
                           <circle cx="0" cy="-1" r="2.5" fill="#3f6212"/>
                         </g>
@@ -1100,31 +1088,31 @@
                         <!-- Trees in Bottom-Right Space (East of Hangar) -->
                         <g class="comic-tree-group" transform="translate(1260, 640)">
                           <ellipse cx="2" cy="4" rx="20" ry="12" fill="#000000" opacity="0.18"/>
-                          <path d="M 0,-18 C 10,-20 18,-12 18,-2 C 22,7 15,18 3,18 C -7,18 -18,15 -18,4 C -20,-6 -12,-18 0,-18 Z" fill="#84cc16" stroke="#000000" stroke-width="2.5"/>
+                          <path d="M 0,-18 C 10,-20 18,-12 18,-2 C 22,7 15,18 3,18 C -7,18 -18,15 -18,4 C -20,-6 -12,-18 0,-18 Z" fill="#84cc16" stroke="#000000" stroke-width="1.8"/>
                           <path d="M -7,-12 C -2,-16 7,-14 9,-7 C 3,-5 -4,-5 -7,-12 Z" fill="#bef264"/>
                           <circle cx="0" cy="-1" r="2.5" fill="#3f6212"/>
                         </g>
                         <g class="comic-tree-group" transform="translate(1360, 630)">
                           <ellipse cx="2" cy="4" rx="20" ry="12" fill="#000000" opacity="0.18"/>
-                          <path d="M 0,-18 C 10,-20 18,-12 18,-2 C 22,7 15,18 3,18 C -7,18 -18,15 -18,4 C -20,-6 -12,-18 0,-18 Z" fill="#84cc16" stroke="#000000" stroke-width="2.5"/>
+                          <path d="M 0,-18 C 10,-20 18,-12 18,-2 C 22,7 15,18 3,18 C -7,18 -18,15 -18,4 C -20,-6 -12,-18 0,-18 Z" fill="#84cc16" stroke="#000000" stroke-width="1.8"/>
                           <path d="M -7,-12 C -2,-16 7,-14 9,-7 C 3,-5 -4,-5 -7,-12 Z" fill="#bef264"/>
                           <circle cx="0" cy="-1" r="2.5" fill="#3f6212"/>
                         </g>
                         <g class="comic-tree-group" transform="translate(1460, 640)">
                           <ellipse cx="2" cy="4" rx="20" ry="12" fill="#000000" opacity="0.18"/>
-                          <path d="M 0,-18 C 10,-20 18,-12 18,-2 C 22,7 15,18 3,18 C -7,18 -18,15 -18,4 C -20,-6 -12,-18 0,-18 Z" fill="#84cc16" stroke="#000000" stroke-width="2.5"/>
+                          <path d="M 0,-18 C 10,-20 18,-12 18,-2 C 22,7 15,18 3,18 C -7,18 -18,15 -18,4 C -20,-6 -12,-18 0,-18 Z" fill="#84cc16" stroke="#000000" stroke-width="1.8"/>
                           <path d="M -7,-12 C -2,-16 7,-14 9,-7 C 3,-5 -4,-5 -7,-12 Z" fill="#bef264"/>
                           <circle cx="0" cy="-1" r="2.5" fill="#3f6212"/>
                         </g>
                         <g class="comic-tree-group" transform="translate(1310, 710)">
                           <ellipse cx="2" cy="4" rx="20" ry="12" fill="#000000" opacity="0.18"/>
-                          <path d="M 0,-18 C 10,-20 18,-12 18,-2 C 22,7 15,18 3,18 C -7,18 -18,15 -18,4 C -20,-6 -12,-18 0,-18 Z" fill="#84cc16" stroke="#000000" stroke-width="2.5"/>
+                          <path d="M 0,-18 C 10,-20 18,-12 18,-2 C 22,7 15,18 3,18 C -7,18 -18,15 -18,4 C -20,-6 -12,-18 0,-18 Z" fill="#84cc16" stroke="#000000" stroke-width="1.8"/>
                           <path d="M -7,-12 C -2,-16 7,-14 9,-7 C 3,-5 -4,-5 -7,-12 Z" fill="#bef264"/>
                           <circle cx="0" cy="-1" r="2.5" fill="#3f6212"/>
                         </g>
                         <g class="comic-tree-group" transform="translate(1410, 710)">
                           <ellipse cx="2" cy="4" rx="20" ry="12" fill="#000000" opacity="0.18"/>
-                          <path d="M 0,-18 C 10,-20 18,-12 18,-2 C 22,7 15,18 3,18 C -7,18 -18,15 -18,4 C -20,-6 -12,-18 0,-18 Z" fill="#84cc16" stroke="#000000" stroke-width="2.5"/>
+                          <path d="M 0,-18 C 10,-20 18,-12 18,-2 C 22,7 15,18 3,18 C -7,18 -18,15 -18,4 C -20,-6 -12,-18 0,-18 Z" fill="#84cc16" stroke="#000000" stroke-width="1.8"/>
                           <path d="M -7,-12 C -2,-16 7,-14 9,-7 C 3,-5 -4,-5 -7,-12 Z" fill="#bef264"/>
                           <circle cx="0" cy="-1" r="2.5" fill="#3f6212"/>
                         </g>
