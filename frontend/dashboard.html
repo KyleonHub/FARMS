@@ -333,18 +333,17 @@
             </div>
 
             <!-- Card 3: Access Permits & Pending Authorization -->
-            <div class="kpi-card-v2 card-pending-amber">
+            <div class="kpi-card-v2 card-pending-amber" style="cursor:pointer;" onclick="window.switchView ? window.switchView('requests') : document.querySelector('[data-view=requests]')?.click();" title="View Access Requests Queue">
               <div class="kpi-v2-main">
                 <div class="kpi-header-row">
                   <span class="kpi-v2-title">Pending Requests</span>
-                  <span class="kpi-micro-tag pending">ACTION REQUIRED</span>
                 </div>
                 <div class="kpi-v2-big-num" id="statPendingRequests">5</div>
-                <div class="kpi-v2-sub dark-amber">Requires Approval · <strong style="color:#78350f;">Fast Track Queue</strong></div>
+                <div class="kpi-v2-sub dark-amber">Requires Approval · <strong style="color:#78350f;">Queue</strong></div>
               </div>
               <div class="kpi-v2-widget">
                 <div class="pending-warning-badge">
-                  <svg viewBox="0 0 24 24" width="34" height="34" fill="none" stroke="#92400e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="#92400e" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
                     <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/>
                     <rect x="8" y="2" width="8" height="4" rx="1" ry="1"/>
                     <path d="M12 11v4M12 18h.01"/>
@@ -353,22 +352,37 @@
               </div>
             </div>
 
-            <!-- Card 4: Facility Hardware & IoT Telemetry -->
-            <div class="kpi-card-v2 card-telemetry-cyan">
-              <div class="kpi-v2-main">
-                <div class="kpi-header-row">
-                  <span class="kpi-v2-title">System Status</span>
-                  <span class="kpi-micro-tag cyber">99.4% ONLINE</span>
-                </div>
-                <div class="kpi-v2-big-num" style="color:#0284c7;">68/68</div>
-                <div class="kpi-v2-sub blue">Smart Locks Active · <strong style="color:#0369a1;">52 AV Ready</strong></div>
+            <!-- Card 4: Quick Operations & Dispatch Deck -->
+            <div class="kpi-card-v2 card-dispatch-kpi" id="topQuickDispatchCard">
+              <div class="dispatch-kpi-header">
+                <span class="kpi-v2-title">Quick Dispatch</span>
+                <span class="dispatch-kpi-tag">OPERATIONS</span>
               </div>
-              <div class="kpi-v2-widget">
-                <div class="telemetry-spark-box">
-                  <div class="telemetry-chip-row"><span class="t-dot online"></span> <span>RFID Locks: OK</span></div>
-                  <div class="telemetry-chip-row"><span class="t-dot online"></span> <span>Smart AV: 98%</span></div>
-                  <div class="telemetry-chip-row"><span class="t-dot opt"></span> <span>Grid: Optimal</span></div>
-                </div>
+              <div class="dispatch-kpi-grid">
+                <button class="dispatch-kpi-tile" id="btnDispatchAssign" title="Quick Assign Room Slot">
+                  <span class="d-icon">
+                    <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="19" y1="8" x2="19" y2="14"/><line x1="22" y1="11" x2="16" y2="11"/></svg>
+                  </span>
+                  <span>Assign</span>
+                </button>
+                <button class="dispatch-kpi-tile" id="btnDispatchReset" title="Reset Campus Map">
+                  <span class="d-icon">
+                    <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>
+                  </span>
+                  <span>Reset Map</span>
+                </button>
+                <button class="dispatch-kpi-tile" id="btnDispatchExport" title="Download Room Audit Log">
+                  <span class="d-icon">
+                    <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                  </span>
+                  <span>Export</span>
+                </button>
+                <button class="dispatch-kpi-tile" id="btnDispatchBroadcast" title="Send Broadcast Announcement">
+                  <span class="d-icon">
+                    <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+                  </span>
+                  <span>Broadcast</span>
+                </button>
               </div>
             </div>
 
@@ -1364,56 +1378,7 @@
                   <div class="timeline-scroll-container bento-timeline">
                     <div class="timeline-list" id="activityTimelineList"></div>
                   </div>
-                </div>
-
-                <!-- Card B2: Quick Operations & Dispatch Tile Deck -->
-                <div class="modular-card dispatch-deck-card">
-                  <div class="section-card-header" style="padding-bottom:10px;">
-                    <div class="section-title-wrap">
-                      <span class="section-title-bar" style="background:#7c3aed;"></span>
-                      <h4 style="font-size:0.92rem; margin:0; font-weight:800;">Quick Operations &amp; Dispatch</h4>
-                    </div>
-                    <span style="font-size:0.68rem; font-weight:700; color:var(--slate-400);">SYSTEM SHORTCUTS</span>
-                  </div>
-                  <div class="dispatch-tiles-grid">
-                    <button class="dispatch-tile" id="btnDispatchAssign">
-                      <span class="dispatch-icon">
-                        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="19" y1="8" x2="19" y2="14"/><line x1="22" y1="11" x2="16" y2="11"/></svg>
-                      </span>
-                      <div class="dispatch-text">
-                        <strong>Quick Assign</strong>
-                        <small>Assign Room Slot</small>
-                      </div>
-                    </button>
-                    <button class="dispatch-tile" id="btnDispatchReset">
-                      <span class="dispatch-icon">
-                        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>
-                      </span>
-                      <div class="dispatch-text">
-                        <strong>Reset Filters</strong>
-                        <small>Clear Map State</small>
-                      </div>
-                    </button>
-                    <button class="dispatch-tile" id="btnDispatchExport">
-                      <span class="dispatch-icon">
-                        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-                      </span>
-                      <div class="dispatch-text">
-                        <strong>Export Audit</strong>
-                        <small>Download Logs</small>
-                      </div>
-                    </button>
-                    <button class="dispatch-tile" id="btnDispatchBroadcast">
-                      <span class="dispatch-icon">
-                        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
-                      </span>
-                      <div class="dispatch-text">
-                        <strong>Broadcast</strong>
-                        <small>Campus Notice</small>
-                      </div>
-                    </button>
-                  </div>
-                </div>
+                </div> <!-- modular-card live-stream-card -->
 
               </div> <!-- bento-right-stack -->
 

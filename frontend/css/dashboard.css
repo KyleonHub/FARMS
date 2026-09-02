@@ -1028,20 +1028,21 @@ body.force-mobile-view .sidebar-close-btn {
 }
 
 /* ──────────────────────────────────────────────────────────
-   §5  KPI STAT CARDS (4 HIGH-DENSITY NEO-BRUTALIST CARDS)
+   §5  KPI STAT CARDS (3-COLUMN TELEMETRY & DISPATCH GRID)
    ────────────────────────────────────────────────────────── */
 .kpi-stats-grid.kpi-four-cards {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: 2.15fr 1.05fr 1.35fr;
   gap: 16px;
   margin-bottom: 20px;
+  align-items: stretch;
 }
 
 .kpi-card-v2 {
   background: #ffffff;
   border: 2.5px solid #000000;
   border-radius: 18px;
-  padding: 18px 20px;
+  padding: 14px 18px;
   box-shadow: 4px 4px 0px #000000;
   display: flex;
   justify-content: space-between;
@@ -1058,9 +1059,6 @@ body.force-mobile-view .sidebar-close-btn {
 
 /* ── Unified Live Capacity Hero Card in Light Mode ── */
 .kpi-card-v2.unified-capacity-hero {
-  grid-column: span 2;
-  width: 75%;
-  max-width: 75%;
   background: #ffffff;
   display: flex;
   align-items: center;
@@ -1204,6 +1202,90 @@ body.force-mobile-view .sidebar-close-btn {
 .comic-pie-svg circle {
   transition: stroke-dasharray 0.4s ease, stroke-dashoffset 0.4s ease;
 }
+
+/* ── Quick Operations & Dispatch KPI Card ── */
+.kpi-card-v2.card-dispatch-kpi {
+  background: #ffffff;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 12px 14px;
+  gap: 8px;
+}
+
+.dispatch-kpi-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.dispatch-kpi-header .kpi-v2-title {
+  font-size: 1.1rem;
+  font-weight: 900;
+  color: #000000;
+  letter-spacing: -0.3px;
+}
+
+.dispatch-kpi-tag {
+  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+  font-size: 0.65rem;
+  font-weight: 900;
+  background: #f1f5f9;
+  border: 1.5px solid #000000;
+  padding: 1.5px 7px;
+  border-radius: 6px;
+  color: #000000;
+  box-shadow: 1px 1px 0px #000000;
+}
+
+.dispatch-kpi-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+  width: 100%;
+}
+
+.dispatch-kpi-tile {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 6px 8px;
+  background: #f8fafc;
+  border: 1.8px solid #000000;
+  border-radius: 8px;
+  box-shadow: 1.5px 1.5px 0px #000000;
+  cursor: pointer;
+  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+  font-size: 0.74rem;
+  font-weight: 900;
+  color: #0f172a;
+  transition: all 0.12s ease;
+  white-space: nowrap;
+}
+
+.dispatch-kpi-tile:hover {
+  transform: translate(-1.5px, -1.5px);
+  box-shadow: 2.5px 2.5px 0px #000000;
+}
+
+.dispatch-kpi-tile:active {
+  transform: translate(1px, 1px);
+  box-shadow: none;
+}
+
+.dispatch-kpi-tile .d-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #000000;
+}
+
+#btnDispatchAssign:hover { background: #dcfce7; border-color: #000000; }
+#btnDispatchReset:hover { background: #e0f2fe; border-color: #000000; }
+#btnDispatchExport:hover { background: #fef3c7; border-color: #000000; }
+#btnDispatchBroadcast:hover { background: #f3e8ff; border-color: #000000; }
 
 /* ── Legacy Themed KPI Cards in Light Mode ── */
 .kpi-card-v2.card-classes-theme {
@@ -4215,10 +4297,31 @@ body.force-mobile-view .sidebar-close-btn {
   border-top: 4px solid #fbbf24;
 }
 
-[data-theme="dark"] .kpi-card-v2.card-telemetry-cyan {
-  background: linear-gradient(150deg, #150b22 0%, #201032 100%);
+[data-theme="dark"] .kpi-card-v2.card-telemetry-cyan,
+[data-theme="dark"] .kpi-card-v2.card-dispatch-kpi {
+  background: #0f172a;
   border-top: 4px solid #c084fc;
 }
+
+[data-theme="dark"] .dispatch-kpi-tile {
+  background: #1e293b;
+  color: #f1f5f9;
+  border: 1.8px solid #000000;
+  box-shadow: 1.5px 1.5px 0px #000000;
+}
+[data-theme="dark"] .dispatch-kpi-tile .d-icon {
+  color: #c084fc;
+}
+[data-theme="dark"] .dispatch-kpi-tag {
+  background: #1e293b;
+  color: #c084fc;
+  border-color: #334155;
+  box-shadow: 1px 1px 0px #000000;
+}
+[data-theme="dark"] #btnDispatchAssign:hover { background: #14532d; }
+[data-theme="dark"] #btnDispatchReset:hover { background: #0369a1; }
+[data-theme="dark"] #btnDispatchExport:hover { background: #78350f; }
+[data-theme="dark"] #btnDispatchBroadcast:hover { background: #581c87; }
 
 [data-theme="dark"] .kpi-v2-title {
   color: #cbd5e1;
