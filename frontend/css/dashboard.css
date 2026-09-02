@@ -1093,57 +1093,59 @@ body.force-mobile-view .sidebar-close-btn {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 16px;
+  gap: 18px;
 }
 
 .kpi-v2-big-num.in-use-num {
-  font-size: 3.4rem;
+  font-size: 3.8rem;
   font-weight: 900;
   color: #15803d;
-  line-height: 0.9;
+  line-height: 0.88;
   letter-spacing: -0.04em;
   margin: 0;
+  flex-shrink: 0;
 }
 
 .kpi-v2-big-num.vacant-num {
-  font-size: 3.4rem;
+  font-size: 3.8rem;
   font-weight: 900;
   color: #0284c7;
-  line-height: 0.9;
+  line-height: 0.88;
   letter-spacing: -0.04em;
   margin: 0;
+  flex-shrink: 0;
 }
 
 .capacity-center-divider {
   width: 2px;
-  height: 84px;
+  height: 90px;
   background: #000000;
   opacity: 0.15;
   border-radius: 2px;
-  margin: 0 4px;
+  margin: 0 6px;
   flex-shrink: 0;
 }
 
 .capacity-bldg-breakdown {
   display: flex;
   flex-direction: column;
-  gap: 5px;
+  gap: 7px;
   flex: 1;
-  max-width: 170px;
+  min-width: 175px;
 }
 
 .bldg-stat-row {
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 8px;
   font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
 }
 
 .bldg-stat-dot {
-  width: 8px;
-  height: 8px;
+  width: 10px;
+  height: 10px;
   border-radius: 50%;
-  border: 1.5px solid #000000;
+  border: 1.8px solid #000000;
   flex-shrink: 0;
 }
 .bldg-stat-dot.dot-cba { background: #c084fc; }
@@ -1151,22 +1153,22 @@ body.force-mobile-view .sidebar-close-btn {
 .bldg-stat-dot.dot-pancho { background: #84cc16; }
 
 .bldg-stat-name {
-  width: 44px;
-  font-size: 0.74rem;
+  width: 52px;
+  font-size: 0.84rem;
   color: #000000;
-  font-weight: 800;
+  font-weight: 900;
   letter-spacing: -0.2px;
 }
 
 .bldg-stat-track {
   flex: 1;
-  height: 8px;
+  height: 11px;
   background: #f8fafc;
-  border: 1.5px solid #000000;
-  border-radius: 4px;
-  box-shadow: 1px 1px 0px #000000;
+  border: 1.8px solid #000000;
+  border-radius: 5px;
+  box-shadow: 1.5px 1.5px 0px #000000;
   overflow: hidden;
-  min-width: 44px;
+  min-width: 55px;
 }
 
 .bldg-stat-fill {
@@ -1179,10 +1181,10 @@ body.force-mobile-view .sidebar-close-btn {
 .bldg-stat-fill.lime { background: #84cc16; }
 
 .bldg-stat-val {
-  font-size: 0.8rem;
+  font-size: 0.92rem;
   font-weight: 900;
   color: #000000;
-  min-width: 18px;
+  min-width: 22px;
   text-align: right;
 }
 
@@ -1190,21 +1192,23 @@ body.force-mobile-view .sidebar-close-btn {
 .capacity-pie-legend {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 7px;
+  flex: 1;
+  min-width: 110px;
 }
 
 .pie-leg-item {
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 7px;
   font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
 }
 
 .pie-leg-dot {
-  width: 8px;
-  height: 8px;
+  width: 10px;
+  height: 10px;
   border-radius: 50%;
-  border: 1.5px solid #000000;
+  border: 1.8px solid #000000;
   flex-shrink: 0;
 }
 .pie-leg-dot.dot-free { background: #0284c7; }
@@ -1212,24 +1216,24 @@ body.force-mobile-view .sidebar-close-btn {
 .pie-leg-dot.dot-maint { background: #f59e0b; }
 
 .pie-leg-label {
-  font-size: 0.74rem;
-  font-weight: 800;
+  font-size: 0.84rem;
+  font-weight: 900;
   color: #000000;
-  width: 42px;
+  width: 48px;
 }
 
 .pie-leg-val {
-  font-size: 0.8rem;
+  font-size: 0.92rem;
   font-weight: 900;
   color: #000000;
-  min-width: 18px;
+  min-width: 22px;
   text-align: right;
 }
 
 .capacity-metric-row.vacant-pie-row {
   justify-content: space-between;
   align-items: center;
-  gap: 14px;
+  gap: 16px;
   padding: 0;
 }
 
