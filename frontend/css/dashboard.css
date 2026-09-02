@@ -1032,7 +1032,7 @@ body.force-mobile-view .sidebar-close-btn {
    ────────────────────────────────────────────────────────── */
 .kpi-stats-grid.kpi-four-cards {
   display: grid;
-  grid-template-columns: 2.15fr 1.05fr 1.35fr;
+  grid-template-columns: 1.8fr 0.85fr 1.65fr;
   gap: 16px;
   margin-bottom: 20px;
   align-items: stretch;
@@ -1242,27 +1242,24 @@ body.force-mobile-view .sidebar-close-btn {
 .dispatch-kpi-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 6px;
+  gap: 8px;
   width: 100%;
 }
 
 .dispatch-kpi-tile {
   display: flex;
   align-items: center;
-  justify-content: center;
-  gap: 6px;
-  padding: 6px 8px;
+  justify-content: flex-start;
+  gap: 8px;
+  padding: 6px 10px;
   background: #f8fafc;
   border: 1.8px solid #000000;
-  border-radius: 8px;
+  border-radius: 9px;
   box-shadow: 1.5px 1.5px 0px #000000;
   cursor: pointer;
   font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
-  font-size: 0.74rem;
-  font-weight: 900;
-  color: #0f172a;
   transition: all 0.12s ease;
-  white-space: nowrap;
+  text-align: left;
 }
 
 .dispatch-kpi-tile:hover {
@@ -1280,6 +1277,25 @@ body.force-mobile-view .sidebar-close-btn {
   align-items: center;
   justify-content: center;
   color: #000000;
+  flex-shrink: 0;
+}
+
+.dispatch-kpi-tile .d-tile-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.15;
+}
+
+.dispatch-kpi-tile .d-tile-text strong {
+  font-size: 0.76rem;
+  font-weight: 900;
+  color: #0f172a;
+}
+
+.dispatch-kpi-tile .d-tile-text small {
+  font-size: 0.64rem;
+  font-weight: 700;
+  color: #64748b;
 }
 
 #btnDispatchAssign:hover { background: #dcfce7; border-color: #000000; }
@@ -4311,6 +4327,12 @@ body.force-mobile-view .sidebar-close-btn {
 }
 [data-theme="dark"] .dispatch-kpi-tile .d-icon {
   color: #c084fc;
+}
+[data-theme="dark"] .dispatch-kpi-tile .d-tile-text strong {
+  color: #f1f5f9;
+}
+[data-theme="dark"] .dispatch-kpi-tile .d-tile-text small {
+  color: #94a3b8;
 }
 [data-theme="dark"] .dispatch-kpi-tag {
   background: #1e293b;
