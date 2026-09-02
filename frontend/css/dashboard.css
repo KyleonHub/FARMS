@@ -6753,5 +6753,26 @@ body.force-mobile-view .mobile-bottom-nav {
   display: none !important;
 }
 
+/* Tinted Building Blueprint Backgrounds */
+.svg-bldg-bg.svg-pancho-bg {
+  fill: #f4fce3;
+}
+.svg-bldg-bg.svg-cba-bg {
+  fill: #faf5ff;
+}
+.svg-bldg-bg.svg-hangar-bg {
+  fill: #f0f9ff;
+}
+
+[data-theme="dark"] .svg-bldg-bg.svg-pancho-bg {
+  fill: #141f12 !important;
+}
+[data-theme="dark"] .svg-bldg-bg.svg-cba-bg {
+  fill: #1a1226 !important;
+}
+[data-theme="dark"] .svg-bldg-bg.svg-hangar-bg {
+  fill: #0f1c24 !important;
+}
+
 
 

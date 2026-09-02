@@ -1080,13 +1080,13 @@ document.addEventListener('DOMContentLoaded', () => {
         <svg viewBox="0 0 1280 360" width="100%" height="100%" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
           <defs>
             <pattern id="floorGridCBA" width="24" height="24" patternUnits="userSpaceOnUse">
-              <path d="M 24 0 L 0 0 0 24" fill="none" stroke="#e2e8f0" stroke-width="0.9"/>
-              <circle cx="0" cy="0" r="1.2" fill="#84cc16" opacity="0.65"/>
+              <path d="M 24 0 L 0 0 0 24" fill="none" stroke="rgba(192, 132, 252, 0.22)" stroke-width="0.9"/>
+              <circle cx="0" cy="0" r="1.2" fill="#c084fc" opacity="0.6"/>
             </pattern>
           </defs>
 
           <!-- Outer Blueprint Card -->
-          <rect width="100%" height="100%" fill="#fafaf9"/>
+          <rect width="100%" height="100%" fill="#faf5ff" class="svg-bldg-bg svg-cba-bg"/>
           <rect width="100%" height="100%" fill="url(#floorGridCBA)"/>
 
           <!-- Central Floor Identifier Badge -->
@@ -1157,13 +1157,13 @@ document.addEventListener('DOMContentLoaded', () => {
         <svg viewBox="0 0 1380 580" width="100%" height="100%" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
           <defs>
             <pattern id="floorGridHangar" width="24" height="24" patternUnits="userSpaceOnUse">
-              <path d="M 24 0 L 0 0 0 24" fill="none" stroke="#e2e8f0" stroke-width="0.9"/>
-              <circle cx="0" cy="0" r="1.2" fill="#0284c7" opacity="0.65"/>
+              <path d="M 24 0 L 0 0 0 24" fill="none" stroke="rgba(56, 189, 248, 0.22)" stroke-width="0.9"/>
+              <circle cx="0" cy="0" r="1.2" fill="#38bdf8" opacity="0.6"/>
             </pattern>
           </defs>
 
           <!-- Outer Blueprint Card -->
-          <rect width="100%" height="100%" fill="#fafaf9"/>
+          <rect width="100%" height="100%" fill="#f0f9ff" class="svg-bldg-bg svg-hangar-bg"/>
           <rect width="100%" height="100%" fill="url(#floorGridHangar)"/>
 
           <!-- Central Floor Identifier Badge -->
@@ -1224,13 +1224,13 @@ document.addEventListener('DOMContentLoaded', () => {
           <svg viewBox="0 0 1560 480" width="100%" height="100%" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
             <defs>
               <pattern id="floorGridPancho" width="24" height="24" patternUnits="userSpaceOnUse">
-                <path d="M 24 0 L 0 0 0 24" fill="none" stroke="#e2e8f0" stroke-width="0.9"/>
-                <circle cx="0" cy="0" r="1.2" fill="#84cc16" opacity="0.65"/>
+                <path d="M 24 0 L 0 0 0 24" fill="none" stroke="rgba(132, 204, 22, 0.22)" stroke-width="0.9"/>
+                <circle cx="0" cy="0" r="1.2" fill="#84cc16" opacity="0.6"/>
               </pattern>
             </defs>
 
             <!-- Outer Blueprint Card -->
-            <rect width="100%" height="100%" fill="#fafaf9"/>
+            <rect width="100%" height="100%" fill="#f4fce3" class="svg-bldg-bg svg-pancho-bg"/>
             <rect width="100%" height="100%" fill="url(#floorGridPancho)"/>
 
             <!-- Central Floor Identifier Badge -->
@@ -1330,13 +1330,13 @@ document.addEventListener('DOMContentLoaded', () => {
           <svg viewBox="0 0 1560 480" width="100%" height="100%" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
             <defs>
               <pattern id="floorGridPanchoF2" width="24" height="24" patternUnits="userSpaceOnUse">
-                <path d="M 24 0 L 0 0 0 24" fill="none" stroke="#e2e8f0" stroke-width="0.9"/>
-                <circle cx="0" cy="0" r="1.2" fill="#84cc16" opacity="0.65"/>
+                <path d="M 24 0 L 0 0 0 24" fill="none" stroke="rgba(132, 204, 22, 0.22)" stroke-width="0.9"/>
+                <circle cx="0" cy="0" r="1.2" fill="#84cc16" opacity="0.6"/>
               </pattern>
             </defs>
 
             <!-- Outer Blueprint Card -->
-            <rect width="100%" height="100%" fill="#fafaf9"/>
+            <rect width="100%" height="100%" fill="#f4fce3" class="svg-bldg-bg svg-pancho-bg"/>
             <rect width="100%" height="100%" fill="url(#floorGridPanchoF2)"/>
 
             <!-- Central Floor Identifier Badge -->
