@@ -867,11 +867,11 @@ document.addEventListener('DOMContentLoaded', () => {
     if (barValPancho) barValPancho.textContent = pOcc;
 
     const maxBarVal = Math.max(cOcc, hOcc, pOcc, 1);
-    if (barFillCba) barFillCba.style.width = `${Math.round((cOcc / maxBarVal) * 100)}%`;
-    if (barFillHangar) barFillHangar.style.width = `${Math.round((hOcc / maxBarVal) * 100)}%`;
-    if (barFillPancho) barFillPancho.style.width = `${Math.round((pOcc / maxBarVal) * 100)}%`;
+    if (barFillCba) barFillCba.style.height = `${Math.max(15, Math.round((cOcc / maxBarVal) * 100))}%`;
+    if (barFillHangar) barFillHangar.style.height = `${Math.max(15, Math.round((hOcc / maxBarVal) * 100))}%`;
+    if (barFillPancho) barFillPancho.style.height = `${Math.max(15, Math.round((pOcc / maxBarVal) * 100))}%`;
 
-    // Right Segment: Status Line Graphs & Multi-Segment Comic Pie
+    // Right Segment: Multi-Segment Comic Pie / Donut
     const statVacantRooms = document.getElementById('statVacantRooms');
     const vacantGaugeNum = document.getElementById('vacantGaugeNum');
     const vacantGaugeTotal = document.getElementById('vacantGaugeTotal');
@@ -882,24 +882,9 @@ document.addEventListener('DOMContentLoaded', () => {
     if (vacantGaugeTotal) vacantGaugeTotal.textContent = `of ${totalRooms}`;
     if (kpiFreeRate) kpiFreeRate.textContent = `${vacantRooms} / ${totalRooms} Rooms Free`;
 
-    const barValFree = document.getElementById('barValFree');
-    const barValOcc = document.getElementById('barValOcc');
-    const barValMaint = document.getElementById('barValMaint');
-    const barFillFree = document.getElementById('barFillFree');
-    const barFillOcc = document.getElementById('barFillOcc');
-    const barFillMaint = document.getElementById('barFillMaint');
-
-    if (barValFree) barValFree.textContent = vacantRooms;
-    if (barValOcc) barValOcc.textContent = occupiedRooms;
-    if (barValMaint) barValMaint.textContent = maintenanceRooms;
-
     if (totalRooms > 0) {
-      if (barFillFree) barFillFree.style.width = `${Math.round((vacantRooms / totalRooms) * 100)}%`;
-      if (barFillOcc) barFillOcc.style.width = `${Math.round((occupiedRooms / totalRooms) * 100)}%`;
-      if (barFillMaint) barFillMaint.style.width = `${Math.round((maintenanceRooms / totalRooms) * 100)}%`;
-
-      // Modern Multi-Segment Donut Calculations (Radius = 32, Circumference C = 201.06)
-      const C = 201.06;
+      // Modern Multi-Segment Donut Calculations (Radius = 30, Circumference C = 188.5)
+      const C = 188.5;
       const freeLen = (vacantRooms / totalRooms) * C;
       const occLen = (occupiedRooms / totalRooms) * C;
       const maintLen = (maintenanceRooms / totalRooms) * C;
