@@ -1124,67 +1124,113 @@ body.force-mobile-view .sidebar-close-btn {
   flex-shrink: 0;
 }
 
-.capacity-vbars-wrap {
-  display: flex;
-  align-items: flex-end;
-  justify-content: flex-end;
-  gap: 16px;
-  height: 72px;
-  padding-right: 2px;
-}
-
-.vbar-col {
+.capacity-bldg-breakdown {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: 4px;
-  height: 100%;
-  justify-content: flex-end;
+  gap: 5px;
+  flex: 1;
+  max-width: 170px;
 }
 
-.vbar-val {
-  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
-  font-size: 0.85rem;
-  font-weight: 900;
-  color: #000000;
-  line-height: 1;
-}
-
-.vbar-track {
-  width: 18px;
-  height: 42px;
-  background: #f8fafc;
-  border: 1.8px solid #000000;
-  border-radius: 5px;
-  box-shadow: 1.5px 1.5px 0px #000000;
-  overflow: hidden;
+.bldg-stat-row {
   display: flex;
-  align-items: flex-end;
-}
-
-.vbar-fill {
-  width: 100%;
-  border-radius: 1px;
-  transition: height 0.4s ease;
-}
-.vbar-fill.purple { background: #c084fc; }
-.vbar-fill.cyan { background: #38bdf8; }
-.vbar-fill.lime { background: #84cc16; }
-
-.vbar-name {
+  align-items: center;
+  gap: 6px;
   font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+}
+
+.bldg-stat-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  border: 1.5px solid #000000;
+  flex-shrink: 0;
+}
+.bldg-stat-dot.dot-cba { background: #c084fc; }
+.bldg-stat-dot.dot-hangar { background: #38bdf8; }
+.bldg-stat-dot.dot-pancho { background: #84cc16; }
+
+.bldg-stat-name {
+  width: 44px;
   font-size: 0.74rem;
+  color: #000000;
+  font-weight: 800;
+  letter-spacing: -0.2px;
+}
+
+.bldg-stat-track {
+  flex: 1;
+  height: 8px;
+  background: #f8fafc;
+  border: 1.5px solid #000000;
+  border-radius: 4px;
+  box-shadow: 1px 1px 0px #000000;
+  overflow: hidden;
+  min-width: 44px;
+}
+
+.bldg-stat-fill {
+  height: 100%;
+  border-radius: 1px;
+  transition: width 0.4s ease;
+}
+.bldg-stat-fill.purple { background: #c084fc; }
+.bldg-stat-fill.cyan { background: #38bdf8; }
+.bldg-stat-fill.lime { background: #84cc16; }
+
+.bldg-stat-val {
+  font-size: 0.8rem;
   font-weight: 900;
   color: #000000;
-  line-height: 1;
-  letter-spacing: -0.2px;
+  min-width: 18px;
+  text-align: right;
+}
+
+/* ── Mini Legend Stack for Vacant Pie Chart ── */
+.capacity-pie-legend {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.pie-leg-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+}
+
+.pie-leg-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  border: 1.5px solid #000000;
+  flex-shrink: 0;
+}
+.pie-leg-dot.dot-free { background: #0284c7; }
+.pie-leg-dot.dot-occ { background: #84cc16; }
+.pie-leg-dot.dot-maint { background: #f59e0b; }
+
+.pie-leg-label {
+  font-size: 0.74rem;
+  font-weight: 800;
+  color: #000000;
+  width: 42px;
+}
+
+.pie-leg-val {
+  font-size: 0.8rem;
+  font-weight: 900;
+  color: #000000;
+  min-width: 18px;
+  text-align: right;
 }
 
 .capacity-metric-row.vacant-pie-row {
   justify-content: space-between;
   align-items: center;
-  gap: 20px;
-  padding: 0 4px;
+  gap: 14px;
+  padding: 0;
 }
 
 .capacity-gauge-wrap {

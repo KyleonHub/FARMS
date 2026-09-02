@@ -867,11 +867,11 @@ document.addEventListener('DOMContentLoaded', () => {
     if (barValPancho) barValPancho.textContent = pOcc;
 
     const maxBarVal = Math.max(cOcc, hOcc, pOcc, 1);
-    if (barFillCba) barFillCba.style.height = `${Math.max(15, Math.round((cOcc / maxBarVal) * 100))}%`;
-    if (barFillHangar) barFillHangar.style.height = `${Math.max(15, Math.round((hOcc / maxBarVal) * 100))}%`;
-    if (barFillPancho) barFillPancho.style.height = `${Math.max(15, Math.round((pOcc / maxBarVal) * 100))}%`;
+    if (barFillCba) barFillCba.style.width = `${Math.round((cOcc / maxBarVal) * 100)}%`;
+    if (barFillHangar) barFillHangar.style.width = `${Math.round((hOcc / maxBarVal) * 100)}%`;
+    if (barFillPancho) barFillPancho.style.width = `${Math.round((pOcc / maxBarVal) * 100)}%`;
 
-    // Right Segment: Multi-Segment Comic Pie / Donut
+    // Right Segment: Vacant Rooms Legend & Multi-Segment Donut Chart
     const statVacantRooms = document.getElementById('statVacantRooms');
     const vacantGaugeNum = document.getElementById('vacantGaugeNum');
     const vacantGaugeTotal = document.getElementById('vacantGaugeTotal');
@@ -882,9 +882,17 @@ document.addEventListener('DOMContentLoaded', () => {
     if (vacantGaugeTotal) vacantGaugeTotal.textContent = `of ${totalRooms}`;
     if (kpiFreeRate) kpiFreeRate.textContent = `${vacantRooms} / ${totalRooms} Rooms Free`;
 
+    const pieValFree = document.getElementById('pieValFree');
+    const pieValOcc = document.getElementById('pieValOcc');
+    const pieValMaint = document.getElementById('pieValMaint');
+
+    if (pieValFree) pieValFree.textContent = vacantRooms;
+    if (pieValOcc) pieValOcc.textContent = occupiedRooms;
+    if (pieValMaint) pieValMaint.textContent = maintenanceRooms;
+
     if (totalRooms > 0) {
-      // Modern Multi-Segment Donut Calculations (Radius = 30, Circumference C = 188.5)
-      const C = 188.5;
+      // Modern Multi-Segment Donut Calculations (Radius = 32, Circumference C = 201.06)
+      const C = 201.06;
       const freeLen = (vacantRooms / totalRooms) * C;
       const occLen = (occupiedRooms / totalRooms) * C;
       const maintLen = (maintenanceRooms / totalRooms) * C;
