@@ -1061,8 +1061,8 @@ document.addEventListener('DOMContentLoaded', () => {
           </defs>
 
           <!-- Outer Blueprint Card -->
-          <rect x="15" y="10" width="1250" height="335" rx="14" fill="#fafaf9" stroke="#000000" stroke-width="2.8"/>
-          <rect x="15" y="10" width="1250" height="335" rx="14" fill="url(#floorGridCBA)"/>
+          <rect width="100%" height="100%" fill="#fafaf9"/>
+          <rect width="100%" height="100%" fill="url(#floorGridCBA)"/>
 
           <!-- Comic CAD Top Badges -->
           <g transform="translate(35, 20)">
@@ -1148,8 +1148,8 @@ document.addEventListener('DOMContentLoaded', () => {
           </defs>
 
           <!-- Outer Blueprint Card -->
-          <rect x="15" y="10" width="1350" height="555" rx="14" fill="#fafaf9" stroke="#000000" stroke-width="2.8"/>
-          <rect x="15" y="10" width="1350" height="555" rx="14" fill="url(#floorGridHangar)"/>
+          <rect width="100%" height="100%" fill="#fafaf9"/>
+          <rect width="100%" height="100%" fill="url(#floorGridHangar)"/>
 
           <!-- Comic CAD Top Badges -->
           <g transform="translate(35, 20)">
@@ -1231,8 +1231,8 @@ document.addEventListener('DOMContentLoaded', () => {
             </defs>
 
             <!-- Outer Blueprint Card -->
-            <rect x="15" y="10" width="1530" height="460" rx="14" fill="#fafaf9" stroke="#000000" stroke-width="2.8"/>
-            <rect x="15" y="10" width="1530" height="460" rx="14" fill="url(#floorGridPancho)"/>
+            <rect width="100%" height="100%" fill="#fafaf9"/>
+            <rect width="100%" height="100%" fill="url(#floorGridPancho)"/>
 
             <!-- Comic CAD Top Badges -->
             <g transform="translate(35, 20)">
@@ -1341,8 +1341,8 @@ document.addEventListener('DOMContentLoaded', () => {
             </defs>
 
             <!-- Outer Blueprint Card -->
-            <rect x="15" y="10" width="1530" height="460" rx="14" fill="#fafaf9" stroke="#000000" stroke-width="2.8"/>
-            <rect x="15" y="10" width="1530" height="460" rx="14" fill="url(#floorGridPanchoF2)"/>
+            <rect width="100%" height="100%" fill="#fafaf9"/>
+            <rect width="100%" height="100%" fill="url(#floorGridPanchoF2)"/>
 
             <!-- Comic CAD Top Badges -->
             <g transform="translate(35, 20)">
