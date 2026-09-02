@@ -243,25 +243,19 @@ document.addEventListener('DOMContentLoaded', () => {
   // ==========================================
   function updateDynamicGreeting() {
     const greetingTitle = document.getElementById('dashboardGreetingTitle');
-    const greetingSub = document.getElementById('dashboardGreetingSub');
     if (!greetingTitle) return;
 
     const hour = new Date().getHours();
     let timeGreeting = 'Good Morning';
-    let defaultSub = 'Here is your campus operations overview and real-time facility load.';
 
     if (hour >= 5 && hour < 12) {
       timeGreeting = 'Good Morning';
-      defaultSub = 'Morning campus overview: Real-time room occupancy, facility load, and pending authorization queue.';
     } else if (hour >= 12 && hour < 17) {
       timeGreeting = 'Good Afternoon';
-      defaultSub = 'Midday operations overview: Real-time facility metrics, active classes, and live room availability.';
     } else if (hour >= 17 && hour < 22) {
       timeGreeting = 'Good Evening';
-      defaultSub = 'Evening operations overview: Real-time facility telemetry and space allocation status.';
     } else {
       timeGreeting = 'Good Night';
-      defaultSub = 'Night operations: Facility monitoring, security lockups, and telemetry status.';
     }
 
     let displayName = 'Administrator';
@@ -274,9 +268,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     greetingTitle.textContent = `${timeGreeting}, ${displayName}!`;
-    if (greetingSub) {
-      greetingSub.textContent = defaultSub;
-    }
 
     // Also synchronize topbar display name and avatar
     const userDisplayName = document.querySelector('.user-display-name');
