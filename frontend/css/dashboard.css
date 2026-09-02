@@ -89,6 +89,11 @@ input, select, textarea {
   background: #94a3b8;
 }
 
+/* Global Utility Classes */
+.hidden {
+  display: none !important;
+}
+
 /* ──────────────────────────────────────────────────────────
    §3  APPLICATION SHELL LAYOUT
    ────────────────────────────────────────────────────────── */
@@ -5352,54 +5357,21 @@ body.force-mobile-view .sidebar-close-btn {
 
 /* ── Mobile Bottom Navigation Bar (Hidden on Desktop) ── */
 .mobile-bottom-nav {
-  display: none;
+  display: none !important;
 }
 
 /* ── Mobile Room Matrix Container (Hidden on Desktop by Default) ── */
 .mobile-room-matrix-wrapper {
-  display: none;
+  display: none !important;
 }
 
-/* ── Mobile Bottom Sheet Drawer Base ── */
+/* ── Mobile Bottom Sheet Drawer Base (Hidden on Desktop by Default) ── */
 .mobile-bottom-sheet-backdrop {
-  display: none;
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.6);
-  backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(4px);
-  z-index: 2000;
-  transition: opacity 0.2s ease;
-}
-.mobile-bottom-sheet-backdrop:not(.hidden) {
-  display: block;
+  display: none !important;
 }
 
 .mobile-bottom-sheet {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background: #ffffff;
-  border-top: 3px solid #000000;
-  border-top-left-radius: 20px;
-  border-top-right-radius: 20px;
-  box-shadow: 0 -8px 30px rgba(0, 0, 0, 0.35);
-  padding: 14px 18px 26px 18px;
-  z-index: 2010;
-  transform: translateY(100%);
-  transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1);
-  max-height: 82vh;
-  overflow-y: auto;
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-}
-.mobile-bottom-sheet:not(.hidden) {
-  transform: translateY(0);
+  display: none !important;
 }
 
 .mobile-sheet-drag-handle {
@@ -5646,8 +5618,14 @@ body.force-mobile-view .admin-main-wrapper {
   .mobile-room-matrix-wrapper {
     display: flex !important;
     flex-direction: column;
-    gap: 10px;
+    gap: 12px;
     width: 100%;
+    background: #ffffff;
+    border: 2.5px solid #000000;
+    border-radius: 16px;
+    box-shadow: 4px 4px 0px #000000;
+    padding: 12px;
+    box-sizing: border-box;
   }
 
   .status-display-main {
@@ -5692,8 +5670,14 @@ body.force-mobile-view .status-filter-sidebar {
 body.force-mobile-view .mobile-room-matrix-wrapper {
   display: flex !important;
   flex-direction: column;
-  gap: 10px;
+  gap: 12px;
   width: 100%;
+  background: #ffffff;
+  border: 2.5px solid #000000;
+  border-radius: 16px;
+  box-shadow: 4px 4px 0px #000000;
+  padding: 12px;
+  box-sizing: border-box;
 }
 
 body.force-mobile-view .status-display-main {
@@ -6149,6 +6133,11 @@ body.force-mobile-view .dashboard-split-grid {
 [data-theme="dark"] .mobile-sheet-btn.secondary {
   background: #141f34 !important;
   color: #ffffff !important;
+  border-color: #000000 !important;
+}
+
+[data-theme="dark"] .mobile-room-matrix-wrapper {
+  background: #0c1322 !important;
   border-color: #000000 !important;
 }
 
