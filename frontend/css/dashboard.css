@@ -3420,24 +3420,24 @@ body.force-mobile-view .sidebar-close-btn {
   box-shadow: 3px 3px 0px #000000;
 }
 
-/* ── Maximalist Comic Directory Filter Cards ── */
+/* ── Maximalist Comic Directory Filter Cards (Clean Flat Selectors) ── */
 .comic-filter-card {
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 7px 10px;
   background: #ffffff;
-  border: 2px solid #000000;
+  border: 1.8px solid #000000;
   border-radius: 9px;
-  box-shadow: 2px 2px 0px #000000;
+  box-shadow: none !important;
   cursor: pointer;
   transition: all 0.12s ease;
   user-select: none;
 }
 
 .comic-filter-card:hover {
-  transform: translate(-1px, -1px);
-  box-shadow: 3px 3px 0px #000000;
+  transform: none !important;
+  box-shadow: none !important;
   background: #f8fafc;
 }
 
@@ -3448,7 +3448,7 @@ body.force-mobile-view .sidebar-close-btn {
 .comic-filter-card:has(input:not(:checked)) {
   opacity: 0.65;
   background: #f1f5f9;
-  box-shadow: 1px 1px 0px #000000;
+  box-shadow: none !important;
 }
 
 .comic-chk-left {
@@ -3464,10 +3464,10 @@ body.force-mobile-view .sidebar-close-btn {
 .comic-chk-box {
   width: 17px;
   height: 17px;
-  border: 2px solid #000000;
+  border: 1.8px solid #000000;
   border-radius: 5px;
   background: #ffffff;
-  box-shadow: 1.2px 1.2px 0px #000000;
+  box-shadow: none !important;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -3504,7 +3504,7 @@ body.force-mobile-view .sidebar-close-btn {
   padding: 2px 6px;
   border: 1.5px solid #000000;
   border-radius: 5px;
-  box-shadow: 1px 1px 0px #000000;
+  box-shadow: none !important;
   text-transform: uppercase;
 }
 
@@ -4870,29 +4870,29 @@ body.force-mobile-view .sidebar-close-btn {
   color: #ff4d4d !important;
 }
 
-/* ── Comic Filter Cards in Dark Mode ── */
+/* ── Comic Filter Cards in Dark Mode (Clean Flat Selectors) ── */
 [data-theme="dark"] .comic-filter-card {
   background: #1c1b1b !important;
-  border: 2px solid #3a3939 !important;
-  box-shadow: 2px 2px 0px #000000 !important;
+  border: 1.8px solid #484848 !important;
+  box-shadow: none !important;
   color: #ffffff !important;
 }
 
 [data-theme="dark"] .comic-filter-card:hover {
-  background: #3a3939 !important;
-  box-shadow: 3px 3px 0px #000000 !important;
-  transform: translate(-1px, -1px);
+  background: #282828 !important;
+  box-shadow: none !important;
+  transform: none !important;
 }
 
 [data-theme="dark"] .comic-filter-card:has(input:checked) {
   background: #1c1b1b !important;
-  border-color: #ccff00 !important;
+  border-color: #484848 !important;
 }
 
 [data-theme="dark"] .comic-chk-box {
   background: #131313;
-  border: 2px solid #3a3939;
-  box-shadow: 1px 1px 0px #000000;
+  border: 1.8px solid #484848;
+  box-shadow: none !important;
 }
 
 [data-theme="dark"] .comic-chk-left input[type="checkbox"]:checked + .comic-chk-box {
