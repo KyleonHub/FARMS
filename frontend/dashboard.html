@@ -221,7 +221,6 @@
               <div class="capacity-seg in-use-seg">
                 <div class="kpi-header-row">
                   <span class="kpi-v2-title">Active Classes</span>
-                  <span class="kpi-status-badge badge-active"><span class="badge-dot"></span> Live</span>
                 </div>
                 <div class="capacity-metric-row">
                   <div class="kpi-v2-big-num in-use-num" id="statActiveClasses">28</div>
@@ -263,37 +262,36 @@
               <div class="capacity-seg vacant-seg">
                 <div class="kpi-header-row">
                   <span class="kpi-v2-title">Vacant Rooms</span>
-                  <span class="kpi-status-badge badge-vacant"><span class="badge-dot"></span> Ready</span>
                 </div>
                 <div class="capacity-metric-row vacant-pie-row">
                   <div class="kpi-v2-big-num vacant-num" id="statVacantRooms">55</div>
 
-                  <!-- High-Visibility Professional Donut Chart -->
+                  <!-- High-Visibility Max-Space Donut Chart -->
                   <div class="capacity-gauge-wrap">
-                    <svg viewBox="0 0 92 92" width="82" height="82" class="pro-donut-svg">
+                    <svg viewBox="0 0 96 96" width="94" height="94" class="pro-donut-svg">
                       <!-- Base Track -->
-                      <circle cx="46" cy="46" r="30" fill="none" stroke="#e2e8f0" stroke-width="9"/>
+                      <circle cx="48" cy="48" r="32" fill="none" stroke="#e2e8f0" stroke-width="9.5"/>
                       
                       <!-- In-Use Segment (Rose/Red) -->
-                      <circle cx="46" cy="46" r="30" fill="none" stroke="#f43f5e" stroke-width="9"
-                              id="pieSegOcc" stroke-dasharray="188.5" stroke-dashoffset="120"
-                              transform="rotate(-90 46 46)"/>
+                      <circle cx="48" cy="48" r="32" fill="none" stroke="#f43f5e" stroke-width="9.5"
+                              id="pieSegOcc" stroke-dasharray="201.06" stroke-dashoffset="130"
+                              transform="rotate(-90 48 48)"/>
                       
                       <!-- Maintenance Segment (Amber) -->
-                      <circle cx="46" cy="46" r="30" fill="none" stroke="#f59e0b" stroke-width="9"
-                              id="pieSegMaint" stroke-dasharray="188.5" stroke-dashoffset="180"
-                              transform="rotate(-90 46 46)"/>
+                      <circle cx="48" cy="48" r="32" fill="none" stroke="#f59e0b" stroke-width="9.5"
+                              id="pieSegMaint" stroke-dasharray="201.06" stroke-dashoffset="190"
+                              transform="rotate(-90 48 48)"/>
 
                       <!-- Free Segment (Lime/Green) -->
-                      <circle cx="46" cy="46" r="30" fill="none" stroke="#84cc16" stroke-width="9"
-                              id="pieSegFree" stroke-dasharray="188.5" stroke-dashoffset="65"
-                              transform="rotate(-90 46 46)"/>
+                      <circle cx="48" cy="48" r="32" fill="none" stroke="#84cc16" stroke-width="9.5"
+                              id="pieSegFree" stroke-dasharray="201.06" stroke-dashoffset="70"
+                              transform="rotate(-90 48 48)"/>
 
                       <!-- Center Hub -->
-                      <circle cx="46" cy="46" r="21" fill="#ffffff" stroke="#000000" stroke-width="1.8"/>
+                      <circle cx="48" cy="48" r="23" fill="#ffffff" stroke="#000000" stroke-width="2"/>
 
-                      <text x="46" y="44" font-family="Plus Jakarta Sans, system-ui, sans-serif" font-weight="900" font-size="16" fill="#0f172a" text-anchor="middle" id="vacantGaugeNum">55</text>
-                      <text x="46" y="55" font-family="Plus Jakarta Sans, system-ui, sans-serif" font-weight="900" font-size="8" fill="#64748b" text-anchor="middle" id="vacantGaugeTotal">of 85</text>
+                      <text x="48" y="46" font-family="Plus Jakarta Sans, system-ui, sans-serif" font-weight="900" font-size="18" fill="#0f172a" text-anchor="middle" id="vacantGaugeNum">55</text>
+                      <text x="48" y="58" font-family="Plus Jakarta Sans, system-ui, sans-serif" font-weight="900" font-size="9" fill="#64748b" text-anchor="middle" id="vacantGaugeTotal">of 85</text>
                     </svg>
                   </div>
                 </div>
