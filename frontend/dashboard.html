@@ -295,29 +295,32 @@
                     </div>
                   </div>
 
-                  <!-- Professional Metric Donut Chart -->
+                  <!-- High-Visibility Professional Donut Chart -->
                   <div class="capacity-gauge-wrap">
-                    <svg viewBox="0 0 92 92" width="76" height="76" class="pro-donut-svg">
+                    <svg viewBox="0 0 92 92" width="80" height="80" class="pro-donut-svg">
                       <!-- Base Track -->
-                      <circle cx="46" cy="46" r="32" fill="none" stroke="#f1f5f9" stroke-width="8"/>
+                      <circle cx="46" cy="46" r="30" fill="none" stroke="#e2e8f0" stroke-width="9"/>
                       
-                      <!-- In-Use Segment (Red/Rose) -->
-                      <circle cx="46" cy="46" r="32" fill="none" stroke="#f43f5e" stroke-width="8"
-                              id="pieSegOcc" stroke-dasharray="201.06" stroke-dashoffset="130"
+                      <!-- In-Use Segment (Rose/Red) -->
+                      <circle cx="46" cy="46" r="30" fill="none" stroke="#f43f5e" stroke-width="9"
+                              id="pieSegOcc" stroke-dasharray="188.5" stroke-dashoffset="120"
                               transform="rotate(-90 46 46)"/>
                       
                       <!-- Maintenance Segment (Amber) -->
-                      <circle cx="46" cy="46" r="32" fill="none" stroke="#f59e0b" stroke-width="8"
-                              id="pieSegMaint" stroke-dasharray="201.06" stroke-dashoffset="190"
+                      <circle cx="46" cy="46" r="30" fill="none" stroke="#f59e0b" stroke-width="9"
+                              id="pieSegMaint" stroke-dasharray="188.5" stroke-dashoffset="180"
                               transform="rotate(-90 46 46)"/>
 
-                      <!-- Free Segment (Emerald/Green) -->
-                      <circle cx="46" cy="46" r="32" fill="none" stroke="#10b981" stroke-width="8"
-                              id="pieSegFree" stroke-dasharray="201.06" stroke-dashoffset="70"
+                      <!-- Free Segment (Lime/Green) -->
+                      <circle cx="46" cy="46" r="30" fill="none" stroke="#84cc16" stroke-width="9"
+                              id="pieSegFree" stroke-dasharray="188.5" stroke-dashoffset="65"
                               transform="rotate(-90 46 46)"/>
 
-                      <text x="46" y="43" font-family="Plus Jakarta Sans, system-ui, -apple-system, sans-serif" font-weight="800" font-size="16" fill="#0f172a" text-anchor="middle" id="vacantGaugeNum">55</text>
-                      <text x="46" y="55" font-family="Plus Jakarta Sans, system-ui, -apple-system, sans-serif" font-weight="600" font-size="8" fill="#64748b" text-anchor="middle" id="vacantGaugeTotal">of 85</text>
+                      <!-- Center Hub -->
+                      <circle cx="46" cy="46" r="21" fill="#ffffff" stroke="#000000" stroke-width="1.8"/>
+
+                      <text x="46" y="44" font-family="Plus Jakarta Sans, system-ui, sans-serif" font-weight="900" font-size="16" fill="#0f172a" text-anchor="middle" id="vacantGaugeNum">55</text>
+                      <text x="46" y="55" font-family="Plus Jakarta Sans, system-ui, sans-serif" font-weight="900" font-size="8" fill="#64748b" text-anchor="middle" id="vacantGaugeTotal">of 85</text>
                     </svg>
                   </div>
                 </div>
