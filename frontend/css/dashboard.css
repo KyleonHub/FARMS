@@ -977,20 +977,32 @@ body.force-mobile-view .sidebar-close-btn {
 }
 
 .section-title-bar {
-  width: 7px;
-  height: 32px;
-  background: var(--green-900);
+  width: 8px;
+  height: 40px;
+  background: var(--lime-500);
   border-radius: 4px;
   flex-shrink: 0;
-  border: 1px solid #000000;
+  border: 1.5px solid #000000;
 }
 
-.section-title-wrap h3 {
-  font-size: 1.85rem;
+.section-title-wrap h3,
+#dashboardGreetingTitle {
+  font-size: 2.35rem;
   font-weight: 900;
   color: var(--slate-950);
-  letter-spacing: -0.5px;
-  line-height: 1.2;
+  letter-spacing: -0.8px;
+  line-height: 1.15;
+}
+
+@media (max-width: 768px) {
+  .section-title-wrap h3,
+  #dashboardGreetingTitle {
+    font-size: 1.55rem;
+  }
+  .section-title-bar {
+    height: 28px;
+    width: 6px;
+  }
 }
 
 .header-tag-pill {
