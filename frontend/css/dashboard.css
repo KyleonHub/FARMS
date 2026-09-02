@@ -3232,6 +3232,46 @@ body.force-mobile-view .sidebar-close-btn {
   font-size: 10px;
 }
 
+/* Interactive Transit Stairwells */
+.stairs-util {
+  cursor: pointer !important;
+  transition: transform 0.16s cubic-bezier(0.16, 1, 0.3, 1), filter 0.16s ease;
+}
+.stairs-util:hover {
+  filter: drop-shadow(0 4px 10px rgba(4, 120, 87, 0.35)) !important;
+  transform: translateY(-2px);
+}
+.stairs-util:hover rect {
+  fill: #a7f3d0 !important;
+  stroke: #000000 !important;
+  stroke-width: 2.4px !important;
+}
+.stairs-util:hover text {
+  fill: #064e3b !important;
+  font-weight: 900 !important;
+}
+.stairs-util:active {
+  transform: translateY(1px);
+}
+
+[data-theme="dark"] .stairs-util rect {
+  fill: #064e3b !important;
+  stroke: #34d399 !important;
+}
+[data-theme="dark"] .stairs-util line {
+  stroke: #34d399 !important;
+}
+[data-theme="dark"] .stairs-util text {
+  fill: #a7f3d0 !important;
+}
+[data-theme="dark"] .stairs-util:hover rect {
+  fill: #059669 !important;
+  stroke: #ccff00 !important;
+}
+[data-theme="dark"] .stairs-util:hover text {
+  fill: #ffffff !important;
+}
+
 /* ──────────────────────────────────────────────────────────
    §7  SCROLLABLE QUICK DIRECTORY TABLE (NEO-BRUTALIST OPTIMIZED)
    ────────────────────────────────────────────────────────── */
