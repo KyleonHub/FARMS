@@ -9,20 +9,32 @@ document.addEventListener('DOMContentLoaded', () => {
   // ==========================================
   
   function getOrGenerateRoomCode(r) {
-    if (r.roomCode && String(r.roomCode).trim()) return String(r.roomCode).trim();
     const bldg = (r.building || r.bldg || '').trim();
     const roomName = (r.room || '').trim();
+    const numMatch = roomName.match(/\d+[A-Za-z]?/);
     if (bldg.includes('Pancho')) {
-      const numOnly = roomName.replace(/^Pancho\s*/i, '');
-      return `PANCHO ${numOnly}`;
+      if (numMatch) return `PANCHO ${numMatch[0]}`;
+      if (/lecture/i.test(roomName)) return 'PANCHO LEC';
+      if (/science|scilab/i.test(roomName)) return 'PANCHO SCILAB';
+      if (/multimedia|avr/i.test(roomName)) return 'PANCHO MULTIMEDIA';
+      if (/library|lib/i.test(roomName)) return 'PANCHO LIB';
+      if (/sped/i.test(roomName)) return 'PANCHO SPED';
+      if (/unites/i.test(roomName)) return 'PANCHO UNITES';
+      if (/pta/i.test(roomName)) return 'PANCHO PTA';
+      if (/sto/i.test(roomName)) return 'PANCHO STO';
+      if (/scouts/i.test(roomName)) return 'PANCHO SCOUTS';
+      const cleanName = roomName.replace(/^Pancho\s*/i, '').toUpperCase();
+      return `PANCHO ${cleanName}`;
     } else if (bldg.includes('CBA')) {
-      const numOnly = roomName.replace(/^CBA\s*/i, '');
-      return `CBA ${numOnly}`;
+      if (numMatch) return `CBA ${numMatch[0]}`;
+      const cleanName = roomName.replace(/^CBA\s*/i, '').toUpperCase();
+      return `CBA ${cleanName}`;
     } else if (bldg.includes('Hangar')) {
-      const numOnly = roomName.replace(/^Hangar\s*/i, '');
-      return `H ${numOnly}`;
+      if (numMatch) return `H ${numMatch[0]}`;
+      const cleanName = roomName.replace(/^Hangar\s*/i, '').toUpperCase();
+      return `H ${cleanName}`;
     }
-    return roomName;
+    return r.roomCode || roomName;
   }
 
   const DEFAULT_ROOMS = [
@@ -154,9 +166,9 @@ document.addEventListener('DOMContentLoaded', () => {
   let storedRooms = JSON.parse(localStorage.getItem('farms_rooms_v4'));
   let rooms = storedRooms || DEFAULT_ROOMS;
 
-  // Auto-migrate rooms to ensure roomCode property is always present
+  // Auto-migrate rooms to ensure roomCode property is always present and concise
   rooms.forEach(r => {
-    if (!r.roomCode) {
+    if (!r.roomCode || /lecture room|science laboratory|multimedia room|library|sped room|unites room|pta room|scouts room/i.test(r.roomCode)) {
       r.roomCode = getOrGenerateRoomCode(r);
     }
   });
