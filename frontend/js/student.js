@@ -147,7 +147,7 @@ document.addEventListener('DOMContentLoaded', () => {
       floorPlanContent.innerHTML = `
         <svg viewBox="0 0 1280 340" width="100%" height="100%">
           <rect x="15" y="10" width="1250" height="315" rx="12" fill="#061122" stroke="#1e2d4a" stroke-width="2"/>
-          <text x="60" y="55" font-family="Plus Jakarta Sans" font-weight="900" font-size="18" fill="#38bdf8">🏢 CBA BUILDING — LEVEL ${floorNum} BLUEPRINT</text>
+          <text x="60" y="55" font-family="Plus Jakarta Sans" font-weight="900" font-size="18" fill="#38bdf8">CBA BUILDING — LEVEL ${floorNum} BLUEPRINT</text>
           <g class="room-group available" data-room="CBA ${floorNum}01"><rect x="180" y="105" width="270" height="160" rx="8" class="room-rect"/><text x="315" y="180" font-family="Plus Jakarta Sans" font-weight="900" font-size="16" fill="#fff" text-anchor="middle" class="room-text">CBA ${floorNum}01</text></g>
           <g class="room-group booked" data-room="CBA ${floorNum}02"><rect x="465" y="105" width="270" height="160" rx="8" class="room-rect"/><text x="600" y="180" font-family="Plus Jakarta Sans" font-weight="900" font-size="16" fill="#fff" text-anchor="middle" class="room-text">CBA ${floorNum}02</text></g>
           <g class="room-group available" data-room="CBA ${floorNum}03"><rect x="750" y="105" width="270" height="160" rx="8" class="room-rect"/><text x="885" y="180" font-family="Plus Jakarta Sans" font-weight="900" font-size="16" fill="#fff" text-anchor="middle" class="room-text">CBA ${floorNum}03</text></g>
@@ -157,11 +157,11 @@ document.addEventListener('DOMContentLoaded', () => {
       floorPlanContent.innerHTML = `
         <svg viewBox="0 0 1380 560" width="100%" height="100%">
           <rect x="15" y="10" width="1350" height="540" rx="14" fill="#061122" stroke="#1e2d4a" stroke-width="2.5"/>
-          <text x="45" y="55" font-family="Plus Jakarta Sans" font-weight="900" font-size="18" fill="#38bdf8">✈️ HANGAR COMPLEX — BLUEPRINT</text>
+          <text x="45" y="55" font-family="Plus Jakarta Sans" font-weight="900" font-size="18" fill="#38bdf8">HANGAR COMPLEX — BLUEPRINT</text>
           <g class="room-group booked" data-room="Hangar 001"><rect x="45" y="105" width="290" height="130" rx="8" class="room-rect"/><text x="190" y="175" class="room-text" fill="#fff" text-anchor="middle">Hangar 001</text></g>
           <g class="room-group available" data-room="Hangar 002"><rect x="45" y="250" width="290" height="130" rx="8" class="room-rect"/><text x="190" y="320" class="room-text" fill="#fff" text-anchor="middle">Hangar 002</text></g>
           <g class="room-group available" data-room="Hangar 003"><rect x="45" y="395" width="290" height="130" rx="8" class="room-rect"/><text x="190" y="465" class="room-text" fill="#fff" text-anchor="middle">Hangar 003</text></g>
-          <g transform="translate(355, 105)"><rect width="670" height="420" fill="#0a1526" stroke="#1e2d4a" stroke-dasharray="4,4" rx="10"/><text x="335" y="220" font-family="Plus Jakarta Sans" font-size="18" font-weight="900" fill="#38bdf8" text-anchor="middle">🛫 CENTRAL HANGAR HALL</text></g>
+          <g transform="translate(355, 105)"><rect width="670" height="420" fill="#0a1526" stroke="#1e2d4a" stroke-dasharray="4,4" rx="10"/><text x="335" y="220" font-family="Plus Jakarta Sans" font-size="18" font-weight="900" fill="#38bdf8" text-anchor="middle">CENTRAL HANGAR HALL</text></g>
           <g class="room-group booked" data-room="Hangar 004"><rect x="1045" y="105" width="290" height="130" rx="8" class="room-rect"/><text x="1190" y="175" class="room-text" fill="#fff" text-anchor="middle">Hangar 004</text></g>
           <g class="room-group available" data-room="Hangar 005"><rect x="1045" y="250" width="290" height="130" rx="8" class="room-rect"/><text x="1190" y="320" class="room-text" fill="#fff" text-anchor="middle">Hangar 005</text></g>
           <g class="room-group maintenance" data-room="Hangar 006"><rect x="1045" y="395" width="290" height="130" rx="8" class="room-rect"/><text x="1190" y="465" class="room-text" fill="#fff" text-anchor="middle">Hangar 006</text></g>
@@ -171,13 +171,13 @@ document.addEventListener('DOMContentLoaded', () => {
       floorPlanContent.innerHTML = `
         <svg viewBox="0 0 1560 490" width="100%" height="100%">
           <rect x="15" y="10" width="1530" height="465" rx="14" fill="#061122" stroke="#1e2d4a" stroke-width="2.5"/>
-          <text x="780" y="55" font-family="Plus Jakarta Sans" font-weight="900" font-size="22" fill="#34d399" text-anchor="middle">🏛️ PANCHO BUILDING — LEVEL ${floorNum} BLUEPRINT</text>
+          <text x="780" y="55" font-family="Plus Jakarta Sans" font-weight="900" font-size="22" fill="#34d399" text-anchor="middle">PANCHO BUILDING — LEVEL ${floorNum} BLUEPRINT</text>
           <path d="M 40 170 L 1450 170 L 1450 215 L 1380 215 L 1380 445 L 1340 445 L 1340 215 L 40 215 Z" fill="#0a1526" stroke="#1e2d4a" stroke-width="1.5"/>
           <g class="room-group available" data-room="101"><rect x="40" y="90" width="90" height="80" rx="6" class="room-rect"/><text x="85" y="135" fill="#fff" class="room-text">101</text></g>
           <g class="room-group booked" data-room="103"><rect x="180" y="90" width="80" height="80" rx="6" class="room-rect"/><text x="220" y="135" fill="#fff" class="room-text">103</text></g>
           <g class="room-group available" data-room="105"><rect x="265" y="90" width="80" height="80" rx="6" class="room-rect"/><text x="305" y="135" fill="#fff" class="room-text">105</text></g>
-          <g class="room-group booked" data-room="Science Laboratory"><rect x="480" y="215" width="190" height="80" rx="6" class="room-rect"/><text x="575" y="260" fill="#fff" class="room-text">🧪 Science Lab</text></g>
-          <g class="room-group booked" data-room="Multimedia Room"><rect x="1380" y="320" width="70" height="110" rx="6" class="room-rect"/><text x="1415" y="375" fill="#fff" class="room-text">🎬 AVR</text></g>
+          <g class="room-group booked" data-room="Science Laboratory"><rect x="480" y="215" width="190" height="80" rx="6" class="room-rect"/><text x="575" y="260" fill="#fff" class="room-text">Science Laboratory</text></g>
+          <g class="room-group booked" data-room="Multimedia Room"><rect x="1380" y="320" width="70" height="110" rx="6" class="room-rect"/><text x="1415" y="375" fill="#fff" class="room-text">Multimedia Room</text></g>
         </svg>
       `;
     }

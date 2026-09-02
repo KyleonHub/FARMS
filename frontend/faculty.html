@@ -571,7 +571,9 @@
 
         <div class="fac-topbar-right">
           <button class="fac-theme-btn" id="facThemeBtn">
-            <span id="facThemeIcon">☀️</span>
+            <span id="facThemeIcon">
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+            </span>
             <span class="fac-theme-label" id="facThemeLabel">Dark</span>
           </button>
           <button class="fac-req-btn" id="facQuickReqBtn">
@@ -592,7 +594,7 @@
 
           <div class="fac-section-header">
             <div class="fac-section-eyebrow">
-              <span>🔴</span> LIVE &nbsp;·&nbsp; <span id="liveTimestamp">BSU Faculty Terminal</span>
+              <span class="fac-status-dot" style="background:#ef4444; box-shadow:0 0 6px #ef4444;"></span> LIVE &nbsp;·&nbsp; <span id="liveTimestamp">BSU Faculty Terminal</span>
             </div>
             <h2 class="fac-section-title">Room Status &amp; Availability</h2>
             <p class="fac-section-sub">Welcome back, <strong id="greetingFacultyName" style="color:#047857;">Prof. Santos</strong> — select a room to request access.</p>
@@ -613,7 +615,7 @@
               <div class="fac-kpi-detail fac-detail-blue">Science Lab &amp; AVR</div>
             </div>
             <div class="fac-kpi-module fac-kpi-mod-amber">
-              <span class="fac-kpi-tag fac-tag-amber">⏳ Pending</span>
+              <span class="fac-kpi-tag fac-tag-amber">Pending</span>
               <div class="fac-kpi-num" id="statPendingCount">1</div>
               <div class="fac-kpi-label">Pending Requests</div>
               <div class="fac-kpi-detail fac-detail-amber">Awaiting Admin Approval</div>
@@ -624,10 +626,10 @@
           <div class="fac-filter-rail">
             <div style="display:flex; gap:8px; overflow-x:auto; flex:1; -webkit-overflow-scrolling:touch; padding-bottom:2px;">
               <button class="fac-filter-chip active" data-filter="all">All Rooms</button>
-              <button class="fac-filter-chip" data-filter="vacant">🟢 Vacant Only</button>
-              <button class="fac-filter-chip" data-filter="Pancho Building">🏛 Pancho</button>
-              <button class="fac-filter-chip" data-filter="CBA Building">🏢 CBA</button>
-              <button class="fac-filter-chip" data-filter="Hangar">✈️ Hangar</button>
+              <button class="fac-filter-chip" data-filter="vacant"><span class="fac-status-dot" style="background:#22c55e;"></span> Vacant Only</button>
+              <button class="fac-filter-chip" data-filter="Pancho Building">Pancho</button>
+              <button class="fac-filter-chip" data-filter="CBA Building">CBA</button>
+              <button class="fac-filter-chip" data-filter="Hangar">Hangar</button>
             </div>
             <div class="fac-view-toggle" style="flex-shrink:0;">
               <button class="fac-seg-btn active" id="facBtnCards">Cards</button>
@@ -652,14 +654,14 @@
              ========================================== -->
         <section class="fac-view" id="view-request">
           <div class="fac-section-header">
-            <div class="fac-section-eyebrow">📋 Form</div>
+            <div class="fac-section-eyebrow">Form</div>
             <h2 class="fac-section-title">Request Room Access</h2>
             <p class="fac-section-sub">Submit a room reservation request for classes, labs, or academic events.</p>
           </div>
 
           <div class="fac-form-card">
             <div class="fac-form-hero">
-              <div class="fac-form-hero-title">🏛 Room Reservation Form</div>
+              <div class="fac-form-hero-title">Room Reservation Form</div>
               <div class="fac-form-hero-sub">All requests are reviewed by the Admin within 24 hours.</div>
             </div>
             <div class="fac-form-body">
@@ -708,7 +710,7 @@
                 </div>
                 <div class="fac-form-footer">
                   <button type="reset" class="fac-btn-reset">Reset</button>
-                  <button type="submit" class="fac-btn-submit">🚀 Submit Request</button>
+                  <button type="submit" class="fac-btn-submit">Submit Request</button>
                 </div>
               </form>
             </div>
@@ -721,10 +723,10 @@
         <section class="fac-view" id="view-logs">
           <div class="fac-logs-header">
             <div>
-              <div class="fac-section-eyebrow">📋 History</div>
+              <div class="fac-section-eyebrow">History</div>
               <h2 class="fac-section-title">Booking Logs &amp; Status</h2>
             </div>
-            <button class="fac-btn-submit" id="facGoToRequest" style="height:40px; padding:0 20px; font-size:0.8rem;">➕ New Request</button>
+            <button class="fac-btn-submit" id="facGoToRequest" style="height:40px; padding:0 20px; font-size:0.8rem;">New Request</button>
           </div>
           <div class="fac-logs-list" id="facLogsList">
             <!-- Populated by JS -->
@@ -736,7 +738,7 @@
              ========================================== -->
         <section class="fac-view" id="view-profile">
           <div class="fac-section-header">
-            <div class="fac-section-eyebrow">👤 Profile</div>
+            <div class="fac-section-eyebrow">Profile</div>
             <h2 class="fac-section-title">Faculty Profile Settings</h2>
           </div>
           <div class="fac-profile-card">
@@ -784,7 +786,7 @@
                   <input type="text" id="profOfficeHours" value="Mon/Wed 1:00 PM - 4:00 PM (Faculty Hall Rm 204)" class="fac-form-input" required>
                 </div>
                 <div style="display:flex; justify-content:flex-end;">
-                  <button type="submit" class="fac-btn-submit">💾 Save Changes</button>
+                  <button type="submit" class="fac-btn-submit">Save Changes</button>
                 </div>
               </form>
             </div>
@@ -824,7 +826,7 @@
           <div style="display:flex; flex-direction:column; gap:10px;">
             <input type="text" id="facModalSubject" placeholder="Subject / Purpose (e.g. CS101 Lab Exam)" class="fac-form-input" required>
             <input type="text" id="facModalTime" placeholder="Time (e.g. 02:00 PM – 04:00 PM)" class="fac-form-input" required>
-            <button type="submit" class="fac-btn-submit" style="width:100%; height:46px;">⚡ Submit Room Request</button>
+            <button type="submit" class="fac-btn-submit" style="width:100%; height:46px;">Submit Room Request</button>
           </div>
         </form>
       </div>

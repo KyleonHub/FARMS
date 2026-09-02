@@ -137,11 +137,11 @@ document.addEventListener('DOMContentLoaded', () => {
   ];
 
   const DEFAULT_TIMELINE = [
-    { id: 'LOG-1', title: 'Room Assigned: Pancho 103', time: '10 mins ago', desc: 'Assigned to Dr. Reyes for Business Admin Forum (01:00 PM - 03:00 PM)', icon: '📅', type: 'booking', color: 'green', side: 'left' },
-    { id: 'LOG-2', title: 'Schedule Override: Hangar 001', time: '45 mins ago', desc: 'Extended until 12:00 PM for Engr. Cruz (Propulsion Test)', icon: '✈️', type: 'booking', color: 'teal', side: 'right' },
-    { id: 'LOG-3', title: 'Maintenance Flagged: CBA 302', time: '2 hours ago', desc: 'Scheduled maintenance for economics lab terminal recalibration.', icon: '🔧', type: 'maintenance', color: 'amber', side: 'left' },
-    { id: 'LOG-4', title: 'Room Released: Pancho 105', time: '3 hours ago', desc: 'Morning session completed. Room returned to Available pool.', icon: '🚪', type: 'release', color: 'teal', side: 'right' },
-    { id: 'LOG-5', title: 'Automated Facility Audit', time: '5 hours ago', desc: 'Daily room occupancy synchronization executed. 68 total facilities synced.', icon: '⚡', type: 'system', color: 'green', side: 'left' }
+    { id: 'LOG-1', title: 'Room Assigned: Pancho 103', time: '10 mins ago', desc: 'Assigned to Dr. Reyes for Business Admin Forum (01:00 PM - 03:00 PM)', icon: 'booking', type: 'booking', color: 'green', side: 'left' },
+    { id: 'LOG-2', title: 'Schedule Override: Hangar 001', time: '45 mins ago', desc: 'Extended until 12:00 PM for Engr. Cruz (Propulsion Test)', icon: 'booking', type: 'booking', color: 'teal', side: 'right' },
+    { id: 'LOG-3', title: 'Maintenance Flagged: CBA 302', time: '2 hours ago', desc: 'Scheduled maintenance for economics lab terminal recalibration.', icon: 'maintenance', type: 'maintenance', color: 'amber', side: 'left' },
+    { id: 'LOG-4', title: 'Room Released: Pancho 105', time: '3 hours ago', desc: 'Morning session completed. Room returned to Available pool.', icon: 'release', type: 'release', color: 'teal', side: 'right' },
+    { id: 'LOG-5', title: 'Automated Facility Audit', time: '5 hours ago', desc: 'Daily room occupancy synchronization executed. 68 total facilities synced.', icon: 'system', type: 'system', color: 'green', side: 'left' }
   ];
 
   const DEFAULT_NOTIFS = [
@@ -210,12 +210,17 @@ document.addEventListener('DOMContentLoaded', () => {
       guestBanner.className = 'guest-access-banner';
       guestBanner.innerHTML = `
         <div class="guest-banner-left">
-          <span class="guest-banner-icon">👀</span>
+          <span class="guest-banner-icon">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+          </span>
           <div>
             <strong>Guest Mode Active:</strong> You are viewing real-time room availability &amp; campus floor plans. Management actions are view-only.
           </div>
         </div>
-        <a href="login.html" class="guest-banner-btn">🔑 Sign In with Account</a>
+        <a href="login.html" class="guest-banner-btn">
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align:middle; margin-right:4px;"><circle cx="7.5" cy="15.5" r="4.5"/><path d="m21 3-9.5 9.5"/><path d="m15.5 7.5 3 3"/></svg>
+          Sign In with Account
+        </a>
       `;
       mainView.insertBefore(guestBanner, mainView.firstChild);
     }
@@ -568,7 +573,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (currentActiveTab === 'list') {
       if (sidebarContextBadge) sidebarContextBadge.classList.remove('hidden');
-      if (sidebarContextIcon) sidebarContextIcon.textContent = '📋';
+      if (sidebarContextIcon) sidebarContextIcon.innerHTML = '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>';
       if (sidebarContextTitle) sidebarContextTitle.textContent = 'Room Directory';
       if (sidebarContextTag) sidebarContextTag.textContent = '● DIRECTORY';
       if (sidebarListBlock) sidebarListBlock.classList.remove('hidden');
@@ -582,7 +587,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (sidebarMiniStatsWrap) sidebarMiniStatsWrap.classList.add('hidden');
         if (campusBlockDivider) campusBlockDivider.classList.add('hidden');
 
-        const cfg = BUILDING_CONFIG[activeBuilding] || { icon: '🏛️', floors: 1 };
+        const cfg = BUILDING_CONFIG[activeBuilding] || { icon: '', floors: 1 };
         if (sidebarBuildingBlock) sidebarBuildingBlock.classList.remove('hidden');
 
         // Update Building Hero Card
@@ -613,7 +618,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (sidebarMiniStatsWrap) sidebarMiniStatsWrap.classList.remove('hidden');
         if (campusBlockDivider) campusBlockDivider.classList.remove('hidden');
 
-        if (sidebarContextIcon) sidebarContextIcon.textContent = '🗺️';
+        if (sidebarContextIcon) sidebarContextIcon.innerHTML = '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"/><line x1="8" y1="2" x2="8" y2="18"/><line x1="16" y1="6" x2="16" y2="22"/></svg>';
         if (sidebarContextTitle) sidebarContextTitle.textContent = 'Campus Grounds';
         if (sidebarContextTag) sidebarContextTag.textContent = '● 3 ACTIVE';
         if (sidebarCampusBlock) sidebarCampusBlock.classList.remove('hidden');
@@ -911,7 +916,7 @@ document.addEventListener('DOMContentLoaded', () => {
         tooltipStatus.textContent = `${pct}% In-Use (● ${occupied} / ${vacant})`;
         tooltipStatus.className = `popover-status-badge ${vacant > 0 ? 'vacant' : 'occupied'}`;
         tooltipOccupant.textContent = `${total} Classrooms & Laboratories (${vacant} available)`;
-        tooltipSchedule.textContent = `⏱ Operational: 7:00 AM - 9:00 PM`;
+        tooltipSchedule.textContent = `Hours: 7:00 AM - 9:00 PM`;
         tooltipDetail.innerHTML = `<span>Click building to view floor layout</span> <span class="popover-arrow">→</span>`;
         showHudCallout();
       });
@@ -935,7 +940,7 @@ document.addEventListener('DOMContentLoaded', () => {
         tooltipStatus.textContent = '● Athletics & Events';
         tooltipStatus.className = 'popover-status-badge vacant';
         tooltipOccupant.textContent = 'Covered Gymnasium, Sports Arena & Events Hub';
-        tooltipSchedule.textContent = '⏱ Open: 6:00 AM - 9:00 PM';
+        tooltipSchedule.textContent = 'Hours: 6:00 AM - 9:00 PM';
         tooltipDetail.innerHTML = `<span>Campus Athletic & Assembly Facility</span>`;
         showHudCallout();
       });
@@ -953,7 +958,7 @@ document.addEventListener('DOMContentLoaded', () => {
         tooltipStatus.textContent = '● Executive Admin';
         tooltipStatus.className = 'popover-status-badge vacant';
         tooltipOccupant.textContent = 'Executive Offices, Registrar, Dean & Student Affairs';
-        tooltipSchedule.textContent = '⏱ Office Hours: 8:00 AM - 5:00 PM';
+        tooltipSchedule.textContent = 'Hours: 8:00 AM - 5:00 PM';
         tooltipDetail.innerHTML = `<span>Central Campus Administration</span>`;
         showHudCallout();
       });
@@ -1044,11 +1049,11 @@ document.addEventListener('DOMContentLoaded', () => {
           <!-- Comic CAD Top Badges -->
           <g transform="translate(35, 20)">
             <rect width="210" height="32" rx="7" fill="#000000"/>
-            <text x="105" y="21" font-family="Plus Jakarta Sans" font-weight="900" font-size="12" fill="#84cc16" text-anchor="middle">⚡ LEVEL ${floor} : CBA WING</text>
+            <text x="105" y="21" font-family="Plus Jakarta Sans" font-weight="900" font-size="12" fill="#84cc16" text-anchor="middle">LEVEL ${floor} : CBA WING</text>
           </g>
           <g transform="translate(1055, 20)">
             <rect width="180" height="32" rx="7" fill="#84cc16" stroke="#000000" stroke-width="2"/>
-            <text x="90" y="21" font-family="Plus Jakarta Sans" font-weight="900" font-size="12" fill="#000000" text-anchor="middle">✦ BULSU CBA CAD</text>
+            <text x="90" y="21" font-family="Plus Jakarta Sans" font-weight="900" font-size="12" fill="#000000" text-anchor="middle">BULSU CBA CAD</text>
           </g>
 
           <!-- Hallway & Corridors -->
@@ -1070,7 +1075,7 @@ document.addEventListener('DOMContentLoaded', () => {
             <rect x="180" y="90" width="270" height="215" rx="8" class="room-rect"/>
             <text x="315" y="180" font-family="Plus Jakarta Sans" font-weight="900" font-size="18" fill="#0f172a" text-anchor="middle" class="room-text">${room1}</text>
             <text x="315" y="210" font-family="Plus Jakarta Sans" font-weight="800" font-size="12" fill="#64748b" text-anchor="middle" class="sub-text">${room1Type}</text>
-            <text x="315" y="250" font-family="Plus Jakarta Sans" font-size="11" font-weight="900" fill="#059669" text-anchor="middle">👉 Click to Manage</text>
+            <text x="315" y="250" font-family="Plus Jakarta Sans" font-size="11" font-weight="900" fill="#059669" text-anchor="middle">Click to Manage</text>
           </g>
 
           <!-- Room 2 (CBA X02) -->
@@ -1078,7 +1083,7 @@ document.addEventListener('DOMContentLoaded', () => {
             <rect x="470" y="90" width="270" height="215" rx="8" class="room-rect"/>
             <text x="605" y="180" font-family="Plus Jakarta Sans" font-weight="900" font-size="18" fill="#0f172a" text-anchor="middle" class="room-text">${room2}</text>
             <text x="605" y="210" font-family="Plus Jakarta Sans" font-weight="800" font-size="12" fill="#64748b" text-anchor="middle" class="sub-text">${room2Type}</text>
-            <text x="605" y="250" font-family="Plus Jakarta Sans" font-size="11" font-weight="900" fill="#059669" text-anchor="middle">👉 Click to Manage</text>
+            <text x="605" y="250" font-family="Plus Jakarta Sans" font-size="11" font-weight="900" fill="#059669" text-anchor="middle">Click to Manage</text>
           </g>
 
           <!-- Room 3 (CBA X03) -->
@@ -1086,7 +1091,7 @@ document.addEventListener('DOMContentLoaded', () => {
             <rect x="760" y="90" width="270" height="215" rx="8" class="room-rect"/>
             <text x="895" y="180" font-family="Plus Jakarta Sans" font-weight="900" font-size="18" fill="#0f172a" text-anchor="middle" class="room-text">${room3}</text>
             <text x="895" y="210" font-family="Plus Jakarta Sans" font-weight="800" font-size="12" fill="#64748b" text-anchor="middle" class="sub-text">${room3Type}</text>
-            <text x="895" y="250" font-family="Plus Jakarta Sans" font-size="11" font-weight="900" fill="#059669" text-anchor="middle">👉 Click to Manage</text>
+            <text x="895" y="250" font-family="Plus Jakarta Sans" font-size="11" font-weight="900" fill="#059669" text-anchor="middle">Click to Manage</text>
           </g>
 
           <!-- East Stairs & Restroom -->
@@ -1102,7 +1107,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
           <g transform="translate(1145, 90)">
             <rect width="70" height="215" fill="#dbeafe" stroke="#000000" stroke-width="1.8" rx="7"/>
-            <text x="35" y="190" font-family="Plus Jakarta Sans" font-weight="900" font-size="15" fill="#1e40af" text-anchor="middle">🚻 CR</text>
+            <text x="35" y="190" font-family="Plus Jakarta Sans" font-weight="900" font-size="13" fill="#1e40af" text-anchor="middle">RESTROOM</text>
             <text x="35" y="215" font-family="Plus Jakarta Sans" font-weight="800" font-size="10" fill="#3b82f6" text-anchor="middle">M / F</text>
           </g>
         </svg>
@@ -1131,11 +1136,11 @@ document.addEventListener('DOMContentLoaded', () => {
           <!-- Comic CAD Top Badges -->
           <g transform="translate(35, 20)">
             <rect width="250" height="32" rx="7" fill="#000000"/>
-            <text x="125" y="21" font-family="Plus Jakarta Sans" font-weight="900" font-size="12" fill="#84cc16" text-anchor="middle">⚡ HANGAR COMPLEX // LEVEL 1</text>
+            <text x="125" y="21" font-family="Plus Jakarta Sans" font-weight="900" font-size="12" fill="#84cc16" text-anchor="middle">HANGAR COMPLEX // LEVEL 1</text>
           </g>
           <g transform="translate(1145, 20)">
             <rect width="190" height="32" rx="7" fill="#84cc16" stroke="#000000" stroke-width="2"/>
-            <text x="95" y="21" font-family="Plus Jakarta Sans" font-weight="900" font-size="12" fill="#000000" text-anchor="middle">✦ BULSU HANGAR CAD</text>
+            <text x="95" y="21" font-family="Plus Jakarta Sans" font-weight="900" font-size="12" fill="#000000" text-anchor="middle">BULSU HANGAR CAD</text>
           </g>
 
           <!-- ================= LEFT WING (BOTTOM TO TOP: 001, 002, 003) ================= -->
@@ -1145,7 +1150,7 @@ document.addEventListener('DOMContentLoaded', () => {
             <rect x="45" y="65" width="290" height="150" rx="8" class="room-rect"/>
             <text x="190" y="125" font-family="Plus Jakarta Sans" font-weight="900" font-size="16" fill="#0f172a" text-anchor="middle" class="room-text">Hangar 003</text>
             <text x="190" y="150" font-family="Plus Jakarta Sans" font-weight="800" font-size="11" fill="#64748b" text-anchor="middle" class="sub-text">Flight Simulation &amp; Nav Lab</text>
-            <text x="190" y="180" font-family="Plus Jakarta Sans" font-size="10" font-weight="900" fill="#059669" text-anchor="middle">👉 Click to Manage</text>
+            <text x="190" y="180" font-family="Plus Jakarta Sans" font-size="10" font-weight="900" fill="#059669" text-anchor="middle">Click to Manage</text>
           </g>
 
           <!-- Hangar 002 (Middle Left) -->
@@ -1153,7 +1158,7 @@ document.addEventListener('DOMContentLoaded', () => {
             <rect x="45" y="230" width="290" height="150" rx="8" class="room-rect"/>
             <text x="190" y="290" font-family="Plus Jakarta Sans" font-weight="900" font-size="16" fill="#0f172a" text-anchor="middle" class="room-text">Hangar 002</text>
             <text x="190" y="315" font-family="Plus Jakarta Sans" font-weight="800" font-size="11" fill="#64748b" text-anchor="middle" class="sub-text">Avionics &amp; Mechanical Lab</text>
-            <text x="190" y="345" font-family="Plus Jakarta Sans" font-size="10" font-weight="900" fill="#059669" text-anchor="middle">👉 Click to Manage</text>
+            <text x="190" y="345" font-family="Plus Jakarta Sans" font-size="10" font-weight="900" fill="#059669" text-anchor="middle">Click to Manage</text>
           </g>
 
           <!-- Hangar 001 (Bottom Left) -->
@@ -1161,7 +1166,7 @@ document.addEventListener('DOMContentLoaded', () => {
             <rect x="45" y="395" width="290" height="150" rx="8" class="room-rect"/>
             <text x="190" y="455" font-family="Plus Jakarta Sans" font-weight="900" font-size="16" fill="#0f172a" text-anchor="middle" class="room-text">Hangar 001</text>
             <text x="190" y="480" font-family="Plus Jakarta Sans" font-weight="800" font-size="11" fill="#64748b" text-anchor="middle" class="sub-text">Aviation Powerplants Bay</text>
-            <text x="190" y="510" font-family="Plus Jakarta Sans" font-size="10" font-weight="900" fill="#059669" text-anchor="middle">👉 Click to Manage</text>
+            <text x="190" y="510" font-family="Plus Jakarta Sans" font-size="10" font-weight="900" fill="#059669" text-anchor="middle">Click to Manage</text>
           </g>
 
           <!-- ================= MIDDLE AREA (CLEAN CENTRAL HANGAR HALL) ================= -->
@@ -1176,7 +1181,7 @@ document.addEventListener('DOMContentLoaded', () => {
             <rect x="1045" y="65" width="290" height="150" rx="8" class="room-rect"/>
             <text x="1190" y="125" font-family="Plus Jakarta Sans" font-weight="900" font-size="16" fill="#0f172a" text-anchor="middle" class="room-text">Hangar 004</text>
             <text x="1190" y="150" font-family="Plus Jakarta Sans" font-weight="800" font-size="11" fill="#64748b" text-anchor="middle" class="sub-text">Drone &amp; UAV Diagnostics Lab</text>
-            <text x="1190" y="180" font-family="Plus Jakarta Sans" font-size="10" font-weight="900" fill="#059669" text-anchor="middle">👉 Click to Manage</text>
+            <text x="1190" y="180" font-family="Plus Jakarta Sans" font-size="10" font-weight="900" fill="#059669" text-anchor="middle">Click to Manage</text>
           </g>
 
           <!-- Hangar 005 (Middle Right) -->
@@ -1184,7 +1189,7 @@ document.addEventListener('DOMContentLoaded', () => {
             <rect x="1045" y="230" width="290" height="150" rx="8" class="room-rect"/>
             <text x="1190" y="290" font-family="Plus Jakarta Sans" font-weight="900" font-size="16" fill="#0f172a" text-anchor="middle" class="room-text">Hangar 005</text>
             <text x="1190" y="315" font-family="Plus Jakarta Sans" font-weight="800" font-size="11" fill="#64748b" text-anchor="middle" class="sub-text">Composite Materials &amp; Fabrication</text>
-            <text x="1190" y="345" font-family="Plus Jakarta Sans" font-size="10" font-weight="900" fill="#059669" text-anchor="middle">👉 Click to Manage</text>
+            <text x="1190" y="345" font-family="Plus Jakarta Sans" font-size="10" font-weight="900" fill="#059669" text-anchor="middle">Click to Manage</text>
           </g>
 
           <!-- Hangar 006 (Bottom Right) -->
@@ -1192,7 +1197,7 @@ document.addEventListener('DOMContentLoaded', () => {
             <rect x="1045" y="395" width="290" height="150" rx="8" class="room-rect"/>
             <text x="1190" y="455" font-family="Plus Jakarta Sans" font-weight="900" font-size="16" fill="#0f172a" text-anchor="middle" class="room-text">Hangar 006</text>
             <text x="1190" y="480" font-family="Plus Jakarta Sans" font-weight="800" font-size="11" fill="#64748b" text-anchor="middle" class="sub-text">Aircraft Systems &amp; Assembly</text>
-            <text x="1190" y="510" font-family="Plus Jakarta Sans" font-size="10" font-weight="900" fill="#059669" text-anchor="middle">👉 Click to Manage</text>
+            <text x="1190" y="510" font-family="Plus Jakarta Sans" font-size="10" font-weight="900" fill="#059669" text-anchor="middle">Click to Manage</text>
           </g>
         </svg>
       `;
@@ -1214,11 +1219,11 @@ document.addEventListener('DOMContentLoaded', () => {
             <!-- Comic CAD Top Badges -->
             <g transform="translate(35, 20)">
               <rect width="220" height="32" rx="7" fill="#000000"/>
-              <text x="110" y="21" font-family="Plus Jakarta Sans" font-weight="900" font-size="12" fill="#84cc16" text-anchor="middle">⚡ LEVEL 1 : GROUND FLOOR</text>
+              <text x="110" y="21" font-family="Plus Jakarta Sans" font-weight="900" font-size="12" fill="#84cc16" text-anchor="middle">LEVEL 1 : GROUND FLOOR</text>
             </g>
             <g transform="translate(1335, 20)">
               <rect width="190" height="32" rx="7" fill="#84cc16" stroke="#000000" stroke-width="2"/>
-              <text x="95" y="21" font-family="Plus Jakarta Sans" font-weight="900" font-size="12" fill="#000000" text-anchor="middle">✦ BULSU PANCHO CAD</text>
+              <text x="95" y="21" font-family="Plus Jakarta Sans" font-weight="900" font-size="12" fill="#000000" text-anchor="middle">BULSU PANCHO CAD</text>
             </g>
 
             <!-- Corridor / Hallway -->
@@ -1271,7 +1276,7 @@ document.addEventListener('DOMContentLoaded', () => {
             
             <g class="room-group ${getRoomStateClass(building, 'Science Laboratory', 1)}" data-bldg="${building}" data-room="Science Laboratory" data-floor="1">
               <rect x="475" y="210" width="195" height="90" rx="7" class="room-rect"/>
-              <text class="room-text" x="572.5" y="248"><tspan x="572.5" dy="0">🧪 Science</tspan><tspan x="572.5" dy="16">Laboratory</tspan></text>
+              <text class="room-text" x="572.5" y="248"><tspan x="572.5" dy="0">Science</tspan><tspan x="572.5" dy="16">Laboratory</tspan></text>
             </g>
             
             <g class="room-group ${getRoomStateClass(building, '112A', 1)}" data-bldg="${building}" data-room="112A" data-floor="1"><rect x="675" y="210" width="65" height="90" rx="7" class="room-rect"/><text x="707.5" y="260" class="room-text">112A</text></g>
@@ -1299,11 +1304,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
             <g class="room-group ${getRoomStateClass(building, 'Library', 1)}" data-bldg="${building}" data-room="Library" data-floor="1">
               <rect x="1375" y="215" width="80" height="105" rx="7" class="room-rect"/>
-              <text x="1415" y="270" class="room-text">📚 Library</text>
+              <text x="1415" y="270" class="room-text">Library</text>
             </g>
             <g class="room-group ${getRoomStateClass(building, 'Multimedia Room', 1)}" data-bldg="${building}" data-room="Multimedia Room" data-floor="1">
               <rect x="1375" y="325" width="80" height="115" rx="7" class="room-rect"/>
-              <text class="room-text" x="1415" y="375"><tspan x="1415" dy="0">🎬 Multimedia</tspan><tspan x="1415" dy="16">Room</tspan></text>
+              <text class="room-text" x="1415" y="375"><tspan x="1415" dy="0">Multimedia</tspan><tspan x="1415" dy="16">Room</tspan></text>
             </g>
           </svg>
         `;
@@ -1324,11 +1329,11 @@ document.addEventListener('DOMContentLoaded', () => {
             <!-- Comic CAD Top Badges -->
             <g transform="translate(35, 20)">
               <rect width="220" height="32" rx="7" fill="#000000"/>
-              <text x="110" y="21" font-family="Plus Jakarta Sans" font-weight="900" font-size="12" fill="#84cc16" text-anchor="middle">⚡ LEVEL 2 : SECOND FLOOR</text>
+              <text x="110" y="21" font-family="Plus Jakarta Sans" font-weight="900" font-size="12" fill="#84cc16" text-anchor="middle">LEVEL 2 : SECOND FLOOR</text>
             </g>
             <g transform="translate(1335, 20)">
               <rect width="190" height="32" rx="7" fill="#84cc16" stroke="#000000" stroke-width="2"/>
-              <text x="95" y="21" font-family="Plus Jakarta Sans" font-weight="900" font-size="12" fill="#000000" text-anchor="middle">✦ BULSU PANCHO CAD</text>
+              <text x="95" y="21" font-family="Plus Jakarta Sans" font-weight="900" font-size="12" fill="#000000" text-anchor="middle">BULSU PANCHO CAD</text>
             </g>
 
             <!-- Corridor / Hallway -->
@@ -1448,7 +1453,7 @@ document.addEventListener('DOMContentLoaded', () => {
           dockRoomOccupant.textContent = roomObj.occupant || 'Unassigned';
           dockRoomSchedule.textContent = roomObj.schedule || 'Available / Open';
           if (dockRoomCapacity) dockRoomCapacity.textContent = `${roomObj.capacity || 45} Seats`;
-          dockActionHint.textContent = roomObj.status === 'vacant' ? '👉 Assign Faculty' : '👉 Manage Room';
+          dockActionHint.textContent = roomObj.status === 'vacant' ? 'Assign Faculty' : 'Manage Room';
           floorTelemetryDock.classList.remove('hidden');
         }
       });
@@ -1553,7 +1558,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (dirOccCount) dirOccCount.textContent = filtered.filter(r => r.status === 'occupied').length;
 
     if (filtered.length === 0) {
-      listTableBody.innerHTML = `<tr><td colspan="6" style="text-align:center; padding:36px; color:#94a3b8; font-weight:800; font-family:'Plus Jakarta Sans';">🔍 No facilities found matching current filters.</td></tr>`;
+      listTableBody.innerHTML = `<tr><td colspan="6" style="text-align:center; padding:36px; color:#94a3b8; font-weight:800; font-family:'Plus Jakarta Sans';">No facilities found matching current filters.</td></tr>`;
       return;
     }
 
@@ -1592,14 +1597,14 @@ document.addEventListener('DOMContentLoaded', () => {
           </span>
         </td>
         <td>
-          <span class="dir-capacity-pill">👥 ${item.capacity || 45} Seats</span>
+          <span class="dir-capacity-pill">${item.capacity || 45} Seats</span>
         </td>
         <td>
           <span class="dir-equipment-text">${item.equipment || 'Standard Class Facility'}</span>
         </td>
         <td style="text-align:right;">
           <button class="dir-manage-action-btn list-inspect-btn">
-            <span>⚡</span>
+            <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
             <span>Manage</span>
           </button>
         </td>
@@ -1632,10 +1637,9 @@ document.addEventListener('DOMContentLoaded', () => {
       card.className = 'matrix-bldg-card';
       card.setAttribute('data-bldg-card', bldgName);
 
-      const icon = bldgName === 'Pancho Building' ? '🏛️' : bldgName === 'CBA Building' ? '🏢' : '✈️';
       card.innerHTML = `
         <div class="matrix-bldg-header">
-          <h4>${icon} ${bldgName}</h4>
+          <h4>${bldgName}</h4>
           <span class="matrix-bldg-badge">${bldgRooms.length} Facilities</span>
         </div>
       `;
@@ -1649,7 +1653,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const flrSection = document.createElement('div');
         flrSection.className = 'matrix-floor-section';
         flrSection.innerHTML = `
-          <div class="matrix-floor-title">🪜 Level ${flr} (${flrRooms.length} Facilities)</div>
+          <div class="matrix-floor-title">Level ${flr} (${flrRooms.length} Facilities)</div>
           <div class="matrix-rooms-grid"></div>
         `;
 
@@ -1661,7 +1665,7 @@ document.addEventListener('DOMContentLoaded', () => {
           cell.innerHTML = `
             <span class="matrix-room-dot"></span>
             <div class="matrix-room-name">${codeDisplay}</div>
-            <div class="matrix-room-sub">${roomObj.status === 'vacant' ? '🟢 Available' : roomObj.occupant}</div>
+            <div class="matrix-room-sub">${roomObj.status === 'vacant' ? 'Available' : roomObj.occupant}</div>
           `;
 
           cell.addEventListener('click', () => {
@@ -1700,7 +1704,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
       const card = document.createElement('div');
       card.className = 'matrix-bldg-card';
-      const icon = bldgName === 'Pancho Building' ? '🏛️' : bldgName === 'CBA Building' ? '🏢' : '✈️';
       
       const occCount = bldgRooms.filter(r => r.status === 'occupied').length;
       const vacCount = bldgRooms.filter(r => r.status === 'vacant').length;
@@ -1709,13 +1712,13 @@ document.addEventListener('DOMContentLoaded', () => {
       card.innerHTML = `
         <div class="matrix-bldg-header">
           <div style="display:flex; align-items:center; gap:10px;">
-            <h4 style="font-size:1.15rem; font-weight:900; color:#0f172a;">${icon} ${bldgName}</h4>
+            <h4 style="font-size:1.15rem; font-weight:900; color:#0f172a;">${bldgName}</h4>
             <span class="matrix-bldg-badge" style="font-size:0.8rem; font-weight:800;">${bldgRooms.length} Facilities</span>
           </div>
           <div style="display:flex; gap:12px; font-size:0.85rem; font-weight:900;">
-            <span style="color:#059669;">🟢 ${vacCount} Available</span>
-            <span style="color:#e11d48;">📚 ${occCount} In-Use</span>
-            ${mntCount > 0 ? `<span style="color:#d97706;">🛠️ ${mntCount} Repair</span>` : ''}
+            <span style="color:#059669;">${vacCount} Available</span>
+            <span style="color:#e11d48;">${occCount} In-Use</span>
+            ${mntCount > 0 ? `<span style="color:#d97706;">${mntCount} Repair</span>` : ''}
           </div>
         </div>
       `;
@@ -1728,7 +1731,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const flrSection = document.createElement('div');
         flrSection.className = 'matrix-floor-section';
         flrSection.innerHTML = `
-          <div class="matrix-floor-title" style="font-size:0.95rem; font-weight:900; color:#334155; margin-bottom:10px;">🪜 Floor Level ${flr} (${flrRooms.length} Facilities)</div>
+          <div class="matrix-floor-title" style="font-size:0.95rem; font-weight:900; color:#334155; margin-bottom:10px;">Floor Level ${flr} (${flrRooms.length} Facilities)</div>
           <div class="matrix-rooms-grid"></div>
         `;
 
@@ -1741,7 +1744,7 @@ document.addEventListener('DOMContentLoaded', () => {
           cell.innerHTML = `
             <span class="matrix-room-dot"></span>
             <div class="matrix-room-name" style="font-size:0.95rem; font-weight:900;">${codeDisplay}</div>
-            <div class="matrix-room-sub" style="font-size:0.82rem; font-weight:800;">${roomObj.status === 'vacant' ? '🟢 Available' : roomObj.status === 'maintenance' ? '🛠️ In Repair' : roomObj.occupant}</div>
+            <div class="matrix-room-sub" style="font-size:0.82rem; font-weight:800;">${roomObj.status === 'vacant' ? 'Available' : roomObj.status === 'maintenance' ? 'In Repair' : roomObj.occupant}</div>
           `;
 
           cell.addEventListener('click', () => {
@@ -2011,7 +2014,7 @@ document.addEventListener('DOMContentLoaded', () => {
       title: 'New Access Request',
       time: 'Just now',
       desc: `${requester} submitted request for ${room}.`,
-      icon: '📝',
+      icon: 'request',
       type: 'request',
       color: 'amber',
       side: 'left'
@@ -2025,6 +2028,28 @@ document.addEventListener('DOMContentLoaded', () => {
 
   if (btnNewRequest) btnNewRequest.addEventListener('click', handleNewRequestPrompt);
   if (btnNewRequestView) btnNewRequestView.addEventListener('click', handleNewRequestPrompt);
+
+  // Helper for timeline log SVG icons
+  function getLogIconSvg(log) {
+    if (log.icon && log.icon.includes('<svg')) return log.icon;
+    const type = log.type || log.icon;
+    switch (type) {
+      case 'booking':
+        return `<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>`;
+      case 'maintenance':
+        return `<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>`;
+      case 'release':
+        return `<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>`;
+      case 'request':
+        return `<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>`;
+      case 'broadcast':
+        return `<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>`;
+      case 'security':
+      case 'system':
+      default:
+        return `<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>`;
+    }
+  }
 
   // ==========================================
   // 10. ACTIVITY LOGS TIMELINE
@@ -2047,7 +2072,7 @@ document.addEventListener('DOMContentLoaded', () => {
         item.className = `timeline-item ${log.side || 'left'}`;
         item.innerHTML = `
           <div class="timeline-node-icon ${log.color}">
-            ${log.icon}
+            ${getLogIconSvg(log)}
           </div>
           <div class="timeline-card">
             <div class="timeline-card-top">
@@ -2071,7 +2096,7 @@ document.addEventListener('DOMContentLoaded', () => {
         title: 'System Health Check',
         time: '2 days ago',
         desc: 'All 3 buildings sync verified. Database backup archived.',
-        icon: '🛡️',
+        icon: 'system',
         type: 'system',
         color: 'teal',
         side: 'left'
@@ -2112,7 +2137,7 @@ document.addEventListener('DOMContentLoaded', () => {
     modalBldgBadge.textContent = `${roomObj.building} · Level ${roomObj.floor}`;
 
     modalStatusBanner.className = `room-status-banner ${roomObj.status}`;
-    modalStatusText.textContent = roomObj.status === 'vacant' ? '🟢 Currently Available' : roomObj.status === 'occupied' ? `🔴 Occupied by ${roomObj.occupant}` : '🟠 Under Maintenance';
+    modalStatusText.textContent = roomObj.status === 'vacant' ? 'Currently Available' : roomObj.status === 'occupied' ? `Occupied by ${roomObj.occupant}` : 'Under Maintenance';
     
     if (modalRoomCode) modalRoomCode.value = codeDisplay;
     if (modalRoomName) modalRoomName.value = roomObj.room || '';
@@ -2172,7 +2197,7 @@ document.addEventListener('DOMContentLoaded', () => {
         title: newStatus === 'vacant' ? 'Room Released' : 'Room Assigned',
         time: 'Just now',
         desc: `${currentEditingRoom.roomCode} (${currentEditingRoom.building}) updated to ${newStatus.toUpperCase()}${newStatus === 'occupied' ? ' - ' + newOccupant : ''}`,
-        icon: newStatus === 'vacant' ? '🚪' : '📅',
+        icon: newStatus === 'vacant' ? 'release' : 'booking',
         type: 'booking',
         color: newStatus === 'vacant' ? 'teal' : 'green',
         side: 'right'
@@ -2204,7 +2229,7 @@ document.addEventListener('DOMContentLoaded', () => {
         title: 'Room Released',
         time: 'Just now',
         desc: `${currentEditingRoom.room} has been released and is now vacant.`,
-        icon: '🚪',
+        icon: 'release',
         type: 'release',
         color: 'teal',
         side: 'left'
@@ -2242,7 +2267,7 @@ document.addEventListener('DOMContentLoaded', () => {
         return;
       }
 
-      const matchedRooms = rooms.filter(r => r.room.toLowerCase().includes(q) || r.occupant.toLowerCase().includes(q) || r.building.toLowerCase().includes(q));
+      const matchedRooms = rooms.filter(r => (r.roomCode && r.roomCode.toLowerCase().includes(q)) || r.room.toLowerCase().includes(q) || r.occupant.toLowerCase().includes(q) || r.building.toLowerCase().includes(q));
       searchResultsList.innerHTML = '';
 
       if (matchedRooms.length === 0) {
@@ -2254,10 +2279,11 @@ document.addEventListener('DOMContentLoaded', () => {
       matchedRooms.slice(0, 7).forEach(r => {
         const item = document.createElement('div');
         item.className = 'search-result-item';
+        const codeDisplay = r.roomCode || getOrGenerateRoomCode(r);
         item.innerHTML = `
           <div>
-            <strong>${r.room}</strong> <span style="color:#64748b; font-size:0.75rem;">— ${r.building} (Floor ${r.floor})</span>
-            <div style="font-size:0.7rem; color:#94a3b8; margin-top:2px;">${r.occupant !== 'None' ? 'Occupied: ' + r.occupant : '🟢 Available Now'}</div>
+            <strong>${codeDisplay}</strong> <span style="color:#64748b; font-size:0.75rem;">— ${r.building} (Floor ${r.floor})</span>
+            <div style="font-size:0.7rem; color:#94a3b8; margin-top:2px;">${r.occupant !== 'None' ? 'Occupied: ' + r.occupant : 'Available Now'}</div>
           </div>
           <span class="search-category-badge">${r.type || 'Room'}</span>
         `;
@@ -2379,19 +2405,19 @@ document.addEventListener('DOMContentLoaded', () => {
     a.download = `FARMS_Room_Audit_${new Date().toISOString().slice(0,10)}.csv`;
     a.click();
     URL.revokeObjectURL(url);
-    showToast('📊 Facility Audit Log exported as CSV.');
+    showToast('Facility Audit Log exported as CSV.');
   });
 
   document.getElementById('btnDispatchBroadcast')?.addEventListener('click', () => {
     const msg = prompt('Enter Campus Operational Announcement:');
     if (!msg) return;
-    showToast(`📢 Announcement: ${msg}`);
+    showToast(`Announcement: ${msg}`);
     timelineLogs.unshift({
       id: `LOG-${Date.now()}`,
-      title: '📢 Campus Broadcast Announcement',
+      title: 'Campus Broadcast Announcement',
       time: 'Just now',
       desc: msg,
-      icon: '📢',
+      icon: 'broadcast',
       type: 'broadcast',
       color: 'amber',
       side: 'left'
@@ -2532,7 +2558,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     mobileRoomsFeed.innerHTML = filtered.map(r => {
       const statusClass = r.status === 'vacant' ? 'available' : r.status === 'occupied' ? 'occupied' : 'maintenance';
-      const statusLabel = r.status === 'vacant' ? '🟢 FREE' : r.status === 'occupied' ? '🔴 IN-USE' : '🟡 MAINT';
+      const statusLabel = r.status === 'vacant' ? 'FREE' : r.status === 'occupied' ? 'IN-USE' : 'MAINT';
       const occupantDisplay = r.status === 'occupied' ? (r.occupant !== 'None' ? r.occupant : 'Active Class') : (r.status === 'vacant' ? 'Vacant & Ready' : 'Under Maintenance');
       const codeDisplay = r.roomCode || getOrGenerateRoomCode(r);
 
@@ -2546,7 +2572,7 @@ document.addEventListener('DOMContentLoaded', () => {
           <div class="m-card-occupant">${occupantDisplay}</div>
           <div class="m-card-bottom">
             <span>Level ${r.floor}</span>
-            <span>👥 ${r.capacity || 45} Max</span>
+            <span>${r.capacity || 45} Max</span>
           </div>
         </div>
       `;
@@ -2584,7 +2610,7 @@ document.addEventListener('DOMContentLoaded', () => {
         <div class="mobile-sheet-stat-card" style="border-left: 5px solid ${isFree ? '#22c55e' : (isOcc ? '#ef4444' : '#f59e0b')};">
           <div class="mobile-sheet-stat-label">Current Status</div>
           <div class="mobile-sheet-stat-value" style="font-weight:900;">
-            ${isFree ? '🟢 Available for Immediate Use' : (isOcc ? '🔴 Currently In-Use' : '🟠 Facility Under Maintenance')}
+            ${isFree ? 'Available for Immediate Use' : (isOcc ? 'Currently In-Use' : 'Facility Under Maintenance')}
           </div>
         </div>
 
@@ -2606,7 +2632,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     if (btnSheetQuickAction) {
-      btnSheetQuickAction.textContent = isFree ? '🔴 Mark In-Use / Book' : '🟢 Free Up & Release Room';
+      btnSheetQuickAction.textContent = isFree ? 'Mark In-Use / Book' : 'Free Up & Release Room';
     }
 
     if (mobileSheetBackdrop) mobileSheetBackdrop.classList.remove('hidden');
@@ -2647,7 +2673,7 @@ document.addEventListener('DOMContentLoaded', () => {
       renderMatrixView();
       renderMobileRoomFeed();
       closeMobileRoomSheet();
-      showToast(`${target.room} status updated to ${target.status === 'vacant' ? '🟢 Available' : '🔴 In-Use'}`);
+      showToast(`${target.roomCode || target.room} status updated to ${target.status === 'vacant' ? 'Available' : 'In-Use'}`);
     });
   }
 

@@ -56,7 +56,11 @@ document.addEventListener('DOMContentLoaded', () => {
     localStorage.setItem('farms-theme', theme);
     const icon = document.getElementById('facThemeIcon');
     const label = document.getElementById('facThemeLabel');
-    if (icon) icon.textContent = theme === 'dark' ? '🌙' : '☀️';
+    if (icon) {
+      icon.innerHTML = theme === 'dark' 
+        ? `<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>`
+        : `<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>`;
+    }
     if (label) label.textContent = theme === 'dark' ? 'Light' : 'Dark';
   }
   applyTheme(savedTheme);
@@ -189,7 +193,7 @@ document.addEventListener('DOMContentLoaded', () => {
     };
     localStorage.setItem('farms_faculty_profile', JSON.stringify(facultyProfile));
     renderProfile();
-    showToast('✅ Profile updated successfully!');
+    showToast('Profile updated successfully!');
   });
 
   // ────────────────────────────────────────────────
@@ -201,7 +205,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function showTip(r, anchorEl) {
     const statusColor = { vacant: '#4ade80', occupied: '#f87171', maintenance: '#fbbf24' }[r.status];
-    const statusLabel = { vacant: '🟢 Vacant — Open for Booking', occupied: '🔴 Occupied', maintenance: '🟡 Under Maintenance' }[r.status];
+    const statusLabel = { vacant: 'Vacant — Open for Booking', occupied: 'Occupied', maintenance: 'Under Maintenance' }[r.status];
     floatTip.innerHTML = `
       <div class="tip-room">${r.room}</div>
       <div class="tip-status" style="color:${statusColor};">${statusLabel}</div>
@@ -210,7 +214,7 @@ document.addEventListener('DOMContentLoaded', () => {
       <div class="tip-row"><span class="tip-key">Capacity</span><span class="tip-val">${r.capacity} seats</span></div>
       <div class="tip-row"><span class="tip-key">Occupant</span><span class="tip-val">${r.occupant}</span></div>
       <div class="tip-row"><span class="tip-key">Schedule</span><span class="tip-val">${r.schedule}</span></div>
-      ${r.status === 'vacant' ? '<div class="tip-cta">⚡ Click to Request Access</div>' : ''}
+      ${r.status === 'vacant' ? '<div class="tip-cta">Click to Request Access</div>' : ''}
     `;
     const rect = anchorEl.getBoundingClientRect();
     const TW = 215, TH = floatTip.offsetHeight || 190;
@@ -231,12 +235,12 @@ document.addEventListener('DOMContentLoaded', () => {
   const grid = document.getElementById('facRoomsGrid');
 
   function makeSqBtn(r) {
-    const icons = { vacant: '🟢', occupied: '🔴', maintenance: '🟡' };
+    const dotColor = r.status === 'vacant' ? '#22c55e' : r.status === 'occupied' ? '#ef4444' : '#f59e0b';
     const btn = document.createElement('button');
     btn.className = `fac-room-sqbtn ${r.status}`;
     btn.setAttribute('aria-label', `${r.room} — ${r.status}`);
     btn.innerHTML = `
-      <span class="fac-sqbtn-icon">${icons[r.status]}</span>
+      <span class="fac-sqbtn-icon" style="display:inline-block; width:8px; height:8px; border-radius:50%; background:${dotColor}; box-shadow:0 0 6px ${dotColor};"></span>
       <span class="fac-sqbtn-name">${r.room}</span>
       <span class="fac-sqbtn-floor">Flr ${r.floor}</span>
     `;
@@ -306,24 +310,24 @@ document.addEventListener('DOMContentLoaded', () => {
           <path d="M 0 300 Q 500 280 1000 300" stroke="#cbd5e1" stroke-width="32" fill="none"/>
           <g class="fac-campus-bldg" data-bldg="Pancho Building" style="cursor:pointer;" transform="translate(60, 60)">
             <rect width="400" height="180" rx="12" fill="#047857" stroke="#065f46" stroke-width="3"/>
-            <text x="200" y="85" font-family="Plus Jakarta Sans,system-ui" font-weight="900" font-size="22" fill="#fff" text-anchor="middle">🏛️ PANCHO BUILDING</text>
+            <text x="200" y="85" font-family="Plus Jakarta Sans,system-ui" font-weight="900" font-size="22" fill="#fff" text-anchor="middle">PANCHO BUILDING</text>
             <text x="200" y="115" font-family="Plus Jakarta Sans,system-ui" font-weight="700" font-size="13" fill="#a7f3d0" text-anchor="middle">2 Floors · 50 Classrooms &amp; Labs</text>
             <rect x="140" y="130" width="120" height="26" rx="13" fill="rgba(0,0,0,.25)"/>
-            <text x="200" y="148" font-family="Plus Jakarta Sans,system-ui" font-weight="800" font-size="11" fill="#facc15" text-anchor="middle">⚡ Click to Inspect</text>
+            <text x="200" y="148" font-family="Plus Jakarta Sans,system-ui" font-weight="800" font-size="11" fill="#facc15" text-anchor="middle">Click to Inspect</text>
           </g>
           <g class="fac-campus-bldg" data-bldg="CBA Building" style="cursor:pointer;" transform="translate(560, 60)">
             <rect width="380" height="180" rx="12" fill="#1d4ed8" stroke="#1e40af" stroke-width="3"/>
-            <text x="190" y="85" font-family="Plus Jakarta Sans,system-ui" font-weight="900" font-size="22" fill="#fff" text-anchor="middle">🏢 CBA BUILDING</text>
+            <text x="190" y="85" font-family="Plus Jakarta Sans,system-ui" font-weight="900" font-size="22" fill="#fff" text-anchor="middle">CBA BUILDING</text>
             <text x="190" y="115" font-family="Plus Jakarta Sans,system-ui" font-weight="700" font-size="13" fill="#bfdbfe" text-anchor="middle">4 Storeys · Business &amp; Computing</text>
             <rect x="130" y="130" width="120" height="26" rx="13" fill="rgba(0,0,0,.25)"/>
-            <text x="190" y="148" font-family="Plus Jakarta Sans,system-ui" font-weight="800" font-size="11" fill="#facc15" text-anchor="middle">⚡ Click to Inspect</text>
+            <text x="190" y="148" font-family="Plus Jakarta Sans,system-ui" font-weight="800" font-size="11" fill="#facc15" text-anchor="middle">Click to Inspect</text>
           </g>
           <g class="fac-campus-bldg" data-bldg="Hangar" style="cursor:pointer;" transform="translate(200, 360)">
             <rect width="600" height="190" rx="12" fill="#0369a1" stroke="#075985" stroke-width="3"/>
-            <text x="300" y="90" font-family="Plus Jakarta Sans,system-ui" font-weight="900" font-size="24" fill="#fff" text-anchor="middle">✈️ HANGAR AVIATION COMPLEX</text>
+            <text x="300" y="90" font-family="Plus Jakarta Sans,system-ui" font-weight="900" font-size="24" fill="#fff" text-anchor="middle">HANGAR AVIATION COMPLEX</text>
             <text x="300" y="120" font-family="Plus Jakarta Sans,system-ui" font-weight="700" font-size="13" fill="#bae6fd" text-anchor="middle">1 Storey · 6 Aviation Engineering Bays</text>
             <rect x="240" y="135" width="120" height="26" rx="13" fill="rgba(0,0,0,.25)"/>
-            <text x="300" y="153" font-family="Plus Jakarta Sans,system-ui" font-weight="800" font-size="11" fill="#facc15" text-anchor="middle">⚡ Click to Inspect</text>
+            <text x="300" y="153" font-family="Plus Jakarta Sans,system-ui" font-weight="800" font-size="11" fill="#facc15" text-anchor="middle">Click to Inspect</text>
           </g>
         </svg>
       </div>
@@ -395,7 +399,7 @@ document.addEventListener('DOMContentLoaded', () => {
     renderLogs();
     modal?.classList.remove('open');
     modalForm.reset();
-    showToast(`✅ Request submitted for ${selectedRoom.room}!`);
+    showToast(`Request submitted for ${selectedRoom.room}!`);
   });
 
   // ────────────────────────────────────────────────
@@ -413,7 +417,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (log.status === 'Pending') pending++;
 
       const badgeCls = log.status === 'Approved' ? 'fac-badge-approved' : log.status === 'Denied' ? 'fac-badge-denied' : 'fac-badge-pending';
-      const badgeText = log.status === 'Approved' ? '✓ Approved' : log.status === 'Denied' ? '✕ Denied' : '⏳ Pending';
+      const badgeText = log.status === 'Approved' ? 'Approved' : log.status === 'Denied' ? 'Denied' : 'Pending';
 
       const permitHtml = log.status === 'Pending'
         ? `<button class="fac-btn-reset" style="height:30px; padding:0 12px; font-size:0.72rem; color:#ef4444; border-color:#ef4444;" onclick="window.cancelFacReq('${log.id}')">Cancel</button>`
@@ -430,10 +434,10 @@ document.addEventListener('DOMContentLoaded', () => {
           <span class="fac-status-badge ${badgeCls}">${badgeText}</span>
         </div>
         <div class="fac-log-meta-row">
-          <span>📅 ${log.date}</span>
-          <span>🕐 ${log.time}</span>
+          <span>Date: ${log.date}</span>
+          <span>Time: ${log.time}</span>
         </div>
-        <div class="fac-log-purpose">📋 ${log.purpose}</div>
+        <div class="fac-log-purpose">${log.purpose}</div>
         <div class="fac-log-footer">
           <span style="font-size:0.72rem; color:#94a3b8;">Permit:</span>
           ${permitHtml}
@@ -461,7 +465,7 @@ document.addEventListener('DOMContentLoaded', () => {
     bookingLogs = bookingLogs.filter(l => l.id !== id);
     localStorage.setItem('farms_faculty_bookings', JSON.stringify(bookingLogs));
     renderLogs();
-    showToast('🗑 Request cancelled.');
+    showToast('Request cancelled.');
   };
 
   renderLogs();
@@ -485,7 +489,7 @@ document.addEventListener('DOMContentLoaded', () => {
     localStorage.setItem('farms_faculty_bookings', JSON.stringify(bookingLogs));
     renderLogs();
     form.reset();
-    showToast(`✅ Request submitted! Check Booking Logs.`);
+    showToast(`Request submitted! Check Booking Logs.`);
     switchView('logs');
   });
 
@@ -505,9 +509,9 @@ document.addEventListener('DOMContentLoaded', () => {
     results.forEach(r => {
       // Re-render matching cards
       const pillClass = r.status === 'vacant' ? 'pill-vacant' : r.status === 'occupied' ? 'pill-occupied' : 'pill-maintenance';
-      const pillText  = r.status === 'vacant' ? '🟢 Vacant' : r.status === 'occupied' ? '🔴 Occupied' : '🟡 Maintenance';
+      const pillText  = r.status === 'vacant' ? 'Vacant' : r.status === 'occupied' ? 'Occupied' : 'Maintenance';
       const btn = r.status === 'vacant'
-        ? `<button class="fac-rc-btn fac-rc-btn-primary">⚡ Request Room</button>`
+        ? `<button class="fac-rc-btn fac-rc-btn-primary">Request Room</button>`
         : `<button class="fac-rc-btn fac-rc-btn-ghost">View Details</button>`;
       const card = document.createElement('div');
       card.className = `fac-room-card ${r.status}`;

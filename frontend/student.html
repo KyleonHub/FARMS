@@ -102,7 +102,9 @@
         </button>
 
         <div class="topbar-search-container" style="width: 440px;">
-          <span class="search-magnifier">🔍</span>
+          <span class="search-magnifier">
+            <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          </span>
           <input type="text" id="studentSearch" placeholder="Search by Subject (e.g. CS101, BIO102) or Professor..." autocomplete="off">
           <button id="clearSearchBtn" class="clear-search-btn" style="display:none;">✕</button>
           
@@ -115,8 +117,12 @@
         <div class="topbar-actions">
           <!-- Dark / Light Theme Toggle -->
           <button class="theme-toggle-btn" id="themeToggleBtn" title="Toggle Dark/Light Mode" aria-label="Toggle Theme">
-            <span class="theme-icon sun-icon">☀️</span>
-            <span class="theme-icon moon-icon">🌙</span>
+            <span class="theme-icon sun-icon">
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+            </span>
+            <span class="theme-icon moon-icon">
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+            </span>
             <span class="theme-label" id="themeLabelText">Dark Mode</span>
           </button>
 
@@ -150,14 +156,14 @@
               <div class="kpi-v2-main">
                 <div class="kpi-header-row">
                   <span class="kpi-v2-title">Next Class</span>
-                  <span class="kpi-micro-tag active">● STARTING SOON</span>
+                  <span class="kpi-micro-tag active">STARTING SOON</span>
                 </div>
                 <div class="kpi-v2-big-num" style="font-size:1.8rem; line-height:1.2;">CS101</div>
                 <div class="kpi-v2-sub green">Room: <strong>CBA 102</strong> · Prof. Santos (01:30 PM)</div>
               </div>
               <div class="kpi-v2-widget">
                 <div class="pending-warning-badge" style="background:rgba(16,185,129,0.2);">
-                  <span style="font-size:1.6rem;">🏫</span>
+                  <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="#059669" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5Z"/><path d="M6 6h10"/><path d="M6 10h10"/></svg>
                 </div>
               </div>
             </div>
@@ -167,7 +173,7 @@
               <div class="kpi-v2-main">
                 <div class="kpi-header-row">
                   <span class="kpi-v2-title">Study Rooms Free</span>
-                  <span class="kpi-micro-tag ready">● OPEN ACCESS</span>
+                  <span class="kpi-micro-tag ready">OPEN ACCESS</span>
                 </div>
                 <div class="kpi-v2-big-num">18</div>
                 <div class="kpi-v2-sub green">Library &amp; Vacant Classrooms Available</div>
@@ -189,14 +195,14 @@
               <div class="kpi-v2-main">
                 <div class="kpi-header-row">
                   <span class="kpi-v2-title">Faculty On Campus</span>
-                  <span class="kpi-micro-tag pending">👨‍🏫 AVAILABLE</span>
+                  <span class="kpi-micro-tag pending">AVAILABLE</span>
                 </div>
                 <div class="kpi-v2-big-num">34</div>
                 <div class="kpi-v2-sub dark-amber">Consultation &amp; Class Hours Active</div>
               </div>
               <div class="kpi-v2-widget">
                 <div class="pending-warning-badge" style="background:rgba(245,158,11,0.2);">
-                  <span style="font-size:1.6rem;">📍</span>
+                  <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="#d97706" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
                 </div>
               </div>
             </div>
@@ -211,8 +217,14 @@
                 <h3>Interactive Campus Vector Blueprint Map</h3>
               </div>
               <div class="segmented-view-toggle">
-                <button class="seg-btn active" id="btnSvgView">🗺️ Vector Map</button>
-                <button class="seg-btn" id="btnListView">📋 Directory List</button>
+                <button class="seg-btn active" id="btnSvgView">
+                  <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle; margin-right:4px;"><polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"/><line x1="8" y1="2" x2="8" y2="18"/><line x1="16" y1="6" x2="16" y2="22"/></svg>
+                  Vector Map
+                </button>
+                <button class="seg-btn" id="btnListView">
+                  <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle; margin-right:4px;"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
+                  Directory List
+                </button>
               </div>
             </div>
 
@@ -221,7 +233,9 @@
               <!-- Adaptive Sidebar -->
               <aside class="status-filter-sidebar" id="adaptiveSidebar">
                 <div class="sidebar-context-badge">
-                  <span class="context-icon" id="contextIcon">🗺️</span>
+                  <span class="context-icon" id="contextIcon">
+                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"/><line x1="8" y1="2" x2="8" y2="18"/><line x1="16" y1="6" x2="16" y2="22"/></svg>
+                  </span>
                   <div class="context-info">
                     <span class="context-sub">ACTIVE VIEW</span>
                     <strong class="context-text" id="contextMainLabel">Campus Overview</strong>
@@ -307,32 +321,32 @@
                     <g id="campus-pancho" class="interactive-bldg" data-bldg="Pancho Building" style="cursor:pointer;">
                       <polygon points="50,110 500,110 500,240 50,240" fill="#ecfdf5" stroke="#047857" stroke-width="3" filter="url(#bldgShadow)" class="bldg-shell"/>
                       <polygon points="500,165 590,165 590,390 500,390" fill="#ecfdf5" stroke="#047857" stroke-width="3" class="bldg-shell"/>
-                      <text x="275" y="180" font-family="Plus Jakarta Sans" font-weight="900" font-size="20" fill="#064e3b" text-anchor="middle">🏛️ PANCHO BUILDING</text>
+                      <text x="275" y="180" font-family="Plus Jakarta Sans" font-weight="900" font-size="20" fill="#064e3b" text-anchor="middle">PANCHO BUILDING</text>
                       <text x="275" y="202" font-family="Plus Jakarta Sans" font-weight="700" font-size="12" fill="#047857" text-anchor="middle">2 Floors · 50 Facilities</text>
                     </g>
 
                     <!-- CBA Building -->
                     <g id="campus-cba" class="interactive-bldg" data-bldg="CBA Building" style="cursor:pointer;">
                       <polygon points="740,110 1310,110 1310,240 740,240" fill="#eff6ff" stroke="#1d4ed8" stroke-width="3" filter="url(#bldgShadow)" class="bldg-shell"/>
-                      <text x="1025" y="180" font-family="Plus Jakarta Sans" font-weight="900" font-size="20" fill="#1e3a8a" text-anchor="middle">🏢 CBA BUILDING</text>
+                      <text x="1025" y="180" font-family="Plus Jakarta Sans" font-weight="900" font-size="20" fill="#1e3a8a" text-anchor="middle">CBA BUILDING</text>
                       <text x="1025" y="202" font-family="Plus Jakarta Sans" font-weight="700" font-size="12" fill="#2563eb" text-anchor="middle">4 Floors · 12 Classrooms</text>
                     </g>
 
                     <!-- Hangar Complex -->
                     <g id="campus-hangar" class="interactive-bldg" data-bldg="Hangar" style="cursor:pointer;">
                       <rect x="50" y="320" width="410" height="230" rx="10" fill="#f0fdf4" stroke="#0284c7" stroke-width="3" filter="url(#bldgShadow)" class="bldg-shell"/>
-                      <text x="255" y="430" font-family="Plus Jakarta Sans" font-weight="900" font-size="20" fill="#0369a1" text-anchor="middle">✈️ HANGAR COMPLEX</text>
+                      <text x="255" y="430" font-family="Plus Jakarta Sans" font-weight="900" font-size="20" fill="#0369a1" text-anchor="middle">HANGAR COMPLEX</text>
                       <text x="255" y="455" font-family="Plus Jakarta Sans" font-weight="700" font-size="12" fill="#0284c7" text-anchor="middle">1 Storey · 6 Rooms + Central Hall</text>
                     </g>
 
                     <!-- Covered Court & Pavilion -->
                     <g id="campus-prop-gym">
                       <rect x="740" y="320" width="310" height="230" rx="10" fill="#f8fafc" stroke="#94a3b8" stroke-width="2" stroke-dasharray="4,4"/>
-                      <text x="895" y="440" font-family="Plus Jakarta Sans" font-weight="900" font-size="17" fill="#64748b" text-anchor="middle">🏀 COVERED COURT</text>
+                      <text x="895" y="440" font-family="Plus Jakarta Sans" font-weight="900" font-size="17" fill="#64748b" text-anchor="middle">COVERED COURT</text>
                     </g>
                     <g id="campus-prop-pavilion">
                       <polygon points="1090,320 1310,320 1310,550 1090,550" fill="#f8fafc" stroke="#94a3b8" stroke-width="2" stroke-dasharray="4,4"/>
-                      <text x="1200" y="440" font-family="Plus Jakarta Sans" font-weight="900" font-size="17" fill="#64748b" text-anchor="middle">🎪 PAVILION</text>
+                      <text x="1200" y="440" font-family="Plus Jakarta Sans" font-weight="900" font-size="17" fill="#64748b" text-anchor="middle">PAVILION</text>
                     </g>
                   </svg>
                 </div>
@@ -354,7 +368,7 @@
                     <span class="dock-info-text" id="dockRoomSchedule">Open Schedule</span>
                   </div>
                   <div class="dock-pill-action">
-                    <span class="dock-action-tag" id="dockActionHint">👉 Click for Info</span>
+                    <span class="dock-action-tag" id="dockActionHint">Click for Info</span>
                   </div>
                 </div>
 

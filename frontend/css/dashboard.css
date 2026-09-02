@@ -4476,7 +4476,7 @@ body.force-mobile-view .sidebar-close-btn {
   outline: none !important;
 }
 
-/* Quick Filter Chips (⚡ ALL, 🟢 FREE, 🔴 IN-USE) */
+/* Quick Filter Chips (ALL, FREE, IN-USE) */
 [data-theme="dark"] .quick-filter-chip {
   background: #0f182c !important;
   color: #cbd5e1 !important;
