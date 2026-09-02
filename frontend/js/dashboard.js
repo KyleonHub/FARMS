@@ -316,9 +316,24 @@ document.addEventListener('DOMContentLoaded', () => {
   let currentActiveTab = 'map'; // 'map', 'list', 'matrix'
 
   const BUILDING_CONFIG = {
-    'Pancho Building': { floors: 2, label: 'Pancho Building', icon: '🏛️', theme: 'pancho' },
-    'CBA Building': { floors: 4, label: 'CBA Building', icon: '🏢', theme: 'cba' },
-    'Hangar': { floors: 1, label: 'Hangar', icon: '✈️', theme: 'hangar' }
+    'Pancho Building': { 
+      floors: 2, 
+      label: 'Pancho Building', 
+      icon: '<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="22" x2="21" y2="22"/><line x1="6" y1="18" x2="6" y2="11"/><line x1="10" y1="18" x2="10" y2="11"/><line x1="14" y1="18" x2="14" y2="11"/><line x1="18" y1="18" x2="18" y2="11"/><polygon points="12 2 20 7 4 7"/></svg>', 
+      theme: 'pancho' 
+    },
+    'CBA Building': { 
+      floors: 4, 
+      label: 'CBA Building', 
+      icon: '<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2" ry="2"/><line x1="9" y1="22" x2="9" y2="12"/><line x1="15" y1="22" x2="15" y2="12"/><line x1="9" y1="6" x2="9" y2="6.01"/><line x1="15" y1="6" x2="15" y2="6.01"/><line x1="9" y1="9" x2="9" y2="9.01"/><line x1="15" y1="9" x2="15" y2="9.01"/></svg>', 
+      theme: 'cba' 
+    },
+    'Hangar': { 
+      floors: 1, 
+      label: 'Hangar', 
+      icon: '<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.8 19.2 16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 3 2 2 3 1-1v-3l3-2 3.5 5.3c.3.4.8.5 1.3.3l.5-.3c.4-.2.6-.6.5-1.1z"/></svg>', 
+      theme: 'hangar' 
+    }
   };
 
   // ==========================================
@@ -345,7 +360,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const current = document.documentElement.getAttribute('data-theme') || 'light';
       const nextTheme = current === 'dark' ? 'light' : 'dark';
       applyTheme(nextTheme);
-      showToast(`Switched to ${nextTheme === 'dark' ? 'Dark Mode 🌙' : 'Light Mode ☀️'}`);
+      showToast(`Switched to ${nextTheme === 'dark' ? 'Dark Mode' : 'Light Mode'}`);
     });
   }
 
@@ -364,7 +379,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const desktopIcon = btnToggleMobileMode.querySelector('.icon-desktop');
         if (phoneIcon) phoneIcon.style.display = 'none';
         if (desktopIcon) desktopIcon.style.display = 'inline-block';
-        btnToggleMobileMode.setAttribute('title', 'Switch to Desktop UI View (💻)');
+        btnToggleMobileMode.setAttribute('title', 'Switch to Desktop UI View');
       }
     } else {
       document.body.classList.remove('force-mobile-view');
@@ -374,7 +389,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const desktopIcon = btnToggleMobileMode.querySelector('.icon-desktop');
         if (phoneIcon) phoneIcon.style.display = 'inline-block';
         if (desktopIcon) desktopIcon.style.display = 'none';
-        btnToggleMobileMode.setAttribute('title', 'Switch to Mobile UI View (📱)');
+        btnToggleMobileMode.setAttribute('title', 'Switch to Mobile UI View');
       }
     }
     localStorage.setItem('farms_mobile_mode', isMobile);
@@ -388,7 +403,7 @@ document.addEventListener('DOMContentLoaded', () => {
     btnToggleMobileMode.addEventListener('click', () => {
       const isMobile = document.body.classList.contains('force-mobile-view');
       applyMobileMode(!isMobile);
-      showToast(!isMobile ? '📱 Mobile UI View Activated' : '💻 Desktop UI View Restored');
+      showToast(!isMobile ? 'Mobile UI View Activated' : 'Desktop UI View Restored');
     });
   }
 
@@ -521,7 +536,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // Update Building Hero Card
         if (bldgHeroTitle) bldgHeroTitle.textContent = activeBuilding;
         if (bldgHeroBadge) bldgHeroBadge.textContent = `LEVEL ${activeFloor}`;
-        if (bldgHeroIcon) bldgHeroIcon.textContent = cfg.icon;
+        if (bldgHeroIcon) bldgHeroIcon.innerHTML = cfg.icon;
         
         const bldgRooms = rooms.filter(r => r.building === activeBuilding);
         const vacant = bldgRooms.filter(r => r.status === 'vacant').length;

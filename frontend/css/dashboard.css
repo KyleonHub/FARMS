@@ -581,10 +581,26 @@ input, select, textarea {
   transform: translate(-1px, -1px);
   box-shadow: 3px 3px 0px #000000;
 }
+.mobile-mode-btn .icon-phone {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.mobile-mode-btn .icon-desktop {
+  display: none;
+  align-items: center;
+  justify-content: center;
+}
 .mobile-mode-btn.active {
   background: var(--lime-400);
   border-color: #000000;
   box-shadow: 2px 2px 0px #000000;
+}
+.mobile-mode-btn.active .icon-phone {
+  display: none;
+}
+.mobile-mode-btn.active .icon-desktop {
+  display: flex;
 }
 [data-theme="dark"] .mobile-mode-btn {
   background: #162032;
@@ -629,12 +645,14 @@ input, select, textarea {
   display: none;
 }
 .theme-toggle-btn .moon-icon {
-  display: inline-block;
-  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 [data-theme="dark"] .theme-toggle-btn .sun-icon {
-  display: inline-block;
-  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 [data-theme="dark"] .theme-toggle-btn .moon-icon {
   display: none;
