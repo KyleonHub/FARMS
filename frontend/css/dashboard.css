@@ -4288,13 +4288,20 @@ body.force-mobile-view .sidebar-close-btn {
 /* ── Shell: Admin Sidebar in Dark Mode (Layer 1 Surface) ── */
 [data-theme="dark"] .admin-sidebar {
   background: #131313;
-  border-right: 2.5px solid #3a3939;
+  border-right: 2.5px solid #52525b;
   box-shadow: 4px 0px 0px #000000;
 }
 
 [data-theme="dark"] .sidebar-brand-unified {
-  background: #1c1b1b;
-  border-bottom: 2px solid #3a3939;
+  background: transparent;
+  border-bottom: 2px solid #52525b;
+}
+
+[data-theme="dark"] .brand-seal-icon {
+  background: #ccff00;
+  color: #000000;
+  border: 2px solid #000000;
+  box-shadow: 2.5px 2.5px 0px #000000;
 }
 
 [data-theme="dark"] .brand-main-title {
@@ -4307,22 +4314,24 @@ body.force-mobile-view .sidebar-close-btn {
 
 [data-theme="dark"] .nav-item {
   color: #d4d4d4;
-  background: #1c1b1b;
-  border: 1.5px solid #3a3939;
+  background: transparent;
+  border: 2px solid transparent;
+  box-shadow: none;
 }
 
 [data-theme="dark"] .nav-item:hover {
-  background: #3a3939;
-  border: 1.5px solid #3a3939;
-  box-shadow: 2px 2px 0px #000000;
+  background: #27272a;
+  border: 2px solid #52525b;
+  box-shadow: 2.5px 2.5px 0px #000000;
   color: #ffffff;
+  transform: translate(-1px, -1px);
 }
 
 [data-theme="dark"] .nav-item.active {
   background: #ccff00;
   color: #000000 !important;
-  border: 2px solid #000000;
-  box-shadow: 3px 3px 0px #000000;
+  border: 2.5px solid #000000;
+  box-shadow: 3.5px 3.5px 0px #000000;
   font-weight: 900;
 }
 
@@ -4330,21 +4339,35 @@ body.force-mobile-view .sidebar-close-btn {
   stroke: #000000;
 }
 
-[data-theme="dark"] .sign-out-nav-item {
-  background: #1c1b1b;
-  color: #ff4d4d;
-  border-top: 2px solid #3a3939;
+[data-theme="dark"] .nav-pill-count {
+  background: #ff4d4d !important;
+  color: #ffffff !important;
+  border: 2px solid #000000 !important;
+  box-shadow: 1.5px 1.5px 0px #000000 !important;
 }
+
+[data-theme="dark"] .sign-out-nav-item {
+  background: transparent;
+  color: #ff4d4d;
+  border-top: 2px solid #52525b;
+  border-bottom: 2px solid transparent;
+  border-left: 2px solid transparent;
+  border-right: 2px solid transparent;
+  box-shadow: none;
+}
+
 [data-theme="dark"] .sign-out-nav-item:hover {
-  background: #ff4d4d;
-  color: #000000;
-  border: 2px solid #000000;
-  box-shadow: 2px 2px 0px #000000;
+  background: rgba(255, 77, 77, 0.15);
+  color: #ff4d4d;
+  border: 2px solid #ff4d4d;
+  box-shadow: 2.5px 2.5px 0px #000000;
+  border-radius: 10px;
+  transform: translate(-1px, -1px);
 }
 
 [data-theme="dark"] .sidebar-footer-card {
   background: #1c1b1b;
-  border: 2px solid #3a3939;
+  border: 2px solid #52525b;
   box-shadow: 2.5px 2.5px 0px #000000;
 }
 
@@ -4355,7 +4378,7 @@ body.force-mobile-view .sidebar-close-btn {
 /* ── Shell: Topbar in Dark Mode (Layer 1 Surface) ── */
 [data-theme="dark"] .admin-topbar {
   background: #131313;
-  border-bottom: 2.5px solid #3a3939;
+  border-bottom: 2.5px solid #52525b;
   box-shadow: 0px 4px 0px #000000;
 }
 
@@ -4365,7 +4388,7 @@ body.force-mobile-view .sidebar-close-btn {
 [data-theme="dark"] .topbar-icon-btn,
 [data-theme="dark"] .user-profile-btn {
   background: #1c1b1b;
-  border: 2px solid #3a3939;
+  border: 2px solid #52525b;
   color: #ffffff;
   box-shadow: 2px 2px 0px #000000;
 }
@@ -4375,21 +4398,22 @@ body.force-mobile-view .sidebar-close-btn {
 [data-theme="dark"] .mobile-mode-btn:hover,
 [data-theme="dark"] .topbar-icon-btn:hover,
 [data-theme="dark"] .user-profile-btn:hover {
-  background: #3a3939;
+  background: #27272a;
+  border-color: #71717a;
   box-shadow: 3px 3px 0px #000000;
   transform: translate(-1px, -1px);
 }
 
 [data-theme="dark"] .topbar-search-container input {
   background: #1c1b1b;
-  border: 2px solid #3a3939;
+  border: 2px solid #52525b;
   color: #ffffff;
   box-shadow: 2px 2px 0px #000000;
 }
 
 [data-theme="dark"] .topbar-search-container input:focus {
   border-color: #ccff00;
-  box-shadow: 3px 3px 0px #ccff00;
+  box-shadow: 3px 3px 0px #000000;
 }
 
 [data-theme="dark"] .search-magnifier {
@@ -4404,7 +4428,7 @@ body.force-mobile-view .sidebar-close-btn {
 
 [data-theme="dark"] .topbar-clock-widget {
   background: #1c1b1b;
-  border: 2px solid #3a3939;
+  border: 2px solid #52525b;
   box-shadow: 2px 2px 0px #000000;
 }
 
@@ -4435,14 +4459,14 @@ body.force-mobile-view .sidebar-close-btn {
 /* ── Modular Dashboard Cards in Dark Mode (Layer 2 Surface) ── */
 [data-theme="dark"] .modular-card {
   background: #1c1b1b;
-  border: 2.5px solid #3a3939;
+  border: 2.5px solid #52525b;
   box-shadow: 4px 4px 0px #000000;
   color: #ffffff;
 }
 
 [data-theme="dark"] .section-card-header {
   background: #131313;
-  border-bottom: 2px solid #3a3939;
+  border-bottom: 2px solid #52525b;
 }
 
 [data-theme="dark"] .section-main-title,
@@ -4457,7 +4481,7 @@ body.force-mobile-view .sidebar-close-btn {
 /* ── KPI Metric Cards in Dark Mode (Core Palette) ── */
 [data-theme="dark"] .kpi-card-v2 {
   background: #1c1b1b;
-  border: 2px solid #3a3939;
+  border: 2.5px solid #52525b;
   box-shadow: 3.5px 3.5px 0px #000000;
   transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
