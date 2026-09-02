@@ -587,11 +587,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const sidebarContextBadge = document.getElementById('sidebarContextBadge');
     const sidebarContextTag = document.getElementById('sidebarContextTag');
-    const bldgHeroIcon = document.getElementById('bldgHeroIcon');
+    const sidebarContextSub = document.getElementById('sidebarContextSub');
+    const sidebarContextIcon = document.getElementById('sidebarContextIcon');
+
+    // Universal top header badge is ALWAYS visible across all views
+    if (sidebarContextBadge) sidebarContextBadge.classList.remove('hidden');
 
     if (currentActiveTab === 'list') {
-      if (sidebarContextBadge) sidebarContextBadge.classList.remove('hidden');
+      if (sidebarContextBadge) sidebarContextBadge.className = 'sidebar-context-badge';
       if (sidebarContextIcon) sidebarContextIcon.innerHTML = '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>';
+      if (sidebarContextSub) sidebarContextSub.textContent = 'CAMPUS RADAR // V3';
       if (sidebarContextTitle) sidebarContextTitle.textContent = 'Room Directory';
       if (sidebarContextTag) sidebarContextTag.textContent = '● DIRECTORY';
       if (sidebarListBlock) sidebarListBlock.classList.remove('hidden');
@@ -600,27 +605,20 @@ document.addEventListener('DOMContentLoaded', () => {
     } else {
       // Map Mode
       if (activeBuilding) {
-        // Inside a Building Floor Plan -> HIDE campus top radar badge & mini KPI stats
-        if (sidebarContextBadge) sidebarContextBadge.classList.add('hidden');
-        if (sidebarMiniStatsWrap) sidebarMiniStatsWrap.classList.add('hidden');
-        if (campusBlockDivider) campusBlockDivider.classList.add('hidden');
-
         const cfg = BUILDING_CONFIG[activeBuilding] || { icon: '', floors: 1 };
         if (sidebarBuildingBlock) sidebarBuildingBlock.classList.remove('hidden');
 
-        // Update Building Hero Card
-        if (bldgHeroTitle) bldgHeroTitle.textContent = activeBuilding;
-        if (bldgHeroBadge) bldgHeroBadge.textContent = `LEVEL ${activeFloor}`;
-        if (bldgHeroIcon) bldgHeroIcon.innerHTML = cfg.icon;
-        
-        const bldgRooms = rooms.filter(r => r.building === activeBuilding);
-        const vacant = bldgRooms.filter(r => r.status === 'vacant').length;
-        const occupied = bldgRooms.filter(r => r.status === 'occupied').length;
-        if (bldgHeroOccSummary) bldgHeroOccSummary.textContent = `${vacant} Free · ${occupied} In-Use (${bldgRooms.length} Total)`;
-
-        if (bldgContextHero) {
-          bldgContextHero.className = `bldg-view-hero-card ${activeBuilding === 'CBA Building' ? 'cba' : activeBuilding === 'Hangar' ? 'hangar' : 'pancho'}`;
+        if (sidebarContextBadge) {
+          sidebarContextBadge.className = `sidebar-context-badge ${activeBuilding === 'CBA Building' ? 'cba' : activeBuilding === 'Hangar' ? 'hangar' : 'pancho'}`;
         }
+        if (sidebarContextIcon) {
+          sidebarContextIcon.innerHTML = cfg.icon || '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"/><line x1="8" y1="2" x2="8" y2="18"/><line x1="16" y1="6" x2="16" y2="22"/></svg>';
+        }
+        if (sidebarContextSub) sidebarContextSub.textContent = 'BUILDING RADAR // V3';
+        if (sidebarContextTitle) sidebarContextTitle.textContent = activeBuilding;
+        if (sidebarContextTag) sidebarContextTag.textContent = `LEVEL ${activeFloor}`;
+
+        const bldgRooms = rooms.filter(r => r.building === activeBuilding);
 
         // Update Floor Metrics
         const floorRooms = bldgRooms.filter(r => r.floor === activeFloor);
@@ -632,11 +630,12 @@ document.addEventListener('DOMContentLoaded', () => {
         buildFloorPills(activeBuilding);
       } else {
         // In Campus Overview Map -> SHOW campus top radar badge & grounds block
-        if (sidebarContextBadge) sidebarContextBadge.classList.remove('hidden');
+        if (sidebarContextBadge) sidebarContextBadge.className = 'sidebar-context-badge';
         if (sidebarMiniStatsWrap) sidebarMiniStatsWrap.classList.remove('hidden');
         if (campusBlockDivider) campusBlockDivider.classList.remove('hidden');
 
         if (sidebarContextIcon) sidebarContextIcon.innerHTML = '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"/><line x1="8" y1="2" x2="8" y2="18"/><line x1="16" y1="6" x2="16" y2="22"/></svg>';
+        if (sidebarContextSub) sidebarContextSub.textContent = 'CAMPUS RADAR // V3';
         if (sidebarContextTitle) sidebarContextTitle.textContent = 'Campus Grounds';
         if (sidebarContextTag) sidebarContextTag.textContent = '● 3 ACTIVE';
         if (sidebarCampusBlock) sidebarCampusBlock.classList.remove('hidden');
