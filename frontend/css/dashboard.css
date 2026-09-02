@@ -6774,5 +6774,53 @@ body.force-mobile-view .mobile-bottom-nav {
   fill: #0f1c24 !important;
 }
 
+/* Dynamic Tinted Building Map Container (Entire Right Display Main Div) */
+.status-display-main {
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.status-display-main[data-active-bldg="pancho"],
+.status-display-main[data-active-bldg="pancho"] .svg-map-wrapper,
+.status-display-main[data-active-bldg="pancho"] #buildingMap,
+.status-display-main[data-active-bldg="pancho"] #floorPlanContent {
+  background: #f4fce3 !important;
+}
+
+.status-display-main[data-active-bldg="cba"],
+.status-display-main[data-active-bldg="cba"] .svg-map-wrapper,
+.status-display-main[data-active-bldg="cba"] #buildingMap,
+.status-display-main[data-active-bldg="cba"] #floorPlanContent {
+  background: #faf5ff !important;
+}
+
+.status-display-main[data-active-bldg="hangar"],
+.status-display-main[data-active-bldg="hangar"] .svg-map-wrapper,
+.status-display-main[data-active-bldg="hangar"] #buildingMap,
+.status-display-main[data-active-bldg="hangar"] #floorPlanContent {
+  background: #f0f9ff !important;
+}
+
+/* Dark Mode Tinted Entire Right Display Main Div */
+[data-theme="dark"] .status-display-main[data-active-bldg="pancho"],
+[data-theme="dark"] .status-display-main[data-active-bldg="pancho"] .svg-map-wrapper,
+[data-theme="dark"] .status-display-main[data-active-bldg="pancho"] #buildingMap,
+[data-theme="dark"] .status-display-main[data-active-bldg="pancho"] #floorPlanContent {
+  background: #141f12 !important;
+}
+
+[data-theme="dark"] .status-display-main[data-active-bldg="cba"],
+[data-theme="dark"] .status-display-main[data-active-bldg="cba"] .svg-map-wrapper,
+[data-theme="dark"] .status-display-main[data-active-bldg="cba"] #buildingMap,
+[data-theme="dark"] .status-display-main[data-active-bldg="cba"] #floorPlanContent {
+  background: #1a1226 !important;
+}
+
+[data-theme="dark"] .status-display-main[data-active-bldg="hangar"],
+[data-theme="dark"] .status-display-main[data-active-bldg="hangar"] .svg-map-wrapper,
+[data-theme="dark"] .status-display-main[data-active-bldg="hangar"] #buildingMap,
+[data-theme="dark"] .status-display-main[data-active-bldg="hangar"] #floorPlanContent {
+  background: #0f1c24 !important;
+}
+
 
 
