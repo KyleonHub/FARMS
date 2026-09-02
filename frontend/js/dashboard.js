@@ -239,6 +239,57 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // ==========================================
+  // 1.6 DYNAMIC PERSONALIZED USER GREETING
+  // ==========================================
+  function updateDynamicGreeting() {
+    const greetingTitle = document.getElementById('dashboardGreetingTitle');
+    const greetingSub = document.getElementById('dashboardGreetingSub');
+    if (!greetingTitle) return;
+
+    const hour = new Date().getHours();
+    let timeGreeting = 'Good Morning';
+    let defaultSub = 'Here is your campus operations overview and real-time facility load.';
+
+    if (hour >= 5 && hour < 12) {
+      timeGreeting = 'Good Morning';
+      defaultSub = 'Morning campus overview: Real-time room occupancy, facility load, and pending authorization queue.';
+    } else if (hour >= 12 && hour < 17) {
+      timeGreeting = 'Good Afternoon';
+      defaultSub = 'Midday operations overview: Real-time facility metrics, active classes, and live room availability.';
+    } else if (hour >= 17 && hour < 22) {
+      timeGreeting = 'Good Evening';
+      defaultSub = 'Evening operations overview: Real-time facility telemetry and space allocation status.';
+    } else {
+      timeGreeting = 'Good Night';
+      defaultSub = 'Night operations: Facility monitoring, security lockups, and telemetry status.';
+    }
+
+    let displayName = 'Administrator';
+    if (sessionUser) {
+      if (sessionUser.name && sessionUser.name.trim()) {
+        displayName = sessionUser.name.trim();
+      } else if (sessionUser.role) {
+        displayName = sessionUser.role === 'Guest' ? 'Guest Visitor' : sessionUser.role;
+      }
+    }
+
+    greetingTitle.textContent = `${timeGreeting}, ${displayName}!`;
+    if (greetingSub) {
+      greetingSub.textContent = defaultSub;
+    }
+
+    // Also synchronize topbar display name and avatar
+    const userDisplayName = document.querySelector('.user-display-name');
+    const userAvatarCircle = document.querySelector('.user-avatar-circle');
+    if (userDisplayName && !isGuest && sessionUser && sessionUser.name) {
+      userDisplayName.textContent = sessionUser.name;
+    }
+    if (userAvatarCircle && !isGuest && sessionUser && sessionUser.name) {
+      userAvatarCircle.textContent = sessionUser.name.charAt(0).toUpperCase();
+    }
+  }
+
+  // ==========================================
   // 2. DOM SELECTORS & STATE
   // ==========================================
   const navItems = document.querySelectorAll('.nav-item');
@@ -2731,6 +2782,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // ==========================================
   // 15. BOOTSTRAP INITIALIZATION
   // ==========================================
+  updateDynamicGreeting();
   updateKPIs();
   renderListView();
   renderMatrixView();
