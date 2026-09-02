@@ -6002,6 +6002,21 @@ body.force-mobile-view .dashboard-split-grid {
   box-shadow: 2px 2px 0px #000000 !important;
 }
 
+/* ── Mobile Section Divider ── */
+.mobile-section-divider {
+  width: 100%;
+  height: 2px;
+  background: #000000;
+  border-radius: 999px;
+  margin: 1px 0;
+  opacity: 1;
+}
+
+[data-theme="dark"] .mobile-section-divider {
+  background: #000000;
+  border-bottom: 1px solid #1e293b;
+}
+
 /* ── Mobile Rooms Touch Cards Grid (Crisp 2-Column Neo-Brutalist Cards) ── */
 .mobile-rooms-grid {
   display: grid;
