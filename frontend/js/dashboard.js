@@ -409,12 +409,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // ── Retractable Sidebar Logic ──
   const sidebarToggleBtn = document.getElementById('sidebarToggleBtn');
+  const sidebarCloseBtn = document.getElementById('sidebarCloseBtn');
   const appLayout = document.querySelector('.admin-app-layout');
   const sidebarBackdrop = document.getElementById('sidebarBackdrop');
 
   const savedSidebarState = localStorage.getItem('farms_sidebar_collapsed') === 'true';
   if (savedSidebarState && window.innerWidth > 768 && !document.body.classList.contains('force-mobile-view') && appLayout) {
     appLayout.classList.add('sidebar-collapsed');
+  }
+
+  function closeMobileSidebar() {
+    if (appLayout) appLayout.classList.remove('sidebar-mobile-open');
   }
 
   if (sidebarToggleBtn && appLayout) {
@@ -428,11 +433,29 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  if (sidebarBackdrop && appLayout) {
-    sidebarBackdrop.addEventListener('click', () => {
-      appLayout.classList.remove('sidebar-mobile-open');
-    });
+  if (sidebarCloseBtn) {
+    sidebarCloseBtn.addEventListener('click', closeMobileSidebar);
   }
+
+  if (sidebarBackdrop) {
+    sidebarBackdrop.addEventListener('click', closeMobileSidebar);
+  }
+
+  // Auto-close sidebar on mobile when clicking any navigation link
+  document.querySelectorAll('.sidebar-nav .nav-item').forEach(item => {
+    item.addEventListener('click', () => {
+      if (window.innerWidth <= 768 || document.body.classList.contains('force-mobile-view')) {
+        closeMobileSidebar();
+      }
+    });
+  });
+
+  // Close sidebar on Escape key
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && appLayout && appLayout.classList.contains('sidebar-mobile-open')) {
+      closeMobileSidebar();
+    }
+  });
 
   // ==========================================
   // 3. TOAST & NOTIFICATIONS
@@ -444,8 +467,12 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     const toast = document.createElement('div');
     toast.className = `toast ${type}`;
-    const icon = type === 'success' ? '✅' : type === 'error' ? '❌' : 'ℹ️';
-    toast.innerHTML = `<span>${icon}</span> <span>${message}</span>`;
+    const icon = type === 'success' 
+      ? '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>'
+      : type === 'error'
+      ? '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>'
+      : '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>';
+    toast.innerHTML = `<span class="toast-icon">${icon}</span> <span>${message}</span>`;
     toastContainer.appendChild(toast);
 
     setTimeout(() => {

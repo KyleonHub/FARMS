@@ -190,6 +190,51 @@ input, select, textarea {
   gap: 12px;
   padding: 4px 4px 14px 4px;
   border-bottom: 2px solid #000000;
+  position: relative;
+}
+
+/* Mobile Sidebar Close Button */
+.sidebar-close-btn {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  margin-left: auto;
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  border: 2px solid #000000;
+  background: #ffffff;
+  color: #000000;
+  cursor: pointer;
+  box-shadow: 2px 2px 0px #000000;
+  transition: all 0.12s ease;
+  flex-shrink: 0;
+}
+.sidebar-close-btn:hover {
+  background: #f43f5e;
+  color: #ffffff;
+  transform: translate(-1px, -1px);
+  box-shadow: 3px 3px 0px #000000;
+}
+
+[data-theme="dark"] .sidebar-close-btn {
+  background: #141f34;
+  color: #ffffff;
+  border-color: #000000;
+  box-shadow: 2px 2px 0px #000000;
+}
+[data-theme="dark"] .sidebar-close-btn:hover {
+  background: #f43f5e;
+  color: #ffffff;
+}
+
+@media (max-width: 768px) {
+  .sidebar-close-btn {
+    display: flex;
+  }
+}
+body.force-mobile-view .sidebar-close-btn {
+  display: flex !important;
 }
 
 .brand-seal-icon {
