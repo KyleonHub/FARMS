@@ -8,103 +8,120 @@ document.addEventListener('DOMContentLoaded', () => {
   // 1. INITIAL SEED DATA & STATE
   // ==========================================
   
+  function getOrGenerateRoomCode(r) {
+    if (r.roomCode && String(r.roomCode).trim()) return String(r.roomCode).trim();
+    const bldg = (r.building || r.bldg || '').trim();
+    const roomName = (r.room || '').trim();
+    if (bldg.includes('Pancho')) {
+      const numOnly = roomName.replace(/^Pancho\s*/i, '');
+      return `PANCHO ${numOnly}`;
+    } else if (bldg.includes('CBA')) {
+      const numOnly = roomName.replace(/^CBA\s*/i, '');
+      return `CBA ${numOnly}`;
+    } else if (bldg.includes('Hangar')) {
+      const numOnly = roomName.replace(/^Hangar\s*/i, '');
+      return `H ${numOnly}`;
+    }
+    return roomName;
+  }
+
   const DEFAULT_ROOMS = [
     // CBA Building (4 Storeys, 3 rooms each = 12 rooms)
     // Floor 1
-    { id: 'cba-101', building: 'CBA Building', floor: 1, room: 'CBA 101', type: 'Lecture Hall', status: 'vacant', occupant: 'None', schedule: '--', capacity: 45, equipment: 'Dual Projectors, Sound System, Whiteboard' },
-    { id: 'cba-102', building: 'CBA Building', floor: 1, room: 'CBA 102', type: 'Computer Lab', status: 'occupied', occupant: 'Prof. Santos (CS101)', schedule: '08:00 AM - 10:00 AM', capacity: 40, equipment: '40 PC Workstations, Smart TV' },
-    { id: 'cba-103', building: 'CBA Building', floor: 1, room: 'CBA 103', type: 'Business Lab', status: 'vacant', occupant: 'None', schedule: '--', capacity: 35, equipment: 'Smart Board, Conference Setup' },
+    { id: 'cba-101', building: 'CBA Building', floor: 1, roomCode: 'CBA 101', room: 'CBA 101', type: 'Lecture Hall', status: 'vacant', occupant: 'None', schedule: '--', capacity: 45, equipment: 'Dual Projectors, Sound System, Whiteboard' },
+    { id: 'cba-102', building: 'CBA Building', floor: 1, roomCode: 'CBA 102', room: 'CBA 102', type: 'Computer Lab', status: 'occupied', occupant: 'Prof. Santos (CS101)', schedule: '08:00 AM - 10:00 AM', capacity: 40, equipment: '40 PC Workstations, Smart TV' },
+    { id: 'cba-103', building: 'CBA Building', floor: 1, roomCode: 'CBA 103', room: 'CBA 103', type: 'Business Lab', status: 'vacant', occupant: 'None', schedule: '--', capacity: 35, equipment: 'Smart Board, Conference Setup' },
     // Floor 2
-    { id: 'cba-201', building: 'CBA Building', floor: 2, room: 'CBA 201', type: 'Smart Classroom', status: 'occupied', occupant: 'Dr. Reyes (BUS201)', schedule: '10:00 AM - 12:00 PM', capacity: 40, equipment: 'Interactive Display, Sound System' },
-    { id: 'cba-202', building: 'CBA Building', floor: 2, room: 'CBA 202', type: 'Lecture Hall', status: 'vacant', occupant: 'None', schedule: '--', capacity: 45, equipment: 'Projector, Whiteboard' },
-    { id: 'cba-203', building: 'CBA Building', floor: 2, room: 'CBA 203', type: 'Accounting Lab', status: 'occupied', occupant: 'Prof. Villanueva (ACT101)', schedule: '01:00 PM - 03:00 PM', capacity: 35, equipment: 'Workstations, Ledger Terminal' },
+    { id: 'cba-201', building: 'CBA Building', floor: 2, roomCode: 'CBA 201', room: 'CBA 201', type: 'Smart Classroom', status: 'occupied', occupant: 'Dr. Reyes (BUS201)', schedule: '10:00 AM - 12:00 PM', capacity: 40, equipment: 'Interactive Display, Sound System' },
+    { id: 'cba-202', building: 'CBA Building', floor: 2, roomCode: 'CBA 202', room: 'CBA 202', type: 'Lecture Hall', status: 'vacant', occupant: 'None', schedule: '--', capacity: 45, equipment: 'Projector, Whiteboard' },
+    { id: 'cba-203', building: 'CBA Building', floor: 2, roomCode: 'CBA 203', room: 'CBA 203', type: 'Accounting Lab', status: 'occupied', occupant: 'Prof. Villanueva (ACT101)', schedule: '01:00 PM - 03:00 PM', capacity: 35, equipment: 'Workstations, Ledger Terminal' },
     // Floor 3
-    { id: 'cba-301', building: 'CBA Building', floor: 3, room: 'CBA 301', type: 'Classroom', status: 'vacant', occupant: 'None', schedule: '--', capacity: 40, equipment: 'Whiteboard, Ceiling Fans' },
-    { id: 'cba-302', building: 'CBA Building', floor: 3, room: 'CBA 302', type: 'Economics Lab', status: 'maintenance', occupant: 'None', schedule: 'Under Maintenance', capacity: 30, equipment: 'Terminal Racks, Smart TV' },
-    { id: 'cba-303', building: 'CBA Building', floor: 3, room: 'CBA 303', type: 'Seminar Room', status: 'vacant', occupant: 'None', schedule: '--', capacity: 35, equipment: 'Projector, Whiteboard' },
+    { id: 'cba-301', building: 'CBA Building', floor: 3, roomCode: 'CBA 301', room: 'CBA 301', type: 'Classroom', status: 'vacant', occupant: 'None', schedule: '--', capacity: 40, equipment: 'Whiteboard, Ceiling Fans' },
+    { id: 'cba-302', building: 'CBA Building', floor: 3, roomCode: 'CBA 302', room: 'CBA 302', type: 'Economics Lab', status: 'maintenance', occupant: 'None', schedule: 'Under Maintenance', capacity: 30, equipment: 'Terminal Racks, Smart TV' },
+    { id: 'cba-303', building: 'CBA Building', floor: 3, roomCode: 'CBA 303', room: 'CBA 303', type: 'Seminar Room', status: 'vacant', occupant: 'None', schedule: '--', capacity: 35, equipment: 'Projector, Whiteboard' },
     // Floor 4
-    { id: 'cba-401', building: 'CBA Building', floor: 4, room: 'CBA 401', type: 'Executive Hall', status: 'vacant', occupant: 'None', schedule: '--', capacity: 60, equipment: 'Audio System, Dual Projectors' },
-    { id: 'cba-402', building: 'CBA Building', floor: 4, room: 'CBA 402', type: 'Conference Suite', status: 'occupied', occupant: 'Dean Mendoza (Admin)', schedule: '01:00 PM - 04:00 PM', capacity: 25, equipment: 'Video Conference, Smart TV' },
-    { id: 'cba-403', building: 'CBA Building', floor: 4, room: 'CBA 403', type: 'Case Study Room', status: 'vacant', occupant: 'None', schedule: '--', capacity: 35, equipment: 'Tiered Seating, Screen' },
+    { id: 'cba-401', building: 'CBA Building', floor: 4, roomCode: 'CBA 401', room: 'CBA 401', type: 'Executive Hall', status: 'vacant', occupant: 'None', schedule: '--', capacity: 60, equipment: 'Audio System, Dual Projectors' },
+    { id: 'cba-402', building: 'CBA Building', floor: 4, roomCode: 'CBA 402', room: 'CBA 402', type: 'Conference Suite', status: 'occupied', occupant: 'Dean Mendoza (Admin)', schedule: '01:00 PM - 04:00 PM', capacity: 25, equipment: 'Video Conference, Smart TV' },
+    { id: 'cba-403', building: 'CBA Building', floor: 4, roomCode: 'CBA 403', room: 'CBA 403', type: 'Case Study Room', status: 'vacant', occupant: 'None', schedule: '--', capacity: 35, equipment: 'Tiered Seating, Screen' },
 
     // Hangar (1 Storey, 6 rooms: Left 004, 005, 006; Right 003, 002, 001)
-    { id: 'h-001', building: 'Hangar', floor: 1, room: 'Hangar 001', type: 'Powerplants Bay', status: 'occupied', occupant: 'Engr. Cruz (AERO202)', schedule: '09:00 AM - 12:00 PM', capacity: 50, equipment: 'Engine Test Stands, Heavy Hoist' },
-    { id: 'h-002', building: 'Hangar', floor: 1, room: 'Hangar 002', type: 'Avionics Lab', status: 'vacant', occupant: 'None', schedule: '--', capacity: 40, equipment: 'Diagnostic Benches, Oscilloscopes' },
-    { id: 'h-003', building: 'Hangar', floor: 1, room: 'Hangar 003', type: 'Flight Simulation', status: 'vacant', occupant: 'None', schedule: '--', capacity: 30, equipment: 'Flight Simulators, Avionics Racks' },
-    { id: 'h-004', building: 'Hangar', floor: 1, room: 'Hangar 004', type: 'UAV & Drone Lab', status: 'occupied', occupant: 'Prof. De Vega (UAV101)', schedule: '01:00 PM - 03:30 PM', capacity: 35, equipment: 'Drone Cages, Telemetry Racks' },
-    { id: 'h-005', building: 'Hangar', floor: 1, room: 'Hangar 005', type: 'Composite Materials', status: 'vacant', occupant: 'None', schedule: '--', capacity: 40, equipment: 'Autoclave, Vacuum Table, Tooling' },
-    { id: 'h-006', building: 'Hangar', floor: 1, room: 'Hangar 006', type: 'Aircraft Assembly', status: 'maintenance', occupant: 'None', schedule: 'Facility Recalibration', capacity: 60, equipment: 'Hydraulic Lifts, Tool Depots' },
+    { id: 'h-001', building: 'Hangar', floor: 1, roomCode: 'H 001', room: 'Hangar 001', type: 'Powerplants Bay', status: 'occupied', occupant: 'Engr. Cruz (AERO202)', schedule: '09:00 AM - 12:00 PM', capacity: 50, equipment: 'Engine Test Stands, Heavy Hoist' },
+    { id: 'h-002', building: 'Hangar', floor: 1, roomCode: 'H 002', room: 'Hangar 002', type: 'Avionics Lab', status: 'vacant', occupant: 'None', schedule: '--', capacity: 40, equipment: 'Diagnostic Benches, Oscilloscopes' },
+    { id: 'h-003', building: 'Hangar', floor: 1, roomCode: 'H 003', room: 'Hangar 003', type: 'Flight Simulation', status: 'vacant', occupant: 'None', schedule: '--', capacity: 30, equipment: 'Flight Simulators, Avionics Racks' },
+    { id: 'h-004', building: 'Hangar', floor: 1, roomCode: 'H 004', room: 'Hangar 004', type: 'UAV & Drone Lab', status: 'occupied', occupant: 'Prof. De Vega (UAV101)', schedule: '01:00 PM - 03:30 PM', capacity: 35, equipment: 'Drone Cages, Telemetry Racks' },
+    { id: 'h-005', building: 'Hangar', floor: 1, roomCode: 'H 005', room: 'Hangar 005', type: 'Composite Materials', status: 'vacant', occupant: 'None', schedule: '--', capacity: 40, equipment: 'Autoclave, Vacuum Table, Tooling' },
+    { id: 'h-006', building: 'Hangar', floor: 1, roomCode: 'H 006', room: 'Hangar 006', type: 'Aircraft Assembly', status: 'maintenance', occupant: 'None', schedule: 'Facility Recalibration', capacity: 60, equipment: 'Hydraulic Lifts, Tool Depots' },
 
     // Pancho Building - Floor 1
-    { id: 'p1-101', building: 'Pancho Building', floor: 1, room: '101', type: 'Classroom', status: 'vacant', occupant: 'None', schedule: '--', capacity: 45, equipment: 'Whiteboard, Ceiling Fans' },
-    { id: 'p1-103', building: 'Pancho Building', floor: 1, room: '103', type: 'Classroom', status: 'occupied', occupant: 'Dr. Reyes (BUS301)', schedule: '01:00 PM - 03:00 PM', capacity: 45, equipment: 'Projector, Whiteboard' },
-    { id: 'p1-105', building: 'Pancho Building', floor: 1, room: '105', type: 'Classroom', status: 'vacant', occupant: 'None', schedule: '--', capacity: 45, equipment: 'Whiteboard, Smart TV' },
-    { id: 'p1-107', building: 'Pancho Building', floor: 1, room: '107', type: 'Classroom', status: 'vacant', occupant: 'None', schedule: '--', capacity: 45, equipment: 'Whiteboard' },
-    { id: 'p1-109', building: 'Pancho Building', floor: 1, room: '109', type: 'Classroom', status: 'occupied', occupant: 'Prof. Diaz (MATH101)', schedule: '10:00 AM - 12:00 PM', capacity: 45, equipment: 'Whiteboard, Sound System' },
-    { id: 'p1-111', building: 'Pancho Building', floor: 1, room: '111', type: 'Classroom', status: 'vacant', occupant: 'None', schedule: '--', capacity: 45, equipment: 'Whiteboard' },
-    { id: 'p1-113', building: 'Pancho Building', floor: 1, room: '113', type: 'Classroom', status: 'vacant', occupant: 'None', schedule: '--', capacity: 45, equipment: 'Whiteboard, Projector' },
-    { id: 'p1-115', building: 'Pancho Building', floor: 1, room: '115', type: 'Classroom', status: 'occupied', occupant: 'Prof. Rivera (CHEM101)', schedule: '08:00 AM - 11:00 AM', capacity: 45, equipment: 'Chemistry Lab Benches' },
-    { id: 'p1-117a', building: 'Pancho Building', floor: 1, room: '117A', type: 'Classroom', status: 'vacant', occupant: 'None', schedule: '--', capacity: 40, equipment: 'Whiteboard' },
-    { id: 'p1-119', building: 'Pancho Building', floor: 1, room: '119', type: 'Classroom', status: 'vacant', occupant: 'None', schedule: '--', capacity: 45, equipment: 'Whiteboard' },
-    { id: 'p1-121', building: 'Pancho Building', floor: 1, room: '121', type: 'Classroom', status: 'occupied', occupant: 'Prof. Soriano (FIL101)', schedule: '01:00 PM - 03:00 PM', capacity: 45, equipment: 'Projector, Whiteboard' },
-    { id: 'p1-123a', building: 'Pancho Building', floor: 1, room: '123A', type: 'Classroom', status: 'vacant', occupant: 'None', schedule: '--', capacity: 40, equipment: 'Whiteboard' },
-    { id: 'p1-125', building: 'Pancho Building', floor: 1, room: '125', type: 'Classroom', status: 'vacant', occupant: 'None', schedule: '--', capacity: 45, equipment: 'Whiteboard' },
-    { id: 'p1-lecture', building: 'Pancho Building', floor: 1, room: 'Lecture Room', type: 'Lecture Hall', status: 'occupied', occupant: 'Prof. Gomez (ENG101)', schedule: '10:00 AM - 12:00 PM', capacity: 90, equipment: 'Tiered Seating, Sound System' },
-    { id: 'p1-102', building: 'Pancho Building', floor: 1, room: '102', type: 'Classroom', status: 'vacant', occupant: 'None', schedule: '--', capacity: 45, equipment: 'Whiteboard' },
-    { id: 'p1-104', building: 'Pancho Building', floor: 1, room: '104', type: 'Classroom', status: 'vacant', occupant: 'None', schedule: '--', capacity: 45, equipment: 'Whiteboard' },
-    { id: 'p1-106', building: 'Pancho Building', floor: 1, room: '106', type: 'Classroom', status: 'occupied', occupant: 'Prof. Morales (ENG201)', schedule: '08:00 AM - 10:00 AM', capacity: 45, equipment: 'Projector, Whiteboard' },
-    { id: 'p1-108', building: 'Pancho Building', floor: 1, room: '108', type: 'Classroom', status: 'vacant', occupant: 'None', schedule: '--', capacity: 45, equipment: 'Whiteboard' },
-    { id: 'p1-scilab', building: 'Pancho Building', floor: 1, room: 'Science Laboratory', type: 'Wet Lab', status: 'occupied', occupant: 'Dr. Lim (BIO102)', schedule: '02:00 PM - 05:00 PM', capacity: 50, equipment: 'Microscopes, Safety Showers' },
-    { id: 'p1-112a', building: 'Pancho Building', floor: 1, room: '112A', type: 'Classroom', status: 'vacant', occupant: 'None', schedule: '--', capacity: 40, equipment: 'Whiteboard' },
-    { id: 'p1-112b', building: 'Pancho Building', floor: 1, room: '112B', type: 'Classroom', status: 'vacant', occupant: 'None', schedule: '--', capacity: 40, equipment: 'Whiteboard' },
-    { id: 'p1-114', building: 'Pancho Building', floor: 1, room: '114', type: 'Classroom', status: 'occupied', occupant: 'Prof. Navarro (PHY102)', schedule: '02:00 PM - 04:00 PM', capacity: 45, equipment: 'Physics Apparatus, Projector' },
-    { id: 'p1-116', building: 'Pancho Building', floor: 1, room: '116', type: 'Classroom', status: 'vacant', occupant: 'None', schedule: '--', capacity: 45, equipment: 'Whiteboard' },
-    { id: 'p1-118', building: 'Pancho Building', floor: 1, room: '118', type: 'Classroom', status: 'vacant', occupant: 'None', schedule: '--', capacity: 45, equipment: 'Whiteboard' },
-    { id: 'p1-122', building: 'Pancho Building', floor: 1, room: '122', type: 'Classroom', status: 'occupied', occupant: 'Dr. Santos (SOC102)', schedule: '10:00 AM - 12:00 PM', capacity: 45, equipment: 'Whiteboard, Projector' },
-    { id: 'p1-103bot', building: 'Pancho Building', floor: 1, room: '103 (East)', type: 'Classroom', status: 'vacant', occupant: 'None', schedule: '--', capacity: 45, equipment: 'Whiteboard' },
-    { id: 'p1-library', building: 'Pancho Building', floor: 1, room: 'Library', type: 'Learning Center', status: 'vacant', occupant: 'Open Access', schedule: '08:00 AM - 06:00 PM', capacity: 120, equipment: 'Book Stacks, Wi-Fi Desks' },
-    { id: 'p1-multimedia', building: 'Pancho Building', floor: 1, room: 'Multimedia Room', type: 'Audio-Visual Hall', status: 'occupied', occupant: 'AV Team (Forum)', schedule: '09:00 AM - 11:30 AM', capacity: 70, equipment: 'Acoustic Panels, 4K Projector' },
+    { id: 'p1-101', building: 'Pancho Building', floor: 1, roomCode: 'PANCHO 101', room: '101', type: 'Classroom', status: 'vacant', occupant: 'None', schedule: '--', capacity: 45, equipment: 'Whiteboard, Ceiling Fans' },
+    { id: 'p1-103', building: 'Pancho Building', floor: 1, roomCode: 'PANCHO 103', room: '103', type: 'Classroom', status: 'occupied', occupant: 'Dr. Reyes (BUS301)', schedule: '01:00 PM - 03:00 PM', capacity: 45, equipment: 'Projector, Whiteboard' },
+    { id: 'p1-105', building: 'Pancho Building', floor: 1, roomCode: 'PANCHO 105', room: '105', type: 'Classroom', status: 'vacant', occupant: 'None', schedule: '--', capacity: 45, equipment: 'Whiteboard, Smart TV' },
+    { id: 'p1-107', building: 'Pancho Building', floor: 1, roomCode: 'PANCHO 107', room: '107', type: 'Classroom', status: 'vacant', occupant: 'None', schedule: '--', capacity: 45, equipment: 'Whiteboard' },
+    { id: 'p1-109', building: 'Pancho Building', floor: 1, roomCode: 'PANCHO 109', room: '109', type: 'Classroom', status: 'occupied', occupant: 'Prof. Diaz (MATH101)', schedule: '10:00 AM - 12:00 PM', capacity: 45, equipment: 'Whiteboard, Sound System' },
+    { id: 'p1-111', building: 'Pancho Building', floor: 1, roomCode: 'PANCHO 111', room: '111', type: 'Classroom', status: 'vacant', occupant: 'None', schedule: '--', capacity: 45, equipment: 'Whiteboard' },
+    { id: 'p1-113', building: 'Pancho Building', floor: 1, roomCode: 'PANCHO 113', room: '113', type: 'Classroom', status: 'vacant', occupant: 'None', schedule: '--', capacity: 45, equipment: 'Whiteboard, Projector' },
+    { id: 'p1-115', building: 'Pancho Building', floor: 1, roomCode: 'PANCHO 115', room: '115', type: 'Classroom', status: 'occupied', occupant: 'Prof. Rivera (CHEM101)', schedule: '08:00 AM - 11:00 AM', capacity: 45, equipment: 'Chemistry Lab Benches' },
+    { id: 'p1-117a', building: 'Pancho Building', floor: 1, roomCode: 'PANCHO 117A', room: '117A', type: 'Classroom', status: 'vacant', occupant: 'None', schedule: '--', capacity: 40, equipment: 'Whiteboard' },
+    { id: 'p1-119', building: 'Pancho Building', floor: 1, roomCode: 'PANCHO 119', room: '119', type: 'Classroom', status: 'vacant', occupant: 'None', schedule: '--', capacity: 45, equipment: 'Whiteboard' },
+    { id: 'p1-121', building: 'Pancho Building', floor: 1, roomCode: 'PANCHO 121', room: '121', type: 'Classroom', status: 'occupied', occupant: 'Prof. Soriano (FIL101)', schedule: '01:00 PM - 03:00 PM', capacity: 45, equipment: 'Projector, Whiteboard' },
+    { id: 'p1-123a', building: 'Pancho Building', floor: 1, roomCode: 'PANCHO 123A', room: '123A', type: 'Classroom', status: 'vacant', occupant: 'None', schedule: '--', capacity: 40, equipment: 'Whiteboard' },
+    { id: 'p1-125', building: 'Pancho Building', floor: 1, roomCode: 'PANCHO 125', room: '125', type: 'Classroom', status: 'vacant', occupant: 'None', schedule: '--', capacity: 45, equipment: 'Whiteboard' },
+    { id: 'p1-lecture', building: 'Pancho Building', floor: 1, roomCode: 'PANCHO LEC', room: 'Lecture Room', type: 'Lecture Hall', status: 'occupied', occupant: 'Prof. Gomez (ENG101)', schedule: '10:00 AM - 12:00 PM', capacity: 90, equipment: 'Tiered Seating, Sound System' },
+    { id: 'p1-102', building: 'Pancho Building', floor: 1, roomCode: 'PANCHO 102', room: '102', type: 'Classroom', status: 'vacant', occupant: 'None', schedule: '--', capacity: 45, equipment: 'Whiteboard' },
+    { id: 'p1-104', building: 'Pancho Building', floor: 1, roomCode: 'PANCHO 104', room: '104', type: 'Classroom', status: 'vacant', occupant: 'None', schedule: '--', capacity: 45, equipment: 'Whiteboard' },
+    { id: 'p1-106', building: 'Pancho Building', floor: 1, roomCode: 'PANCHO 106', room: '106', type: 'Classroom', status: 'occupied', occupant: 'Prof. Morales (ENG201)', schedule: '08:00 AM - 10:00 AM', capacity: 45, equipment: 'Projector, Whiteboard' },
+    { id: 'p1-108', building: 'Pancho Building', floor: 1, roomCode: 'PANCHO 108', room: '108', type: 'Classroom', status: 'vacant', occupant: 'None', schedule: '--', capacity: 45, equipment: 'Whiteboard' },
+    { id: 'p1-scilab', building: 'Pancho Building', floor: 1, roomCode: 'PANCHO SCILAB', room: 'Science Laboratory', type: 'Wet Lab', status: 'occupied', occupant: 'Dr. Lim (BIO102)', schedule: '02:00 PM - 05:00 PM', capacity: 50, equipment: 'Microscopes, Safety Showers' },
+    { id: 'p1-112a', building: 'Pancho Building', floor: 1, roomCode: 'PANCHO 112A', room: '112A', type: 'Classroom', status: 'vacant', occupant: 'None', schedule: '--', capacity: 40, equipment: 'Whiteboard' },
+    { id: 'p1-112b', building: 'Pancho Building', floor: 1, roomCode: 'PANCHO 112B', room: '112B', type: 'Classroom', status: 'vacant', occupant: 'None', schedule: '--', capacity: 40, equipment: 'Whiteboard' },
+    { id: 'p1-114', building: 'Pancho Building', floor: 1, roomCode: 'PANCHO 114', room: '114', type: 'Classroom', status: 'occupied', occupant: 'Prof. Navarro (PHY102)', schedule: '02:00 PM - 04:00 PM', capacity: 45, equipment: 'Physics Apparatus, Projector' },
+    { id: 'p1-116', building: 'Pancho Building', floor: 1, roomCode: 'PANCHO 116', room: '116', type: 'Classroom', status: 'vacant', occupant: 'None', schedule: '--', capacity: 45, equipment: 'Whiteboard' },
+    { id: 'p1-118', building: 'Pancho Building', floor: 1, roomCode: 'PANCHO 118', room: '118', type: 'Classroom', status: 'vacant', occupant: 'None', schedule: '--', capacity: 45, equipment: 'Whiteboard' },
+    { id: 'p1-122', building: 'Pancho Building', floor: 1, roomCode: 'PANCHO 122', room: '122', type: 'Classroom', status: 'occupied', occupant: 'Dr. Santos (SOC102)', schedule: '10:00 AM - 12:00 PM', capacity: 45, equipment: 'Whiteboard, Projector' },
+    { id: 'p1-103bot', building: 'Pancho Building', floor: 1, roomCode: 'PANCHO 103E', room: '103 (East)', type: 'Classroom', status: 'vacant', occupant: 'None', schedule: '--', capacity: 45, equipment: 'Whiteboard' },
+    { id: 'p1-library', building: 'Pancho Building', floor: 1, roomCode: 'PANCHO LIB', room: 'Library', type: 'Learning Center', status: 'vacant', occupant: 'Open Access', schedule: '08:00 AM - 06:00 PM', capacity: 120, equipment: 'Book Stacks, Wi-Fi Desks' },
+    { id: 'p1-multimedia', building: 'Pancho Building', floor: 1, roomCode: 'PANCHO MULTIMEDIA', room: 'Multimedia Room', type: 'Audio-Visual Hall', status: 'occupied', occupant: 'AV Team (Forum)', schedule: '09:00 AM - 11:30 AM', capacity: 70, equipment: 'Acoustic Panels, 4K Projector' },
 
     // Pancho Building - Floor 2
-    { id: 'p2-201', building: 'Pancho Building', floor: 2, room: '201', type: 'Classroom', status: 'vacant', occupant: 'None', schedule: '--', capacity: 45, equipment: 'Whiteboard' },
-    { id: 'p2-203', building: 'Pancho Building', floor: 2, room: '203', type: 'Classroom', status: 'vacant', occupant: 'None', schedule: '--', capacity: 45, equipment: 'Whiteboard' },
-    { id: 'p2-206', building: 'Pancho Building', floor: 2, room: '206', type: 'Classroom', status: 'vacant', occupant: 'None', schedule: '--', capacity: 45, equipment: 'Whiteboard' },
-    { id: 'p2-202', building: 'Pancho Building', floor: 2, room: 'Pancho 202', type: 'Conference Room', status: 'occupied', occupant: 'Dr. Smith (Physics Seminar)', schedule: '02:00 PM - 04:00 PM', capacity: 12, equipment: 'Video Conf, Smart Board' },
-    { id: 'p2-210', building: 'Pancho Building', floor: 2, room: '210', type: 'Classroom', status: 'vacant', occupant: 'None', schedule: '--', capacity: 45, equipment: 'Whiteboard' },
-    { id: 'p2-212', building: 'Pancho Building', floor: 2, room: '212', type: 'Classroom', status: 'occupied', occupant: 'Prof. Mendoza (HIST101)', schedule: '08:00 AM - 10:00 AM', capacity: 45, equipment: 'Whiteboard' },
-    { id: 'p2-214a', building: 'Pancho Building', floor: 2, room: '214A', type: 'Classroom', status: 'vacant', occupant: 'None', schedule: '--', capacity: 40, equipment: 'Whiteboard' },
-    { id: 'p2-214b', building: 'Pancho Building', floor: 2, room: '214B', type: 'Classroom', status: 'vacant', occupant: 'None', schedule: '--', capacity: 40, equipment: 'Whiteboard' },
-    { id: 'p2-216a', building: 'Pancho Building', floor: 2, room: '216A', type: 'Classroom', status: 'vacant', occupant: 'None', schedule: '--', capacity: 40, equipment: 'Whiteboard' },
-    { id: 'p2-216b', building: 'Pancho Building', floor: 2, room: '216B', type: 'Classroom', status: 'occupied', occupant: 'Prof. De Leon (LIT102)', schedule: '01:00 PM - 03:00 PM', capacity: 40, equipment: 'Whiteboard, Projector' },
-    { id: 'p2-215', building: 'Pancho Building', floor: 2, room: '215', type: 'Architecture Studio', status: 'occupied', occupant: 'Engr. Dalisay (ARCH202)', schedule: '08:00 AM - 11:30 AM', capacity: 40, equipment: 'Drafting Tables, Plotter' },
-    { id: 'p2-220', building: 'Pancho Building', floor: 2, room: '220', type: 'Classroom', status: 'vacant', occupant: 'None', schedule: '--', capacity: 45, equipment: 'Whiteboard' },
-    { id: 'p2-222', building: 'Pancho Building', floor: 2, room: '222', type: 'Classroom', status: 'vacant', occupant: 'None', schedule: '--', capacity: 45, equipment: 'Whiteboard' },
-    { id: 'p2-224', building: 'Pancho Building', floor: 2, room: '224', type: 'Lecture Hall', status: 'vacant', occupant: 'None', schedule: '--', capacity: 65, equipment: 'Projector, Whiteboard' },
-    { id: 'p2-226', building: 'Pancho Building', floor: 2, room: '226', type: 'Classroom', status: 'occupied', occupant: 'Dr. Garcia (CHEM202)', schedule: '02:00 PM - 04:00 PM', capacity: 45, equipment: 'Smart Board' },
-    { id: 'p2-228a', building: 'Pancho Building', floor: 2, room: '228A', type: 'Classroom', status: 'vacant', occupant: 'None', schedule: '--', capacity: 35, equipment: 'Whiteboard' },
-    { id: 'p2-228b', building: 'Pancho Building', floor: 2, room: '228B', type: 'Classroom', status: 'vacant', occupant: 'None', schedule: '--', capacity: 35, equipment: 'Whiteboard' },
-    { id: 'p2-sped', building: 'Pancho Building', floor: 2, room: 'SPED Room', type: 'Resource Room', status: 'occupied', occupant: 'Mrs. Ramos (Special Ed)', schedule: '08:00 AM - 12:00 PM', capacity: 20, equipment: 'Sensory Stations, Braille Display' },
-    { id: 'p2-unites', building: 'Pancho Building', floor: 2, room: 'Unites Room', type: 'Activity Hall', status: 'vacant', occupant: 'None', schedule: '--', capacity: 30, equipment: 'Round Tables' },
-    { id: 'p2-200', building: 'Pancho Building', floor: 2, room: '200', type: 'Classroom', status: 'vacant', occupant: 'None', schedule: '--', capacity: 45, equipment: 'Whiteboard' },
-    { id: 'p2-204', building: 'Pancho Building', floor: 2, room: '204', type: 'Classroom', status: 'occupied', occupant: 'Prof. Cruz (ENG102)', schedule: '10:00 AM - 12:00 PM', capacity: 45, equipment: 'Projector' },
-    { id: 'p2-pta', building: 'Pancho Building', floor: 2, room: 'PTA Room', type: 'Office', status: 'vacant', occupant: 'None', schedule: '--', capacity: 15, equipment: 'Conference Table' },
-    { id: 'p2-sto', building: 'Pancho Building', floor: 2, room: 'STO', type: 'Faculty Office', status: 'occupied', occupant: 'Student Affairs', schedule: '08:00 AM - 05:00 PM', capacity: 15, equipment: 'Desks, File Storage' },
-    { id: 'p2-scouts', building: 'Pancho Building', floor: 2, room: 'Scouts Room', type: 'Activity Office', status: 'vacant', occupant: 'None', schedule: '--', capacity: 20, equipment: 'Benches, Gear Lockers' },
-    { id: 'p2-207', building: 'Pancho Building', floor: 2, room: '207', type: 'Classroom', status: 'vacant', occupant: 'None', schedule: '--', capacity: 45, equipment: 'Whiteboard' },
-    { id: 'p2-209', building: 'Pancho Building', floor: 2, room: '209', type: 'Classroom', status: 'occupied', occupant: 'Prof. Tolentino (FIL102)', schedule: '01:00 PM - 03:00 PM', capacity: 45, equipment: 'Whiteboard' },
-    { id: 'p2-211', building: 'Pancho Building', floor: 2, room: '211', type: 'Classroom', status: 'vacant', occupant: 'None', schedule: '--', capacity: 45, equipment: 'Whiteboard' },
-    { id: 'p2-213', building: 'Pancho Building', floor: 2, room: '213', type: 'Classroom', status: 'vacant', occupant: 'None', schedule: '--', capacity: 45, equipment: 'Whiteboard' },
-    { id: 'p2-217', building: 'Pancho Building', floor: 2, room: '217', type: 'Lecture Hall', status: 'occupied', occupant: 'Dr. Hernandez (ENG202)', schedule: '09:00 AM - 11:30 AM', capacity: 85, equipment: 'Sound System, Dual TV' },
-    { id: 'p2-219', building: 'Pancho Building', floor: 2, room: '219', type: 'Classroom', status: 'vacant', occupant: 'None', schedule: '--', capacity: 45, equipment: 'Whiteboard' },
-    { id: 'p2-221', building: 'Pancho Building', floor: 2, room: '221', type: 'Classroom', status: 'vacant', occupant: 'None', schedule: '--', capacity: 45, equipment: 'Whiteboard' },
-    { id: 'p2-223', building: 'Pancho Building', floor: 2, room: '223', type: 'Classroom', status: 'occupied', occupant: 'Prof. Castillo (MATH201)', schedule: '08:00 AM - 10:00 AM', capacity: 45, equipment: 'Whiteboard' },
-    { id: 'p2-225', building: 'Pancho Building', floor: 2, room: '225', type: 'Lecture Hall', status: 'vacant', occupant: 'None', schedule: '--', capacity: 70, equipment: 'Projector, Whiteboard' },
-    { id: 'p2-227a', building: 'Pancho Building', floor: 2, room: '227A', type: 'Classroom', status: 'vacant', occupant: 'None', schedule: '--', capacity: 40, equipment: 'Whiteboard' },
-    { id: 'p2-227b', building: 'Pancho Building', floor: 2, room: '227B', type: 'Classroom', status: 'vacant', occupant: 'None', schedule: '--', capacity: 40, equipment: 'Whiteboard' },
-    { id: 'p2-229', building: 'Pancho Building', floor: 2, room: '229', type: 'Classroom', status: 'occupied', occupant: 'Dr. Valerio (PHYS201)', schedule: '02:00 PM - 04:30 PM', capacity: 45, equipment: 'Physics Kits' },
-    { id: 'p2-231', building: 'Pancho Building', floor: 2, room: '231', type: 'Classroom', status: 'vacant', occupant: 'None', schedule: '--', capacity: 45, equipment: 'Whiteboard' },
-    { id: 'p2-232', building: 'Pancho Building', floor: 2, room: '232', type: 'Classroom', status: 'vacant', occupant: 'None', schedule: '--', capacity: 45, equipment: 'Whiteboard' },
-    { id: 'p2-233', building: 'Pancho Building', floor: 2, room: '233', type: 'Classroom', status: 'occupied', occupant: 'Prof. Robles (BIO201)', schedule: '10:00 AM - 12:00 PM', capacity: 45, equipment: 'Whiteboard, Screen' }
+    { id: 'p2-201', building: 'Pancho Building', floor: 2, roomCode: 'PANCHO 201', room: '201', type: 'Classroom', status: 'vacant', occupant: 'None', schedule: '--', capacity: 45, equipment: 'Whiteboard' },
+    { id: 'p2-203', building: 'Pancho Building', floor: 2, roomCode: 'PANCHO 203', room: '203', type: 'Classroom', status: 'vacant', occupant: 'None', schedule: '--', capacity: 45, equipment: 'Whiteboard' },
+    { id: 'p2-206', building: 'Pancho Building', floor: 2, roomCode: 'PANCHO 206', room: '206', type: 'Classroom', status: 'vacant', occupant: 'None', schedule: '--', capacity: 45, equipment: 'Whiteboard' },
+    { id: 'p2-202', building: 'Pancho Building', floor: 2, roomCode: 'PANCHO 202', room: 'Pancho 202', type: 'Conference Room', status: 'occupied', occupant: 'Dr. Smith (Physics Seminar)', schedule: '02:00 PM - 04:00 PM', capacity: 12, equipment: 'Video Conf, Smart Board' },
+    { id: 'p2-210', building: 'Pancho Building', floor: 2, roomCode: 'PANCHO 210', room: '210', type: 'Classroom', status: 'vacant', occupant: 'None', schedule: '--', capacity: 45, equipment: 'Whiteboard' },
+    { id: 'p2-212', building: 'Pancho Building', floor: 2, roomCode: 'PANCHO 212', room: '212', type: 'Classroom', status: 'occupied', occupant: 'Prof. Mendoza (HIST101)', schedule: '08:00 AM - 10:00 AM', capacity: 45, equipment: 'Whiteboard' },
+    { id: 'p2-214a', building: 'Pancho Building', floor: 2, roomCode: 'PANCHO 214A', room: '214A', type: 'Classroom', status: 'vacant', occupant: 'None', schedule: '--', capacity: 40, equipment: 'Whiteboard' },
+    { id: 'p2-214b', building: 'Pancho Building', floor: 2, roomCode: 'PANCHO 214B', room: '214B', type: 'Classroom', status: 'vacant', occupant: 'None', schedule: '--', capacity: 40, equipment: 'Whiteboard' },
+    { id: 'p2-216a', building: 'Pancho Building', floor: 2, roomCode: 'PANCHO 216A', room: '216A', type: 'Classroom', status: 'vacant', occupant: 'None', schedule: '--', capacity: 40, equipment: 'Whiteboard' },
+    { id: 'p2-216b', building: 'Pancho Building', floor: 2, roomCode: 'PANCHO 216B', room: '216B', type: 'Classroom', status: 'occupied', occupant: 'Prof. De Leon (LIT102)', schedule: '01:00 PM - 03:00 PM', capacity: 40, equipment: 'Whiteboard, Projector' },
+    { id: 'p2-215', building: 'Pancho Building', floor: 2, roomCode: 'PANCHO 215', room: '215', type: 'Architecture Studio', status: 'occupied', occupant: 'Engr. Dalisay (ARCH202)', schedule: '08:00 AM - 11:30 AM', capacity: 40, equipment: 'Drafting Tables, Plotter' },
+    { id: 'p2-220', building: 'Pancho Building', floor: 2, roomCode: 'PANCHO 220', room: '220', type: 'Classroom', status: 'vacant', occupant: 'None', schedule: '--', capacity: 45, equipment: 'Whiteboard' },
+    { id: 'p2-222', building: 'Pancho Building', floor: 2, roomCode: 'PANCHO 222', room: '222', type: 'Classroom', status: 'vacant', occupant: 'None', schedule: '--', capacity: 45, equipment: 'Whiteboard' },
+    { id: 'p2-224', building: 'Pancho Building', floor: 2, roomCode: 'PANCHO 224', room: '224', type: 'Lecture Hall', status: 'vacant', occupant: 'None', schedule: '--', capacity: 65, equipment: 'Projector, Whiteboard' },
+    { id: 'p2-226', building: 'Pancho Building', floor: 2, roomCode: 'PANCHO 226', room: '226', type: 'Classroom', status: 'occupied', occupant: 'Dr. Garcia (CHEM202)', schedule: '02:00 PM - 04:00 PM', capacity: 45, equipment: 'Smart Board' },
+    { id: 'p2-228a', building: 'Pancho Building', floor: 2, roomCode: 'PANCHO 228A', room: '228A', type: 'Classroom', status: 'vacant', occupant: 'None', schedule: '--', capacity: 35, equipment: 'Whiteboard' },
+    { id: 'p2-228b', building: 'Pancho Building', floor: 2, roomCode: 'PANCHO 228B', room: '228B', type: 'Classroom', status: 'vacant', occupant: 'None', schedule: '--', capacity: 35, equipment: 'Whiteboard' },
+    { id: 'p2-sped', building: 'Pancho Building', floor: 2, roomCode: 'PANCHO SPED', room: 'SPED Room', type: 'Resource Room', status: 'occupied', occupant: 'Mrs. Ramos (Special Ed)', schedule: '08:00 AM - 12:00 PM', capacity: 20, equipment: 'Sensory Stations, Braille Display' },
+    { id: 'p2-unites', building: 'Pancho Building', floor: 2, roomCode: 'PANCHO UNITES', room: 'Unites Room', type: 'Activity Hall', status: 'vacant', occupant: 'None', schedule: '--', capacity: 30, equipment: 'Round Tables' },
+    { id: 'p2-200', building: 'Pancho Building', floor: 2, roomCode: 'PANCHO 200', room: '200', type: 'Classroom', status: 'vacant', occupant: 'None', schedule: '--', capacity: 45, equipment: 'Whiteboard' },
+    { id: 'p2-204', building: 'Pancho Building', floor: 2, roomCode: 'PANCHO 204', room: '204', type: 'Classroom', status: 'occupied', occupant: 'Prof. Cruz (ENG102)', schedule: '10:00 AM - 12:00 PM', capacity: 45, equipment: 'Projector' },
+    { id: 'p2-pta', building: 'Pancho Building', floor: 2, roomCode: 'PANCHO PTA', room: 'PTA Room', type: 'Office', status: 'vacant', occupant: 'None', schedule: '--', capacity: 15, equipment: 'Conference Table' },
+    { id: 'p2-sto', building: 'Pancho Building', floor: 2, roomCode: 'PANCHO STO', room: 'STO', type: 'Faculty Office', status: 'occupied', occupant: 'Student Affairs', schedule: '08:00 AM - 05:00 PM', capacity: 15, equipment: 'Desks, File Storage' },
+    { id: 'p2-scouts', building: 'Pancho Building', floor: 2, roomCode: 'PANCHO SCOUTS', room: 'Scouts Room', type: 'Activity Office', status: 'vacant', occupant: 'None', schedule: '--', capacity: 20, equipment: 'Benches, Gear Lockers' },
+    { id: 'p2-207', building: 'Pancho Building', floor: 2, roomCode: 'PANCHO 207', room: '207', type: 'Classroom', status: 'vacant', occupant: 'None', schedule: '--', capacity: 45, equipment: 'Whiteboard' },
+    { id: 'p2-209', building: 'Pancho Building', floor: 2, roomCode: 'PANCHO 209', room: '209', type: 'Classroom', status: 'occupied', occupant: 'Prof. Tolentino (FIL102)', schedule: '01:00 PM - 03:00 PM', capacity: 45, equipment: 'Whiteboard' },
+    { id: 'p2-211', building: 'Pancho Building', floor: 2, roomCode: 'PANCHO 211', room: '211', type: 'Classroom', status: 'vacant', occupant: 'None', schedule: '--', capacity: 45, equipment: 'Whiteboard' },
+    { id: 'p2-213', building: 'Pancho Building', floor: 2, roomCode: 'PANCHO 213', room: '213', type: 'Classroom', status: 'vacant', occupant: 'None', schedule: '--', capacity: 45, equipment: 'Whiteboard' },
+    { id: 'p2-217', building: 'Pancho Building', floor: 2, roomCode: 'PANCHO 217', room: '217', type: 'Lecture Hall', status: 'occupied', occupant: 'Dr. Hernandez (ENG202)', schedule: '09:00 AM - 11:30 AM', capacity: 85, equipment: 'Sound System, Dual TV' },
+    { id: 'p2-219', building: 'Pancho Building', floor: 2, roomCode: 'PANCHO 219', room: '219', type: 'Classroom', status: 'vacant', occupant: 'None', schedule: '--', capacity: 45, equipment: 'Whiteboard' },
+    { id: 'p2-221', building: 'Pancho Building', floor: 2, roomCode: 'PANCHO 221', room: '221', type: 'Classroom', status: 'vacant', occupant: 'None', schedule: '--', capacity: 45, equipment: 'Whiteboard' },
+    { id: 'p2-223', building: 'Pancho Building', floor: 2, roomCode: 'PANCHO 223', room: '223', type: 'Classroom', status: 'occupied', occupant: 'Prof. Castillo (MATH201)', schedule: '08:00 AM - 10:00 AM', capacity: 45, equipment: 'Whiteboard' },
+    { id: 'p2-225', building: 'Pancho Building', floor: 2, roomCode: 'PANCHO 225', room: '225', type: 'Lecture Hall', status: 'vacant', occupant: 'None', schedule: '--', capacity: 70, equipment: 'Projector, Whiteboard' },
+    { id: 'p2-227a', building: 'Pancho Building', floor: 2, roomCode: 'PANCHO 227A', room: '227A', type: 'Classroom', status: 'vacant', occupant: 'None', schedule: '--', capacity: 40, equipment: 'Whiteboard' },
+    { id: 'p2-227b', building: 'Pancho Building', floor: 2, roomCode: 'PANCHO 227B', room: '227B', type: 'Classroom', status: 'vacant', occupant: 'None', schedule: '--', capacity: 40, equipment: 'Whiteboard' },
+    { id: 'p2-229', building: 'Pancho Building', floor: 2, roomCode: 'PANCHO 229', room: '229', type: 'Classroom', status: 'occupied', occupant: 'Dr. Valerio (PHYS201)', schedule: '02:00 PM - 04:30 PM', capacity: 45, equipment: 'Physics Kits' },
+    { id: 'p2-231', building: 'Pancho Building', floor: 2, roomCode: 'PANCHO 231', room: '231', type: 'Classroom', status: 'vacant', occupant: 'None', schedule: '--', capacity: 45, equipment: 'Whiteboard' },
+    { id: 'p2-232', building: 'Pancho Building', floor: 2, roomCode: 'PANCHO 232', room: '232', type: 'Classroom', status: 'vacant', occupant: 'None', schedule: '--', capacity: 45, equipment: 'Whiteboard' },
+    { id: 'p2-233', building: 'Pancho Building', floor: 2, roomCode: 'PANCHO 233', room: '233', type: 'Classroom', status: 'occupied', occupant: 'Prof. Robles (BIO201)', schedule: '10:00 AM - 12:00 PM', capacity: 45, equipment: 'Whiteboard, Screen' }
   ];
 
   const DEFAULT_REQUESTS = [
@@ -136,6 +153,14 @@ document.addEventListener('DOMContentLoaded', () => {
   // Refresh local storage if old seed format detected
   let storedRooms = JSON.parse(localStorage.getItem('farms_rooms_v4'));
   let rooms = storedRooms || DEFAULT_ROOMS;
+
+  // Auto-migrate rooms to ensure roomCode property is always present
+  rooms.forEach(r => {
+    if (!r.roomCode) {
+      r.roomCode = getOrGenerateRoomCode(r);
+    }
+  });
+
   let requests = JSON.parse(localStorage.getItem('farms_requests_v4')) || DEFAULT_REQUESTS;
   let timelineLogs = JSON.parse(localStorage.getItem('farms_logs_v4')) || DEFAULT_TIMELINE;
   let notifs = JSON.parse(localStorage.getItem('farms_notifs_v4')) || DEFAULT_NOTIFS;
@@ -1510,7 +1535,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const filtered = rooms.filter(r => {
       const matchBldg = selectedBldgs.includes(r.building);
       const matchStatus = selectedStatuses.includes(r.status);
-      const matchQuery = query === '' || r.room.toLowerCase().includes(query) || r.building.toLowerCase().includes(query) || r.occupant.toLowerCase().includes(query);
+      const matchQuery = query === '' || 
+        (r.roomCode && r.roomCode.toLowerCase().includes(query)) ||
+        (r.room && r.room.toLowerCase().includes(query)) || 
+        (r.building && r.building.toLowerCase().includes(query)) || 
+        (r.occupant && r.occupant.toLowerCase().includes(query)) ||
+        (r.type && r.type.toLowerCase().includes(query));
       return matchBldg && matchStatus && matchQuery;
     });
 
@@ -1536,10 +1566,14 @@ document.addEventListener('DOMContentLoaded', () => {
       const badgeText = item.status === 'vacant' ? 'Available' : item.status === 'occupied' ? 'In-Use' : 'Maintenance';
       const badgeDotClass = item.status === 'vacant' ? 'available' : item.status === 'occupied' ? 'occupied' : 'maintenance';
 
+      const codeDisplay = item.roomCode || getOrGenerateRoomCode(item);
+      const isAlias = item.room && item.room !== codeDisplay && !codeDisplay.endsWith(item.room);
+
       tr.innerHTML = `
         <td>
           <div class="table-room-chip clickable-room-name" title="Click to edit room properties">
-            <span class="room-chip-code">${item.room}</span>
+            <span class="room-chip-code">${codeDisplay}</span>
+            ${isAlias ? `<small class="room-chip-alias" style="display:block; font-size:0.72rem; color:#64748b; font-weight:700; margin-top:2px;">${item.room}</small>` : ''}
           </div>
         </td>
         <td>
@@ -1623,9 +1657,10 @@ document.addEventListener('DOMContentLoaded', () => {
         flrRooms.forEach(roomObj => {
           const cell = document.createElement('div');
           cell.className = `matrix-room-cell ${roomObj.status}`;
+          const codeDisplay = roomObj.roomCode || getOrGenerateRoomCode(roomObj);
           cell.innerHTML = `
             <span class="matrix-room-dot"></span>
-            <div class="matrix-room-name">${roomObj.room}</div>
+            <div class="matrix-room-name">${codeDisplay}</div>
             <div class="matrix-room-sub">${roomObj.status === 'vacant' ? '🟢 Available' : roomObj.occupant}</div>
           `;
 
@@ -1702,9 +1737,10 @@ document.addEventListener('DOMContentLoaded', () => {
           const cell = document.createElement('div');
           cell.className = `matrix-room-cell ${roomObj.status}`;
           cell.style.cursor = 'pointer';
+          const codeDisplay = roomObj.roomCode || getOrGenerateRoomCode(roomObj);
           cell.innerHTML = `
             <span class="matrix-room-dot"></span>
-            <div class="matrix-room-name" style="font-size:0.95rem; font-weight:900;">${roomObj.room}</div>
+            <div class="matrix-room-name" style="font-size:0.95rem; font-weight:900;">${codeDisplay}</div>
             <div class="matrix-room-sub" style="font-size:0.82rem; font-weight:800;">${roomObj.status === 'vacant' ? '🟢 Available' : roomObj.status === 'maintenance' ? '🛠️ In Repair' : roomObj.occupant}</div>
           `;
 
@@ -2058,17 +2094,36 @@ document.addEventListener('DOMContentLoaded', () => {
   // ==========================================
   // 11. ROOM MODAL MANAGEMENT
   // ==========================================
+  const modalRoomCode = document.getElementById('modalRoomCode');
+  const modalRoomName = document.getElementById('modalRoomName');
+  const modalBldgSelect = document.getElementById('modalBldgSelect');
+  const modalFloorNum = document.getElementById('modalFloorNum');
+  const modalRoomType = document.getElementById('modalRoomType');
+  const modalStatusSelect = document.getElementById('modalStatusSelect');
+  const modalCapacity = document.getElementById('modalCapacity');
+  const modalOccupant = document.getElementById('modalOccupant');
+  const modalSchedule = document.getElementById('modalSchedule');
+  const modalEquipment = document.getElementById('modalEquipment');
+
   function openRoomModal(roomObj) {
     currentEditingRoom = roomObj;
-    modalRoomTitle.textContent = `${roomObj.room} (${roomObj.type || 'Room'})`;
+    const codeDisplay = roomObj.roomCode || getOrGenerateRoomCode(roomObj);
+    modalRoomTitle.textContent = `${codeDisplay} (${roomObj.type || 'Room'})`;
     modalBldgBadge.textContent = `${roomObj.building} · Level ${roomObj.floor}`;
 
     modalStatusBanner.className = `room-status-banner ${roomObj.status}`;
     modalStatusText.textContent = roomObj.status === 'vacant' ? '🟢 Currently Available' : roomObj.status === 'occupied' ? `🔴 Occupied by ${roomObj.occupant}` : '🟠 Under Maintenance';
-    modalStatusSelect.value = roomObj.status;
-    modalCapacity.value = `${roomObj.capacity || 45} Students`;
-    modalOccupant.value = roomObj.occupant !== 'None' ? roomObj.occupant : '';
-    modalSchedule.value = roomObj.schedule !== '--' ? roomObj.schedule : '';
+    
+    if (modalRoomCode) modalRoomCode.value = codeDisplay;
+    if (modalRoomName) modalRoomName.value = roomObj.room || '';
+    if (modalBldgSelect) modalBldgSelect.value = roomObj.building || 'Pancho Building';
+    if (modalFloorNum) modalFloorNum.value = roomObj.floor || 1;
+    if (modalRoomType) modalRoomType.value = roomObj.type || 'Classroom';
+    if (modalStatusSelect) modalStatusSelect.value = roomObj.status;
+    if (modalCapacity) modalCapacity.value = roomObj.capacity || 45;
+    if (modalOccupant) modalOccupant.value = roomObj.occupant !== 'None' ? roomObj.occupant : '';
+    if (modalSchedule) modalSchedule.value = roomObj.schedule !== '--' ? roomObj.schedule : '';
+    if (modalEquipment) modalEquipment.value = roomObj.equipment || '';
 
     roomModalBackdrop.classList.remove('hidden');
   }
@@ -2090,19 +2145,33 @@ document.addEventListener('DOMContentLoaded', () => {
       e.preventDefault();
       if (!currentEditingRoom) return;
 
+      const newRoomCode = modalRoomCode ? modalRoomCode.value.trim() : (currentEditingRoom.roomCode || getOrGenerateRoomCode(currentEditingRoom));
+      const newRoomName = modalRoomName ? modalRoomName.value.trim() : currentEditingRoom.room;
+      const newBldg = modalBldgSelect ? modalBldgSelect.value : currentEditingRoom.building;
+      const newFloor = modalFloorNum ? parseInt(modalFloorNum.value, 10) : currentEditingRoom.floor;
+      const newType = modalRoomType ? modalRoomType.value.trim() : currentEditingRoom.type;
       const newStatus = modalStatusSelect.value;
+      const newCapacity = modalCapacity ? parseInt(modalCapacity.value, 10) : (currentEditingRoom.capacity || 45);
       const newOccupant = modalOccupant.value.trim() || 'None';
       const newSchedule = modalSchedule.value.trim() || '--';
+      const newEquipment = modalEquipment ? modalEquipment.value.trim() : currentEditingRoom.equipment;
 
+      currentEditingRoom.roomCode = newRoomCode;
+      currentEditingRoom.room = newRoomName;
+      currentEditingRoom.building = newBldg;
+      currentEditingRoom.floor = newFloor;
+      currentEditingRoom.type = newType;
       currentEditingRoom.status = newStatus;
+      currentEditingRoom.capacity = newCapacity;
       currentEditingRoom.occupant = newStatus === 'vacant' ? 'None' : newOccupant;
       currentEditingRoom.schedule = newStatus === 'vacant' ? '--' : newSchedule;
+      currentEditingRoom.equipment = newEquipment;
 
       timelineLogs.unshift({
         id: `LOG-${Date.now()}`,
         title: newStatus === 'vacant' ? 'Room Released' : 'Room Assigned',
         time: 'Just now',
-        desc: `${currentEditingRoom.room} (${currentEditingRoom.building}) updated to ${newStatus.toUpperCase()}${newStatus === 'occupied' ? ' - ' + newOccupant : ''}`,
+        desc: `${currentEditingRoom.roomCode} (${currentEditingRoom.building}) updated to ${newStatus.toUpperCase()}${newStatus === 'occupied' ? ' - ' + newOccupant : ''}`,
         icon: newStatus === 'vacant' ? '🚪' : '📅',
         type: 'booking',
         color: newStatus === 'vacant' ? 'teal' : 'green',
@@ -2119,7 +2188,7 @@ document.addEventListener('DOMContentLoaded', () => {
       }
 
       closeRoomModal();
-      showToast(`Updated ${currentEditingRoom.room} to ${newStatus}.`);
+      showToast(`Updated ${currentEditingRoom.roomCode} to ${newStatus}.`);
     });
   }
 
@@ -2299,9 +2368,9 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   document.getElementById('btnDispatchExport')?.addEventListener('click', () => {
-    let csv = 'ID,Building,Floor,Room,Type,Status,Occupant,Schedule,Capacity\n';
+    let csv = 'ID,Room Code,Building,Floor,Room,Type,Status,Occupant,Schedule,Capacity\n';
     rooms.forEach(r => {
-      csv += `"${r.id}","${r.building}","${r.floor}","${r.room}","${r.type}","${r.status}","${r.occupant}","${r.schedule}","${r.capacity}"\n`;
+      csv += `"${r.id}","${r.roomCode || getOrGenerateRoomCode(r)}","${r.building}","${r.floor}","${r.room}","${r.type}","${r.status}","${r.occupant}","${r.schedule}","${r.capacity}"\n`;
     });
     const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
     const url = URL.createObjectURL(blob);
@@ -2442,7 +2511,8 @@ document.addEventListener('DOMContentLoaded', () => {
       let matchSearch = true;
       if (mobileSearchQuery.trim()) {
         const q = mobileSearchQuery.toLowerCase();
-        matchSearch = (r.room && r.room.toLowerCase().includes(q)) ||
+        matchSearch = (r.roomCode && r.roomCode.toLowerCase().includes(q)) ||
+                      (r.room && r.room.toLowerCase().includes(q)) ||
                       (r.type && r.type.toLowerCase().includes(q)) ||
                       (r.occupant && r.occupant.toLowerCase().includes(q)) ||
                       (r.building && r.building.toLowerCase().includes(q));
@@ -2464,14 +2534,15 @@ document.addEventListener('DOMContentLoaded', () => {
       const statusClass = r.status === 'vacant' ? 'available' : r.status === 'occupied' ? 'occupied' : 'maintenance';
       const statusLabel = r.status === 'vacant' ? '🟢 FREE' : r.status === 'occupied' ? '🔴 IN-USE' : '🟡 MAINT';
       const occupantDisplay = r.status === 'occupied' ? (r.occupant !== 'None' ? r.occupant : 'Active Class') : (r.status === 'vacant' ? 'Vacant & Ready' : 'Under Maintenance');
+      const codeDisplay = r.roomCode || getOrGenerateRoomCode(r);
 
       return `
         <div class="mobile-room-card" data-room-id="${r.id}">
           <div class="m-card-top">
-            <span class="m-card-code">${r.room}</span>
+            <span class="m-card-code">${codeDisplay}</span>
             <span class="m-card-badge ${statusClass}">${statusLabel}</span>
           </div>
-          <div class="m-card-type">${r.type || 'Classroom'}</div>
+          <div class="m-card-type">${r.type || 'Classroom'}${r.room && r.room !== codeDisplay ? ` · ${r.room}` : ''}</div>
           <div class="m-card-occupant">${occupantDisplay}</div>
           <div class="m-card-bottom">
             <span>Level ${r.floor}</span>
@@ -2500,8 +2571,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const sheetRoomBody = document.getElementById('sheetRoomBody');
     const btnSheetQuickAction = document.getElementById('btnSheetQuickAction');
 
-    if (sheetRoomBadge) sheetRoomBadge.textContent = roomObj.room;
-    if (sheetRoomName) sheetRoomName.textContent = `${roomObj.room} (${roomObj.type || 'Room'})`;
+    const codeDisplay = roomObj.roomCode || getOrGenerateRoomCode(roomObj);
+    if (sheetRoomBadge) sheetRoomBadge.textContent = codeDisplay;
+    if (sheetRoomName) sheetRoomName.textContent = `${codeDisplay} (${roomObj.type || 'Room'})`;
     if (sheetRoomMeta) sheetRoomMeta.textContent = `${roomObj.building} · Level ${roomObj.floor}`;
 
     const isFree = roomObj.status === 'vacant';

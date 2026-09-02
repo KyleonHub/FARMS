@@ -24,22 +24,22 @@ document.addEventListener('DOMContentLoaded', () => {
   ];
 
   const ROOM_DATA = [
-    { bldg: 'Pancho Building', room: '101', floor: 1, status: 'vacant',      occupant: 'Unassigned',           schedule: 'Open', capacity: 45 },
-    { bldg: 'Pancho Building', room: '103', floor: 1, status: 'occupied',    occupant: 'Dr. Reyes (BUS301)',    schedule: '08:00 AM – 11:00 AM', capacity: 45 },
-    { bldg: 'Pancho Building', room: '105', floor: 1, status: 'vacant',      occupant: 'Unassigned',           schedule: 'Open', capacity: 45 },
-    { bldg: 'Pancho Building', room: 'Science Laboratory', floor: 1, status: 'occupied', occupant: 'Dr. Lim (BIO102)', schedule: '01:30 PM – 03:30 PM', capacity: 40 },
-    { bldg: 'Pancho Building', room: 'Lecture Room',       floor: 1, status: 'occupied', occupant: 'Prof. Gomez (ENG101)', schedule: '09:00 AM – 12:00 PM', capacity: 60 },
-    { bldg: 'Pancho Building', room: 'Multimedia Room',    floor: 1, status: 'occupied', occupant: 'Prof. Santos (CS101)', schedule: '02:00 PM – 04:00 PM', capacity: 50 },
-    { bldg: 'CBA Building',    room: 'CBA 101', floor: 1,  status: 'vacant',      occupant: 'Unassigned',           schedule: 'Open', capacity: 45 },
-    { bldg: 'CBA Building',    room: 'CBA 102', floor: 1,  status: 'occupied',    occupant: 'Prof. Santos (CS101)', schedule: '08:30 AM – 10:00 AM', capacity: 50 },
-    { bldg: 'CBA Building',    room: 'CBA 103', floor: 1,  status: 'vacant',      occupant: 'Unassigned',           schedule: 'Open', capacity: 45 },
-    { bldg: 'CBA Building',    room: 'CBA 202', floor: 2,  status: 'vacant',      occupant: 'Unassigned',           schedule: 'Open', capacity: 45 },
-    { bldg: 'Hangar',          room: 'Hangar 001', floor: 1, status: 'occupied',  occupant: 'Engr. Cruz (AERO202)', schedule: '08:00 AM – 12:00 PM', capacity: 35 },
-    { bldg: 'Hangar',          room: 'Hangar 002', floor: 1, status: 'vacant',    occupant: 'Unassigned',           schedule: 'Open', capacity: 35 },
-    { bldg: 'Hangar',          room: 'Hangar 003', floor: 1, status: 'vacant',    occupant: 'Unassigned',           schedule: 'Open', capacity: 35 },
-    { bldg: 'Hangar',          room: 'Hangar 004', floor: 1, status: 'occupied',  occupant: 'Prof. De Vega (UAV101)', schedule: '01:00 PM – 04:00 PM', capacity: 35 },
-    { bldg: 'Hangar',          room: 'Hangar 005', floor: 1, status: 'vacant',    occupant: 'Unassigned',           schedule: 'Open', capacity: 35 },
-    { bldg: 'Hangar',          room: 'Hangar 006', floor: 1, status: 'maintenance', occupant: 'Facility Maintenance', schedule: 'All Day', capacity: 35 }
+    { bldg: 'Pancho Building', roomCode: 'PANCHO 101', room: '101', floor: 1, status: 'vacant',      occupant: 'Unassigned',           schedule: 'Open', capacity: 45 },
+    { bldg: 'Pancho Building', roomCode: 'PANCHO 103', room: '103', floor: 1, status: 'occupied',    occupant: 'Dr. Reyes (BUS301)',    schedule: '08:00 AM – 11:00 AM', capacity: 45 },
+    { bldg: 'Pancho Building', roomCode: 'PANCHO 105', room: '105', floor: 1, status: 'vacant',      occupant: 'Unassigned',           schedule: 'Open', capacity: 45 },
+    { bldg: 'Pancho Building', roomCode: 'PANCHO SCILAB', room: 'Science Laboratory', floor: 1, status: 'occupied', occupant: 'Dr. Lim (BIO102)', schedule: '01:30 PM – 03:30 PM', capacity: 40 },
+    { bldg: 'Pancho Building', roomCode: 'PANCHO LEC', room: 'Lecture Room',       floor: 1, status: 'occupied', occupant: 'Prof. Gomez (ENG101)', schedule: '09:00 AM – 12:00 PM', capacity: 60 },
+    { bldg: 'Pancho Building', roomCode: 'PANCHO MULTIMEDIA', room: 'Multimedia Room',    floor: 1, status: 'occupied', occupant: 'Prof. Santos (CS101)', schedule: '02:00 PM – 04:00 PM', capacity: 50 },
+    { bldg: 'CBA Building',    roomCode: 'CBA 101', room: 'CBA 101', floor: 1,  status: 'vacant',      occupant: 'Unassigned',           schedule: 'Open', capacity: 45 },
+    { bldg: 'CBA Building',    roomCode: 'CBA 102', room: 'CBA 102', floor: 1,  status: 'occupied',    occupant: 'Prof. Santos (CS101)', schedule: '08:30 AM – 10:00 AM', capacity: 50 },
+    { bldg: 'CBA Building',    roomCode: 'CBA 103', room: 'CBA 103', floor: 1,  status: 'vacant',      occupant: 'Unassigned',           schedule: 'Open', capacity: 45 },
+    { bldg: 'CBA Building',    roomCode: 'CBA 202', room: 'CBA 202', floor: 2,  status: 'vacant',      occupant: 'Unassigned',           schedule: 'Open', capacity: 45 },
+    { bldg: 'Hangar',          roomCode: 'H 001', room: 'Hangar 001', floor: 1, status: 'occupied',  occupant: 'Engr. Cruz (AERO202)', schedule: '08:00 AM – 12:00 PM', capacity: 35 },
+    { bldg: 'Hangar',          roomCode: 'H 002', room: 'Hangar 002', floor: 1, status: 'vacant',    occupant: 'Unassigned',           schedule: 'Open', capacity: 35 },
+    { bldg: 'Hangar',          roomCode: 'H 003', room: 'Hangar 003', floor: 1, status: 'vacant',    occupant: 'Unassigned',           schedule: 'Open', capacity: 35 },
+    { bldg: 'Hangar',          roomCode: 'H 004', room: 'Hangar 004', floor: 1, status: 'occupied',  occupant: 'Prof. De Vega (UAV101)', schedule: '01:00 PM – 04:00 PM', capacity: 35 },
+    { bldg: 'Hangar',          roomCode: 'H 005', room: 'Hangar 005', floor: 1, status: 'vacant',    occupant: 'Unassigned',           schedule: 'Open', capacity: 35 },
+    { bldg: 'Hangar',          roomCode: 'H 006', room: 'Hangar 006', floor: 1, status: 'maintenance', occupant: 'Facility Maintenance', schedule: 'All Day', capacity: 35 }
   ];
 
   let facultyProfile = JSON.parse(localStorage.getItem('farms_faculty_profile')) || DEFAULT_PROFILE;

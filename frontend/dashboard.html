@@ -1135,7 +1135,7 @@
                     <table class="modular-table">
                       <thead>
                         <tr>
-                          <th>Room</th>
+                          <th>Room Code &amp; Name</th>
                           <th>Building &amp; Level</th>
                           <th>Status</th>
                           <th>Capacity</th>
@@ -1671,10 +1671,17 @@
         <form id="roomAssignmentForm">
           <div class="form-grid-two">
             <div class="form-row">
-              <label>Room Code / Name</label>
-              <input type="text" id="modalRoomName" class="form-input" required>
+              <label>Room Code</label>
+              <input type="text" id="modalRoomCode" class="form-input" placeholder="e.g. PANCHO 101, CBA 101, H 001" required>
             </div>
 
+            <div class="form-row">
+              <label>Room Name / Number</label>
+              <input type="text" id="modalRoomName" class="form-input" placeholder="e.g. 101, CBA 101, Hangar 001" required>
+            </div>
+          </div>
+
+          <div class="form-grid-two">
             <div class="form-row">
               <label>Building Campus</label>
               <select id="modalBldgSelect" class="form-input">
@@ -1683,18 +1690,16 @@
                 <option value="Hangar">Hangar Complex</option>
               </select>
             </div>
-          </div>
 
-          <div class="form-grid-two">
             <div class="form-row">
               <label>Floor Level</label>
               <input type="number" id="modalFloorNum" class="form-input" min="1" max="4" value="1">
             </div>
+          </div>
 
-            <div class="form-row">
-              <label>Facility Designation</label>
-              <input type="text" id="modalRoomType" class="form-input" placeholder="e.g. Lecture Hall, Computer Lab">
-            </div>
+          <div class="form-row">
+            <label>Facility Designation / Type</label>
+            <input type="text" id="modalRoomType" class="form-input" placeholder="e.g. Classroom, Lecture Hall, Computer Lab">
           </div>
 
           <div class="form-grid-two">
