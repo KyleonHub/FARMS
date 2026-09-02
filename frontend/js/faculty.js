@@ -297,6 +297,7 @@ document.addEventListener('DOMContentLoaded', () => {
   renderRooms();
 
   // ────────────────────────────────────────────────
+  // ────────────────────────────────────────────────
   // 8. CAMPUS MAP (SVG)
   // ────────────────────────────────────────────────
   function renderCampusMap() {
@@ -304,30 +305,30 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!cont) return;
     cont.innerHTML = `
       <div style="padding:20px;">
-        <p style="font-size:0.8rem; font-weight:700; color:#94a3b8; margin-bottom:12px;">Click a building to inspect floors &amp; rooms.</p>
-        <svg viewBox="0 0 1000 600" width="100%" style="max-height:400px;">
+        <p style="font-size:0.8rem; font-weight:800; color:var(--text-sub); margin-bottom:12px; text-transform:uppercase; letter-spacing:0.5px;">Click a building to inspect rooms</p>
+        <svg viewBox="0 0 1000 600" width="100%" style="max-height:400px; filter: drop-shadow(4px 4px 0px #000000);">
           <rect width="1000" height="600" fill="transparent"/>
-          <path d="M 0 300 Q 500 280 1000 300" stroke="#cbd5e1" stroke-width="32" fill="none"/>
+          <path d="M 0 300 Q 500 280 1000 300" stroke="#475569" stroke-width="24" stroke-dasharray="16,10" fill="none"/>
           <g class="fac-campus-bldg" data-bldg="Pancho Building" style="cursor:pointer;" transform="translate(60, 60)">
-            <rect width="400" height="180" rx="12" fill="#047857" stroke="#065f46" stroke-width="3"/>
-            <text x="200" y="85" font-family="Plus Jakarta Sans,system-ui" font-weight="900" font-size="22" fill="#fff" text-anchor="middle">PANCHO BUILDING</text>
-            <text x="200" y="115" font-family="Plus Jakarta Sans,system-ui" font-weight="700" font-size="13" fill="#a7f3d0" text-anchor="middle">2 Floors · 50 Classrooms &amp; Labs</text>
-            <rect x="140" y="130" width="120" height="26" rx="13" fill="rgba(0,0,0,.25)"/>
-            <text x="200" y="148" font-family="Plus Jakarta Sans,system-ui" font-weight="800" font-size="11" fill="#facc15" text-anchor="middle">Click to Inspect</text>
+            <rect width="400" height="180" rx="14" fill="#047857" stroke="#000000" stroke-width="3.5"/>
+            <text x="200" y="80" font-family="Plus Jakarta Sans,system-ui" font-weight="900" font-size="22" fill="#ffffff" text-anchor="middle">PANCHO BUILDING</text>
+            <text x="200" y="110" font-family="Plus Jakarta Sans,system-ui" font-weight="800" font-size="13" fill="#a7f3d0" text-anchor="middle">2 Floors · 50 Classrooms &amp; Labs</text>
+            <rect x="130" y="128" width="140" height="30" rx="8" fill="#ccff00" stroke="#000000" stroke-width="2"/>
+            <text x="200" y="148" font-family="Plus Jakarta Sans,system-ui" font-weight="900" font-size="12" fill="#000000" text-anchor="middle">INSPECT BUILDING</text>
           </g>
           <g class="fac-campus-bldg" data-bldg="CBA Building" style="cursor:pointer;" transform="translate(560, 60)">
-            <rect width="380" height="180" rx="12" fill="#1d4ed8" stroke="#1e40af" stroke-width="3"/>
-            <text x="190" y="85" font-family="Plus Jakarta Sans,system-ui" font-weight="900" font-size="22" fill="#fff" text-anchor="middle">CBA BUILDING</text>
-            <text x="190" y="115" font-family="Plus Jakarta Sans,system-ui" font-weight="700" font-size="13" fill="#bfdbfe" text-anchor="middle">4 Storeys · Business &amp; Computing</text>
-            <rect x="130" y="130" width="120" height="26" rx="13" fill="rgba(0,0,0,.25)"/>
-            <text x="190" y="148" font-family="Plus Jakarta Sans,system-ui" font-weight="800" font-size="11" fill="#facc15" text-anchor="middle">Click to Inspect</text>
+            <rect width="380" height="180" rx="14" fill="#1d4ed8" stroke="#000000" stroke-width="3.5"/>
+            <text x="190" y="80" font-family="Plus Jakarta Sans,system-ui" font-weight="900" font-size="22" fill="#ffffff" text-anchor="middle">CBA BUILDING</text>
+            <text x="190" y="110" font-family="Plus Jakarta Sans,system-ui" font-weight="800" font-size="13" fill="#bfdbfe" text-anchor="middle">4 Storeys · Business &amp; Computing</text>
+            <rect x="120" y="128" width="140" height="30" rx="8" fill="#ccff00" stroke="#000000" stroke-width="2"/>
+            <text x="190" y="148" font-family="Plus Jakarta Sans,system-ui" font-weight="900" font-size="12" fill="#000000" text-anchor="middle">INSPECT BUILDING</text>
           </g>
           <g class="fac-campus-bldg" data-bldg="Hangar" style="cursor:pointer;" transform="translate(200, 360)">
-            <rect width="600" height="190" rx="12" fill="#0369a1" stroke="#075985" stroke-width="3"/>
-            <text x="300" y="90" font-family="Plus Jakarta Sans,system-ui" font-weight="900" font-size="24" fill="#fff" text-anchor="middle">HANGAR AVIATION COMPLEX</text>
-            <text x="300" y="120" font-family="Plus Jakarta Sans,system-ui" font-weight="700" font-size="13" fill="#bae6fd" text-anchor="middle">1 Storey · 6 Aviation Engineering Bays</text>
-            <rect x="240" y="135" width="120" height="26" rx="13" fill="rgba(0,0,0,.25)"/>
-            <text x="300" y="153" font-family="Plus Jakarta Sans,system-ui" font-weight="800" font-size="11" fill="#facc15" text-anchor="middle">Click to Inspect</text>
+            <rect width="600" height="190" rx="14" fill="#0284c7" stroke="#000000" stroke-width="3.5"/>
+            <text x="300" y="85" font-family="Plus Jakarta Sans,system-ui" font-weight="900" font-size="24" fill="#ffffff" text-anchor="middle">HANGAR AVIATION COMPLEX</text>
+            <text x="300" y="115" font-family="Plus Jakarta Sans,system-ui" font-weight="800" font-size="13" fill="#bae6fd" text-anchor="middle">1 Storey · 6 Aviation Engineering Bays</text>
+            <rect x="230" y="132" width="140" height="30" rx="8" fill="#ccff00" stroke="#000000" stroke-width="2"/>
+            <text x="300" y="152" font-family="Plus Jakarta Sans,system-ui" font-weight="900" font-size="12" fill="#000000" text-anchor="middle">INSPECT BUILDING</text>
           </g>
         </svg>
       </div>
@@ -506,30 +507,11 @@ document.addEventListener('DOMContentLoaded', () => {
     );
     if (!grid) return;
     grid.innerHTML = '';
-    results.forEach(r => {
-      // Re-render matching cards
-      const pillClass = r.status === 'vacant' ? 'pill-vacant' : r.status === 'occupied' ? 'pill-occupied' : 'pill-maintenance';
-      const pillText  = r.status === 'vacant' ? 'Vacant' : r.status === 'occupied' ? 'Occupied' : 'Maintenance';
-      const btn = r.status === 'vacant'
-        ? `<button class="fac-rc-btn fac-rc-btn-primary">Request Room</button>`
-        : `<button class="fac-rc-btn fac-rc-btn-ghost">View Details</button>`;
-      const card = document.createElement('div');
-      card.className = `fac-room-card ${r.status}`;
-      card.innerHTML = `
-        <div class="fac-rc-head">
-          <div><div class="fac-rc-room">${r.room}</div><div class="fac-rc-bldg">${r.bldg} · Floor ${r.floor}</div></div>
-          <span class="fac-rc-pill ${pillClass}">${pillText}</span>
-        </div>
-        <div class="fac-rc-body">
-          <div class="fac-rc-info-row"><span class="fac-rc-key">Capacity</span><span class="fac-rc-val">${r.capacity} Seats</span></div>
-          <div class="fac-rc-info-row"><span class="fac-rc-key">Occupant</span><span class="fac-rc-val">${r.occupant}</span></div>
-          <div class="fac-rc-info-row"><span class="fac-rc-key">Schedule</span><span class="fac-rc-val ${r.status === 'vacant' ? 'green' : ''}">${r.schedule}</span></div>
-        </div>
-        <div class="fac-rc-foot">${btn}</div>
-      `;
-      card.querySelector('button').addEventListener('click', () => openRoomModal(r));
-      grid.appendChild(card);
-    });
+    if (results.length === 0) {
+      grid.innerHTML = `<div style="grid-column:1/-1;text-align:center;padding:40px;color:var(--text-sub);font-weight:800;">No rooms match "${e.target.value}".</div>`;
+      return;
+    }
+    results.forEach(r => grid.appendChild(makeSqBtn(r)));
   });
 
   // ────────────────────────────────────────────────
