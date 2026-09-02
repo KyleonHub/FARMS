@@ -1059,6 +1059,8 @@ body.force-mobile-view .sidebar-close-btn {
 /* ── Unified Live Capacity Hero Card in Light Mode ── */
 .kpi-card-v2.unified-capacity-hero {
   grid-column: span 2;
+  width: 75%;
+  max-width: 75%;
   background: #ffffff;
   display: flex;
   align-items: center;
@@ -1082,14 +1084,14 @@ body.force-mobile-view .sidebar-close-btn {
 }
 
 .unified-capacity-hero .kpi-v2-title {
-  font-size: 1.05rem;
+  font-size: 1.18rem;
   font-weight: 900;
   color: #000000;
-  letter-spacing: -0.3px;
+  letter-spacing: -0.4px;
 }
 
 .unified-capacity-hero .kpi-micro-tag {
-  font-size: 0.68rem;
+  font-size: 0.7rem;
   font-weight: 900;
   padding: 2.5px 9px;
   border: 1.8px solid #000000;
@@ -1100,30 +1102,30 @@ body.force-mobile-view .sidebar-close-btn {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 14px;
+  gap: 12px;
 }
 
 .kpi-v2-big-num.in-use-num {
-  font-size: 3.2rem;
+  font-size: 3.5rem;
   font-weight: 900;
   color: #15803d;
   line-height: 0.95;
-  letter-spacing: -0.04em;
+  letter-spacing: -0.05em;
   margin: 0;
 }
 
 .kpi-v2-big-num.vacant-num {
-  font-size: 3.2rem;
+  font-size: 3.5rem;
   font-weight: 900;
   color: #0284c7;
   line-height: 0.95;
-  letter-spacing: -0.04em;
+  letter-spacing: -0.05em;
   margin: 0;
 }
 
 .capacity-center-divider {
   width: 2px;
-  height: 80px;
+  height: 82px;
   background: #000000;
   opacity: 0.15;
   border-radius: 2px;
@@ -1136,7 +1138,7 @@ body.force-mobile-view .sidebar-close-btn {
   flex-direction: column;
   gap: 4px;
   flex: 1;
-  max-width: 145px;
+  max-width: 140px;
 }
 
 .bldg-stat-row {
@@ -1155,7 +1157,7 @@ body.force-mobile-view .sidebar-close-btn {
 }
 
 .bldg-stat-name {
-  width: 48px;
+  width: 44px;
   font-size: 0.74rem;
   color: #000000;
   font-weight: 900;
@@ -1170,7 +1172,7 @@ body.force-mobile-view .sidebar-close-btn {
   border-radius: 4px;
   box-shadow: 1px 1px 0px #000000;
   overflow: hidden;
-  min-width: 40px;
+  min-width: 38px;
 }
 
 .bldg-stat-fill {
@@ -1181,6 +1183,8 @@ body.force-mobile-view .sidebar-close-btn {
 .bldg-stat-fill.purple { background: #c084fc; }
 .bldg-stat-fill.cyan { background: #38bdf8; }
 .bldg-stat-fill.lime { background: #84cc16; }
+.bldg-stat-fill.rose { background: #f43f5e; }
+.bldg-stat-fill.amber { background: #f59e0b; }
 
 .bldg-stat-val {
   font-size: 0.82rem;
@@ -1195,6 +1199,10 @@ body.force-mobile-view .sidebar-close-btn {
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
+}
+
+.comic-pie-svg circle {
+  transition: stroke-dasharray 0.4s ease, stroke-dashoffset 0.4s ease;
 }
 
 /* ── Legacy Themed KPI Cards in Light Mode ── */

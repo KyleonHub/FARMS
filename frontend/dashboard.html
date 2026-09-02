@@ -266,14 +266,67 @@
                 </div>
                 <div class="capacity-metric-row">
                   <div class="kpi-v2-big-num vacant-num" id="statVacantRooms">55</div>
+                  
+                  <!-- Status Line Graphs on Vacant Side -->
+                  <div class="capacity-bldg-breakdown status-breakdown">
+                    <div class="bldg-stat-row">
+                      <span class="bldg-stat-dot" style="background:#84cc16;"></span>
+                      <span class="bldg-stat-name">Free</span>
+                      <div class="bldg-stat-track">
+                        <div class="bldg-stat-fill lime" id="barFillFree" style="width: 65%;"></div>
+                      </div>
+                      <strong class="bldg-stat-val" id="barValFree">55</strong>
+                    </div>
+                    <div class="bldg-stat-row">
+                      <span class="bldg-stat-dot" style="background:#f43f5e;"></span>
+                      <span class="bldg-stat-name">In-Use</span>
+                      <div class="bldg-stat-track">
+                        <div class="bldg-stat-fill rose" id="barFillOcc" style="width: 33%;"></div>
+                      </div>
+                      <strong class="bldg-stat-val" id="barValOcc">28</strong>
+                    </div>
+                    <div class="bldg-stat-row">
+                      <span class="bldg-stat-dot" style="background:#f59e0b;"></span>
+                      <span class="bldg-stat-name">Maint</span>
+                      <div class="bldg-stat-track">
+                        <div class="bldg-stat-fill amber" id="barFillMaint" style="width: 5%;"></div>
+                      </div>
+                      <strong class="bldg-stat-val" id="barValMaint">2</strong>
+                    </div>
+                  </div>
+
+                  <!-- Detailed Comic Pie / Donut Chart -->
                   <div class="capacity-gauge-wrap">
-                    <svg viewBox="0 0 84 84" width="76" height="76">
-                      <circle cx="42" cy="42" r="33" fill="none" stroke="#e2e8f0" stroke-width="8"/>
-                      <circle cx="42" cy="42" r="33" fill="none" stroke="#84cc16" stroke-width="8"
-                              id="vacantRingProgress" stroke-dasharray="207.3" stroke-dashoffset="72"
-                              stroke-linecap="round" transform="rotate(-90 42 42)"/>
-                      <text x="42" y="40" font-family="Plus Jakarta Sans, system-ui" font-weight="900" font-size="18" fill="#0f172a" text-anchor="middle" id="vacantGaugeNum">55</text>
-                      <text x="42" y="53" font-family="Plus Jakarta Sans, system-ui" font-weight="900" font-size="9.5" fill="#64748b" text-anchor="middle" id="vacantGaugeTotal">of 85</text>
+                    <svg viewBox="0 0 92 92" width="82" height="82" class="comic-pie-svg">
+                      <!-- Drop shadow -->
+                      <circle cx="49" cy="49" r="37" fill="#000000" opacity="0.18"/>
+                      
+                      <!-- Outer Comic Outline -->
+                      <circle cx="46" cy="46" r="37" fill="#ffffff" stroke="#000000" stroke-width="2.2"/>
+                      
+                      <!-- Base Track -->
+                      <circle cx="46" cy="46" r="28" fill="none" stroke="#f1f5f9" stroke-width="11"/>
+                      
+                      <!-- In-Use Segment (Red) -->
+                      <circle cx="46" cy="46" r="28" fill="none" stroke="#f43f5e" stroke-width="11"
+                              id="pieSegOcc" stroke-dasharray="176" stroke-dashoffset="116"
+                              stroke-linecap="butt" transform="rotate(-90 46 46)"/>
+                      
+                      <!-- Maintenance Segment (Amber) -->
+                      <circle cx="46" cy="46" r="28" fill="none" stroke="#f59e0b" stroke-width="11"
+                              id="pieSegMaint" stroke-dasharray="176" stroke-dashoffset="170"
+                              stroke-linecap="butt" transform="rotate(-90 46 46)"/>
+
+                      <!-- Free Segment (Lime) -->
+                      <circle cx="46" cy="46" r="28" fill="none" stroke="#84cc16" stroke-width="11"
+                              id="pieSegFree" stroke-dasharray="176" stroke-dashoffset="60"
+                              stroke-linecap="butt" transform="rotate(-90 46 46)"/>
+
+                      <!-- Inner Comic Hub Badge -->
+                      <circle cx="46" cy="46" r="20" fill="#ffffff" stroke="#000000" stroke-width="1.8"/>
+                      
+                      <text x="46" y="44" font-family="Plus Jakarta Sans, system-ui" font-weight="900" font-size="16" fill="#0f172a" text-anchor="middle" id="vacantGaugeNum">55</text>
+                      <text x="46" y="55" font-family="Plus Jakarta Sans, system-ui" font-weight="900" font-size="7.5" fill="#64748b" text-anchor="middle" id="vacantGaugeTotal">of 85</text>
                     </svg>
                   </div>
                 </div>

@@ -872,11 +872,10 @@ document.addEventListener('DOMContentLoaded', () => {
     if (barFillHangar) barFillHangar.style.width = `${Math.round((hOcc / maxBarVal) * 100)}%`;
     if (barFillPancho) barFillPancho.style.width = `${Math.round((pOcc / maxBarVal) * 100)}%`;
 
-    // Card 2: Vacant Rooms & Circular Ring Gauge
+    // Right Segment: Status Line Graphs & Multi-Segment Comic Pie
     const statVacantRooms = document.getElementById('statVacantRooms');
     const vacantGaugeNum = document.getElementById('vacantGaugeNum');
     const vacantGaugeTotal = document.getElementById('vacantGaugeTotal');
-    const vacantRingProgress = document.getElementById('vacantRingProgress');
     const kpiFreeRate = document.getElementById('kpiFreeRate');
 
     if (statVacantRooms) statVacantRooms.textContent = vacantRooms;
@@ -884,10 +883,44 @@ document.addEventListener('DOMContentLoaded', () => {
     if (vacantGaugeTotal) vacantGaugeTotal.textContent = `of ${totalRooms}`;
     if (kpiFreeRate) kpiFreeRate.textContent = `${vacantRooms} / ${totalRooms} Rooms Free`;
 
-    if (vacantRingProgress && totalRooms > 0) {
-      const circum = 2 * Math.PI * 33; // ~207.3
-      const offset = circum - (vacantRooms / totalRooms) * circum;
-      vacantRingProgress.style.strokeDashoffset = offset;
+    const barValFree = document.getElementById('barValFree');
+    const barValOcc = document.getElementById('barValOcc');
+    const barValMaint = document.getElementById('barValMaint');
+    const barFillFree = document.getElementById('barFillFree');
+    const barFillOcc = document.getElementById('barFillOcc');
+    const barFillMaint = document.getElementById('barFillMaint');
+
+    if (barValFree) barValFree.textContent = vacantRooms;
+    if (barValOcc) barValOcc.textContent = occupiedRooms;
+    if (barValMaint) barValMaint.textContent = maintenanceRooms;
+
+    if (totalRooms > 0) {
+      if (barFillFree) barFillFree.style.width = `${Math.round((vacantRooms / totalRooms) * 100)}%`;
+      if (barFillOcc) barFillOcc.style.width = `${Math.round((occupiedRooms / totalRooms) * 100)}%`;
+      if (barFillMaint) barFillMaint.style.width = `${Math.round((maintenanceRooms / totalRooms) * 100)}%`;
+
+      // Multi-Segment Comic Pie Calculations (Radius = 28, Circumference C = 175.93)
+      const C = 175.93;
+      const freeLen = (vacantRooms / totalRooms) * C;
+      const occLen = (occupiedRooms / totalRooms) * C;
+      const maintLen = (maintenanceRooms / totalRooms) * C;
+
+      const pieSegFree = document.getElementById('pieSegFree');
+      const pieSegOcc = document.getElementById('pieSegOcc');
+      const pieSegMaint = document.getElementById('pieSegMaint');
+
+      if (pieSegFree) {
+        pieSegFree.style.strokeDasharray = `${freeLen} ${C}`;
+        pieSegFree.style.strokeDashoffset = `0`;
+      }
+      if (pieSegOcc) {
+        pieSegOcc.style.strokeDasharray = `${occLen} ${C}`;
+        pieSegOcc.style.strokeDashoffset = `-${freeLen}`;
+      }
+      if (pieSegMaint) {
+        pieSegMaint.style.strokeDasharray = `${maintLen} ${C}`;
+        pieSegMaint.style.strokeDashoffset = `-${freeLen + occLen}`;
+      }
     }
 
     // Card 3: Pending Requests
