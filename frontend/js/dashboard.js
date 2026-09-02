@@ -331,10 +331,16 @@ document.addEventListener('DOMContentLoaded', () => {
   const modalBldgBadge = document.getElementById('modalBldgBadge');
   const modalStatusBanner = document.getElementById('modalStatusBanner');
   const modalStatusText = document.getElementById('modalStatusText');
+  const modalRoomCode = document.getElementById('modalRoomCode');
+  const modalRoomName = document.getElementById('modalRoomName');
+  const modalBldgSelect = document.getElementById('modalBldgSelect');
+  const modalFloorNum = document.getElementById('modalFloorNum');
+  const modalRoomType = document.getElementById('modalRoomType');
   const modalStatusSelect = document.getElementById('modalStatusSelect');
   const modalCapacity = document.getElementById('modalCapacity');
   const modalOccupant = document.getElementById('modalOccupant');
   const modalSchedule = document.getElementById('modalSchedule');
+  const modalEquipment = document.getElementById('modalEquipment');
   const btnReleaseRoom = document.getElementById('btnReleaseRoom');
   const roomAssignmentForm = document.getElementById('roomAssignmentForm');
 
@@ -2119,17 +2125,6 @@ document.addEventListener('DOMContentLoaded', () => {
   // ==========================================
   // 11. ROOM MODAL MANAGEMENT
   // ==========================================
-  const modalRoomCode = document.getElementById('modalRoomCode');
-  const modalRoomName = document.getElementById('modalRoomName');
-  const modalBldgSelect = document.getElementById('modalBldgSelect');
-  const modalFloorNum = document.getElementById('modalFloorNum');
-  const modalRoomType = document.getElementById('modalRoomType');
-  const modalStatusSelect = document.getElementById('modalStatusSelect');
-  const modalCapacity = document.getElementById('modalCapacity');
-  const modalOccupant = document.getElementById('modalOccupant');
-  const modalSchedule = document.getElementById('modalSchedule');
-  const modalEquipment = document.getElementById('modalEquipment');
-
   function openRoomModal(roomObj) {
     currentEditingRoom = roomObj;
     const codeDisplay = roomObj.roomCode || getOrGenerateRoomCode(roomObj);
