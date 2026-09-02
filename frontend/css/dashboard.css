@@ -1056,7 +1056,126 @@ body.force-mobile-view .sidebar-close-btn {
   box-shadow: 6px 6px 0px #000000;
 }
 
-/* ── Themed KPI Cards in Light Mode ── */
+/* ── Unified Live Capacity Hero Card in Light Mode ── */
+.kpi-card-v2.unified-capacity-hero {
+  grid-column: span 2;
+  background: #ffffff;
+  display: flex;
+  align-items: stretch;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 16px 20px;
+}
+.kpi-card-v2.unified-capacity-hero:hover {
+  box-shadow: 6px 6px 0px #000000;
+}
+
+.capacity-seg {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 6px;
+}
+
+.capacity-metric-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin: 2px 0;
+}
+
+.kpi-v2-big-num.in-use-num {
+  font-size: 2.85rem;
+  font-weight: 900;
+  color: #15803d;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  margin: 0;
+}
+
+.kpi-v2-big-num.vacant-num {
+  font-size: 2.85rem;
+  font-weight: 900;
+  color: #0284c7;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  margin: 0;
+}
+
+.capacity-center-divider {
+  width: 1.5px;
+  background: #000000;
+  opacity: 0.12;
+  border-radius: 2px;
+  margin: 2px 4px;
+}
+
+.capacity-bldg-breakdown {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 112px;
+}
+
+.bldg-stat-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.72rem;
+  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+  font-weight: 800;
+}
+
+.bldg-stat-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.bldg-stat-name {
+  width: 44px;
+  font-size: 0.68rem;
+  color: #475569;
+  font-weight: 800;
+}
+
+.bldg-stat-track {
+  flex: 1;
+  height: 6px;
+  background: #f1f5f9;
+  border: 1px solid #000000;
+  border-radius: 3px;
+  overflow: hidden;
+  min-width: 32px;
+}
+
+.bldg-stat-fill {
+  height: 100%;
+  border-radius: 2px;
+  transition: width 0.3s ease;
+}
+.bldg-stat-fill.purple { background: #a855f7; }
+.bldg-stat-fill.cyan { background: #0284c7; }
+.bldg-stat-fill.lime { background: #84cc16; }
+
+.bldg-stat-val {
+  font-size: 0.72rem;
+  font-weight: 900;
+  color: #0f172a;
+  min-width: 16px;
+  text-align: right;
+}
+
+.capacity-gauge-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ── Legacy Themed KPI Cards in Light Mode ── */
 .kpi-card-v2.card-classes-theme {
   background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
 }
@@ -4010,6 +4129,45 @@ body.force-mobile-view .sidebar-close-btn {
 [data-theme="dark"] .kpi-card-v2:hover {
   transform: translate(-2px, -2px);
   box-shadow: 5px 5px 0px #000000;
+}
+
+[data-theme="dark"] .kpi-card-v2.unified-capacity-hero {
+  background: #0f172a;
+  border-top: 4px solid #84cc16;
+}
+
+[data-theme="dark"] .unified-capacity-hero .kpi-v2-big-num.in-use-num {
+  color: #a3e635;
+}
+
+[data-theme="dark"] .unified-capacity-hero .kpi-v2-big-num.vacant-num {
+  color: #38bdf8;
+}
+
+[data-theme="dark"] .unified-capacity-hero .capacity-center-divider {
+  background: #334155;
+  opacity: 1;
+}
+
+[data-theme="dark"] .unified-capacity-hero .bldg-stat-name {
+  color: #94a3b8;
+}
+
+[data-theme="dark"] .unified-capacity-hero .bldg-stat-track {
+  background: #1e293b;
+  border-color: #334155;
+}
+
+[data-theme="dark"] .unified-capacity-hero .bldg-stat-val {
+  color: #f1f5f9;
+}
+
+[data-theme="dark"] .unified-capacity-hero .capacity-gauge-wrap svg text:first-of-type {
+  fill: #f1f5f9;
+}
+
+[data-theme="dark"] .unified-capacity-hero .capacity-gauge-wrap svg text:last-of-type {
+  fill: #94a3b8;
 }
 
 [data-theme="dark"] .kpi-card-v2.card-classes-theme {

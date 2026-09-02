@@ -212,62 +212,72 @@
           </div>
 
           <!-- KPI Metric Cards Grid (4 High-Density Maximalist Telemetry Cards) -->
+          <!-- KPI Metric Cards Grid (Neo-Brutalist Telemetry Grid) -->
           <div class="kpi-stats-grid kpi-four-cards">
             
-            <!-- Card 1: Active Classes & Campus Load -->
-            <div class="kpi-card-v2 card-classes-theme">
-              <div class="kpi-v2-main">
+            <!-- Unified Card 1 & 2: Campus Live Capacity & Room Workstation -->
+            <div class="kpi-card-v2 unified-capacity-hero">
+              <!-- Left Segment: In-Use / Active Sessions -->
+              <div class="capacity-seg in-use-seg">
                 <div class="kpi-header-row">
                   <span class="kpi-v2-title">Active Classes</span>
                   <span class="kpi-micro-tag live">● LIVE SESSIONS</span>
                 </div>
-                <div class="kpi-v2-big-num" id="statActiveClasses">22</div>
-                <div class="kpi-v2-sub green">Across 3 Buildings · <strong id="kpiOccRate" style="color:#065f46;">43% Occupancy</strong></div>
+                <div class="capacity-metric-row">
+                  <div class="kpi-v2-big-num in-use-num" id="statActiveClasses">28</div>
+                  <div class="capacity-bldg-breakdown">
+                    <div class="bldg-stat-row">
+                      <span class="bldg-stat-dot" style="background:#a855f7;"></span>
+                      <span class="bldg-stat-name">CBA</span>
+                      <div class="bldg-stat-track">
+                        <div class="bldg-stat-fill purple" id="barFillCba" style="width: 50%;"></div>
+                      </div>
+                      <strong class="bldg-stat-val" id="barValCba">4</strong>
+                    </div>
+                    <div class="bldg-stat-row">
+                      <span class="bldg-stat-dot" style="background:#0284c7;"></span>
+                      <span class="bldg-stat-name">Hangar</span>
+                      <div class="bldg-stat-track">
+                        <div class="bldg-stat-fill cyan" id="barFillHangar" style="width: 33%;"></div>
+                      </div>
+                      <strong class="bldg-stat-val" id="barValHangar">2</strong>
+                    </div>
+                    <div class="bldg-stat-row">
+                      <span class="bldg-stat-dot" style="background:#84cc16;"></span>
+                      <span class="bldg-stat-name">Pancho</span>
+                      <div class="bldg-stat-track">
+                        <div class="bldg-stat-fill lime" id="barFillPancho" style="width: 75%;"></div>
+                      </div>
+                      <strong class="bldg-stat-val" id="barValPancho">22</strong>
+                    </div>
+                  </div>
+                </div>
+                <div class="kpi-v2-sub">Across 3 Buildings · <strong id="kpiOccRate" style="color:#065f46;">33% Occupancy</strong></div>
               </div>
-              <div class="kpi-v2-widget mini-bldg-bars">
-                <div class="mini-bar-col">
-                  <span class="mini-bar-val" id="barValCba">8</span>
-                  <div class="mini-bar-track">
-                    <div class="mini-bar-fill green" id="barFillCba" style="height: 80%;"></div>
-                  </div>
-                  <span class="mini-bar-lbl">CBA</span>
-                </div>
-                <div class="mini-bar-col">
-                  <span class="mini-bar-val" id="barValHangar">7</span>
-                  <div class="mini-bar-track">
-                    <div class="mini-bar-fill green" id="barFillHangar" style="height: 70%;"></div>
-                  </div>
-                  <span class="mini-bar-lbl">Hangar</span>
-                </div>
-                <div class="mini-bar-col">
-                  <span class="mini-bar-val" id="barValPancho">7</span>
-                  <div class="mini-bar-track">
-                    <div class="mini-bar-fill amber" id="barFillPancho" style="height: 70%;"></div>
-                  </div>
-                  <span class="mini-bar-lbl">Pancho</span>
-                </div>
-              </div>
-            </div>
 
-            <!-- Card 2: Vacant Rooms & Capacity -->
-            <div class="kpi-card-v2 card-vacant-theme">
-              <div class="kpi-v2-main">
+              <!-- Center Vertical Divider -->
+              <div class="capacity-center-divider"></div>
+
+              <!-- Right Segment: Vacant / Available Rooms -->
+              <div class="capacity-seg vacant-seg">
                 <div class="kpi-header-row">
                   <span class="kpi-v2-title">Vacant Rooms</span>
                   <span class="kpi-micro-tag ready">● READY TO ASSIGN</span>
                 </div>
-                <div class="kpi-v2-big-num" id="statVacantRooms">14</div>
-                <div class="kpi-v2-sub green">Available Now · <strong id="kpiFreeRate" style="color:#065f46;">54 / 68 Rooms Free</strong></div>
-              </div>
-              <div class="kpi-v2-widget ring-gauge-widget">
-                <svg viewBox="0 0 80 80" width="76" height="76">
-                  <circle cx="40" cy="40" r="32" fill="none" stroke="#e2e8f0" stroke-width="6.5"/>
-                  <circle cx="40" cy="40" r="32" fill="none" stroke="#059669" stroke-width="6.5"
-                          id="vacantRingProgress" stroke-dasharray="201" stroke-dashoffset="144"
-                          stroke-linecap="round" transform="rotate(-90 40 40)"/>
-                  <text x="40" y="38" font-family="Plus Jakarta Sans, system-ui" font-weight="900" font-size="16" fill="#0f172a" text-anchor="middle" id="vacantGaugeNum">14</text>
-                  <text x="40" y="50" font-family="Plus Jakarta Sans, system-ui" font-weight="700" font-size="8.5" fill="#64748b" text-anchor="middle" id="vacantGaugeTotal">of 50</text>
-                </svg>
+                <div class="capacity-metric-row">
+                  <div class="kpi-v2-big-num vacant-num" id="statVacantRooms">55</div>
+                  <div class="capacity-gauge-wrap">
+                    <svg viewBox="0 0 76 76" width="68" height="68">
+                      <circle cx="38" cy="38" r="30" fill="none" stroke="#e2e8f0" stroke-width="6.5"/>
+                      <circle cx="38" cy="38" r="30" fill="none" stroke="#84cc16" stroke-width="6.5"
+                              id="vacantRingProgress" stroke-dasharray="188.5" stroke-dashoffset="66"
+                              stroke-linecap="round" transform="rotate(-90 38 38)"/>
+                      <text x="38" y="36" font-family="Plus Jakarta Sans, system-ui" font-weight="900" font-size="15" fill="#0f172a" text-anchor="middle" id="vacantGaugeNum">55</text>
+                      <text x="38" y="48" font-family="Plus Jakarta Sans, system-ui" font-weight="800" font-size="8.5" fill="#64748b" text-anchor="middle" id="vacantGaugeTotal">of 85</text>
+                    </svg>
+                  </div>
+                </div>
+                <div class="kpi-v2-sub green">Available Now · <strong id="kpiFreeRate" style="color:#065f46;">55 / 85 Rooms Free</strong></div>
               </div>
             </div>
 

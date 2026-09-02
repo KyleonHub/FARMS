@@ -868,9 +868,9 @@ document.addEventListener('DOMContentLoaded', () => {
     if (barValPancho) barValPancho.textContent = pOcc;
 
     const maxBarVal = Math.max(cOcc, hOcc, pOcc, 1);
-    if (barFillCba) barFillCba.style.height = `${Math.round((cOcc / maxBarVal) * 100)}%`;
-    if (barFillHangar) barFillHangar.style.height = `${Math.round((hOcc / maxBarVal) * 100)}%`;
-    if (barFillPancho) barFillPancho.style.height = `${Math.round((pOcc / maxBarVal) * 100)}%`;
+    if (barFillCba) barFillCba.style.width = `${Math.round((cOcc / maxBarVal) * 100)}%`;
+    if (barFillHangar) barFillHangar.style.width = `${Math.round((hOcc / maxBarVal) * 100)}%`;
+    if (barFillPancho) barFillPancho.style.width = `${Math.round((pOcc / maxBarVal) * 100)}%`;
 
     // Card 2: Vacant Rooms & Circular Ring Gauge
     const statVacantRooms = document.getElementById('statVacantRooms');
@@ -885,7 +885,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (kpiFreeRate) kpiFreeRate.textContent = `${vacantRooms} / ${totalRooms} Rooms Free`;
 
     if (vacantRingProgress && totalRooms > 0) {
-      const circum = 2 * Math.PI * 32; // ~201
+      const circum = 2 * Math.PI * 30; // ~188.5
       const offset = circum - (vacantRooms / totalRooms) * circum;
       vacantRingProgress.style.strokeDashoffset = offset;
     }
