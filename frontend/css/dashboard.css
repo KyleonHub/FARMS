@@ -6009,7 +6009,7 @@ body.force-mobile-view .dashboard-split-grid {
 .mobile-rooms-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 8px;
+  gap: 10px;
   width: 100%;
 }
 @media (max-width: 360px) {
@@ -6022,14 +6022,14 @@ body.force-mobile-view .dashboard-split-grid {
   background: #ffffff;
   border: 2px solid #000000;
   border-radius: 12px;
-  padding: 10px 12px;
+  padding: 12px;
   box-shadow: 2.5px 2.5px 0px #000000;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  height: 120px !important;
-  min-height: 120px !important;
-  max-height: 120px !important;
+  height: 124px !important;
+  min-height: 124px !important;
+  max-height: 124px !important;
   box-sizing: border-box !important;
   cursor: pointer;
   transition: all 0.15s ease;
@@ -6045,8 +6045,8 @@ body.force-mobile-view .dashboard-split-grid {
 .m-card-top {
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  gap: 6px;
+  align-items: flex-start;
+  gap: 8px;
   width: 100%;
   min-width: 0;
 }
@@ -6055,18 +6055,23 @@ body.force-mobile-view .dashboard-split-grid {
   font-weight: 900;
   color: #000000;
   letter-spacing: -0.3px;
-  white-space: nowrap;
+  line-height: 1.18;
+  white-space: normal;
+  word-break: break-word;
   overflow: hidden;
-  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
   min-width: 0;
   flex: 1 1 auto;
 }
 .m-card-badge {
-  font-size: 0.62rem;
+  font-size: 0.72rem;
   font-weight: 900;
-  padding: 2px 6px;
+  padding: 3px 8px;
   border-radius: 6px;
-  border: 1.2px solid #000000;
+  border: 2px solid #000000;
+  box-shadow: 1.5px 1.5px 0px #000000;
   text-transform: uppercase;
   white-space: nowrap;
   flex-shrink: 0;
@@ -6074,47 +6079,40 @@ body.force-mobile-view .dashboard-split-grid {
   align-items: center;
   justify-content: center;
   line-height: 1.1;
+  letter-spacing: 0.5px;
 }
 .m-card-badge.available {
-  background: #dcfce7;
-  color: #14532d;
+  background: #a3e635;
+  color: #000000;
 }
 .m-card-badge.occupied {
-  background: #fee2e2;
-  color: #991b1b;
+  background: #f43f5e;
+  color: #ffffff;
 }
 .m-card-badge.maintenance {
-  background: #fef3c7;
-  color: #92400e;
+  background: #f59e0b;
+  color: #000000;
 }
 
-.m-card-type {
-  font-size: 0.72rem;
-  font-weight: 800;
-  color: #64748b;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  line-height: 1.2;
-}
 .m-card-occupant {
-  font-size: 0.72rem;
+  font-size: 0.78rem;
   font-weight: 800;
-  color: #000000;
+  color: #0f172a;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  line-height: 1.2;
+  line-height: 1.25;
+  margin-top: auto;
+  margin-bottom: 2px;
 }
 .m-card-bottom {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-top: auto;
   padding-top: 5px;
-  border-top: 1px solid #f1f5f9;
-  font-size: 0.68rem;
-  font-weight: 700;
+  border-top: 1.5px solid #000000;
+  font-size: 0.70rem;
+  font-weight: 800;
   color: #64748b;
   width: 100%;
 }
@@ -6226,15 +6224,27 @@ body.force-mobile-view .dashboard-split-grid {
 [data-theme="dark"] .m-card-code {
   color: #ffffff !important;
 }
-[data-theme="dark"] .m-card-type {
-  color: #8392a8 !important;
-}
 [data-theme="dark"] .m-card-occupant {
-  color: #e2e8f0 !important;
+  color: #f1f5f9 !important;
 }
 [data-theme="dark"] .m-card-bottom {
-  border-top-color: #1c2b46 !important;
-  color: #8392a8 !important;
+  border-top-color: #000000 !important;
+  color: #94a3b8 !important;
+}
+[data-theme="dark"] .m-card-badge.available {
+  background: #a3e635 !important;
+  color: #000000 !important;
+  border-color: #000000 !important;
+}
+[data-theme="dark"] .m-card-badge.occupied {
+  background: #f43f5e !important;
+  color: #ffffff !important;
+  border-color: #000000 !important;
+}
+[data-theme="dark"] .m-card-badge.maintenance {
+  background: #f59e0b !important;
+  color: #000000 !important;
+  border-color: #000000 !important;
 }
 
 /* ── Mobile Topbar & Scroll Content Optimizations ── */

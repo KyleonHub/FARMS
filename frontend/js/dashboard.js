@@ -2575,7 +2575,6 @@ document.addEventListener('DOMContentLoaded', () => {
             <span class="m-card-code">${codeDisplay}</span>
             <span class="m-card-badge ${statusClass}">${statusLabel}</span>
           </div>
-          <div class="m-card-type">${r.type || 'Classroom'}${r.room && r.room !== codeDisplay ? ` · ${r.room}` : ''}</div>
           <div class="m-card-occupant">${occupantDisplay}</div>
           <div class="m-card-bottom">
             <span>Level ${r.floor}</span>
