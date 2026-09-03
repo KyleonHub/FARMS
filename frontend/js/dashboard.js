@@ -1218,14 +1218,15 @@ document.addEventListener('DOMContentLoaded', () => {
           <rect x="50" y="70" width="1180" height="255" fill="#f8fafc" stroke="#000000" stroke-width="2" rx="10"/>
 
           <!-- West Stairwell (Takes to Floor Below or Level 2) -->
-          <g class="facility-util stairs-util interactive-stairs" data-target-floor="${floor > 1 ? floor - 1 : 2}" transform="translate(70, 90)">
-            <rect width="90" height="215" fill="#ecfdf5" stroke="#000000" stroke-width="1.8" rx="7"/>
-            <line x1="0" y1="35" x2="90" y2="35" stroke="#047857" stroke-width="1.5"/>
-            <line x1="0" y1="70" x2="90" y2="70" stroke="#047857" stroke-width="1.5"/>
-            <line x1="0" y1="105" x2="90" y2="105" stroke="#047857" stroke-width="1.5"/>
-            <line x1="0" y1="140" x2="90" y2="140" stroke="#047857" stroke-width="1.5"/>
-            <line x1="0" y1="175" x2="90" y2="175" stroke="#047857" stroke-width="1.5"/>
-            <text x="45" y="198" font-family="Plus Jakarta Sans" font-weight="900" font-size="10" fill="#047857" text-anchor="middle">STAIRS W ${floor > 1 ? '▼ L' + (floor - 1) : '▲ L2'}</text>
+          <g class="facility-util stairs-util interactive-stairs" data-target-floor="${floor > 1 ? floor - 1 : 2}" transform="translate(70, 90)" title="West Stairs: Click to navigate floors">
+            <rect width="90" height="215" rx="7" class="stairs-shell"/>
+            <line x1="0" y1="30" x2="90" y2="30" stroke="#047857" stroke-width="1.5"/>
+            <line x1="0" y1="60" x2="90" y2="60" stroke="#047857" stroke-width="1.5"/>
+            <line x1="0" y1="90" x2="90" y2="90" stroke="#047857" stroke-width="1.5"/>
+            <line x1="0" y1="120" x2="90" y2="120" stroke="#047857" stroke-width="1.5"/>
+            <rect x="7" y="150" width="76" height="48" rx="5" class="stairs-plate"/>
+            <text x="45" y="170" class="stairs-label" font-size="9">STAIRS W</text>
+            <text x="45" y="186" class="stairs-label" font-size="10">${floor > 1 ? '▼ L' + (floor - 1) : '▲ L2'}</text>
           </g>
 
           <!-- Room 1 (CBA X01) -->
@@ -1247,14 +1248,15 @@ document.addEventListener('DOMContentLoaded', () => {
           </g>
 
           <!-- East Stairs & Restroom (Takes to Next Floor Up or Ground) -->
-          <g class="facility-util stairs-util interactive-stairs" data-target-floor="${floor < 4 ? floor + 1 : 1}" transform="translate(1050, 90)">
-            <rect width="80" height="215" fill="#ecfdf5" stroke="#000000" stroke-width="1.8" rx="7"/>
-            <line x1="0" y1="35" x2="80" y2="35" stroke="#047857" stroke-width="1.5"/>
-            <line x1="0" y1="70" x2="80" y2="70" stroke="#047857" stroke-width="1.5"/>
-            <line x1="0" y1="105" x2="80" y2="105" stroke="#047857" stroke-width="1.5"/>
-            <line x1="0" y1="140" x2="80" y2="140" stroke="#047857" stroke-width="1.5"/>
-            <line x1="0" y1="175" x2="80" y2="175" stroke="#047857" stroke-width="1.5"/>
-            <text x="40" y="198" font-family="Plus Jakarta Sans" font-weight="900" font-size="10" fill="#047857" text-anchor="middle">STAIRS E ${floor < 4 ? '▲ L' + (floor + 1) : '▼ L1'}</text>
+          <g class="facility-util stairs-util interactive-stairs" data-target-floor="${floor < 4 ? floor + 1 : 1}" transform="translate(1050, 90)" title="East Stairs: Click to navigate floors">
+            <rect width="80" height="215" rx="7" class="stairs-shell"/>
+            <line x1="0" y1="30" x2="80" y2="30" stroke="#047857" stroke-width="1.5"/>
+            <line x1="0" y1="60" x2="80" y2="60" stroke="#047857" stroke-width="1.5"/>
+            <line x1="0" y1="90" x2="80" y2="90" stroke="#047857" stroke-width="1.5"/>
+            <line x1="0" y1="120" x2="80" y2="120" stroke="#047857" stroke-width="1.5"/>
+            <rect x="6" y="150" width="68" height="48" rx="5" class="stairs-plate"/>
+            <text x="40" y="170" class="stairs-label" font-size="9">STAIRS E</text>
+            <text x="40" y="186" class="stairs-label" font-size="10">${floor < 4 ? '▲ L' + (floor + 1) : '▼ L1'}</text>
           </g>
 
           <g class="facility-util cr-util" transform="translate(1145, 90)">
@@ -1405,10 +1407,15 @@ document.addEventListener('DOMContentLoaded', () => {
             </g>
             
             <!-- North Stairs (Go Up to Level 2) -->
-            <g class="facility-util stairs-util interactive-stairs" data-target-floor="2" transform="translate(130, 210)">
-              <rect width="40" height="90" rx="5" fill="#ecfdf5" stroke="#000000" stroke-width="1.8"/>
-              <line x1="0" y1="15" x2="40" y2="15" stroke="#047857" stroke-width="1.5"/><line x1="0" y1="30" x2="40" y2="30" stroke="#047857" stroke-width="1.5"/><line x1="0" y1="45" x2="40" y2="45" stroke="#047857" stroke-width="1.5"/><line x1="0" y1="60" x2="40" y2="60" stroke="#047857" stroke-width="1.5"/><line x1="0" y1="75" x2="40" y2="75" stroke="#047857" stroke-width="1.5"/>
-              <text x="20" y="52" font-family="Plus Jakarta Sans" font-weight="900" font-size="8" fill="#047857" text-anchor="middle">STAIRS ▲ L2</text>
+            <g class="facility-util stairs-util interactive-stairs" data-target-floor="2" transform="translate(130, 210)" title="North Stairs: Click to go up to Level 2">
+              <rect width="40" height="90" rx="5" class="stairs-shell"/>
+              <line x1="0" y1="12" x2="40" y2="12" stroke="#047857" stroke-width="1.5"/>
+              <line x1="0" y1="21" x2="40" y2="21" stroke="#047857" stroke-width="1.5"/>
+              <line x1="0" y1="69" x2="40" y2="69" stroke="#047857" stroke-width="1.5"/>
+              <line x1="0" y1="78" x2="40" y2="78" stroke="#047857" stroke-width="1.5"/>
+              <rect x="3" y="29" width="34" height="32" rx="4" class="stairs-plate"/>
+              <text x="20" y="42" class="stairs-label" font-size="7">STAIRS</text>
+              <text x="20" y="53" class="stairs-label" font-size="7.5">▲ L2</text>
             </g>
 
             <g class="room-group ${getRoomStateClass(building, '102', 1)}" data-bldg="${building}" data-room="102" data-floor="1"><rect x="175" y="210" width="70" height="90" rx="7" class="room-rect"/><text x="210" y="260" class="room-text">102</text></g>
@@ -1425,23 +1432,31 @@ document.addEventListener('DOMContentLoaded', () => {
             <g class="room-group ${getRoomStateClass(building, '112B', 1)}" data-bldg="${building}" data-room="112B" data-floor="1"><rect x="745" y="210" width="65" height="90" rx="7" class="room-rect"/><text x="777.5" y="260" class="room-text">112B</text></g>
             
             <!-- Center Stairs (Go Up to Level 2) -->
-            <g class="facility-util stairs-util interactive-stairs" data-target-floor="2" transform="translate(815, 210)">
-              <rect width="70" height="90" rx="5" fill="#ecfdf5" stroke="#000000" stroke-width="1.8"/>
-              <line x1="0" y1="15" x2="70" y2="15" stroke="#047857" stroke-width="1.5"/><line x1="0" y1="30" x2="70" y2="30" stroke="#047857" stroke-width="1.5"/><line x1="0" y1="45" x2="70" y2="45" stroke="#047857" stroke-width="1.5"/><line x1="0" y1="60" x2="70" y2="60" stroke="#047857" stroke-width="1.5"/><line x1="0" y1="75" x2="70" y2="75" stroke="#047857" stroke-width="1.5"/>
-              <text x="35" y="52" font-family="Plus Jakarta Sans" font-weight="900" font-size="9" fill="#047857" text-anchor="middle">STAIRS C ▲ L2</text>
+            <g class="facility-util stairs-util interactive-stairs" data-target-floor="2" transform="translate(815, 210)" title="Center Stairs: Click to go up to Level 2">
+              <rect width="65" height="90" rx="5" class="stairs-shell"/>
+              <line x1="0" y1="12" x2="65" y2="12" stroke="#047857" stroke-width="1.5"/>
+              <line x1="0" y1="21" x2="65" y2="21" stroke="#047857" stroke-width="1.5"/>
+              <line x1="0" y1="69" x2="65" y2="69" stroke="#047857" stroke-width="1.5"/>
+              <line x1="0" y1="78" x2="65" y2="78" stroke="#047857" stroke-width="1.5"/>
+              <rect x="5" y="29" width="55" height="32" rx="4" class="stairs-plate"/>
+              <text x="32.5" y="42" class="stairs-label" font-size="8">STAIRS C</text>
+              <text x="32.5" y="53" class="stairs-label" font-size="7.5">▲ L2</text>
             </g>
 
-            <g class="room-group ${getRoomStateClass(building, '114', 1)}" data-bldg="${building}" data-room="114" data-floor="1"><rect x="890" y="210" width="70" height="90" rx="7" class="room-rect"/><text x="925" y="260" class="room-text">114</text></g>
+            <g class="room-group ${getRoomStateClass(building, '114', 1)}" data-bldg="${building}" data-room="114" data-floor="1"><rect x="885" y="210" width="75" height="90" rx="7" class="room-rect"/><text x="922.5" y="260" class="room-text">114</text></g>
             <g class="room-group ${getRoomStateClass(building, '116', 1)}" data-bldg="${building}" data-room="116" data-floor="1"><rect x="965" y="210" width="70" height="90" rx="7" class="room-rect"/><text x="1000" y="260" class="room-text">116</text></g>
             <g class="room-group ${getRoomStateClass(building, '118', 1)}" data-bldg="${building}" data-room="118" data-floor="1"><rect x="1040" y="210" width="70" height="90" rx="7" class="room-rect"/><text x="1075" y="260" class="room-text">118</text></g>
             <g class="room-group ${getRoomStateClass(building, '122', 1)}" data-bldg="${building}" data-room="122" data-floor="1"><rect x="1115" y="210" width="70" height="90" rx="7" class="room-rect"/><text x="1150" y="260" class="room-text">122</text></g>
             <g class="room-group ${getRoomStateClass(building, '103 (East)', 1)}" data-bldg="${building}" data-room="103 (East)" data-floor="1"><rect x="1190" y="210" width="90" height="90" rx="7" class="room-rect"/><text x="1235" y="260" class="room-text">103</text></g>
 
             <!-- East Wing Stairs (Go Up to Level 2) -->
-            <g class="facility-util stairs-util interactive-stairs" data-target-floor="2" transform="translate(1375, 160)">
-              <rect width="80" height="50" rx="5" fill="#ecfdf5" stroke="#000000" stroke-width="1.8"/>
-              <line x1="0" y1="12" x2="80" y2="12" stroke="#047857" stroke-width="1.5"/><line x1="0" y1="25" x2="80" y2="25" stroke="#047857" stroke-width="1.5"/><line x1="0" y1="38" x2="80" y2="38" stroke="#047857" stroke-width="1.5"/>
-              <text x="40" y="30" font-family="Plus Jakarta Sans" font-weight="900" font-size="9" fill="#047857" text-anchor="middle">STAIRS E ▲ L2</text>
+            <g class="facility-util stairs-util interactive-stairs" data-target-floor="2" transform="translate(1375, 155)" title="East Stairs: Click to go up to Level 2">
+              <rect width="80" height="52" rx="5" class="stairs-shell"/>
+              <line x1="0" y1="10" x2="80" y2="10" stroke="#047857" stroke-width="1.5"/>
+              <line x1="0" y1="42" x2="80" y2="42" stroke="#047857" stroke-width="1.5"/>
+              <rect x="8" y="14" width="64" height="24" rx="4" class="stairs-plate"/>
+              <text x="40" y="26" class="stairs-label" font-size="8">STAIRS E</text>
+              <text x="40" y="34" class="stairs-label" font-size="7">▲ L2</text>
             </g>
 
             <g class="room-group ${getRoomStateClass(building, 'Library', 1)}" data-bldg="${building}" data-room="Library" data-floor="1">
@@ -1530,10 +1545,15 @@ document.addEventListener('DOMContentLoaded', () => {
             <g class="room-group ${getRoomStateClass(building, '204', 2)}" data-bldg="${building}" data-room="204" data-floor="2"><rect x="105" y="210" width="20" height="90" rx="4" class="room-rect"/><text x="115" y="260" font-family="Plus Jakarta Sans" font-weight="900" font-size="8" fill="#000000" text-anchor="middle">204</text></g>
 
             <!-- North Stairs (Go Down to Level 1) -->
-            <g class="facility-util stairs-util interactive-stairs" data-target-floor="1" transform="translate(130, 210)">
-              <rect width="35" height="90" rx="5" fill="#ecfdf5" stroke="#000000" stroke-width="1.8"/>
-              <line x1="0" y1="15" x2="35" y2="15" stroke="#047857" stroke-width="1.5"/><line x1="0" y1="30" x2="35" y2="30" stroke="#047857" stroke-width="1.5"/><line x1="0" y1="45" x2="35" y2="45" stroke="#047857" stroke-width="1.5"/><line x1="0" y1="60" x2="35" y2="60" stroke="#047857" stroke-width="1.5"/><line x1="0" y1="75" x2="35" y2="75" stroke="#047857" stroke-width="1.5"/>
-              <text x="17.5" y="52" font-family="Plus Jakarta Sans" font-weight="900" font-size="7.5" fill="#047857" text-anchor="middle">STAIRS ▼ L1</text>
+            <g class="facility-util stairs-util interactive-stairs" data-target-floor="1" transform="translate(130, 210)" title="North Stairs: Click to go down to Level 1">
+              <rect width="40" height="90" rx="5" class="stairs-shell"/>
+              <line x1="0" y1="12" x2="40" y2="12" stroke="#047857" stroke-width="1.5"/>
+              <line x1="0" y1="21" x2="40" y2="21" stroke="#047857" stroke-width="1.5"/>
+              <line x1="0" y1="69" x2="40" y2="69" stroke="#047857" stroke-width="1.5"/>
+              <line x1="0" y1="78" x2="40" y2="78" stroke="#047857" stroke-width="1.5"/>
+              <rect x="3" y="29" width="34" height="32" rx="4" class="stairs-plate"/>
+              <text x="20" y="42" class="stairs-label" font-size="7">STAIRS</text>
+              <text x="20" y="53" class="stairs-label" font-size="7.5">▼ L1</text>
             </g>
 
             <g class="room-group ${getRoomStateClass(building, 'PTA Room', 2)}" data-bldg="${building}" data-room="PTA Room" data-floor="2"><rect x="170" y="210" width="35" height="42" rx="4" class="room-rect"/><text x="187.5" y="235" font-family="Plus Jakarta Sans" font-weight="900" font-size="8" fill="#000000" text-anchor="middle">PTA</text></g>
@@ -1550,10 +1570,15 @@ document.addEventListener('DOMContentLoaded', () => {
             <g class="room-group ${getRoomStateClass(building, '217', 2)}" data-bldg="${building}" data-room="217" data-floor="2"><rect x="650" y="210" width="160" height="90" rx="7" class="room-rect"/><text x="730" y="260" class="room-text">217</text></g>
 
             <!-- Center Stairs (Go Down to Level 1) -->
-            <g class="facility-util stairs-util interactive-stairs" data-target-floor="1" transform="translate(815, 210)">
-              <rect width="70" height="90" rx="5" fill="#ecfdf5" stroke="#000000" stroke-width="1.8"/>
-              <line x1="0" y1="15" x2="70" y2="15" stroke="#047857" stroke-width="1.5"/><line x1="0" y1="30" x2="70" y2="30" stroke="#047857" stroke-width="1.5"/><line x1="0" y1="45" x2="70" y2="45" stroke="#047857" stroke-width="1.5"/><line x1="0" y1="60" x2="70" y2="60" stroke="#047857" stroke-width="1.5"/><line x1="0" y1="75" x2="70" y2="75" stroke="#047857" stroke-width="1.5"/>
-              <text x="35" y="52" font-family="Plus Jakarta Sans" font-weight="900" font-size="9" fill="#047857" text-anchor="middle">STAIRS C ▼ L1</text>
+            <g class="facility-util stairs-util interactive-stairs" data-target-floor="1" transform="translate(815, 210)" title="Center Stairs: Click to go down to Level 1">
+              <rect width="65" height="90" rx="5" class="stairs-shell"/>
+              <line x1="0" y1="12" x2="65" y2="12" stroke="#047857" stroke-width="1.5"/>
+              <line x1="0" y1="21" x2="65" y2="21" stroke="#047857" stroke-width="1.5"/>
+              <line x1="0" y1="69" x2="65" y2="69" stroke="#047857" stroke-width="1.5"/>
+              <line x1="0" y1="78" x2="65" y2="78" stroke="#047857" stroke-width="1.5"/>
+              <rect x="5" y="29" width="55" height="32" rx="4" class="stairs-plate"/>
+              <text x="32.5" y="42" class="stairs-label" font-size="8">STAIRS C</text>
+              <text x="32.5" y="53" class="stairs-label" font-size="7.5">▼ L1</text>
             </g>
 
             <g class="room-group ${getRoomStateClass(building, '219', 2)}" data-bldg="${building}" data-room="219" data-floor="2"><rect x="890" y="210" width="55" height="90" rx="7" class="room-rect"/><text x="917.5" y="260" class="room-text">219</text></g>
@@ -1565,10 +1590,13 @@ document.addEventListener('DOMContentLoaded', () => {
             <g class="room-group ${getRoomStateClass(building, '229', 2)}" data-bldg="${building}" data-room="229" data-floor="2"><rect x="1310" y="210" width="55" height="90" rx="7" class="room-rect"/><text x="1337.5" y="260" class="room-text">229</text></g>
 
             <!-- East Wing Stairs (Go Down to Level 1) -->
-            <g class="facility-util stairs-util interactive-stairs" data-target-floor="1" transform="translate(1375, 160)">
-              <rect width="80" height="50" rx="5" fill="#ecfdf5" stroke="#000000" stroke-width="1.8"/>
-              <line x1="0" y1="12" x2="80" y2="12" stroke="#047857" stroke-width="1.5"/><line x1="0" y1="25" x2="80" y2="25" stroke="#047857" stroke-width="1.5"/><line x1="0" y1="38" x2="80" y2="38" stroke="#047857" stroke-width="1.5"/>
-              <text x="40" y="30" font-family="Plus Jakarta Sans" font-weight="900" font-size="8.5" fill="#047857" text-anchor="middle">STAIRS E ▼ L1</text>
+            <g class="facility-util stairs-util interactive-stairs" data-target-floor="1" transform="translate(1375, 155)" title="East Stairs: Click to go down to Level 1">
+              <rect width="80" height="52" rx="5" class="stairs-shell"/>
+              <line x1="0" y1="10" x2="80" y2="10" stroke="#047857" stroke-width="1.5"/>
+              <line x1="0" y1="42" x2="80" y2="42" stroke="#047857" stroke-width="1.5"/>
+              <rect x="8" y="14" width="64" height="24" rx="4" class="stairs-plate"/>
+              <text x="40" y="26" class="stairs-label" font-size="8">STAIRS E</text>
+              <text x="40" y="34" class="stairs-label" font-size="7">▼ L1</text>
             </g>
 
             <g class="room-group ${getRoomStateClass(building, '231', 2)}" data-bldg="${building}" data-room="231" data-floor="2"><rect x="1375" y="215" width="80" height="85" rx="7" class="room-rect"/><text x="1415" y="260" class="room-text">231</text></g>
