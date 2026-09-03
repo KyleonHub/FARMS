@@ -2595,14 +2595,25 @@ document.addEventListener('DOMContentLoaded', () => {
   // ==========================================
   // 11. ROOM MODAL MANAGEMENT
   // ==========================================
+  function updateModalStatusBanner(status, occupant) {
+    if (!modalStatusBanner || !modalStatusText) return;
+    modalStatusBanner.className = `room-status-banner ${status}`;
+    if (status === 'vacant') {
+      modalStatusText.textContent = 'Currently Available For Booking';
+    } else if (status === 'occupied') {
+      modalStatusText.textContent = occupant && occupant !== 'None' ? `In-Use · Occupied by ${occupant}` : 'In-Use · Active Facility Session';
+    } else {
+      modalStatusText.textContent = 'Under Maintenance · Service In Progress';
+    }
+  }
+
   function openRoomModal(roomObj) {
     currentEditingRoom = roomObj;
     const codeDisplay = roomObj.roomCode || getOrGenerateRoomCode(roomObj);
     modalRoomTitle.textContent = `${codeDisplay} (${roomObj.type || 'Room'})`;
     modalBldgBadge.textContent = `${roomObj.building} · Level ${roomObj.floor}`;
 
-    modalStatusBanner.className = `room-status-banner ${roomObj.status}`;
-    modalStatusText.textContent = roomObj.status === 'vacant' ? 'Currently Available' : roomObj.status === 'occupied' ? `Occupied by ${roomObj.occupant}` : 'Under Maintenance';
+    updateModalStatusBanner(roomObj.status, roomObj.occupant);
     
     if (modalRoomCode) modalRoomCode.value = codeDisplay;
     if (modalRoomName) modalRoomName.value = roomObj.room || '';
@@ -2614,6 +2625,16 @@ document.addEventListener('DOMContentLoaded', () => {
     if (modalOccupant) modalOccupant.value = roomObj.occupant !== 'None' ? roomObj.occupant : '';
     if (modalSchedule) modalSchedule.value = roomObj.schedule !== '--' ? roomObj.schedule : '';
     if (modalEquipment) modalEquipment.value = roomObj.equipment || '';
+
+    if (btnReleaseRoom) {
+      if (roomObj.status === 'occupied') {
+        btnReleaseRoom.textContent = 'Release Room';
+        btnReleaseRoom.classList.remove('is-cancel');
+      } else {
+        btnReleaseRoom.textContent = 'Cancel';
+        btnReleaseRoom.classList.add('is-cancel');
+      }
+    }
 
     roomModalBackdrop.classList.remove('hidden');
   }
@@ -2671,6 +2692,7 @@ document.addEventListener('DOMContentLoaded', () => {
       saveState();
       renderListView();
       renderMatrixView();
+      if (typeof renderStandaloneMatrix === 'function') renderStandaloneMatrix();
       renderTimelineLogs();
 
       if (activeBuilding) {
@@ -2682,9 +2704,38 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  if (modalStatusSelect) {
+    modalStatusSelect.addEventListener('change', () => {
+      const selectedStatus = modalStatusSelect.value;
+      const occ = modalOccupant ? modalOccupant.value.trim() : '';
+      updateModalStatusBanner(selectedStatus, occ);
+      if (btnReleaseRoom) {
+        if (selectedStatus === 'occupied') {
+          btnReleaseRoom.textContent = 'Release Room';
+          btnReleaseRoom.classList.remove('is-cancel');
+        } else {
+          btnReleaseRoom.textContent = 'Cancel';
+          btnReleaseRoom.classList.add('is-cancel');
+        }
+      }
+    });
+  }
+
+  if (modalOccupant) {
+    modalOccupant.addEventListener('input', () => {
+      if (modalStatusSelect && modalStatusSelect.value === 'occupied') {
+        updateModalStatusBanner('occupied', modalOccupant.value.trim());
+      }
+    });
+  }
+
   if (btnReleaseRoom) {
     btnReleaseRoom.addEventListener('click', () => {
       if (!currentEditingRoom) return;
+      if (btnReleaseRoom.classList.contains('is-cancel')) {
+        closeRoomModal();
+        return;
+      }
       currentEditingRoom.status = 'vacant';
       currentEditingRoom.occupant = 'None';
       currentEditingRoom.schedule = '--';
@@ -2703,6 +2754,7 @@ document.addEventListener('DOMContentLoaded', () => {
       saveState();
       renderListView();
       renderMatrixView();
+      if (typeof renderStandaloneMatrix === 'function') renderStandaloneMatrix();
       renderTimelineLogs();
 
       if (activeBuilding) {

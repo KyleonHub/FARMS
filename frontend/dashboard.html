@@ -1692,81 +1692,97 @@
   <div id="roomModalBackdrop" class="modal-backdrop hidden">
     <div class="modal-card modular-modal">
       <div class="modal-header">
-        <div>
+        <div class="modal-title-group">
           <h3 id="modalRoomTitle">Edit: Room 103</h3>
           <span class="modal-bldg-badge" id="modalBldgBadge">Pancho Building · Level 1</span>
         </div>
-        <button class="modal-close" id="modalCloseBtn">✕</button>
+        <button class="modal-close" id="modalCloseBtn" type="button" title="Close dialog">✕</button>
       </div>
 
       <div class="modal-body">
         <div class="room-status-banner vacant" id="modalStatusBanner">
+          <span class="status-indicator-dot"></span>
           <span id="modalStatusText">Currently Available</span>
         </div>
 
         <form id="roomAssignmentForm">
-          <div class="form-grid-two">
-            <div class="form-row">
-              <label>Room Code</label>
-              <input type="text" id="modalRoomCode" class="form-input" placeholder="e.g. PANCHO 101, CBA 101, H 001" required>
+          <!-- Card 1: Facility Identification & Configuration -->
+          <div class="form-section-card">
+            <div class="form-section-header">
+              <span class="form-section-title">Facility Configuration</span>
+            </div>
+            <div class="form-grid-two">
+              <div class="form-row">
+                <label for="modalRoomCode">Room Code</label>
+                <input type="text" id="modalRoomCode" class="form-input" placeholder="e.g. PANCHO 101, CBA 101" required>
+              </div>
+
+              <div class="form-row">
+                <label for="modalRoomName">Room Name / Number</label>
+                <input type="text" id="modalRoomName" class="form-input" placeholder="e.g. 101, Science Lab" required>
+              </div>
             </div>
 
-            <div class="form-row">
-              <label>Room Name / Number</label>
-              <input type="text" id="modalRoomName" class="form-input" placeholder="e.g. 101, CBA 101, Hangar 001" required>
+            <div class="form-grid-two">
+              <div class="form-row">
+                <label for="modalBldgSelect">Building Campus</label>
+                <select id="modalBldgSelect" class="form-input form-select">
+                  <option value="Pancho Building">Pancho Building</option>
+                  <option value="CBA Building">CBA Building</option>
+                  <option value="Hangar">Hangar Complex</option>
+                </select>
+              </div>
+
+              <div class="form-row">
+                <label for="modalFloorNum">Floor Level</label>
+                <input type="number" id="modalFloorNum" class="form-input" min="1" max="4" value="1">
+              </div>
+            </div>
+
+            <div class="form-grid-two">
+              <div class="form-row">
+                <label for="modalRoomType">Facility Type</label>
+                <input type="text" id="modalRoomType" class="form-input" placeholder="e.g. Classroom, Computer Lab">
+              </div>
+
+              <div class="form-row">
+                <label for="modalCapacity">Seating Capacity</label>
+                <input type="number" id="modalCapacity" class="form-input" value="45" min="1">
+              </div>
             </div>
           </div>
 
-          <div class="form-grid-two">
-            <div class="form-row">
-              <label>Building Campus</label>
-              <select id="modalBldgSelect" class="form-input">
-                <option value="Pancho Building">Pancho Building</option>
-                <option value="CBA Building">CBA Building</option>
-                <option value="Hangar">Hangar Complex</option>
-              </select>
+          <!-- Card 2: Operational Status & Schedule Assignment -->
+          <div class="form-section-card">
+            <div class="form-section-header">
+              <span class="form-section-title">Status &amp; Schedule Assignment</span>
             </div>
 
             <div class="form-row">
-              <label>Floor Level</label>
-              <input type="number" id="modalFloorNum" class="form-input" min="1" max="4" value="1">
-            </div>
-          </div>
-
-          <div class="form-row">
-            <label>Facility Designation / Type</label>
-            <input type="text" id="modalRoomType" class="form-input" placeholder="e.g. Classroom, Lecture Hall, Computer Lab">
-          </div>
-
-          <div class="form-grid-two">
-            <div class="form-row">
-              <label>Current Status</label>
-              <select id="modalStatusSelect" class="form-input">
+              <label for="modalStatusSelect">Current Operational Status</label>
+              <select id="modalStatusSelect" class="form-input form-select">
                 <option value="vacant">Available (Vacant)</option>
                 <option value="occupied">In-Use (Occupied)</option>
                 <option value="maintenance">Under Maintenance</option>
               </select>
             </div>
 
-            <div class="form-row">
-              <label>Seating Capacity</label>
-              <input type="number" id="modalCapacity" class="form-input" value="45">
+            <div class="form-grid-two">
+              <div class="form-row">
+                <label for="modalOccupant">Assigned Faculty / Subject</label>
+                <input type="text" id="modalOccupant" class="form-input" placeholder="e.g. Prof. Santos (CS101)">
+              </div>
+
+              <div class="form-row">
+                <label for="modalSchedule">Schedule / Time Slot</label>
+                <input type="text" id="modalSchedule" class="form-input" placeholder="e.g. 08:00 AM - 10:00 AM">
+              </div>
             </div>
-          </div>
 
-          <div class="form-row">
-            <label>Assigned Faculty / Subject</label>
-            <input type="text" id="modalOccupant" class="form-input" placeholder="e.g. Prof. Santos (CS101)">
-          </div>
-
-          <div class="form-row">
-            <label>Schedule / Time Slot</label>
-            <input type="text" id="modalSchedule" class="form-input" placeholder="e.g. 08:00 AM - 10:00 AM">
-          </div>
-
-          <div class="form-row">
-            <label>Installed Hardware &amp; Equipment</label>
-            <input type="text" id="modalEquipment" class="form-input" placeholder="e.g. Projector, Sound System, Smart Board">
+            <div class="form-row">
+              <label for="modalEquipment">Installed Hardware &amp; Equipment</label>
+              <input type="text" id="modalEquipment" class="form-input" placeholder="e.g. Projector, Sound System, Smart Board">
+            </div>
           </div>
 
           <div class="modal-actions">
@@ -1776,6 +1792,7 @@
         </form>
       </div>
     </div>
+  </div>
   <!-- ── Mobile Room Inspector Bottom Sheet Drawer ── -->
   <div class="mobile-bottom-sheet-backdrop hidden" id="mobileSheetBackdrop"></div>
   <div class="mobile-bottom-sheet hidden" id="mobileRoomSheet">
