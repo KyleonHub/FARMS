@@ -5146,30 +5146,54 @@ body.force-mobile-view .sidebar-close-btn {
   font-weight: 500;
 }
 
-/* Locked vs Target Inputs */
-.form-input-locked {
-  background: #f1f5f9 !important;
-  color: #64748b !important;
-  cursor: not-allowed !important;
-  border-color: #94a3b8 !important;
-  box-shadow: none !important;
-}
-
+/* Inputs in View Mode vs Edit Mode */
+.form-input-locked,
 .form-input-target {
   background: #ffffff;
+  color: #0f172a;
+  -webkit-text-fill-color: #0f172a;
+  opacity: 1;
+  border: 2px solid #000000;
+  box-shadow: 2px 2px 0px #000000;
   cursor: default;
 }
+
+/* Ensure disabled inputs and selects preserve high contrast without browser default graying */
+.form-input:disabled,
+.form-select:disabled,
+.form-input-locked:disabled,
+select.form-input:disabled {
+  background: #ffffff !important;
+  color: #0f172a !important;
+  -webkit-text-fill-color: #0f172a !important;
+  opacity: 1 !important;
+  border-color: #000000 !important;
+  box-shadow: 2px 2px 0px #000000 !important;
+  cursor: default !important;
+}
+
+/* In Edit Mode, editable target inputs become interactive */
 .is-editing-mode .form-input-target {
-  border-width: 2px;
-  border-color: #000000;
   background: #ffffff;
-  box-shadow: 2.5px 2.5px 0px #000000;
   cursor: text;
+  border-color: #000000;
+  box-shadow: 2.5px 2.5px 0px #000000;
 }
 .is-editing-mode .form-input-target:focus {
   background: #fefce8;
   box-shadow: 4px 4px 0px #000000;
   transform: translate(-1.5px, -1.5px);
+}
+
+/* In Edit Mode, locked inputs indicate fixed state without being washed out */
+.is-editing-mode .form-input-locked,
+.is-editing-mode .form-input-locked:disabled {
+  background: #f8fafc !important;
+  color: #334155 !important;
+  -webkit-text-fill-color: #334155 !important;
+  border-color: #000000 !important;
+  box-shadow: 2px 2px 0px #000000 !important;
+  cursor: not-allowed !important;
 }
 
 select.form-input,
@@ -6882,9 +6906,33 @@ select.form-input,
 }
 
 
-[data-theme="dark"] .form-input-locked {
+[data-theme="dark"] .form-input,
+[data-theme="dark"] .form-input-locked,
+[data-theme="dark"] .form-input-target {
+  background: #18181b !important;
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+  opacity: 1 !important;
+  border-color: #3f3f46 !important;
+  box-shadow: 2px 2px 0px #000000 !important;
+}
+
+[data-theme="dark"] .form-input:disabled,
+[data-theme="dark"] .form-select:disabled,
+[data-theme="dark"] .form-input-locked:disabled {
+  background: #18181b !important;
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+  opacity: 1 !important;
+  border-color: #3f3f46 !important;
+  box-shadow: 2px 2px 0px #000000 !important;
+}
+
+[data-theme="dark"] .is-editing-mode .form-input-locked,
+[data-theme="dark"] .is-editing-mode .form-input-locked:disabled {
   background: #202024 !important;
-  color: #71717a !important;
+  color: #d4d4d8 !important;
+  -webkit-text-fill-color: #d4d4d8 !important;
   border-color: #3f3f46 !important;
 }
 
