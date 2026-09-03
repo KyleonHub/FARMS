@@ -5427,6 +5427,8 @@ body.force-mobile-view .sidebar-close-btn {
 
 [data-theme="dark"] .pro-donut-svg circle:first-of-type {
   stroke: #3a3939;
+}
+
 [data-theme="dark"] .enhanced-pie-svg {
   filter: drop-shadow(3.5px 3.5px 0px #000000) !important;
 }
