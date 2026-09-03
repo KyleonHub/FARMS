@@ -4058,11 +4058,10 @@ body.force-mobile-view .sidebar-close-btn {
 /* Interactive Transit Stairwells */
 .stairs-util {
   cursor: pointer !important;
-  transition: transform 0.16s cubic-bezier(0.16, 1, 0.3, 1), filter 0.16s ease;
+  transition: filter 0.16s ease;
 }
 .stairs-util:hover {
-  filter: drop-shadow(0 4px 10px rgba(4, 120, 87, 0.35)) !important;
-  transform: translateY(-2px);
+  filter: drop-shadow(2.5px 2.5px 0px #000000) drop-shadow(0 4px 12px rgba(4, 120, 87, 0.45)) !important;
 }
 .stairs-util .stairs-shell {
   fill: #ecfdf5;
@@ -4083,6 +4082,7 @@ body.force-mobile-view .sidebar-close-btn {
 .stairs-util:hover .stairs-plate {
   fill: #ffffff !important;
   stroke: #064e3b !important;
+  stroke-width: 1.6px !important;
 }
 .stairs-label {
   font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
@@ -4094,7 +4094,7 @@ body.force-mobile-view .sidebar-close-btn {
   fill: #064e3b !important;
 }
 .stairs-util:active {
-  transform: translateY(1px);
+  filter: drop-shadow(1px 1px 0px #000000) !important;
 }
 
 [data-theme="dark"] .stairs-util .stairs-shell,
