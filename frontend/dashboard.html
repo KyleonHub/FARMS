@@ -1277,63 +1277,69 @@
           </div> <!-- modular-card live-status-container   -->
 
           <!-- Real-Time Authorizations & Operation Controls Bento Grid -->
-          <div class="admin-bento-grid">
-              
-              <!-- Bento Column A: Fast-Track Access Request Authorization Queue -->
-              <div class="modular-card auth-queue-card">
-                <div class="section-card-header">
-                  <div class="section-title-wrap">
-                    <span class="section-title-bar"></span>
-                    <div>
-                      <h3>Fast-Track Access Authorization</h3>
-                      <p style="font-size:0.74rem; color:var(--slate-500); margin:0;">Live queue of incoming faculty and department permit applications</p>
-                    </div>
-                  </div>
-                  <div style="display:flex; align-items:center; gap:8px;">
-                    <span class="auth-queue-counter-tag"><strong id="authQueuePendingCount">5</strong> Pending</span>
-                    <button class="header-action-btn primary" id="btnNewRequest">+ New Permit</button>
-                  </div>
+          <!-- Neo-Brutalist Construction & Innovation Hub -->
+          <div class="modular-card construction-card">
+            <div class="construction-hazard-bar"></div>
+            <div class="construction-card-body">
+              <div class="construction-header-row">
+                <div class="construction-icon-wrap">
+                  <svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M2 22h20M7 2v20M17 2v20M2 12h20M2 7h20M2 17h20"/>
+                  </svg>
                 </div>
-                <div class="table-card-body scrollable-sub-table">
-                  <table class="modular-table auth-queue-table">
-                    <thead>
-                      <tr>
-                        <th>Requester</th>
-                        <th>Facility</th>
-                        <th>Time Window</th>
-                        <th>Purpose / Event</th>
-                        <th>Status</th>
-                        <th style="text-align:right;">Decision</th>
-                      </tr>
-                    </thead>
-                    <tbody id="accessRequestsTableBody"></tbody>
-                  </table>
+                <div class="construction-title-group">
+                  <div class="construction-status-tag">
+                    <span class="construction-dot"></span>
+                    <span>UNDER ACTIVE DEVELOPMENT</span>
+                  </div>
+                  <h3 class="construction-title">Campus Operations &amp; Intelligence Hub</h3>
+                  <p class="construction-subtitle">Advanced facility automation and telemetry systems are currently in engineering. Access Requests and Activity Logs have been transitioned to their dedicated views in the sidebar.</p>
                 </div>
               </div>
 
-              <!-- Bento Column B: Live Facility Event Stream & Quick Operations Deck -->
-              <div class="bento-right-stack">
-                
-                <!-- Card B1: Live Audit Trail & Status Ticker -->
-                <div class="modular-card live-stream-card">
-                  <div class="section-card-header">
-                    <div class="section-title-wrap">
-                      <span class="section-title-bar" style="background:#0284c7;"></span>
-                      <div>
-                        <h3>Live Audit Stream</h3>
-                        <p style="font-size:0.74rem; color:var(--slate-500); margin:0;">Real-time campus room status transitions</p>
-                      </div>
-                    </div>
-                    <span class="header-tag-pill" style="color:#0284c7; background:rgba(2,132,199,0.1);">● REALTIME</span>
+              <!-- Development Modules Grid -->
+              <div class="construction-modules-grid">
+                <div class="c-module-item">
+                  <div class="c-mod-icon-badge">
+                    <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                      <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>
+                    </svg>
                   </div>
-                  <div class="timeline-scroll-container bento-timeline">
-                    <div class="timeline-list" id="activityTimelineList"></div>
+                  <div class="c-mod-info">
+                    <h4>Automated Timetable &amp; Curriculum Sync</h4>
+                    <p>Direct integration with academic scheduling systems and automated room conflict detection.</p>
+                    <span class="c-mod-state">Planned for FARMS v2.5</span>
                   </div>
-                </div> <!-- modular-card live-stream-card -->
+                </div>
 
-              </div> <!-- bento-right-stack -->
+                <div class="c-module-item">
+                  <div class="c-mod-icon-badge">
+                    <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+                    </svg>
+                  </div>
+                  <div class="c-mod-info">
+                    <h4>Smart Climate &amp; Energy Automation</h4>
+                    <p>IoT-based automated AC and lighting controls linked to live room occupancy sensors.</p>
+                    <span class="c-mod-state">Hardware Integration Phase</span>
+                  </div>
+                </div>
 
-            </div> <!-- admin-bento-grid -->
+                <div class="c-module-item">
+                  <div class="c-mod-icon-badge">
+                    <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                      <line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/>
+                    </svg>
+                  </div>
+                  <div class="c-mod-info">
+                    <h4>Predictive Occupancy &amp; Traffic AI</h4>
+                    <p>Forecasting student congestion, high-traffic corridors, and room utilization efficiency.</p>
+                    <span class="c-mod-state">Model Training</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
 
         </section>
 
