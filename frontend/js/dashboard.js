@@ -196,6 +196,19 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!r.roomCode || /lecture room|science laboratory|multimedia room|library|sped room|unites room|pta room|scouts room/i.test(r.roomCode)) {
       r.roomCode = getOrGenerateRoomCode(r);
     }
+    if (r.declaredDuration === undefined) {
+      r.declaredDuration = r.status === 'occupied' ? 120 : 0;
+    }
+    if (r.actualOccupiedMinutes === undefined) {
+      r.actualOccupiedMinutes = r.status === 'occupied' ? 45 : 0;
+    }
+    if (!Array.isArray(r.equipmentTags)) {
+      if (typeof r.equipment === 'string' && r.equipment.trim()) {
+        r.equipmentTags = r.equipment.split(',').map(s => s.trim()).filter(Boolean);
+      } else {
+        r.equipmentTags = [];
+      }
+    }
   });
 
   let requests = JSON.parse(localStorage.getItem('farms_requests_v4')) || DEFAULT_REQUESTS;
@@ -423,6 +436,47 @@ document.addEventListener('DOMContentLoaded', () => {
   const modalEquipment = document.getElementById('modalEquipment');
   const btnReleaseRoom = document.getElementById('btnReleaseRoom');
   const roomAssignmentForm = document.getElementById('roomAssignmentForm');
+
+  const modalCardContainer = document.getElementById('modalCardContainer');
+  const modalModeBadge = document.getElementById('modalModeBadge');
+  const btnToggleEditMode = document.getElementById('btnToggleEditMode');
+  const configModeIndicator = document.getElementById('configModeIndicator');
+  const modalEquipmentTagsList = document.getElementById('modalEquipmentTagsList');
+  const equipmentCountBadge = document.getElementById('equipmentCountBadge');
+  const modalAvailableTagsPicker = document.getElementById('modalAvailableTagsPicker');
+  const pickerCatalogChips = document.getElementById('pickerCatalogChips');
+  const customTagInput = document.getElementById('customTagInput');
+  const btnAddCustomTag = document.getElementById('btnAddCustomTag');
+  const telemetryDeclaredVal = document.getElementById('telemetryDeclaredVal');
+  const telemetryDeclaredSub = document.getElementById('telemetryDeclaredSub');
+  const telemetryActualVal = document.getElementById('telemetryActualVal');
+  const telemetryActualSub = document.getElementById('telemetryActualSub');
+  const btnEditAction = document.getElementById('btnEditAction');
+  const btnSaveChanges = document.getElementById('btnSaveChanges');
+
+  let isRoomModalEditMode = false;
+  let activeModalEquipmentTags = [];
+
+  const STANDARD_EQUIPMENT_CATALOG = [
+    'Projector',
+    'Smart Board',
+    'Sound System',
+    'Whiteboard',
+    'PC Workstations',
+    'Air Conditioning',
+    'Interactive Display',
+    'Conference Setup',
+    'Diagnostic Benches',
+    'Flight Simulators',
+    'Document Camera',
+    'Audio-Visual Rack',
+    'Smart TV',
+    'Ledger Terminal',
+    'Drone Cages',
+    'Engine Test Stands',
+    'Hydraulic Lifts',
+    'Tool Depots'
+  ];
 
   const toastContainer = document.getElementById('toastContainer');
 
@@ -2607,6 +2661,152 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
+  function renderModalEquipmentTags() {
+    if (!modalEquipmentTagsList) return;
+    modalEquipmentTagsList.innerHTML = '';
+
+    if (activeModalEquipmentTags.length === 0) {
+      modalEquipmentTagsList.innerHTML = '<span class="no-tags-placeholder">No hardware or equipment tagged.</span>';
+    } else {
+      activeModalEquipmentTags.forEach((tag, idx) => {
+        const chip = document.createElement('span');
+        chip.className = `equipment-tag-chip ${isRoomModalEditMode ? 'removable' : ''}`;
+        chip.innerHTML = isRoomModalEditMode
+          ? `${tag} <span class="tag-remove-x" title="Remove ${tag}">✕</span>`
+          : tag;
+
+        if (isRoomModalEditMode) {
+          chip.addEventListener('click', () => {
+            activeModalEquipmentTags.splice(idx, 1);
+            renderModalEquipmentTags();
+            renderAvailableTagChips();
+          });
+        }
+        modalEquipmentTagsList.appendChild(chip);
+      });
+    }
+
+    if (equipmentCountBadge) {
+      equipmentCountBadge.textContent = `${activeModalEquipmentTags.length} ${activeModalEquipmentTags.length === 1 ? 'item' : 'items'}`;
+    }
+
+    if (modalEquipment) {
+      modalEquipment.value = activeModalEquipmentTags.join(', ');
+    }
+  }
+
+  function renderAvailableTagChips() {
+    if (!pickerCatalogChips) return;
+    pickerCatalogChips.innerHTML = '';
+    STANDARD_EQUIPMENT_CATALOG.forEach(tag => {
+      const isSelected = activeModalEquipmentTags.includes(tag);
+      const chip = document.createElement('button');
+      chip.type = 'button';
+      chip.className = `catalog-chip ${isSelected ? 'selected' : ''}`;
+      chip.innerHTML = isSelected ? `✓ ${tag}` : `+ ${tag}`;
+      chip.disabled = isSelected;
+      if (!isSelected) {
+        chip.addEventListener('click', () => {
+          if (!activeModalEquipmentTags.includes(tag)) {
+            activeModalEquipmentTags.push(tag);
+            renderModalEquipmentTags();
+            renderAvailableTagChips();
+          }
+        });
+      }
+      pickerCatalogChips.appendChild(chip);
+    });
+  }
+
+  if (btnAddCustomTag && customTagInput) {
+    btnAddCustomTag.addEventListener('click', () => {
+      const val = customTagInput.value.trim();
+      if (!val) return;
+      if (!activeModalEquipmentTags.includes(val)) {
+        activeModalEquipmentTags.push(val);
+        renderModalEquipmentTags();
+        renderAvailableTagChips();
+      }
+      customTagInput.value = '';
+    });
+    customTagInput.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        btnAddCustomTag.click();
+      }
+    });
+  }
+
+  function setRoomModalEditMode(enable) {
+    isRoomModalEditMode = enable;
+    if (modalCardContainer) {
+      modalCardContainer.classList.toggle('is-editing-mode', enable);
+    }
+    if (modalModeBadge) {
+      modalModeBadge.className = `mode-badge ${enable ? 'edit-mode-pill' : 'view-mode-pill'}`;
+      modalModeBadge.textContent = enable ? 'EDIT MODE' : 'VIEW MODE';
+    }
+    if (configModeIndicator) {
+      configModeIndicator.className = `section-mode-indicator ${enable ? 'is-editing' : ''}`;
+      configModeIndicator.textContent = enable ? 'Editable Properties Active' : 'Read-Only';
+    }
+    if (btnToggleEditMode) {
+      btnToggleEditMode.classList.toggle('active', enable);
+      const labelSpan = btnToggleEditMode.querySelector('.edit-btn-text');
+      const iconSpan = btnToggleEditMode.querySelector('.edit-btn-icon');
+      if (labelSpan) labelSpan.textContent = enable ? 'Cancel Edit' : 'Edit Properties';
+      if (iconSpan) iconSpan.textContent = enable ? '✕' : '✏️';
+    }
+
+    // Editable properties in Edit Mode:
+    // 1. Room Name / Number
+    // 2. Seating Capacity
+    // 3. Room Type
+    // 4. Installed Hardware & Equipment (Tags)
+    if (modalRoomName) modalRoomName.readOnly = !enable;
+    if (modalCapacity) modalCapacity.readOnly = !enable;
+    if (modalRoomType) modalRoomType.readOnly = !enable;
+
+    // Fixed / Locked properties (always read-only):
+    if (modalRoomCode) modalRoomCode.readOnly = true;
+    if (modalBldgSelect) modalBldgSelect.disabled = true;
+    if (modalFloorNum) modalFloorNum.readOnly = true;
+
+    // Occupant dependent properties (always read-only in this dialog):
+    if (modalStatusSelect) modalStatusSelect.disabled = true;
+    if (modalOccupant) modalOccupant.readOnly = true;
+    if (modalSchedule) modalSchedule.readOnly = true;
+
+    // Toggle equipment picker catalog
+    if (modalAvailableTagsPicker) {
+      modalAvailableTagsPicker.classList.toggle('hidden', !enable);
+    }
+    renderModalEquipmentTags();
+    if (enable) renderAvailableTagChips();
+
+    // Toggle action buttons in footer
+    if (enable) {
+      if (btnEditAction) btnEditAction.classList.add('hidden');
+      if (btnSaveChanges) btnSaveChanges.classList.remove('hidden');
+      if (btnReleaseRoom) {
+        btnReleaseRoom.textContent = 'Cancel Edit';
+        btnReleaseRoom.classList.add('is-cancel');
+      }
+    } else {
+      if (btnEditAction) btnEditAction.classList.remove('hidden');
+      if (btnSaveChanges) btnSaveChanges.classList.add('hidden');
+      if (btnReleaseRoom && currentEditingRoom) {
+        if (currentEditingRoom.status === 'occupied') {
+          btnReleaseRoom.textContent = 'Release Room';
+          btnReleaseRoom.classList.remove('is-cancel');
+        } else {
+          btnReleaseRoom.textContent = 'Close';
+          btnReleaseRoom.classList.add('is-cancel');
+        }
+      }
+    }
+  }
+
   function openRoomModal(roomObj) {
     currentEditingRoom = roomObj;
     const codeDisplay = roomObj.roomCode || getOrGenerateRoomCode(roomObj);
@@ -2614,7 +2814,7 @@ document.addEventListener('DOMContentLoaded', () => {
     modalBldgBadge.textContent = `${roomObj.building} · Level ${roomObj.floor}`;
 
     updateModalStatusBanner(roomObj.status, roomObj.occupant);
-    
+
     if (modalRoomCode) modalRoomCode.value = codeDisplay;
     if (modalRoomName) modalRoomName.value = roomObj.room || '';
     if (modalBldgSelect) modalBldgSelect.value = roomObj.building || 'Pancho Building';
@@ -2622,25 +2822,45 @@ document.addEventListener('DOMContentLoaded', () => {
     if (modalRoomType) modalRoomType.value = roomObj.type || 'Classroom';
     if (modalStatusSelect) modalStatusSelect.value = roomObj.status;
     if (modalCapacity) modalCapacity.value = roomObj.capacity || 45;
-    if (modalOccupant) modalOccupant.value = roomObj.occupant !== 'None' ? roomObj.occupant : '';
-    if (modalSchedule) modalSchedule.value = roomObj.schedule !== '--' ? roomObj.schedule : '';
-    if (modalEquipment) modalEquipment.value = roomObj.equipment || '';
+    if (modalOccupant) modalOccupant.value = roomObj.occupant && roomObj.occupant !== 'None' ? roomObj.occupant : 'None';
+    if (modalSchedule) modalSchedule.value = roomObj.schedule && roomObj.schedule !== '--' ? roomObj.schedule : '--';
 
-    if (btnReleaseRoom) {
-      if (roomObj.status === 'occupied') {
-        btnReleaseRoom.textContent = 'Release Room';
-        btnReleaseRoom.classList.remove('is-cancel');
-      } else {
-        btnReleaseRoom.textContent = 'Cancel';
-        btnReleaseRoom.classList.add('is-cancel');
-      }
+    // Parse equipment tags
+    if (Array.isArray(roomObj.equipmentTags)) {
+      activeModalEquipmentTags = [...roomObj.equipmentTags];
+    } else if (typeof roomObj.equipment === 'string' && roomObj.equipment.trim()) {
+      activeModalEquipmentTags = roomObj.equipment.split(',').map(s => s.trim()).filter(Boolean);
+    } else {
+      activeModalEquipmentTags = [];
     }
+
+    // Declared stay duration telemetry
+    const declMins = roomObj.declaredDuration !== undefined ? roomObj.declaredDuration : (roomObj.status === 'occupied' ? 120 : 0);
+    if (telemetryDeclaredVal) {
+      telemetryDeclaredVal.textContent = roomObj.status === 'occupied' ? `${declMins} mins` : 'None';
+    }
+    if (telemetryDeclaredSub) {
+      telemetryDeclaredSub.textContent = roomObj.status === 'occupied' ? `Declared stay (${(declMins / 60).toFixed(1)} hrs)` : 'No active reservation';
+    }
+
+    // Actual time occupied telemetry
+    const actMins = roomObj.actualOccupiedMinutes !== undefined ? roomObj.actualOccupiedMinutes : (roomObj.status === 'occupied' ? 45 : 0);
+    if (telemetryActualVal) {
+      telemetryActualVal.textContent = roomObj.status === 'occupied' ? `${actMins} mins` : '0 mins';
+    }
+    if (telemetryActualSub) {
+      telemetryActualSub.textContent = roomObj.status === 'occupied' ? 'Occupied elapsed time' : 'Facility vacant';
+    }
+
+    // Start in View Mode
+    setRoomModalEditMode(false);
 
     roomModalBackdrop.classList.remove('hidden');
   }
 
   function closeRoomModal() {
     roomModalBackdrop.classList.add('hidden');
+    setRoomModalEditMode(false);
     currentEditingRoom = null;
   }
 
@@ -2651,41 +2871,48 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  if (btnToggleEditMode) {
+    btnToggleEditMode.addEventListener('click', () => {
+      setRoomModalEditMode(!isRoomModalEditMode);
+    });
+  }
+
+  if (btnEditAction) {
+    btnEditAction.addEventListener('click', () => {
+      setRoomModalEditMode(true);
+    });
+  }
+
   if (roomAssignmentForm) {
     roomAssignmentForm.addEventListener('submit', (e) => {
       e.preventDefault();
       if (!currentEditingRoom) return;
 
-      const newRoomCode = modalRoomCode ? modalRoomCode.value.trim() : (currentEditingRoom.roomCode || getOrGenerateRoomCode(currentEditingRoom));
+      // Update strictly the 4 editable properties defined by user:
+      // - room name
+      // - seating capacity
+      // - room type
+      // - equipment (tags)
       const newRoomName = modalRoomName ? modalRoomName.value.trim() : currentEditingRoom.room;
-      const newBldg = modalBldgSelect ? modalBldgSelect.value : currentEditingRoom.building;
-      const newFloor = modalFloorNum ? parseInt(modalFloorNum.value, 10) : currentEditingRoom.floor;
-      const newType = modalRoomType ? modalRoomType.value.trim() : currentEditingRoom.type;
-      const newStatus = modalStatusSelect.value;
       const newCapacity = modalCapacity ? parseInt(modalCapacity.value, 10) : (currentEditingRoom.capacity || 45);
-      const newOccupant = modalOccupant.value.trim() || 'None';
-      const newSchedule = modalSchedule.value.trim() || '--';
-      const newEquipment = modalEquipment ? modalEquipment.value.trim() : currentEditingRoom.equipment;
+      const newType = modalRoomType ? modalRoomType.value.trim() : currentEditingRoom.type;
+      const newEquipmentTags = [...activeModalEquipmentTags];
+      const newEquipment = newEquipmentTags.join(', ');
 
-      currentEditingRoom.roomCode = newRoomCode;
       currentEditingRoom.room = newRoomName;
-      currentEditingRoom.building = newBldg;
-      currentEditingRoom.floor = newFloor;
-      currentEditingRoom.type = newType;
-      currentEditingRoom.status = newStatus;
       currentEditingRoom.capacity = newCapacity;
-      currentEditingRoom.occupant = newStatus === 'vacant' ? 'None' : newOccupant;
-      currentEditingRoom.schedule = newStatus === 'vacant' ? '--' : newSchedule;
+      currentEditingRoom.type = newType;
+      currentEditingRoom.equipmentTags = newEquipmentTags;
       currentEditingRoom.equipment = newEquipment;
 
       timelineLogs.unshift({
         id: `LOG-${Date.now()}`,
-        title: newStatus === 'vacant' ? 'Room Released' : 'Room Assigned',
+        title: 'Facility Properties Updated',
         time: 'Just now',
-        desc: `${currentEditingRoom.roomCode} (${currentEditingRoom.building}) updated to ${newStatus.toUpperCase()}${newStatus === 'occupied' ? ' - ' + newOccupant : ''}`,
-        icon: newStatus === 'vacant' ? 'release' : 'booking',
-        type: 'booking',
-        color: newStatus === 'vacant' ? 'teal' : 'green',
+        desc: `${currentEditingRoom.roomCode} (${currentEditingRoom.building}) updated: Name "${newRoomName}", Type "${newType}", Capacity ${newCapacity}, ${newEquipmentTags.length} equipment items.`,
+        icon: 'system',
+        type: 'system',
+        color: 'teal',
         side: 'right'
       });
 
@@ -2699,46 +2926,30 @@ document.addEventListener('DOMContentLoaded', () => {
         loadFloorSVG(activeBuilding, activeFloor);
       }
 
+      setRoomModalEditMode(false);
+      showToast(`Updated properties for ${currentEditingRoom.roomCode}.`);
       closeRoomModal();
-      showToast(`Updated ${currentEditingRoom.roomCode} to ${newStatus}.`);
-    });
-  }
-
-  if (modalStatusSelect) {
-    modalStatusSelect.addEventListener('change', () => {
-      const selectedStatus = modalStatusSelect.value;
-      const occ = modalOccupant ? modalOccupant.value.trim() : '';
-      updateModalStatusBanner(selectedStatus, occ);
-      if (btnReleaseRoom) {
-        if (selectedStatus === 'occupied') {
-          btnReleaseRoom.textContent = 'Release Room';
-          btnReleaseRoom.classList.remove('is-cancel');
-        } else {
-          btnReleaseRoom.textContent = 'Cancel';
-          btnReleaseRoom.classList.add('is-cancel');
-        }
-      }
-    });
-  }
-
-  if (modalOccupant) {
-    modalOccupant.addEventListener('input', () => {
-      if (modalStatusSelect && modalStatusSelect.value === 'occupied') {
-        updateModalStatusBanner('occupied', modalOccupant.value.trim());
-      }
     });
   }
 
   if (btnReleaseRoom) {
     btnReleaseRoom.addEventListener('click', () => {
       if (!currentEditingRoom) return;
-      if (btnReleaseRoom.classList.contains('is-cancel')) {
+      if (isRoomModalEditMode) {
+        // Cancel edit mode and restore values
+        setRoomModalEditMode(false);
+        openRoomModal(currentEditingRoom);
+        return;
+      }
+      if (currentEditingRoom.status === 'vacant') {
         closeRoomModal();
         return;
       }
       currentEditingRoom.status = 'vacant';
       currentEditingRoom.occupant = 'None';
       currentEditingRoom.schedule = '--';
+      currentEditingRoom.declaredDuration = 0;
+      currentEditingRoom.actualOccupiedMinutes = 0;
 
       timelineLogs.unshift({
         id: `LOG-${Date.now()}`,
