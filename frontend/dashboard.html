@@ -1693,15 +1693,12 @@
     <div class="modal-card modular-modal" id="modalCardContainer">
       <div class="modal-header">
         <div class="modal-title-group">
-          <div class="modal-header-headline">
-            <h3 id="modalRoomTitle">Edit: Room 103</h3>
-            <span class="mode-badge view-mode-pill" id="modalModeBadge">VIEW MODE</span>
-          </div>
+          <h3 id="modalRoomTitle">Edit: Room 103</h3>
           <span class="modal-bldg-badge" id="modalBldgBadge">Pancho Building · Level 1</span>
         </div>
         <div class="modal-header-actions">
           <button class="btn-toggle-edit" id="btnToggleEditMode" type="button" title="Toggle Edit Mode">
-            <span class="edit-btn-icon">✏️</span> <span class="edit-btn-text">Edit Properties</span>
+            <span class="edit-btn-text">Edit Properties</span>
           </button>
           <button class="modal-close" id="modalCloseBtn" type="button" title="Close dialog">✕</button>
         </div>
@@ -1718,23 +1715,22 @@
           <div class="form-section-card">
             <div class="form-section-header">
               <span class="form-section-title">Facility Configuration</span>
-              <span class="section-mode-indicator" id="configModeIndicator">Read-Only</span>
             </div>
             <div class="form-grid-two">
               <div class="form-row">
-                <label for="modalRoomCode">Room Code <span class="prop-tag fixed-tag">🔒 FIXED</span></label>
+                <label for="modalRoomCode">Room Code</label>
                 <input type="text" id="modalRoomCode" class="form-input form-input-locked" readonly required>
               </div>
 
               <div class="form-row">
-                <label for="modalRoomName">Room Name / Number <span class="prop-tag edit-tag">✏️ EDITABLE</span></label>
+                <label for="modalRoomName">Room Name / Number</label>
                 <input type="text" id="modalRoomName" class="form-input form-input-target" placeholder="e.g. 101, Science Lab" readonly required>
               </div>
             </div>
 
             <div class="form-grid-two">
               <div class="form-row">
-                <label for="modalBldgSelect">Building Campus <span class="prop-tag fixed-tag">🔒 FIXED</span></label>
+                <label for="modalBldgSelect">Building Campus</label>
                 <select id="modalBldgSelect" class="form-input form-select form-input-locked" disabled>
                   <option value="Pancho Building">Pancho Building</option>
                   <option value="CBA Building">CBA Building</option>
@@ -1743,19 +1739,19 @@
               </div>
 
               <div class="form-row">
-                <label for="modalFloorNum">Floor Level <span class="prop-tag fixed-tag">🔒 FIXED</span></label>
+                <label for="modalFloorNum">Floor Level</label>
                 <input type="number" id="modalFloorNum" class="form-input form-input-locked" min="1" max="4" value="1" readonly>
               </div>
             </div>
 
             <div class="form-grid-two">
               <div class="form-row">
-                <label for="modalRoomType">Facility Type <span class="prop-tag edit-tag">✏️ EDITABLE</span></label>
+                <label for="modalRoomType">Facility Type</label>
                 <input type="text" id="modalRoomType" class="form-input form-input-target" placeholder="e.g. Classroom, Computer Lab" readonly>
               </div>
 
               <div class="form-row">
-                <label for="modalCapacity">Seating Capacity <span class="prop-tag edit-tag">✏️ EDITABLE</span></label>
+                <label for="modalCapacity">Seating Capacity</label>
                 <input type="number" id="modalCapacity" class="form-input form-input-target" value="45" min="1" readonly>
               </div>
             </div>
@@ -1763,7 +1759,7 @@
             <!-- Installed Hardware & Equipment (Interactive Tag System) -->
             <div class="form-row equipment-form-row">
               <div class="equipment-label-row">
-                <label>Installed Hardware &amp; Equipment <span class="prop-tag edit-tag">✏️ EDITABLE</span></label>
+                <label>Installed Hardware &amp; Equipment</label>
                 <span class="equipment-count-badge" id="equipmentCountBadge">0 items</span>
               </div>
 
@@ -1793,11 +1789,10 @@
           <div class="form-section-card">
             <div class="form-section-header">
               <span class="form-section-title">Status &amp; Occupancy Telemetry</span>
-              <span class="section-mode-indicator occupant-indicator">Session Dependent</span>
             </div>
 
             <div class="form-row">
-              <label for="modalStatusSelect">Current Operational Status <span class="prop-tag occupant-tag">👤 OCCUPANT</span></label>
+              <label for="modalStatusSelect">Current Operational Status</label>
               <select id="modalStatusSelect" class="form-input form-select form-input-locked" disabled>
                 <option value="vacant">Available (Vacant)</option>
                 <option value="occupied">In-Use (Occupied)</option>
@@ -1807,12 +1802,12 @@
 
             <div class="form-grid-two">
               <div class="form-row">
-                <label for="modalOccupant">Assigned Faculty / Subject <span class="prop-tag occupant-tag">👤 OCCUPANT</span></label>
+                <label for="modalOccupant">Assigned Faculty / Subject</label>
                 <input type="text" id="modalOccupant" class="form-input form-input-locked" placeholder="None" readonly>
               </div>
 
               <div class="form-row">
-                <label for="modalSchedule">Schedule / Time Slot <span class="prop-tag occupant-tag">👤 OCCUPANT</span></label>
+                <label for="modalSchedule">Schedule / Time Slot</label>
                 <input type="text" id="modalSchedule" class="form-input form-input-locked" placeholder="--" readonly>
               </div>
             </div>
@@ -1820,9 +1815,8 @@
             <!-- Declared Stay & Actual Occupied Time Telemetry -->
             <div class="form-grid-two telemetry-grid-row">
               <div class="form-row">
-                <label>Declared Stay Duration <span class="prop-tag occupant-tag">👤 REQUESTER</span></label>
+                <label>Declared Stay Duration</label>
                 <div class="telemetry-pill-box" id="declaredDurationBox">
-                  <span class="telemetry-icon">⏱️</span>
                   <div class="telemetry-content">
                     <strong class="telemetry-val" id="telemetryDeclaredVal">120 mins</strong>
                     <span class="telemetry-sub" id="telemetryDeclaredSub">Requested booking window</span>
@@ -1831,9 +1825,8 @@
               </div>
 
               <div class="form-row">
-                <label>Actual Occupied Time <span class="prop-tag occupant-tag">👤 TELEMETRY</span></label>
+                <label>Actual Occupied Time</label>
                 <div class="telemetry-pill-box live-occupancy-box" id="actualTimeBox">
-                  <span class="telemetry-icon">⚡</span>
                   <div class="telemetry-content">
                     <strong class="telemetry-val" id="telemetryActualVal">45 mins</strong>
                     <span class="telemetry-sub" id="telemetryActualSub">Occupied elapsed time</span>
@@ -1845,8 +1838,8 @@
 
           <div class="modal-actions">
             <button type="button" class="btn-modal secondary" id="btnReleaseRoom">Release Room</button>
-            <button type="button" class="btn-modal primary" id="btnEditAction">✏️ Edit Properties</button>
-            <button type="submit" class="btn-modal primary hidden" id="btnSaveChanges">💾 Save Changes</button>
+            <button type="button" class="btn-modal primary" id="btnEditAction">Edit Properties</button>
+            <button type="submit" class="btn-modal primary hidden" id="btnSaveChanges">Save Changes</button>
           </div>
         </form>
       </div>

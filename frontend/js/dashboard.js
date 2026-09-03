@@ -2703,7 +2703,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const chip = document.createElement('button');
       chip.type = 'button';
       chip.className = `catalog-chip ${isSelected ? 'selected' : ''}`;
-      chip.innerHTML = isSelected ? `✓ ${tag}` : `+ ${tag}`;
+      chip.innerHTML = isSelected ? `Added: ${tag}` : `+ ${tag}`;
       chip.disabled = isSelected;
       if (!isSelected) {
         chip.addEventListener('click', () => {
@@ -2742,20 +2742,10 @@ document.addEventListener('DOMContentLoaded', () => {
     if (modalCardContainer) {
       modalCardContainer.classList.toggle('is-editing-mode', enable);
     }
-    if (modalModeBadge) {
-      modalModeBadge.className = `mode-badge ${enable ? 'edit-mode-pill' : 'view-mode-pill'}`;
-      modalModeBadge.textContent = enable ? 'EDIT MODE' : 'VIEW MODE';
-    }
-    if (configModeIndicator) {
-      configModeIndicator.className = `section-mode-indicator ${enable ? 'is-editing' : ''}`;
-      configModeIndicator.textContent = enable ? 'Editable Properties Active' : 'Read-Only';
-    }
     if (btnToggleEditMode) {
       btnToggleEditMode.classList.toggle('active', enable);
-      const labelSpan = btnToggleEditMode.querySelector('.edit-btn-text');
-      const iconSpan = btnToggleEditMode.querySelector('.edit-btn-icon');
-      if (labelSpan) labelSpan.textContent = enable ? 'Cancel Edit' : 'Edit Properties';
-      if (iconSpan) iconSpan.textContent = enable ? '✕' : '✏️';
+      const labelSpan = btnToggleEditMode.querySelector('.edit-btn-text') || btnToggleEditMode;
+      labelSpan.textContent = enable ? 'Cancel Edit' : 'Edit Properties';
     }
 
     // Editable properties in Edit Mode:
