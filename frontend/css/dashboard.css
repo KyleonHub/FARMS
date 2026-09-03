@@ -6778,12 +6778,12 @@ select.form-input,
    Campus Overview SVG Map — Dark Mode Refinements
    ══════════════════════════════════════════════════════════ */
 
-/* 1. Prop Buildings: Grayed Out Dark Blueprint Style for Clean Context & Visibility */
+/* 1. Prop Buildings: Sleek Architectural Slate Gray Blueprint for Crisp Visibility */
 [data-theme="dark"] #campusMap .static-bldg polygon:not([fill="#000000"]),
 [data-theme="dark"] #campusMap #campus-prop-pavilion polygon:not([fill="#000000"]),
 [data-theme="dark"] #campusMap #campus-prop-gym rect:not([fill="#000000"]):not([rx="23"]) {
-  fill: #222226 !important;
-  stroke: #3f3f46 !important;
+  fill: #2d3748 !important;
+  stroke: #94a3b8 !important;
   stroke-width: 2.2px !important;
 }
 
@@ -6791,30 +6791,34 @@ select.form-input,
 [data-theme="dark"] #campusMap #campus-prop-pavilion g rect,
 [data-theme="dark"] #campusMap #campus-prop-pavilion rect[fill="#f8fafc"],
 [data-theme="dark"] #campusMap #campus-prop-pavilion rect[fill="#ffffff"] {
-  fill: #1a1a1e !important;
-  stroke: #3f3f46 !important;
+  fill: #1e293b !important;
+  stroke: #64748b !important;
+  stroke-width: 1.5px !important;
 }
 
 /* Corridor / hallway in Admin Building */
 [data-theme="dark"] #campusMap #campus-prop-pavilion rect[height="30"] {
-  fill: #141416 !important;
-  stroke: #3f3f46 !important;
+  fill: #0f172a !important;
+  stroke: #64748b !important;
 }
 
 /* Interior partition lines & stair steps in Admin */
 [data-theme="dark"] #campusMap #campus-prop-pavilion line {
-  stroke: #52525b !important;
+  stroke: #94a3b8 !important;
+  stroke-width: 1.2px !important;
 }
 
 /* Gym hip roof slope lines & transverse dashed line */
 [data-theme="dark"] #campusMap #campus-prop-gym line {
-  stroke: #52525b !important;
+  stroke: #94a3b8 !important;
+  stroke-width: 1.8px !important;
 }
 
 /* Gym column pedestals */
 [data-theme="dark"] #campusMap #campus-prop-gym g rect {
-  fill: #2e2e33 !important;
-  stroke: #52525b !important;
+  fill: #475569 !important;
+  stroke: #94a3b8 !important;
+  stroke-width: 1.5px !important;
 }
 
 /* Preserve deep black drop shadows */
@@ -6826,15 +6830,17 @@ select.form-input,
 
 /* Prop Building Title Badges in Dark Mode */
 [data-theme="dark"] #campusMap .static-bldg > g rect[rx="23"] {
-  fill: #18181b !important;
-  stroke: #3f3f46 !important;
+  fill: #1e293b !important;
+  stroke: #64748b !important;
+  stroke-width: 2px !important;
 }
 [data-theme="dark"] #campusMap .static-bldg > g circle {
-  fill: #3f3f46 !important;
-  stroke: #52525b !important;
+  fill: #475569 !important;
+  stroke: #94a3b8 !important;
 }
 [data-theme="dark"] #campusMap .static-bldg text {
-  fill: #a1a1aa !important;
+  fill: #f1f5f9 !important;
+  font-weight: 900 !important;
 }
 
 /* 2. Interactive Buildings: Enhanced Respective Colors in Dark Mode */
