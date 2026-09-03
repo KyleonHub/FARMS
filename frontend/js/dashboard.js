@@ -41,6 +41,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const bldg = (r.building || r.bldg || '').toLowerCase();
     const room = (r.room || '').trim();
     if (bldg.includes('pancho')) {
+      if (room.includes('103 (East)') || r.id === 'p1-103bot') return '103E';
       const numMatch = room.match(/\d+[A-Za-z]?/);
       if (numMatch) return numMatch[0];
       if (/science|scilab/i.test(room)) return 'SciLab';
@@ -60,6 +61,29 @@ document.addEventListener('DOMContentLoaded', () => {
       if (numMatch) return `H${numMatch[0]}`;
     }
     return room.replace(/^(Pancho|CBA|Hangar)\s*/i, '') || (r.roomCode || '');
+  }
+
+  function getRoomSortKey(r) {
+    const code = getMatrixRoomDisplayCode(r) || r.room || '';
+    const numMatch = code.match(/\d+/);
+    const num = numMatch ? parseInt(numMatch[0], 10) : 999999;
+    const suffixMatch = code.match(/\d+([A-Za-z]+)/);
+    const suffix = suffixMatch ? suffixMatch[1].toUpperCase() : '';
+    return { num, suffix, code: code.toLowerCase(), isNamed: !numMatch };
+  }
+
+  function compareRoomsNatural(a, b) {
+    const keyA = getRoomSortKey(a);
+    const keyB = getRoomSortKey(b);
+
+    if (!keyA.isNamed && !keyB.isNamed) {
+      if (keyA.num !== keyB.num) return keyA.num - keyB.num;
+      if (keyA.suffix !== keyB.suffix) return keyA.suffix.localeCompare(keyB.suffix);
+      return keyA.code.localeCompare(keyB.code);
+    }
+    if (!keyA.isNamed && keyB.isNamed) return -1;
+    if (keyA.isNamed && !keyB.isNamed) return 1;
+    return keyA.code.localeCompare(keyB.code);
   }
 
   const DEFAULT_ROOMS = [
@@ -115,7 +139,7 @@ document.addEventListener('DOMContentLoaded', () => {
     { id: 'p1-116', building: 'Pancho Building', floor: 1, roomCode: 'PANCHO 116', room: '116', type: 'Classroom', status: 'vacant', occupant: 'None', schedule: '--', capacity: 45, equipment: 'Whiteboard' },
     { id: 'p1-118', building: 'Pancho Building', floor: 1, roomCode: 'PANCHO 118', room: '118', type: 'Classroom', status: 'vacant', occupant: 'None', schedule: '--', capacity: 45, equipment: 'Whiteboard' },
     { id: 'p1-122', building: 'Pancho Building', floor: 1, roomCode: 'PANCHO 122', room: '122', type: 'Classroom', status: 'occupied', occupant: 'Dr. Santos (SOC102)', schedule: '10:00 AM - 12:00 PM', capacity: 45, equipment: 'Whiteboard, Projector' },
-    { id: 'p1-103bot', building: 'Pancho Building', floor: 1, roomCode: 'PANCHO 103E', room: '103 (East)', type: 'Classroom', status: 'vacant', occupant: 'None', schedule: '--', capacity: 45, equipment: 'Whiteboard' },
+    { id: 'p1-103bot', building: 'Pancho Building', floor: 1, roomCode: 'PANCHO 103E', room: '103E', type: 'Classroom', status: 'vacant', occupant: 'None', schedule: '--', capacity: 45, equipment: 'Whiteboard' },
     { id: 'p1-library', building: 'Pancho Building', floor: 1, roomCode: 'PANCHO LIB', room: 'Library', type: 'Learning Center', status: 'vacant', occupant: 'Open Access', schedule: '08:00 AM - 06:00 PM', capacity: 120, equipment: 'Book Stacks, Wi-Fi Desks' },
     { id: 'p1-multimedia', building: 'Pancho Building', floor: 1, roomCode: 'PANCHO MULTIMEDIA', room: 'Multimedia Room', type: 'Audio-Visual Hall', status: 'occupied', occupant: 'AV Team (Forum)', schedule: '09:00 AM - 11:30 AM', capacity: 70, equipment: 'Acoustic Panels, 4K Projector' },
 
@@ -1856,6 +1880,12 @@ document.addEventListener('DOMContentLoaded', () => {
       return matchBldg && matchStatus && matchQuery;
     });
 
+    filtered.sort((a, b) => {
+      if (a.building !== b.building) return a.building.localeCompare(b.building);
+      if (a.floor !== b.floor) return a.floor - b.floor;
+      return compareRoomsNatural(a, b);
+    });
+
     // Update Directory Vitals at sidebar base
     const dirMatchedCount = document.getElementById('dirMatchedCount');
     const dirFreeCount = document.getElementById('dirFreeCount');
@@ -1949,7 +1979,7 @@ document.addEventListener('DOMContentLoaded', () => {
       // Group rooms by floor
       const floors = [...new Set(bldgRooms.map(r => r.floor))].sort((a,b) => a - b);
       floors.forEach(flr => {
-        const flrRooms = bldgRooms.filter(r => r.floor === flr);
+        const flrRooms = bldgRooms.filter(r => r.floor === flr).slice().sort(compareRoomsNatural);
         if (flrRooms.length === 0) return;
 
         const flrSection = document.createElement('div');
@@ -2152,7 +2182,7 @@ document.addEventListener('DOMContentLoaded', () => {
       floorsContainer.className = 'matrix-floors-stack';
 
       visibleFloors.forEach(flr => {
-        const flrRooms = visibleBldgRooms.filter(r => r.floor === flr);
+        const flrRooms = visibleBldgRooms.filter(r => r.floor === flr).slice().sort(compareRoomsNatural);
         if (flrRooms.length === 0) return;
 
         const flrSection = document.createElement('div');
