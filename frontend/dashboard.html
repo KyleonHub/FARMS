@@ -1642,6 +1642,9 @@
           <h3 id="modalRoomTitle">PANCHO 103</h3>
         </div>
         <div class="modal-header-actions">
+          <button class="btn-toggle-edit" id="btnToggleEditMode" type="button" title="Toggle Edit Mode">
+            <span class="edit-btn-text">Edit Mode</span>
+          </button>
           <button class="modal-close" id="modalCloseBtn" type="button" title="Close dialog">✕</button>
         </div>
       </div>
@@ -1724,7 +1727,8 @@
 
               <div class="summary-prop-slot">
                 <span class="s-prop-label">ROOM NAME / NUMBER</span>
-                <input type="text" id="modalRoomName" class="summary-prop-input" placeholder="e.g. 103" required>
+                <span class="s-prop-value bold-font view-only-prop" id="sumPropName">103</span>
+                <input type="text" id="modalRoomName" class="summary-prop-input edit-only-prop hidden" placeholder="e.g. 103" required>
               </div>
 
               <div class="summary-prop-slot">
@@ -1739,12 +1743,14 @@
 
               <div class="summary-prop-slot">
                 <span class="s-prop-label">PRIMARY FUNCTION</span>
-                <input type="text" id="modalRoomType" class="summary-prop-input" placeholder="e.g. Classroom">
+                <span class="s-prop-value view-only-prop" id="sumPropType">Classroom</span>
+                <input type="text" id="modalRoomType" class="summary-prop-input edit-only-prop hidden" placeholder="e.g. Classroom">
               </div>
 
               <div class="summary-prop-slot">
                 <span class="s-prop-label">SEATING CAPACITY</span>
-                <input type="number" id="modalCapacity" class="summary-prop-input" min="1" max="500">
+                <span class="s-prop-value view-only-prop" id="sumPropCap">45 Student Desks</span>
+                <input type="number" id="modalCapacity" class="summary-prop-input edit-only-prop hidden" min="1" max="500">
               </div>
             </div>
           </div>
@@ -1758,7 +1764,7 @@
             <div class="summary-equipment-wrap" id="modalEquipmentTagsList">
               <!-- Populated dynamically via JS -->
             </div>
-            <div class="available-tags-picker" id="modalAvailableTagsPicker" style="margin-top: 8px;">
+            <div class="available-tags-picker hidden" id="modalAvailableTagsPicker" style="margin-top: 8px;">
               <div class="picker-instructions">
                 <span>Available Hardware Catalog (Click to toggle):</span>
               </div>
@@ -1775,7 +1781,7 @@
 
         <div class="modal-actions">
           <button type="button" class="btn-modal secondary" id="btnReleaseRoom">Close</button>
-          <button type="button" class="btn-modal primary" id="btnSaveChanges">Save</button>
+          <button type="button" class="btn-modal primary hidden" id="btnSaveChanges">Save</button>
         </div>
       </div>
     </div>

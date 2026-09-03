@@ -2774,6 +2774,52 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function setRoomModalEditMode(enable) {
     isRoomModalEditMode = enable;
+
+    if (modalCardContainer) {
+      modalCardContainer.classList.toggle('is-editing-mode', enable);
+    }
+
+    if (btnToggleEditMode) {
+      btnToggleEditMode.classList.toggle('active', enable);
+      const labelSpan = btnToggleEditMode.querySelector('.edit-btn-text') || btnToggleEditMode;
+      labelSpan.textContent = enable ? 'Cancel Edit' : 'Edit Mode';
+    }
+
+    // Toggle view-only vs edit-only inputs
+    document.querySelectorAll('.view-only-prop').forEach(el => el.classList.toggle('hidden', enable));
+    document.querySelectorAll('.edit-only-prop').forEach(el => el.classList.toggle('hidden', !enable));
+
+    // Toggle hardware catalog picker
+    if (modalAvailableTagsPicker) {
+      modalAvailableTagsPicker.classList.toggle('hidden', !enable);
+    }
+
+    // Toggle Save button in footer
+    if (btnSaveChanges) {
+      btnSaveChanges.classList.toggle('hidden', !enable);
+    }
+
+    // Update left button text
+    if (btnReleaseRoom) {
+      if (enable) {
+        btnReleaseRoom.textContent = 'Cancel';
+        btnReleaseRoom.classList.add('is-cancel');
+      } else {
+        if (currentEditingRoom && currentEditingRoom.status === 'occupied') {
+          btnReleaseRoom.textContent = 'Release Room';
+          btnReleaseRoom.classList.remove('is-cancel');
+        } else {
+          btnReleaseRoom.textContent = 'Close';
+          btnReleaseRoom.classList.add('is-cancel');
+        }
+      }
+    }
+
+    renderModalEquipmentTags();
+    if (enable) {
+      renderAvailableTagChips();
+      if (modalRoomName) modalRoomName.focus();
+    }
   }
 
   function openRoomModal(roomObj) {
@@ -2861,27 +2907,15 @@ document.addEventListener('DOMContentLoaded', () => {
       sumPropDeclared.textContent = roomObj.status === 'occupied' ? `${declMins} mins (${(declMins / 60).toFixed(1)} hrs)` : 'None';
     }
 
-    renderModalEquipmentTags();
-    renderAvailableTagChips();
-
-    if (btnSaveChanges) {
-      btnSaveChanges.textContent = 'Save';
-    }
-    if (btnReleaseRoom) {
-      if (roomObj.status === 'occupied') {
-        btnReleaseRoom.textContent = 'Release Room';
-        btnReleaseRoom.classList.remove('is-cancel');
-      } else {
-        btnReleaseRoom.textContent = 'Close';
-        btnReleaseRoom.classList.add('is-cancel');
-      }
-    }
+    // Default to View Mode
+    setRoomModalEditMode(false);
 
     roomModalBackdrop.classList.remove('hidden');
   }
 
   function closeRoomModal() {
     roomModalBackdrop.classList.add('hidden');
+    setRoomModalEditMode(false);
     currentEditingRoom = null;
   }
 
@@ -2894,13 +2928,30 @@ document.addEventListener('DOMContentLoaded', () => {
 
   if (btnToggleEditMode) {
     btnToggleEditMode.addEventListener('click', () => {
-      if (modalRoomName) modalRoomName.focus();
+      if (isRoomModalEditMode) {
+        // Revert inputs
+        if (currentEditingRoom) {
+          if (modalRoomName) modalRoomName.value = currentEditingRoom.room || '';
+          if (modalRoomType) modalRoomType.value = currentEditingRoom.type || 'Classroom';
+          if (modalCapacity) modalCapacity.value = currentEditingRoom.capacity || 45;
+          if (Array.isArray(currentEditingRoom.equipmentTags)) {
+            activeModalEquipmentTags = [...currentEditingRoom.equipmentTags];
+          } else if (typeof currentEditingRoom.equipment === 'string' && currentEditingRoom.equipment.trim()) {
+            activeModalEquipmentTags = currentEditingRoom.equipment.split(',').map(s => s.trim()).filter(Boolean);
+          } else {
+            activeModalEquipmentTags = [];
+          }
+        }
+        setRoomModalEditMode(false);
+      } else {
+        setRoomModalEditMode(true);
+      }
     });
   }
 
   if (btnEditAction) {
     btnEditAction.addEventListener('click', () => {
-      if (modalRoomName) modalRoomName.focus();
+      setRoomModalEditMode(true);
     });
   }
 
@@ -2937,6 +2988,13 @@ document.addEventListener('DOMContentLoaded', () => {
       currentEditingRoom.equipmentTags = newEquipmentTags;
       currentEditingRoom.equipment = newEquipment;
 
+      // Update view-only text elements immediately
+      if (sumPropName) sumPropName.textContent = newRoomName;
+      if (sumPropType) sumPropType.textContent = newType;
+      if (sumPropCap) sumPropCap.textContent = `${newCapacity} Student Desks`;
+      if (sumCapacityVal) sumCapacityVal.textContent = newCapacity;
+      if (sumTypeVal) sumTypeVal.textContent = newType;
+
       timelineLogs.unshift({
         id: `LOG-${Date.now()}`,
         title: 'Facility Properties Updated',
@@ -2959,13 +3017,28 @@ document.addEventListener('DOMContentLoaded', () => {
       }
 
       showToast(`Saved properties for ${currentEditingRoom.roomCode}.`);
-      closeRoomModal();
+      setRoomModalEditMode(false);
     });
   }
 
   if (btnReleaseRoom) {
     btnReleaseRoom.addEventListener('click', () => {
       if (!currentEditingRoom) return;
+      if (isRoomModalEditMode) {
+        // Cancel edit mode and revert
+        if (modalRoomName) modalRoomName.value = currentEditingRoom.room || '';
+        if (modalRoomType) modalRoomType.value = currentEditingRoom.type || 'Classroom';
+        if (modalCapacity) modalCapacity.value = currentEditingRoom.capacity || 45;
+        if (Array.isArray(currentEditingRoom.equipmentTags)) {
+          activeModalEquipmentTags = [...currentEditingRoom.equipmentTags];
+        } else if (typeof currentEditingRoom.equipment === 'string' && currentEditingRoom.equipment.trim()) {
+          activeModalEquipmentTags = currentEditingRoom.equipment.split(',').map(s => s.trim()).filter(Boolean);
+        } else {
+          activeModalEquipmentTags = [];
+        }
+        setRoomModalEditMode(false);
+        return;
+      }
       if (currentEditingRoom.status === 'vacant') {
         closeRoomModal();
         return;
