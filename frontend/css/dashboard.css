@@ -3608,22 +3608,9 @@ body.force-mobile-view .sidebar-close-btn {
 .m-cell-top {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 2px;
+  justify-content: flex-end;
   width: 100%;
-}
-
-.m-cell-code {
-  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
-  font-size: 0.82rem;
-  font-weight: 900;
-  color: #000000;
-  letter-spacing: -0.3px;
-  line-height: 1;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  max-width: 52px;
+  height: 8px;
 }
 
 .m-status-dot {
@@ -3651,6 +3638,27 @@ body.force-mobile-view .sidebar-close-btn {
   flex: 1;
   min-height: 0;
   width: 100%;
+  padding: 1px 0;
+}
+
+.m-cell-code {
+  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+  font-size: 1.25rem;
+  font-weight: 900;
+  color: #000000;
+  letter-spacing: -0.5px;
+  line-height: 1;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+  display: block;
+}
+
+.m-cell-code.code-long {
+  font-size: 0.95rem;
+  letter-spacing: -0.3px;
 }
 
 .m-cell-status-text {

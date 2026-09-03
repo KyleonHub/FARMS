@@ -1968,15 +1968,16 @@ document.addEventListener('DOMContentLoaded', () => {
           const displayCode = getMatrixRoomDisplayCode(roomObj);
           const typeShort = (roomObj.type || 'Room').replace(/\s*(Hall|Laboratory|Room|Workstation)\s*/i, '').slice(0, 6);
 
+          const isLongCode = displayCode.length >= 6;
+
           cell.className = `matrix-room-cell ${statusClass}`;
           cell.setAttribute('title', `${codeDisplay} (${roomObj.type || 'Room'})\nStatus: ${statusPillText}\nCapacity: ${roomObj.capacity || 40} Seats`);
           cell.innerHTML = `
             <div class="m-cell-top">
-              <span class="m-cell-code" title="${codeDisplay}">${displayCode}</span>
               <span class="m-status-dot ${statusClass}"></span>
             </div>
             <div class="m-cell-middle">
-              <span class="m-cell-status-text ${statusClass}">${statusPillText}</span>
+              <span class="m-cell-code ${isLongCode ? 'code-long' : ''}" title="${codeDisplay}">${displayCode}</span>
             </div>
             <div class="m-cell-bottom">
               <span class="m-cell-cap">${roomObj.capacity || 40}s</span>
@@ -2192,15 +2193,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
           const typeShort = (roomObj.type || 'Room').replace(/\s*(Hall|Laboratory|Room|Workstation)\s*/i, '').slice(0, 6);
 
+          const isLongCode = displayCode.length >= 6;
+
           cell.className = `matrix-room-cell ${statusClass}`;
           cell.setAttribute('title', `${codeDisplay} (${roomObj.type || 'Room'})\nStatus: ${statusPillText}\nOccupant: ${facultyDisplay}\nCapacity: ${roomObj.capacity || 40} Seats${roomObj.schedule && roomObj.schedule !== '--' ? '\nSchedule: ' + roomObj.schedule : ''}`);
           cell.innerHTML = `
             <div class="m-cell-top">
-              <span class="m-cell-code" title="${codeDisplay}">${displayCode}</span>
               <span class="m-status-dot ${statusClass}"></span>
             </div>
             <div class="m-cell-middle">
-              <span class="m-cell-status-text ${statusClass}">${statusPillText}</span>
+              <span class="m-cell-code ${isLongCode ? 'code-long' : ''}" title="${codeDisplay}">${displayCode}</span>
             </div>
             <div class="m-cell-bottom">
               <span class="m-cell-cap">${roomObj.capacity || 40}s</span>
