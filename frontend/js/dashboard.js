@@ -1758,12 +1758,16 @@ document.addEventListener('DOMContentLoaded', () => {
     if (dirOccCount) dirOccCount.textContent = filtered.filter(r => r.status === 'occupied').length;
 
     if (filtered.length === 0) {
-      listTableBody.innerHTML = `<tr><td colspan="6" style="text-align:center; padding:36px; color:#94a3b8; font-weight:800; font-family:'Plus Jakarta Sans';">No facilities found matching current filters.</td></tr>`;
+      listTableBody.innerHTML = `<tr><td colspan="5" style="text-align:center; padding:36px; color:#94a3b8; font-weight:800; font-family:'Plus Jakarta Sans';">No facilities found matching current filters.</td></tr>`;
       return;
     }
 
     filtered.forEach(item => {
       const tr = document.createElement('tr');
+      tr.className = 'modular-table-row';
+      tr.style.cursor = 'pointer';
+      tr.title = `Click to inspect details for ${item.roomCode || item.room}`;
+
       const bldgColor = item.building.includes('Pancho') ? '#84cc16' : item.building.includes('CBA') ? '#a855f7' : '#06b6d4';
       const bldgLabel = item.building.includes('Pancho') ? 'Pancho Bldg' : item.building.includes('CBA') ? 'CBA Bldg' : 'Hangar Complex';
       
@@ -1776,7 +1780,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       tr.innerHTML = `
         <td>
-          <div class="table-room-chip clickable-room-name" title="Click to edit room properties">
+          <div class="table-room-chip">
             <span class="room-chip-code">${codeDisplay}</span>
             ${isAlias ? `<small class="room-chip-alias" style="display:block; font-size:0.72rem; color:#64748b; font-weight:700; margin-top:2px;">${item.room}</small>` : ''}
           </div>
@@ -1802,18 +1806,9 @@ document.addEventListener('DOMContentLoaded', () => {
         <td>
           <span class="dir-equipment-text">${item.equipment || 'Standard Class Facility'}</span>
         </td>
-        <td style="text-align:right;">
-          <button class="dir-manage-action-btn list-inspect-btn">
-            <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
-            <span>Manage</span>
-          </button>
-        </td>
       `;
 
-      tr.querySelector('.clickable-room-name').addEventListener('click', () => {
-        openRoomModal(item);
-      });
-      tr.querySelector('.list-inspect-btn').addEventListener('click', () => {
+      tr.addEventListener('click', () => {
         openRoomModal(item);
       });
 

@@ -4158,22 +4158,22 @@ body.force-mobile-view .sidebar-close-btn {
   vertical-align: middle;
 }
 
-/* Explicit Fixed Column Proportions & Exact Alignments */
+/* Explicit Fixed Column Proportions & Exact Alignments (5 Columns, Maximized Space) */
 .modular-table th:nth-child(1),
 .modular-table td:nth-child(1) {
-  width: 17%;
+  width: 25%;
   text-align: left;
 }
 
 .modular-table th:nth-child(2),
 .modular-table td:nth-child(2) {
-  width: 16%;
+  width: 22%;
   text-align: left;
 }
 
 .modular-table th:nth-child(3),
 .modular-table td:nth-child(3) {
-  width: 15%;
+  width: 18%;
   text-align: left;
 }
 
@@ -4185,22 +4185,20 @@ body.force-mobile-view .sidebar-close-btn {
 
 .modular-table th:nth-child(5),
 .modular-table td:nth-child(5) {
-  width: 27%;
+  width: 22%;
   text-align: left;
-}
-
-.modular-table th:nth-child(6),
-.modular-table td:nth-child(6) {
-  width: 12%;
-  text-align: right;
-  padding-right: 20px;
 }
 
 .modular-table tbody tr:nth-child(even) {
   background: #fafafa;
 }
 
-.modular-table tbody tr:hover td {
+.modular-table tbody tr.modular-table-row {
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.modular-table tbody tr.modular-table-row:hover td {
   background: #f0fdf4 !important;
 }
 
