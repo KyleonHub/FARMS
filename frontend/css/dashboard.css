@@ -1211,14 +1211,14 @@ body.force-mobile-view .sidebar-close-btn {
   text-align: right;
 }
 
-/* ── Mini Legend Stack for Vacant Pie Chart ── */
+/* ── Mini Legend Stack for Vacant Pie Chart (Clean Color Key, No Numbers) ── */
 .capacity-pie-legend {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: 9px;
+  gap: 10px;
   flex: 1;
-  min-width: 120px;
+  min-width: 75px;
 }
 
 .pie-leg-item {
@@ -1226,6 +1226,11 @@ body.force-mobile-view .sidebar-close-btn {
   align-items: center;
   gap: 8px;
   font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+  cursor: default;
+  transition: transform 0.12s ease;
+}
+.pie-leg-item:hover {
+  transform: translateX(2px);
 }
 
 .pie-leg-dot {
@@ -1233,6 +1238,7 @@ body.force-mobile-view .sidebar-close-btn {
   height: 14px;
   border-radius: 50%;
   border: 2px solid #000000;
+  box-shadow: 1.5px 1.5px 0px #000000;
   flex-shrink: 0;
 }
 .pie-leg-dot.dot-free { background: #0284c7; }
@@ -1240,24 +1246,16 @@ body.force-mobile-view .sidebar-close-btn {
 .pie-leg-dot.dot-maint { background: #f59e0b; }
 
 .pie-leg-label {
-  font-size: 0.86rem;
+  font-size: 0.88rem;
   font-weight: 900;
   color: #000000;
-  width: 50px;
-}
-
-.pie-leg-val {
-  font-size: 0.95rem;
-  font-weight: 900;
-  color: #000000;
-  min-width: 22px;
-  text-align: right;
+  letter-spacing: -0.2px;
 }
 
 .capacity-metric-row.vacant-pie-row {
   justify-content: space-between;
   align-items: center;
-  gap: 18px;
+  gap: 16px;
   padding: 0;
 }
 
@@ -1268,15 +1266,27 @@ body.force-mobile-view .sidebar-close-btn {
   flex-shrink: 0;
 }
 
-.capacity-gauge-wrap {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
+/* ── Enhanced Neo-Brutalist Pie Graph ── */
+.enhanced-pie-svg {
+  filter: drop-shadow(3.5px 3.5px 0px #000000);
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  overflow: visible;
+}
+.enhanced-pie-svg:hover {
+  transform: scale(1.04);
 }
 
-.pro-donut-svg circle {
-  transition: stroke-dasharray 0.4s ease, stroke-dashoffset 0.4s ease;
+.pie-slice-path {
+  cursor: pointer;
+  transition: filter 0.15s ease, stroke-width 0.15s ease;
+}
+.pie-slice-path:hover {
+  filter: brightness(1.15);
+  stroke-width: 2.8px;
+}
+
+.pie-center-pin {
+  transition: fill 0.2s ease;
 }
 
 /* ── Card 2: Pending Requests ── */
@@ -5417,31 +5427,33 @@ body.force-mobile-view .sidebar-close-btn {
 
 [data-theme="dark"] .pro-donut-svg circle:first-of-type {
   stroke: #3a3939;
+[data-theme="dark"] .enhanced-pie-svg {
+  filter: drop-shadow(3.5px 3.5px 0px #000000) !important;
 }
 
-[data-theme="dark"] .pro-donut-svg circle#pieSegFree {
-  stroke: #ccff00;
+[data-theme="dark"] .enhanced-pie-svg .pie-slice-path {
+  stroke: #131313 !important;
 }
 
-[data-theme="dark"] .pro-donut-svg circle#pieSegOcc {
-  stroke: #ff4d4d;
+[data-theme="dark"] .enhanced-pie-svg .pie-slice-path[data-slice="free"] {
+  fill: #ccff00 !important;
 }
 
-[data-theme="dark"] .pro-donut-svg circle#pieSegMaint {
-  stroke: #f59e0b;
+[data-theme="dark"] .enhanced-pie-svg .pie-slice-path[data-slice="occ"] {
+  fill: #ff4d4d !important;
 }
 
-[data-theme="dark"] .pro-donut-svg circle:nth-of-type(5) {
-  fill: #1c1b1b;
-  stroke: #3a3939;
+[data-theme="dark"] .enhanced-pie-svg .pie-slice-path[data-slice="maint"] {
+  fill: #f59e0b !important;
 }
 
-[data-theme="dark"] .pro-donut-svg text:first-of-type {
-  fill: #ffffff;
+[data-theme="dark"] .enhanced-pie-svg .pie-center-pin {
+  fill: #1c1b1b !important;
+  stroke: #3a3939 !important;
 }
 
-[data-theme="dark"] .pro-donut-svg text:last-of-type {
-  fill: #d4d4d4;
+[data-theme="dark"] .enhanced-pie-svg .pie-center-dot {
+  fill: #ccff00 !important;
 }
 
 [data-theme="dark"] .pie-leg-dot.dot-free { background: #ccff00; }

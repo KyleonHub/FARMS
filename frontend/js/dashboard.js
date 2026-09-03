@@ -944,30 +944,8 @@ document.addEventListener('DOMContentLoaded', () => {
     if (pieValOcc) pieValOcc.textContent = occupiedRooms;
     if (pieValMaint) pieValMaint.textContent = maintenanceRooms;
 
-    if (totalRooms > 0) {
-      // Modern Multi-Segment Donut Calculations (Radius = 32, Circumference C = 201.06)
-      const C = 201.06;
-      const freeLen = (vacantRooms / totalRooms) * C;
-      const occLen = (occupiedRooms / totalRooms) * C;
-      const maintLen = (maintenanceRooms / totalRooms) * C;
-
-      const pieSegFree = document.getElementById('pieSegFree');
-      const pieSegOcc = document.getElementById('pieSegOcc');
-      const pieSegMaint = document.getElementById('pieSegMaint');
-
-      if (pieSegFree) {
-        pieSegFree.style.strokeDasharray = `${freeLen} ${C}`;
-        pieSegFree.style.strokeDashoffset = `0`;
-      }
-      if (pieSegOcc) {
-        pieSegOcc.style.strokeDasharray = `${occLen} ${C}`;
-        pieSegOcc.style.strokeDashoffset = `-${freeLen}`;
-      }
-      if (pieSegMaint) {
-        pieSegMaint.style.strokeDasharray = `${maintLen} ${C}`;
-        pieSegMaint.style.strokeDashoffset = `-${freeLen + occLen}`;
-      }
-    }
+    // Render Enhanced Neo-Brutalist Pie Graph (No Cluttered Numbers, Clean Slices)
+    renderEnhancedPieGraph(vacantRooms, occupiedRooms, maintenanceRooms, totalRooms);
 
     // Card 3: Pending Requests
     const statPendingRequests = document.getElementById('statPendingRequests');
@@ -990,6 +968,93 @@ document.addEventListener('DOMContentLoaded', () => {
     updateDynamicSidebarData();
     renderStationaryOccupancyRings();
     updateAdaptiveSidebar();
+  }
+
+  // ── Enhanced Neo-Brutalist Pie Graph Renderer ──
+  function renderEnhancedPieGraph(free, occ, maint, total) {
+    const slicesGroup = document.getElementById('pieSlicesGroup');
+    if (!slicesGroup) return;
+    slicesGroup.innerHTML = '';
+
+    if (total <= 0) total = 1;
+
+    const cx = 50;
+    const cy = 50;
+    const r = 42;
+
+    const freePct = Math.round((free / total) * 100);
+    const occPct = Math.round((occ / total) * 100);
+    const maintPct = Math.max(0, 100 - freePct - occPct);
+
+    const slices = [
+      { key: 'free', count: free, color: '#0284c7', label: 'Free', pct: freePct },
+      { key: 'occ', count: occ, color: '#84cc16', label: 'In-Use', pct: occPct },
+      { key: 'maint', count: maint, color: '#f59e0b', label: 'Maintenance', pct: maintPct }
+    ];
+
+    const activeSlices = slices.filter(s => s.count > 0);
+
+    if (activeSlices.length === 0) {
+      const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+      circle.setAttribute('cx', cx);
+      circle.setAttribute('cy', cy);
+      circle.setAttribute('r', r);
+      circle.setAttribute('fill', '#e2e8f0');
+      circle.setAttribute('stroke', '#000000');
+      circle.setAttribute('stroke-width', '2.5');
+      slicesGroup.appendChild(circle);
+      return;
+    }
+
+    if (activeSlices.length === 1) {
+      const s = activeSlices[0];
+      const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+      circle.setAttribute('cx', cx);
+      circle.setAttribute('cy', cy);
+      circle.setAttribute('r', r);
+      circle.setAttribute('fill', s.color);
+      circle.setAttribute('stroke', '#000000');
+      circle.setAttribute('stroke-width', '2.5');
+      circle.setAttribute('data-slice', s.key);
+      circle.classList.add('pie-slice-path');
+      const title = document.createElementNS('http://www.w3.org/2000/svg', 'title');
+      title.textContent = `${s.label}: ${s.count} rooms (${s.pct}%)`;
+      circle.appendChild(title);
+      slicesGroup.appendChild(circle);
+      return;
+    }
+
+    let currentAngle = -Math.PI / 2; // Start at 12 o'clock
+
+    activeSlices.forEach(s => {
+      const angleSpan = (s.count / total) * 2 * Math.PI;
+      const nextAngle = currentAngle + angleSpan;
+
+      const x1 = cx + r * Math.cos(currentAngle);
+      const y1 = cy + r * Math.sin(currentAngle);
+      const x2 = cx + r * Math.cos(nextAngle);
+      const y2 = cy + r * Math.sin(nextAngle);
+
+      const largeArc = angleSpan > Math.PI ? 1 : 0;
+
+      const pathData = `M ${cx} ${cy} L ${x1.toFixed(3)} ${y1.toFixed(3)} A ${r} ${r} 0 ${largeArc} 1 ${x2.toFixed(3)} ${y2.toFixed(3)} Z`;
+
+      const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+      path.setAttribute('d', pathData);
+      path.setAttribute('fill', s.color);
+      path.setAttribute('stroke', '#000000');
+      path.setAttribute('stroke-width', '2.2');
+      path.setAttribute('stroke-linejoin', 'round');
+      path.setAttribute('data-slice', s.key);
+      path.classList.add('pie-slice-path');
+
+      const title = document.createElementNS('http://www.w3.org/2000/svg', 'title');
+      title.textContent = `${s.label}: ${s.count} rooms (${s.pct}%)`;
+      path.appendChild(title);
+
+      slicesGroup.appendChild(path);
+      currentAngle = nextAngle;
+    });
   }
 
   // ==========================================

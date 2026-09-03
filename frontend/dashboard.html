@@ -266,51 +266,34 @@
                 <div class="capacity-metric-row vacant-pie-row">
                   <div class="kpi-v2-big-num vacant-num" id="statVacantRooms">55</div>
 
-                  <!-- Mini Legend Stack for Pie Graph -->
+                  <!-- Mini Legend Stack for Pie Graph (Clean Color Key, No Redundant Numbers) -->
                   <div class="capacity-pie-legend">
-                    <div class="pie-leg-item">
+                    <div class="pie-leg-item" title="Free: Available rooms">
                       <span class="pie-leg-dot dot-free"></span>
                       <span class="pie-leg-label">Free</span>
-                      <strong class="pie-leg-val" id="pieValFree">55</strong>
                     </div>
-                    <div class="pie-leg-item">
+                    <div class="pie-leg-item" title="In-Use: Active classes">
                       <span class="pie-leg-dot dot-occ"></span>
                       <span class="pie-leg-label">In-Use</span>
-                      <strong class="pie-leg-val" id="pieValOcc">28</strong>
                     </div>
-                    <div class="pie-leg-item">
+                    <div class="pie-leg-item" title="Maint: Rooms undergoing repair">
                       <span class="pie-leg-dot dot-maint"></span>
                       <span class="pie-leg-label">Maint</span>
-                      <strong class="pie-leg-val" id="pieValMaint">2</strong>
                     </div>
                   </div>
 
-                  <!-- High-Visibility Max-Space Donut Chart -->
+                  <!-- Enhanced High-Visibility Neo-Brutalist Pie Graph -->
                   <div class="capacity-gauge-wrap">
-                    <svg viewBox="0 0 96 96" width="98" height="98" class="pro-donut-svg">
-                      <!-- Base Track -->
-                      <circle cx="48" cy="48" r="32" fill="none" stroke="#e2e8f0" stroke-width="9.5"/>
-                      
-                      <!-- In-Use Segment (Lime Green #84cc16) -->
-                      <circle cx="48" cy="48" r="32" fill="none" stroke="#84cc16" stroke-width="9.5"
-                              id="pieSegOcc" stroke-dasharray="201.06" stroke-dashoffset="130"
-                              transform="rotate(-90 48 48)"/>
-                      
-                      <!-- Maintenance Segment (Amber #f59e0b) -->
-                      <circle cx="48" cy="48" r="32" fill="none" stroke="#f59e0b" stroke-width="9.5"
-                              id="pieSegMaint" stroke-dasharray="201.06" stroke-dashoffset="190"
-                              transform="rotate(-90 48 48)"/>
-
-                      <!-- Free Segment (Sky/Ocean Blue #0284c7) -->
-                      <circle cx="48" cy="48" r="32" fill="none" stroke="#0284c7" stroke-width="9.5"
-                              id="pieSegFree" stroke-dasharray="201.06" stroke-dashoffset="70"
-                              transform="rotate(-90 48 48)"/>
-
-                      <!-- Center Hub -->
-                      <circle cx="48" cy="48" r="23" fill="#ffffff" stroke="#000000" stroke-width="2"/>
-
-                      <text x="48" y="46" font-family="Plus Jakarta Sans, system-ui, sans-serif" font-weight="900" font-size="18" fill="#0f172a" text-anchor="middle" id="vacantGaugeNum">55</text>
-                      <text x="48" y="58" font-family="Plus Jakarta Sans, system-ui, sans-serif" font-weight="900" font-size="9" fill="#64748b" text-anchor="middle" id="vacantGaugeTotal">of 85</text>
+                    <svg viewBox="0 0 100 100" width="106" height="106" class="enhanced-pie-svg" id="vacantPieSvg" role="img" aria-label="Room Availability Breakdown Pie Graph">
+                      <g id="pieSlicesGroup">
+                        <!-- Dynamic crisp SVG pie slices rendered by updateKPIStats -->
+                        <path d="M 50 50 L 50 8 A 42 42 0 1 1 13.6 29 Z" fill="#0284c7" stroke="#000000" stroke-width="2.2" class="pie-slice-path"/>
+                        <path d="M 50 50 L 13.6 29 A 42 42 0 0 1 43.4 8.5 Z" fill="#84cc16" stroke="#000000" stroke-width="2.2" class="pie-slice-path"/>
+                        <path d="M 50 50 L 43.4 8.5 A 42 42 0 0 1 50 8 Z" fill="#f59e0b" stroke="#000000" stroke-width="2.2" class="pie-slice-path"/>
+                      </g>
+                      <!-- Center Mechanical Blueprint Pin -->
+                      <circle cx="50" cy="50" r="7" fill="#ffffff" stroke="#000000" stroke-width="2.5" class="pie-center-pin"/>
+                      <circle cx="50" cy="50" r="2.5" fill="#000000" class="pie-center-dot"/>
                     </svg>
                   </div>
                 </div>
