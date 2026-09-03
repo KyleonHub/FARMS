@@ -37,6 +37,31 @@ document.addEventListener('DOMContentLoaded', () => {
     return r.roomCode || roomName;
   }
 
+  function getMatrixRoomDisplayCode(r) {
+    const bldg = (r.building || r.bldg || '').toLowerCase();
+    const room = (r.room || '').trim();
+    if (bldg.includes('pancho')) {
+      const numMatch = room.match(/\d+[A-Za-z]?/);
+      if (numMatch) return numMatch[0];
+      if (/science|scilab/i.test(room)) return 'SciLab';
+      if (/lecture/i.test(room)) return 'Lec';
+      if (/multimedia|avr/i.test(room)) return 'AVR';
+      if (/library|lib/i.test(room)) return 'Library';
+      if (/sped/i.test(room)) return 'SPED';
+      if (/unites/i.test(room)) return 'Unites';
+      if (/scouts/i.test(room)) return 'Scouts';
+      if (/pta/i.test(room)) return 'PTA';
+      if (/sto/i.test(room)) return 'STO';
+    } else if (bldg.includes('cba')) {
+      const numMatch = room.match(/\d+/);
+      if (numMatch) return `C${numMatch[0]}`;
+    } else if (bldg.includes('hangar')) {
+      const numMatch = room.match(/\d+/);
+      if (numMatch) return `H${numMatch[0]}`;
+    }
+    return room.replace(/^(Pancho|CBA|Hangar)\s*/i, '') || (r.roomCode || '');
+  }
+
   const DEFAULT_ROOMS = [
     // CBA Building (4 Storeys, 3 rooms each = 12 rooms)
     // Floor 1
@@ -1883,12 +1908,26 @@ document.addEventListener('DOMContentLoaded', () => {
         const grid = flrSection.querySelector('.matrix-rooms-grid');
         flrRooms.forEach(roomObj => {
           const cell = document.createElement('div');
-          cell.className = `matrix-room-cell ${roomObj.status}`;
+          const statusClass = roomObj.status === 'vacant' ? 'vacant' : roomObj.status === 'occupied' ? 'occupied' : 'maintenance';
+          const statusPillText = roomObj.status === 'vacant' ? 'FREE' : roomObj.status === 'occupied' ? 'IN-USE' : 'MAINT';
           const codeDisplay = roomObj.roomCode || getOrGenerateRoomCode(roomObj);
+          const displayCode = getMatrixRoomDisplayCode(roomObj);
+          const typeShort = (roomObj.type || 'Room').replace(/\s*(Hall|Laboratory|Room|Workstation)\s*/i, '').slice(0, 6);
+
+          cell.className = `matrix-room-cell ${statusClass}`;
+          cell.setAttribute('title', `${codeDisplay} (${roomObj.type || 'Room'})\nStatus: ${statusPillText}\nCapacity: ${roomObj.capacity || 40} Seats`);
           cell.innerHTML = `
-            <span class="matrix-room-dot"></span>
-            <div class="matrix-room-name">${codeDisplay}</div>
-            <div class="matrix-room-sub">${roomObj.status === 'vacant' ? 'Available' : roomObj.occupant}</div>
+            <div class="m-cell-top">
+              <span class="m-cell-code" title="${codeDisplay}">${displayCode}</span>
+              <span class="m-status-dot ${statusClass}"></span>
+            </div>
+            <div class="m-cell-middle">
+              <span class="m-cell-status-text ${statusClass}">${statusPillText}</span>
+            </div>
+            <div class="m-cell-bottom">
+              <span class="m-cell-cap">${roomObj.capacity || 40}s</span>
+              <span class="m-cell-type">${typeShort}</span>
+            </div>
           `;
 
           cell.addEventListener('click', () => {
@@ -2086,8 +2125,9 @@ document.addEventListener('DOMContentLoaded', () => {
         flrRooms.forEach(roomObj => {
           const cell = document.createElement('div');
           const statusClass = roomObj.status === 'vacant' ? 'vacant' : roomObj.status === 'occupied' ? 'occupied' : 'maintenance';
-          const statusPillText = roomObj.status === 'vacant' ? 'AVAILABLE' : roomObj.status === 'occupied' ? 'IN-USE' : 'MAINT';
+          const statusPillText = roomObj.status === 'vacant' ? 'FREE' : roomObj.status === 'occupied' ? 'IN-USE' : 'MAINT';
           const codeDisplay = roomObj.roomCode || getOrGenerateRoomCode(roomObj);
+          const displayCode = getMatrixRoomDisplayCode(roomObj);
           
           let facultyDisplay = 'Available for Booking';
           if (roomObj.status === 'occupied') {
@@ -2096,22 +2136,21 @@ document.addEventListener('DOMContentLoaded', () => {
             facultyDisplay = 'Under Maintenance';
           }
 
+          const typeShort = (roomObj.type || 'Room').replace(/\s*(Hall|Laboratory|Room|Workstation)\s*/i, '').slice(0, 6);
+
           cell.className = `matrix-room-cell ${statusClass}`;
+          cell.setAttribute('title', `${codeDisplay} (${roomObj.type || 'Room'})\nStatus: ${statusPillText}\nOccupant: ${facultyDisplay}\nCapacity: ${roomObj.capacity || 40} Seats${roomObj.schedule && roomObj.schedule !== '--' ? '\nSchedule: ' + roomObj.schedule : ''}`);
           cell.innerHTML = `
             <div class="m-cell-top">
-              <span class="m-cell-code">${codeDisplay}</span>
-              <span class="m-cell-status-badge ${statusClass}">
-                <span class="m-status-dot"></span>
-                ${statusPillText}
-              </span>
+              <span class="m-cell-code" title="${codeDisplay}">${displayCode}</span>
+              <span class="m-status-dot ${statusClass}"></span>
             </div>
             <div class="m-cell-middle">
-              <div class="m-cell-occupant" title="${facultyDisplay}">${facultyDisplay}</div>
-              ${roomObj.schedule && roomObj.schedule !== '--' ? `<div class="m-cell-schedule">${roomObj.schedule}</div>` : ''}
+              <span class="m-cell-status-text ${statusClass}">${statusPillText}</span>
             </div>
             <div class="m-cell-bottom">
-              <span class="m-cell-type">${roomObj.type || 'Room'}</span>
-              <span class="m-cell-cap">${roomObj.capacity || 40} Seats</span>
+              <span class="m-cell-cap">${roomObj.capacity || 40}s</span>
+              <span class="m-cell-type">${typeShort}</span>
             </div>
           `;
 
