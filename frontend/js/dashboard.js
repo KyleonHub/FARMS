@@ -478,6 +478,28 @@ document.addEventListener('DOMContentLoaded', () => {
   const btnEditAction = document.getElementById('btnEditAction');
   const btnSaveChanges = document.getElementById('btnSaveChanges');
 
+  // Room Summary Sheet Elements (View Mode)
+  const roomSummaryView = document.getElementById('roomSummaryView');
+  const sumCapacityVal = document.getElementById('sumCapacityVal');
+  const sumTypeVal = document.getElementById('sumTypeVal');
+  const sumStatusBadge = document.getElementById('sumStatusBadge');
+  const sumStatusSub = document.getElementById('sumStatusSub');
+  const sumOccupiedMins = document.getElementById('sumOccupiedMins');
+  const sumOccupiedSub = document.getElementById('sumOccupiedSub');
+  const sumBldgTag = document.getElementById('sumBldgTag');
+  const sumPropCode = document.getElementById('sumPropCode');
+  const sumPropName = document.getElementById('sumPropName');
+  const sumPropBldg = document.getElementById('sumPropBldg');
+  const sumPropFloor = document.getElementById('sumPropFloor');
+  const sumPropType = document.getElementById('sumPropType');
+  const sumPropCap = document.getElementById('sumPropCap');
+  const sumEquipmentCount = document.getElementById('sumEquipmentCount');
+  const sumEquipmentTags = document.getElementById('sumEquipmentTags');
+  const sumOccupantTag = document.getElementById('sumOccupantTag');
+  const sumPropOccupant = document.getElementById('sumPropOccupant');
+  const sumPropSchedule = document.getElementById('sumPropSchedule');
+  const sumPropDeclared = document.getElementById('sumPropDeclared');
+
   let isRoomModalEditMode = false;
   let activeModalEquipmentTags = [];
 
@@ -2774,6 +2796,12 @@ document.addEventListener('DOMContentLoaded', () => {
     if (modalCardContainer) {
       modalCardContainer.classList.toggle('is-editing-mode', enable);
     }
+    if (roomSummaryView) {
+      roomSummaryView.classList.toggle('hidden', enable);
+    }
+    if (roomAssignmentForm) {
+      roomAssignmentForm.classList.toggle('hidden', !enable);
+    }
     if (btnToggleEditMode) {
       btnToggleEditMode.classList.toggle('active', enable);
       const labelSpan = btnToggleEditMode.querySelector('.edit-btn-text') || btnToggleEditMode;
@@ -2874,7 +2902,67 @@ document.addEventListener('DOMContentLoaded', () => {
       telemetryActualSub.textContent = roomObj.status === 'occupied' ? 'Occupied elapsed time' : 'Facility vacant';
     }
 
-    // Start in View Mode
+    // ── Populate Summary View (Properties & Attributes Sheet) ──
+    if (sumCapacityVal) sumCapacityVal.textContent = roomObj.capacity || 45;
+    if (sumTypeVal) sumTypeVal.textContent = roomObj.type || 'Classroom';
+    if (sumStatusBadge) {
+      const sCls = roomObj.status === 'vacant' ? 'available' : roomObj.status === 'occupied' ? 'occupied' : 'maintenance';
+      const sTxt = roomObj.status === 'vacant' ? 'Available' : roomObj.status === 'occupied' ? 'In-Use' : 'Maintenance';
+      sumStatusBadge.className = `s-status-badge ${sCls}`;
+      sumStatusBadge.textContent = sTxt;
+    }
+    if (sumStatusSub) {
+      sumStatusSub.textContent = roomObj.status === 'vacant' ? 'Ready for booking' : roomObj.status === 'occupied' ? 'Active session' : 'Under repair';
+    }
+    if (sumOccupiedMins) {
+      sumOccupiedMins.textContent = roomObj.status === 'occupied' ? `${actMins} mins` : '0 mins';
+    }
+    if (sumOccupiedSub) {
+      sumOccupiedSub.textContent = roomObj.status === 'occupied' ? 'Occupied elapsed' : 'Facility vacant';
+    }
+    if (sumBldgTag) sumBldgTag.textContent = roomObj.building || 'Pancho Building';
+    if (sumPropCode) sumPropCode.textContent = codeDisplay;
+    if (sumPropName) sumPropName.textContent = roomObj.room || codeDisplay;
+    if (sumPropBldg) sumPropBldg.textContent = roomObj.building || 'Pancho Building';
+    if (sumPropFloor) {
+      const flrNum = roomObj.floor || 1;
+      const flrSuffix = flrNum === 1 ? '1 (Ground Floor)' : flrNum === 2 ? '2 (Second Floor)' : flrNum === 3 ? '3 (Third Floor)' : `${flrNum}`;
+      sumPropFloor.textContent = `Level ${flrSuffix}`;
+    }
+    if (sumPropType) sumPropType.textContent = roomObj.type || 'Classroom';
+    if (sumPropCap) sumPropCap.textContent = `${roomObj.capacity || 45} Student Desks`;
+
+    if (sumEquipmentCount) {
+      sumEquipmentCount.textContent = `${activeModalEquipmentTags.length} ${activeModalEquipmentTags.length === 1 ? 'item' : 'items'}`;
+    }
+    if (sumEquipmentTags) {
+      sumEquipmentTags.innerHTML = '';
+      if (activeModalEquipmentTags.length === 0) {
+        sumEquipmentTags.innerHTML = '<span class="s-no-equipment">No hardware or equipment tagged for this facility.</span>';
+      } else {
+        activeModalEquipmentTags.forEach(tag => {
+          const chip = document.createElement('span');
+          chip.className = 'summary-equipment-chip';
+          chip.textContent = tag;
+          sumEquipmentTags.appendChild(chip);
+        });
+      }
+    }
+
+    if (sumOccupantTag) {
+      sumOccupantTag.textContent = roomObj.status === 'vacant' ? 'No Occupant' : roomObj.status === 'occupied' ? 'Session Live' : 'Offline';
+    }
+    if (sumPropOccupant) {
+      sumPropOccupant.textContent = roomObj.status === 'occupied' && roomObj.occupant && roomObj.occupant !== 'None' ? roomObj.occupant : 'None (Available)';
+    }
+    if (sumPropSchedule) {
+      sumPropSchedule.textContent = roomObj.schedule && roomObj.schedule !== '--' ? roomObj.schedule : '--';
+    }
+    if (sumPropDeclared) {
+      sumPropDeclared.textContent = roomObj.status === 'occupied' ? `${declMins} mins (${(declMins / 60).toFixed(1)} hrs)` : 'None';
+    }
+
+    // Start in View Mode (Summary Sheet)
     setRoomModalEditMode(false);
 
     roomModalBackdrop.classList.remove('hidden');

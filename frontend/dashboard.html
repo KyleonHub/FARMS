@@ -1710,27 +1710,142 @@
           <span id="modalStatusText">Currently Available</span>
         </div>
 
-        <form id="roomAssignmentForm">
-          <!-- Card 1: Facility Configuration (Editable / Fixed) -->
+        <!-- ── VIEW MODE: ROOM PROPERTIES & ATTRIBUTES SUMMARY ── -->
+        <div id="roomSummaryView" class="room-summary-sheet">
+          <!-- Quick Vitals Ribbon -->
+          <div class="summary-vitals-strip">
+            <div class="summary-vital-card">
+              <span class="s-vital-lbl">SEATING CAPACITY</span>
+              <div class="s-vital-main">
+                <strong class="s-vital-val" id="sumCapacityVal">45</strong>
+                <span class="s-vital-unit">Seats</span>
+              </div>
+              <small class="s-vital-sub">Student capacity</small>
+            </div>
+
+            <div class="summary-vital-card">
+              <span class="s-vital-lbl">FACILITY TYPE</span>
+              <div class="s-vital-main">
+                <strong class="s-vital-val type-val" id="sumTypeVal">Classroom</strong>
+              </div>
+              <small class="s-vital-sub">Classification</small>
+            </div>
+
+            <div class="summary-vital-card">
+              <span class="s-vital-lbl">OPERATIONAL STATUS</span>
+              <div class="s-vital-main">
+                <span class="s-status-badge available" id="sumStatusBadge">Available</span>
+              </div>
+              <small class="s-vital-sub" id="sumStatusSub">Ready for use</small>
+            </div>
+
+            <div class="summary-vital-card">
+              <span class="s-vital-lbl">SESSION TIME</span>
+              <div class="s-vital-main">
+                <strong class="s-vital-val" id="sumOccupiedMins">0 mins</strong>
+              </div>
+              <small class="s-vital-sub" id="sumOccupiedSub">Occupied elapsed</small>
+            </div>
+          </div>
+
+          <!-- Specifications Card -->
+          <div class="summary-spec-card">
+            <div class="summary-card-header">
+              <span class="summary-card-title">Facility Specifications</span>
+              <span class="summary-card-tag" id="sumBldgTag">Pancho Building</span>
+            </div>
+            
+            <div class="summary-properties-grid">
+              <div class="summary-prop-slot">
+                <span class="s-prop-label">ROOM CODE</span>
+                <span class="s-prop-value code-font" id="sumPropCode">PANCHO 103</span>
+              </div>
+
+              <div class="summary-prop-slot">
+                <span class="s-prop-label">ROOM NAME / NUMBER</span>
+                <span class="s-prop-value bold-font" id="sumPropName">103 (East)</span>
+              </div>
+
+              <div class="summary-prop-slot">
+                <span class="s-prop-label">BUILDING CAMPUS</span>
+                <span class="s-prop-value" id="sumPropBldg">Pancho Building</span>
+              </div>
+
+              <div class="summary-prop-slot">
+                <span class="s-prop-label">FLOOR LEVEL</span>
+                <span class="s-prop-value" id="sumPropFloor">Level 1 (Ground Floor)</span>
+              </div>
+
+              <div class="summary-prop-slot">
+                <span class="s-prop-label">PRIMARY FUNCTION</span>
+                <span class="s-prop-value" id="sumPropType">Classroom</span>
+              </div>
+
+              <div class="summary-prop-slot">
+                <span class="s-prop-label">SEATING CAPACITY</span>
+                <span class="s-prop-value" id="sumPropCap">45 Standard Student Desks</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Installed Hardware & Equipment -->
+          <div class="summary-spec-card">
+            <div class="summary-card-header">
+              <span class="summary-card-title">Installed Hardware &amp; Equipment</span>
+              <span class="summary-card-tag count" id="sumEquipmentCount">1 item</span>
+            </div>
+            <div class="summary-equipment-wrap" id="sumEquipmentTags">
+              <!-- Populated dynamically via JS -->
+            </div>
+          </div>
+
+          <!-- Occupancy & Reservation Telemetry -->
+          <div class="summary-spec-card">
+            <div class="summary-card-header">
+              <span class="summary-card-title">Occupancy &amp; Schedule Details</span>
+              <span class="summary-card-tag" id="sumOccupantTag">Session Live</span>
+            </div>
+
+            <div class="summary-properties-grid">
+              <div class="summary-prop-slot full-span">
+                <span class="s-prop-label">ASSIGNED FACULTY / SUBJECT</span>
+                <span class="s-prop-value" id="sumPropOccupant">None (Available)</span>
+              </div>
+
+              <div class="summary-prop-slot">
+                <span class="s-prop-label">SCHEDULE / TIME SLOT</span>
+                <span class="s-prop-value" id="sumPropSchedule">--</span>
+              </div>
+
+              <div class="summary-prop-slot">
+                <span class="s-prop-label">DECLARED STAY DURATION</span>
+                <span class="s-prop-value" id="sumPropDeclared">None</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ── EDIT MODE: ROOM PROPERTIES EDITOR ── -->
+        <form id="roomAssignmentForm" class="hidden">
           <div class="form-section-card">
             <div class="form-section-header">
-              <span class="form-section-title">Facility Configuration</span>
+              <span class="form-section-title">Edit Facility Properties</span>
             </div>
             <div class="form-grid-two">
               <div class="form-row">
-                <label for="modalRoomCode">Room Code</label>
+                <label for="modalRoomCode">Room Code (Fixed)</label>
                 <input type="text" id="modalRoomCode" class="form-input form-input-locked" readonly required>
               </div>
 
               <div class="form-row">
                 <label for="modalRoomName">Room Name / Number</label>
-                <input type="text" id="modalRoomName" class="form-input form-input-target" placeholder="e.g. 101, Science Lab" readonly required>
+                <input type="text" id="modalRoomName" class="form-input form-input-target" placeholder="e.g. 101, Science Lab" required>
               </div>
             </div>
 
             <div class="form-grid-two">
               <div class="form-row">
-                <label for="modalBldgSelect">Building Campus</label>
+                <label for="modalBldgSelect">Building Campus (Fixed)</label>
                 <select id="modalBldgSelect" class="form-input form-select form-input-locked" disabled>
                   <option value="Pancho Building">Pancho Building</option>
                   <option value="CBA Building">CBA Building</option>
@@ -1739,7 +1854,7 @@
               </div>
 
               <div class="form-row">
-                <label for="modalFloorNum">Floor Level</label>
+                <label for="modalFloorNum">Floor Level (Fixed)</label>
                 <input type="number" id="modalFloorNum" class="form-input form-input-locked" min="1" max="4" value="1" readonly>
               </div>
             </div>
@@ -1747,12 +1862,12 @@
             <div class="form-grid-two">
               <div class="form-row">
                 <label for="modalRoomType">Facility Type</label>
-                <input type="text" id="modalRoomType" class="form-input form-input-target" placeholder="e.g. Classroom, Computer Lab" readonly>
+                <input type="text" id="modalRoomType" class="form-input form-input-target" placeholder="e.g. Classroom, Computer Lab">
               </div>
 
               <div class="form-row">
                 <label for="modalCapacity">Seating Capacity</label>
-                <input type="number" id="modalCapacity" class="form-input form-input-target" value="45" min="1" readonly>
+                <input type="number" id="modalCapacity" class="form-input form-input-target" value="45" min="1">
               </div>
             </div>
 
@@ -1770,7 +1885,7 @@
               <input type="hidden" id="modalEquipment" value="">
 
               <!-- Tag Picker Catalog (Active only during Edit Mode) -->
-              <div class="available-tags-picker hidden" id="modalAvailableTagsPicker">
+              <div class="available-tags-picker" id="modalAvailableTagsPicker">
                 <div class="picker-instructions">
                   <span>Available Hardware Catalog (Click to toggle):</span>
                 </div>
@@ -1785,14 +1900,14 @@
             </div>
           </div>
 
-          <!-- Card 2: Operational Status & Occupancy Telemetry -->
+          <!-- Fixed Status & Occupancy Telemetry -->
           <div class="form-section-card">
             <div class="form-section-header">
-              <span class="form-section-title">Status &amp; Occupancy Telemetry</span>
+              <span class="form-section-title">Status &amp; Telemetry Context</span>
             </div>
 
             <div class="form-row">
-              <label for="modalStatusSelect">Current Operational Status</label>
+              <label for="modalStatusSelect">Operational Status</label>
               <select id="modalStatusSelect" class="form-input form-select form-input-locked" disabled>
                 <option value="vacant">Available (Vacant)</option>
                 <option value="occupied">In-Use (Occupied)</option>
@@ -1835,13 +1950,13 @@
               </div>
             </div>
           </div>
-
-          <div class="modal-actions">
-            <button type="button" class="btn-modal secondary" id="btnReleaseRoom">Release Room</button>
-            <button type="button" class="btn-modal primary" id="btnEditAction">Edit Properties</button>
-            <button type="submit" class="btn-modal primary hidden" id="btnSaveChanges">Save Changes</button>
-          </div>
         </form>
+
+        <div class="modal-actions">
+          <button type="button" class="btn-modal secondary" id="btnReleaseRoom">Close</button>
+          <button type="button" class="btn-modal primary" id="btnEditAction">Edit Properties</button>
+          <button type="submit" class="btn-modal primary hidden" id="btnSaveChanges" form="roomAssignmentForm">Save Changes</button>
+        </div>
       </div>
     </div>
   </div>
