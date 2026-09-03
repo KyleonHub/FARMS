@@ -2707,13 +2707,18 @@ document.addEventListener('DOMContentLoaded', () => {
     } else {
       activeModalEquipmentTags.forEach((tag, idx) => {
         const chip = document.createElement('span');
-        chip.className = 'equipment-tag-chip removable';
-        chip.innerHTML = `${tag} <span class="tag-remove-x" title="Remove ${tag}">✕</span>`;
-        chip.addEventListener('click', () => {
-          activeModalEquipmentTags.splice(idx, 1);
-          renderModalEquipmentTags();
-          renderAvailableTagChips();
-        });
+        if (isRoomModalEditMode) {
+          chip.className = 'equipment-tag-chip removable';
+          chip.innerHTML = `${tag} <span class="tag-remove-x" title="Remove ${tag}">✕</span>`;
+          chip.addEventListener('click', () => {
+            activeModalEquipmentTags.splice(idx, 1);
+            renderModalEquipmentTags();
+            renderAvailableTagChips();
+          });
+        } else {
+          chip.className = 'equipment-tag-chip';
+          chip.textContent = tag;
+        }
         modalEquipmentTagsList.appendChild(chip);
       });
     }
