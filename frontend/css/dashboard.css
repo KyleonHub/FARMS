@@ -6774,6 +6774,222 @@ select.form-input,
   stroke-width: 3px !important;
 }
 
+/* ══════════════════════════════════════════════════════════
+   Campus Overview SVG Map — Dark Mode Refinements
+   ══════════════════════════════════════════════════════════ */
+
+/* 1. Prop Buildings: Grayed Out Dark Blueprint Style for Clean Context & Visibility */
+[data-theme="dark"] #campusMap .static-bldg polygon:not([fill="#000000"]),
+[data-theme="dark"] #campusMap #campus-prop-pavilion polygon:not([fill="#000000"]),
+[data-theme="dark"] #campusMap #campus-prop-gym rect:not([fill="#000000"]):not([rx="23"]) {
+  fill: #222226 !important;
+  stroke: #3f3f46 !important;
+  stroke-width: 2.2px !important;
+}
+
+/* Interior office rooms & canopies in Admin Building */
+[data-theme="dark"] #campusMap #campus-prop-pavilion g rect,
+[data-theme="dark"] #campusMap #campus-prop-pavilion rect[fill="#f8fafc"],
+[data-theme="dark"] #campusMap #campus-prop-pavilion rect[fill="#ffffff"] {
+  fill: #1a1a1e !important;
+  stroke: #3f3f46 !important;
+}
+
+/* Corridor / hallway in Admin Building */
+[data-theme="dark"] #campusMap #campus-prop-pavilion rect[height="30"] {
+  fill: #141416 !important;
+  stroke: #3f3f46 !important;
+}
+
+/* Interior partition lines & stair steps in Admin */
+[data-theme="dark"] #campusMap #campus-prop-pavilion line {
+  stroke: #52525b !important;
+}
+
+/* Gym hip roof slope lines & transverse dashed line */
+[data-theme="dark"] #campusMap #campus-prop-gym line {
+  stroke: #52525b !important;
+}
+
+/* Gym column pedestals */
+[data-theme="dark"] #campusMap #campus-prop-gym g rect {
+  fill: #2e2e33 !important;
+  stroke: #52525b !important;
+}
+
+/* Preserve deep black drop shadows */
+[data-theme="dark"] #campusMap .static-bldg polygon[fill="#000000"],
+[data-theme="dark"] #campusMap .static-bldg rect[fill="#000000"] {
+  fill: #000000 !important;
+  stroke: none !important;
+}
+
+/* Prop Building Title Badges in Dark Mode */
+[data-theme="dark"] #campusMap .static-bldg > g rect[rx="23"] {
+  fill: #18181b !important;
+  stroke: #3f3f46 !important;
+}
+[data-theme="dark"] #campusMap .static-bldg > g circle {
+  fill: #3f3f46 !important;
+  stroke: #52525b !important;
+}
+[data-theme="dark"] #campusMap .static-bldg text {
+  fill: #a1a1aa !important;
+}
+
+/* 2. Interactive Buildings: Enhanced Respective Colors in Dark Mode */
+
+/* ── Pancho Building (Enhanced Green / Lime Theme) ── */
+[data-theme="dark"] #campus-pancho polygon[fill="#ecfccb"] {
+  fill: #064e3b !important;
+  stroke: #84cc16 !important;
+  stroke-width: 2.8px !important;
+}
+[data-theme="dark"] #campus-pancho line[stroke="#000000"] {
+  stroke: #84cc16 !important;
+}
+[data-theme="dark"] #campus-pancho g[stroke="#000000"] line {
+  stroke: #22c55e !important;
+  opacity: 0.7 !important;
+}
+[data-theme="dark"] #campus-pancho g[fill="#d9f99d"] rect {
+  fill: #047857 !important;
+  stroke: #84cc16 !important;
+}
+[data-theme="dark"] #campus-pancho g[fill="#d9f99d"] line {
+  stroke: #a3e635 !important;
+}
+[data-theme="dark"] #campus-pancho > g rect[rx="23"] {
+  fill: #18181b !important;
+  stroke: #84cc16 !important;
+}
+[data-theme="dark"] #campus-pancho > g text[fill="#000000"]:not([font-size="13"]) {
+  fill: #ffffff !important;
+}
+[data-theme="dark"] #campus-pancho > g circle {
+  fill: #84cc16 !important;
+  stroke: #000000 !important;
+}
+[data-theme="dark"] #campus-pancho > g text[font-size="13"] {
+  fill: #000000 !important;
+}
+[data-theme="dark"] #campus-pancho:hover polygon[fill="#ecfccb"] {
+  fill: #065f46 !important;
+}
+[data-theme="dark"] #campus-pancho:hover {
+  filter: drop-shadow(0 0 12px rgba(132, 204, 22, 0.45));
+}
+
+/* ── CBA Building (Enhanced Purple / Violet Theme) ── */
+[data-theme="dark"] #campus-cba polygon[fill="#f3e8ff"] {
+  fill: #3b0764 !important;
+  stroke: #c084fc !important;
+  stroke-width: 2.8px !important;
+}
+[data-theme="dark"] #campus-cba line[stroke="#000000"] {
+  stroke: #c084fc !important;
+}
+[data-theme="dark"] #campus-cba g[stroke="#000000"] line {
+  stroke: #a855f7 !important;
+  opacity: 0.7 !important;
+}
+[data-theme="dark"] #campus-cba g[fill="#e9d5ff"] rect {
+  fill: #581c87 !important;
+  stroke: #c084fc !important;
+}
+[data-theme="dark"] #campus-cba g[fill="#e9d5ff"] line {
+  stroke: #d8b4fe !important;
+}
+[data-theme="dark"] #campus-cba > g rect[rx="23"] {
+  fill: #18181b !important;
+  stroke: #c084fc !important;
+}
+[data-theme="dark"] #campus-cba > g text[fill="#000000"] {
+  fill: #ffffff !important;
+}
+[data-theme="dark"] #campus-cba > g circle {
+  fill: #a855f7 !important;
+  stroke: #000000 !important;
+}
+[data-theme="dark"] #campus-cba:hover polygon[fill="#f3e8ff"] {
+  fill: #4c1d95 !important;
+}
+[data-theme="dark"] #campus-cba:hover {
+  filter: drop-shadow(0 0 12px rgba(192, 132, 252, 0.45));
+}
+
+/* ── Hangar Complex (Enhanced Cyan / Sky Blue Theme) ── */
+[data-theme="dark"] #campus-hangar polygon[fill="#e0f2fe"] {
+  fill: #082f49 !important;
+  stroke: #38bdf8 !important;
+  stroke-width: 2.8px !important;
+}
+[data-theme="dark"] #campus-hangar rect[fill="#bae6fd"] {
+  fill: #0369a1 !important;
+  stroke: #38bdf8 !important;
+}
+[data-theme="dark"] #campus-hangar g[stroke="#000000"] line {
+  stroke: #0284c7 !important;
+  opacity: 0.8 !important;
+}
+[data-theme="dark"] #campus-hangar line[stroke="#000000"] {
+  stroke: #38bdf8 !important;
+}
+[data-theme="dark"] #campus-hangar > g rect[rx="23"] {
+  fill: #18181b !important;
+  stroke: #38bdf8 !important;
+}
+[data-theme="dark"] #campus-hangar > g text[fill="#000000"] {
+  fill: #ffffff !important;
+}
+[data-theme="dark"] #campus-hangar > g circle {
+  fill: #0284c7 !important;
+  stroke: #000000 !important;
+}
+[data-theme="dark"] #campus-hangar:hover polygon[fill="#e0f2fe"] {
+  fill: #075985 !important;
+}
+[data-theme="dark"] #campus-hangar:hover {
+  filter: drop-shadow(0 0 12px rgba(56, 189, 248, 0.45));
+}
+
+/* 3. Modern Campus Map Hover Popover in Dark Mode */
+[data-theme="dark"] .modern-campus-card,
+[data-theme="dark"] #roomTooltip {
+  background: #18181b !important;
+  border: 2px solid #3f3f46 !important;
+  box-shadow: 4px 4px 0px #000000 !important;
+  color: #ffffff !important;
+}
+[data-theme="dark"] .popover-bldg-title {
+  color: #ffffff !important;
+}
+[data-theme="dark"] .popover-subtitle {
+  color: #d4d4d8 !important;
+}
+[data-theme="dark"] .popover-meta-row {
+  color: #a1a1aa !important;
+}
+[data-theme="dark"] .popover-footer {
+  border-top-color: #27272a !important;
+  color: #a1a1aa !important;
+}
+[data-theme="dark"] .popover-status-badge.vacant {
+  background: #064e3b !important;
+  color: #a7f3d0 !important;
+  border-color: #059669 !important;
+}
+[data-theme="dark"] .popover-status-badge.occupied {
+  background: #4c0519 !important;
+  color: #fecdd3 !important;
+  border-color: #be123c !important;
+}
+[data-theme="dark"] .popover-status-badge.maintenance {
+  background: #451a03 !important;
+  color: #fef3c7 !important;
+  border-color: #d97706 !important;
+}
+
 /* ── Floor Plan SVG Dark Mode (No White Glare!) ── */
 [data-theme="dark"] #floorPlanContent svg rect[fill="#fafaf9"] {
   fill: #131313 !important;
