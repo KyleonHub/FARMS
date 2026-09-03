@@ -1352,25 +1352,9 @@
              ==================================================== -->
         <section id="view-facilities" class="content-view">
           
-          <!-- Top Header Row with Segmented View Switcher -->
+          <!-- Top Header Row -->
           <div class="dashboard-greeting-row facilities-greeting-row">
-            <div>
-              <h2 class="page-section-heading">Facilities &amp; Visual Matrix</h2>
-              <p class="page-section-sub">Comprehensive Campus Roster, Floor Layouts &amp; Live Room Properties</p>
-            </div>
-            
-            <div class="facilities-header-actions">
-              <div class="facilities-tab-toggle">
-                <button class="fac-tab-btn active" id="btnFacMatrixTab">
-                  <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle; margin-right:4px;"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
-                  Visual Matrix
-                </button>
-                <button class="fac-tab-btn" id="btnFacDirectoryTab">
-                  <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle; margin-right:4px;"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
-                  Master Directory
-                </button>
-              </div>
-            </div>
+            <h2 class="facilities-main-title">Facilities &amp; Visual Matrix</h2>
           </div>
 
           <!-- PANE A: VISUAL ROOM MATRIX -->
@@ -1444,44 +1428,6 @@
             <!-- Standalone Matrix Cards Grid -->
             <div class="standalone-matrix-grid" id="standaloneMatrixGrid"></div>
           </div>
-
-          <!-- PANE B: MASTER ROOM DIRECTORY & PROPERTY EDITOR -->
-          <div id="paneFacDirectory" class="facilities-pane hidden">
-            <div class="modular-card directory-editor-card">
-              <div class="directory-toolbar">
-                <div style="display:flex; align-items:center; gap:12px; width:100%; justify-content:space-between;">
-                  <div style="display:flex; align-items:center; gap:10px; flex:1; max-width:480px;">
-                    <div class="matrix-search-box" style="width:100%;">
-                      <span class="m-search-icon">
-                        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-                      </span>
-                      <input type="text" id="dirSearchInput" placeholder="Filter by room, floor, faculty, or type..." class="matrix-search-input" />
-                    </div>
-                  </div>
-                  <span style="font-size:0.8rem; color:#64748b; font-weight:800;">Total Facilities: <strong id="dirTotalCount" style="color:#0f172a; font-size:0.95rem;">85</strong></span>
-                </div>
-              </div>
-
-              <div class="master-dir-table-wrap">
-                <table class="modular-table">
-                  <thead>
-                    <tr>
-                      <th>Room Code &amp; Name</th>
-                      <th>Building</th>
-                      <th>Floor Level</th>
-                      <th>Designation / Type</th>
-                      <th>Capacity</th>
-                      <th>Status</th>
-                      <th>Current Occupant / Schedule</th>
-                      <th>Actions</th>
-                    </tr>
-                  </thead>
-                  <tbody id="masterDirectoryTableBody"></tbody>
-                </table>
-              </div>
-            </div>
-          </div>
-
         </section>
 
         <!-- ====================================================

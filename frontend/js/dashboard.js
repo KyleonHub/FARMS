@@ -2397,23 +2397,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Master Directory Search Input
   document.getElementById('dirSearchInput')?.addEventListener('input', renderMasterDirectory);
-  
-  // Facilities Tab Switching (Visual Matrix vs Master Directory)
-  document.getElementById('btnFacMatrixTab')?.addEventListener('click', () => {
-    document.getElementById('btnFacMatrixTab')?.classList.add('active');
-    document.getElementById('btnFacDirectoryTab')?.classList.remove('active');
-    document.getElementById('paneFacMatrix')?.classList.remove('hidden');
-    document.getElementById('paneFacDirectory')?.classList.add('hidden');
-    renderStandaloneMatrix();
-  });
-  
-  document.getElementById('btnFacDirectoryTab')?.addEventListener('click', () => {
-    document.getElementById('btnFacDirectoryTab')?.classList.add('active');
-    document.getElementById('btnFacMatrixTab')?.classList.remove('active');
-    document.getElementById('paneFacDirectory')?.classList.remove('hidden');
-    document.getElementById('paneFacMatrix')?.classList.add('hidden');
-    renderMasterDirectory();
-  });
 
   // Handle matrix filter pills (Map subview)
   document.querySelectorAll('.matrix-pill-btn').forEach(btn => {
