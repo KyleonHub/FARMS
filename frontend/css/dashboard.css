@@ -5329,6 +5329,45 @@ body.force-mobile-view .sidebar-close-btn {
   font-weight: 900;
 }
 
+.summary-prop-input {
+  height: 38px;
+  background: #ffffff;
+  border: 2px solid #000000;
+  border-radius: 8px;
+  padding: 0 10px;
+  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+  font-size: 0.92rem;
+  font-weight: 800;
+  color: #0f172a;
+  box-shadow: 2px 2px 0px #000000;
+  outline: none;
+  width: 100%;
+  box-sizing: border-box;
+  transition: all 0.15s ease;
+}
+.summary-prop-input:focus {
+  box-shadow: 3px 3px 0px #000000;
+  transform: translate(-1px, -1px);
+  background: #fefce8;
+}
+
+.summary-prop-static {
+  height: 38px;
+  display: flex;
+  align-items: center;
+  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+  font-size: 0.92rem;
+  font-weight: 800;
+  color: #0f172a;
+  padding: 0 2px;
+}
+.summary-prop-static.code-font {
+  font-family: var(--font-mono);
+  font-weight: 900;
+  letter-spacing: -0.3px;
+  color: #000000;
+}
+
 /* 4. Equipment Chips in Summary View */
 .summary-equipment-wrap {
   display: flex;
@@ -9153,4 +9192,20 @@ body.force-mobile-view .mobile-bottom-nav {
 }
 [data-theme="dark"] .s-no-equipment {
   color: #71717a !important;
+}
+[data-theme="dark"] .summary-prop-input {
+  background: #131313 !important;
+  border-color: #3f3f46 !important;
+  color: #ffffff !important;
+  box-shadow: 2px 2px 0px #000000 !important;
+}
+[data-theme="dark"] .summary-prop-input:focus {
+  border-color: #ccff00 !important;
+  background: #18181b !important;
+}
+[data-theme="dark"] .summary-prop-static {
+  color: #ffffff !important;
+}
+[data-theme="dark"] .summary-prop-static.code-font {
+  color: #ccff00 !important;
 }

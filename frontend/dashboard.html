@@ -1633,19 +1633,15 @@
   </div>
 
   <!-- ====================================================
-       ROOM PROPERTY EDITOR MODAL
+       ROOM PROPERTY & ATTRIBUTES MODAL
        ==================================================== -->
   <div id="roomModalBackdrop" class="modal-backdrop hidden">
     <div class="modal-card modular-modal" id="modalCardContainer">
       <div class="modal-header">
         <div class="modal-title-group">
-          <h3 id="modalRoomTitle">Edit: Room 103</h3>
-          <span class="modal-bldg-badge" id="modalBldgBadge">Pancho Building · Level 1</span>
+          <h3 id="modalRoomTitle">PANCHO 103</h3>
         </div>
         <div class="modal-header-actions">
-          <button class="btn-toggle-edit" id="btnToggleEditMode" type="button" title="Toggle Edit Mode">
-            <span class="edit-btn-text">Edit Properties</span>
-          </button>
           <button class="modal-close" id="modalCloseBtn" type="button" title="Close dialog">✕</button>
         </div>
       </div>
@@ -1656,7 +1652,7 @@
           <span id="modalStatusText">Currently Available</span>
         </div>
 
-        <!-- ── VIEW MODE: ROOM PROPERTIES & ATTRIBUTES SUMMARY ── -->
+        <!-- ── ROOM PROPERTIES & ATTRIBUTES SUMMARY SHEET ── -->
         <div id="roomSummaryView" class="room-summary-sheet">
           <!-- Quick Vitals Ribbon -->
           <div class="summary-vitals-strip">
@@ -1666,7 +1662,6 @@
                 <strong class="s-vital-val" id="sumCapacityVal">45</strong>
                 <span class="s-vital-unit">Seats</span>
               </div>
-              <small class="s-vital-sub">Student capacity</small>
             </div>
 
             <div class="summary-vital-card">
@@ -1674,7 +1669,6 @@
               <div class="s-vital-main">
                 <strong class="s-vital-val type-val" id="sumTypeVal">Classroom</strong>
               </div>
-              <small class="s-vital-sub">Classification</small>
             </div>
 
             <div class="summary-vital-card">
@@ -1682,7 +1676,6 @@
               <div class="s-vital-main">
                 <span class="s-status-badge available" id="sumStatusBadge">Available</span>
               </div>
-              <small class="s-vital-sub" id="sumStatusSub">Ready for use</small>
             </div>
 
             <div class="summary-vital-card">
@@ -1690,7 +1683,6 @@
               <div class="s-vital-main">
                 <strong class="s-vital-val" id="sumOccupiedMins">0 mins</strong>
               </div>
-              <small class="s-vital-sub" id="sumOccupiedSub">Occupied elapsed</small>
             </div>
           </div>
 
@@ -1698,7 +1690,6 @@
           <div class="summary-spec-card">
             <div class="summary-card-header">
               <span class="summary-card-title">Occupancy &amp; Schedule Details</span>
-              <span class="summary-card-tag" id="sumOccupantTag">Session Live</span>
             </div>
 
             <div class="summary-properties-grid">
@@ -1723,38 +1714,37 @@
           <div class="summary-spec-card">
             <div class="summary-card-header">
               <span class="summary-card-title">Facility Specifications</span>
-              <span class="summary-card-tag" id="sumBldgTag">Pancho Building</span>
             </div>
             
             <div class="summary-properties-grid">
               <div class="summary-prop-slot">
                 <span class="s-prop-label">ROOM CODE</span>
-                <span class="s-prop-value code-font" id="sumPropCode">PANCHO 103</span>
+                <span class="summary-prop-static code-font" id="sumPropCode">PANCHO 103</span>
               </div>
 
               <div class="summary-prop-slot">
                 <span class="s-prop-label">ROOM NAME / NUMBER</span>
-                <span class="s-prop-value bold-font" id="sumPropName">103 (East)</span>
+                <input type="text" id="modalRoomName" class="summary-prop-input" placeholder="e.g. 103" required>
               </div>
 
               <div class="summary-prop-slot">
                 <span class="s-prop-label">BUILDING CAMPUS</span>
-                <span class="s-prop-value" id="sumPropBldg">Pancho Building</span>
+                <span class="summary-prop-static" id="sumPropBldg">Pancho Building</span>
               </div>
 
               <div class="summary-prop-slot">
                 <span class="s-prop-label">FLOOR LEVEL</span>
-                <span class="s-prop-value" id="sumPropFloor">Level 1 (Ground Floor)</span>
+                <span class="summary-prop-static" id="sumPropFloor">Level 1 (Ground Floor)</span>
               </div>
 
               <div class="summary-prop-slot">
                 <span class="s-prop-label">PRIMARY FUNCTION</span>
-                <span class="s-prop-value" id="sumPropType">Classroom</span>
+                <input type="text" id="modalRoomType" class="summary-prop-input" placeholder="e.g. Classroom">
               </div>
 
               <div class="summary-prop-slot">
                 <span class="s-prop-label">SEATING CAPACITY</span>
-                <span class="s-prop-value" id="sumPropCap">45 Standard Student Desks</span>
+                <input type="number" id="modalCapacity" class="summary-prop-input" min="1" max="500">
               </div>
             </div>
           </div>
@@ -1763,150 +1753,34 @@
           <div class="summary-spec-card">
             <div class="summary-card-header">
               <span class="summary-card-title">Installed Hardware &amp; Equipment</span>
-              <span class="summary-card-tag count" id="sumEquipmentCount">1 item</span>
+              <span class="summary-card-tag count" id="sumEquipmentCount">2 items</span>
             </div>
-            <div class="summary-equipment-wrap" id="sumEquipmentTags">
+            <div class="summary-equipment-wrap" id="modalEquipmentTagsList">
               <!-- Populated dynamically via JS -->
+            </div>
+            <div class="available-tags-picker" id="modalAvailableTagsPicker" style="margin-top: 8px;">
+              <div class="picker-instructions">
+                <span>Available Hardware Catalog (Click to toggle):</span>
+              </div>
+              <div class="picker-catalog-chips" id="pickerCatalogChips">
+                <!-- Populated dynamically via JS -->
+              </div>
+              <div class="custom-tag-row">
+                <input type="text" id="customTagInput" class="form-input custom-tag-text" placeholder="Add custom equipment tag...">
+                <button type="button" id="btnAddCustomTag" class="btn-add-custom-tag">+ Add Tag</button>
+              </div>
             </div>
           </div>
         </div>
 
-        <!-- ── EDIT MODE: ROOM PROPERTIES EDITOR ── -->
-        <form id="roomAssignmentForm" class="hidden">
-          <div class="form-section-card">
-            <div class="form-section-header">
-              <span class="form-section-title">Edit Facility Properties</span>
-            </div>
-            <div class="form-grid-two">
-              <div class="form-row">
-                <label for="modalRoomCode">Room Code (Fixed)</label>
-                <input type="text" id="modalRoomCode" class="form-input form-input-locked" readonly required>
-              </div>
-
-              <div class="form-row">
-                <label for="modalRoomName">Room Name / Number</label>
-                <input type="text" id="modalRoomName" class="form-input form-input-target" placeholder="e.g. 101, Science Lab" required>
-              </div>
-            </div>
-
-            <div class="form-grid-two">
-              <div class="form-row">
-                <label for="modalBldgSelect">Building Campus (Fixed)</label>
-                <select id="modalBldgSelect" class="form-input form-select form-input-locked" disabled>
-                  <option value="Pancho Building">Pancho Building</option>
-                  <option value="CBA Building">CBA Building</option>
-                  <option value="Hangar">Hangar Complex</option>
-                </select>
-              </div>
-
-              <div class="form-row">
-                <label for="modalFloorNum">Floor Level (Fixed)</label>
-                <input type="number" id="modalFloorNum" class="form-input form-input-locked" min="1" max="4" value="1" readonly>
-              </div>
-            </div>
-
-            <div class="form-grid-two">
-              <div class="form-row">
-                <label for="modalRoomType">Facility Type</label>
-                <input type="text" id="modalRoomType" class="form-input form-input-target" placeholder="e.g. Classroom, Computer Lab">
-              </div>
-
-              <div class="form-row">
-                <label for="modalCapacity">Seating Capacity</label>
-                <input type="number" id="modalCapacity" class="form-input form-input-target" value="45" min="1">
-              </div>
-            </div>
-
-            <!-- Installed Hardware & Equipment (Interactive Tag System) -->
-            <div class="form-row equipment-form-row">
-              <div class="equipment-label-row">
-                <label>Installed Hardware &amp; Equipment</label>
-                <span class="equipment-count-badge" id="equipmentCountBadge">0 items</span>
-              </div>
-
-              <!-- Selected Active Tags -->
-              <div class="equipment-tags-wrapper" id="modalEquipmentTagsList">
-                <!-- Populated dynamically via JS -->
-              </div>
-              <input type="hidden" id="modalEquipment" value="">
-
-              <!-- Tag Picker Catalog (Active only during Edit Mode) -->
-              <div class="available-tags-picker" id="modalAvailableTagsPicker">
-                <div class="picker-instructions">
-                  <span>Available Hardware Catalog (Click to toggle):</span>
-                </div>
-                <div class="picker-catalog-chips" id="pickerCatalogChips">
-                  <!-- Populated dynamically via JS -->
-                </div>
-                <div class="custom-tag-row">
-                  <input type="text" id="customTagInput" class="form-input custom-tag-text" placeholder="Add custom equipment tag...">
-                  <button type="button" id="btnAddCustomTag" class="btn-add-custom-tag">+ Add Tag</button>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Fixed Status & Occupancy Telemetry -->
-          <div class="form-section-card">
-            <div class="form-section-header">
-              <span class="form-section-title">Status &amp; Telemetry Context</span>
-            </div>
-
-            <div class="form-row">
-              <label for="modalStatusSelect">Operational Status</label>
-              <select id="modalStatusSelect" class="form-input form-select form-input-locked" disabled>
-                <option value="vacant">Available (Vacant)</option>
-                <option value="occupied">In-Use (Occupied)</option>
-                <option value="maintenance">Under Maintenance</option>
-              </select>
-            </div>
-
-            <div class="form-grid-two">
-              <div class="form-row">
-                <label for="modalOccupant">Assigned Faculty / Subject</label>
-                <input type="text" id="modalOccupant" class="form-input form-input-locked" placeholder="None" readonly>
-              </div>
-
-              <div class="form-row">
-                <label for="modalSchedule">Schedule / Time Slot</label>
-                <input type="text" id="modalSchedule" class="form-input form-input-locked" placeholder="--" readonly>
-              </div>
-            </div>
-
-            <!-- Declared Stay & Actual Occupied Time Telemetry -->
-            <div class="form-grid-two telemetry-grid-row">
-              <div class="form-row">
-                <label>Declared Stay Duration</label>
-                <div class="telemetry-pill-box" id="declaredDurationBox">
-                  <div class="telemetry-content">
-                    <strong class="telemetry-val" id="telemetryDeclaredVal">120 mins</strong>
-                    <span class="telemetry-sub" id="telemetryDeclaredSub">Requested booking window</span>
-                  </div>
-                </div>
-              </div>
-
-              <div class="form-row">
-                <label>Actual Occupied Time</label>
-                <div class="telemetry-pill-box live-occupancy-box" id="actualTimeBox">
-                  <div class="telemetry-content">
-                    <strong class="telemetry-val" id="telemetryActualVal">45 mins</strong>
-                    <span class="telemetry-sub" id="telemetryActualSub">Occupied elapsed time</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </form>
-
         <div class="modal-actions">
           <button type="button" class="btn-modal secondary" id="btnReleaseRoom">Close</button>
-          <button type="button" class="btn-modal primary" id="btnEditAction">Edit Properties</button>
-          <button type="submit" class="btn-modal primary hidden" id="btnSaveChanges" form="roomAssignmentForm">Save Changes</button>
+          <button type="button" class="btn-modal primary" id="btnSaveChanges">Save</button>
         </div>
       </div>
     </div>
   </div>
-  <!-- ── Mobile Room Inspector Bottom Sheet Drawer ── -->
+
   <div class="mobile-bottom-sheet-backdrop hidden" id="mobileSheetBackdrop"></div>
   <div class="mobile-bottom-sheet hidden" id="mobileRoomSheet">
     <div class="mobile-sheet-drag-handle"></div>

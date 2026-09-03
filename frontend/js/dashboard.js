@@ -2707,24 +2707,22 @@ document.addEventListener('DOMContentLoaded', () => {
     } else {
       activeModalEquipmentTags.forEach((tag, idx) => {
         const chip = document.createElement('span');
-        chip.className = `equipment-tag-chip ${isRoomModalEditMode ? 'removable' : ''}`;
-        chip.innerHTML = isRoomModalEditMode
-          ? `${tag} <span class="tag-remove-x" title="Remove ${tag}">✕</span>`
-          : tag;
-
-        if (isRoomModalEditMode) {
-          chip.addEventListener('click', () => {
-            activeModalEquipmentTags.splice(idx, 1);
-            renderModalEquipmentTags();
-            renderAvailableTagChips();
-          });
-        }
+        chip.className = 'equipment-tag-chip removable';
+        chip.innerHTML = `${tag} <span class="tag-remove-x" title="Remove ${tag}">✕</span>`;
+        chip.addEventListener('click', () => {
+          activeModalEquipmentTags.splice(idx, 1);
+          renderModalEquipmentTags();
+          renderAvailableTagChips();
+        });
         modalEquipmentTagsList.appendChild(chip);
       });
     }
 
     if (equipmentCountBadge) {
       equipmentCountBadge.textContent = `${activeModalEquipmentTags.length} ${activeModalEquipmentTags.length === 1 ? 'item' : 'items'}`;
+    }
+    if (sumEquipmentCount) {
+      sumEquipmentCount.textContent = `${activeModalEquipmentTags.length} ${activeModalEquipmentTags.length === 1 ? 'item' : 'items'}`;
     }
 
     if (modalEquipment) {
@@ -2776,75 +2774,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function setRoomModalEditMode(enable) {
     isRoomModalEditMode = enable;
-    if (modalCardContainer) {
-      modalCardContainer.classList.toggle('is-editing-mode', enable);
-    }
-    if (roomSummaryView) {
-      roomSummaryView.classList.toggle('hidden', enable);
-    }
-    if (roomAssignmentForm) {
-      roomAssignmentForm.classList.toggle('hidden', !enable);
-    }
-    if (btnToggleEditMode) {
-      btnToggleEditMode.classList.toggle('active', enable);
-      const labelSpan = btnToggleEditMode.querySelector('.edit-btn-text') || btnToggleEditMode;
-      labelSpan.textContent = enable ? 'Cancel Edit' : 'Edit Properties';
-    }
-
-    // Editable properties in Edit Mode:
-    // 1. Room Name / Number
-    // 2. Seating Capacity
-    // 3. Room Type
-    // 4. Installed Hardware & Equipment (Tags)
-    if (modalRoomName) modalRoomName.readOnly = !enable;
-    if (modalCapacity) modalCapacity.readOnly = !enable;
-    if (modalRoomType) modalRoomType.readOnly = !enable;
-
-    // Fixed / Locked properties (always read-only):
-    if (modalRoomCode) modalRoomCode.readOnly = true;
-    if (modalBldgSelect) modalBldgSelect.disabled = true;
-    if (modalFloorNum) modalFloorNum.readOnly = true;
-
-    // Occupant dependent properties (always read-only in this dialog):
-    if (modalStatusSelect) modalStatusSelect.disabled = true;
-    if (modalOccupant) modalOccupant.readOnly = true;
-    if (modalSchedule) modalSchedule.readOnly = true;
-
-    // Toggle equipment picker catalog
-    if (modalAvailableTagsPicker) {
-      modalAvailableTagsPicker.classList.toggle('hidden', !enable);
-    }
-    renderModalEquipmentTags();
-    if (enable) renderAvailableTagChips();
-
-    // Toggle action buttons in footer
-    if (enable) {
-      if (btnEditAction) btnEditAction.classList.add('hidden');
-      if (btnSaveChanges) btnSaveChanges.classList.remove('hidden');
-      if (btnReleaseRoom) {
-        btnReleaseRoom.textContent = 'Cancel Edit';
-        btnReleaseRoom.classList.add('is-cancel');
-      }
-    } else {
-      if (btnEditAction) btnEditAction.classList.remove('hidden');
-      if (btnSaveChanges) btnSaveChanges.classList.add('hidden');
-      if (btnReleaseRoom && currentEditingRoom) {
-        if (currentEditingRoom.status === 'occupied') {
-          btnReleaseRoom.textContent = 'Release Room';
-          btnReleaseRoom.classList.remove('is-cancel');
-        } else {
-          btnReleaseRoom.textContent = 'Close';
-          btnReleaseRoom.classList.add('is-cancel');
-        }
-      }
-    }
   }
 
   function openRoomModal(roomObj) {
     currentEditingRoom = roomObj;
     const codeDisplay = roomObj.roomCode || getOrGenerateRoomCode(roomObj);
-    modalRoomTitle.textContent = `${codeDisplay} (${roomObj.type || 'Room'})`;
-    modalBldgBadge.textContent = `${roomObj.building} · Level ${roomObj.floor}`;
+    modalRoomTitle.textContent = codeDisplay;
+    if (modalBldgBadge) modalBldgBadge.textContent = `${roomObj.building} · Level ${roomObj.floor}`;
 
     updateModalStatusBanner(roomObj.status, roomObj.occupant);
 
@@ -2894,16 +2830,9 @@ document.addEventListener('DOMContentLoaded', () => {
       sumStatusBadge.className = `s-status-badge ${sCls}`;
       sumStatusBadge.textContent = sTxt;
     }
-    if (sumStatusSub) {
-      sumStatusSub.textContent = roomObj.status === 'vacant' ? 'Ready for booking' : roomObj.status === 'occupied' ? 'Active session' : 'Under repair';
-    }
     if (sumOccupiedMins) {
       sumOccupiedMins.textContent = roomObj.status === 'occupied' ? `${actMins} mins` : '0 mins';
     }
-    if (sumOccupiedSub) {
-      sumOccupiedSub.textContent = roomObj.status === 'occupied' ? 'Occupied elapsed' : 'Facility vacant';
-    }
-    if (sumBldgTag) sumBldgTag.textContent = roomObj.building || 'Pancho Building';
     if (sumPropCode) sumPropCode.textContent = codeDisplay;
     if (sumPropName) sumPropName.textContent = roomObj.room || codeDisplay;
     if (sumPropBldg) sumPropBldg.textContent = roomObj.building || 'Pancho Building';
@@ -2917,19 +2846,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (sumEquipmentCount) {
       sumEquipmentCount.textContent = `${activeModalEquipmentTags.length} ${activeModalEquipmentTags.length === 1 ? 'item' : 'items'}`;
-    }
-    if (sumEquipmentTags) {
-      sumEquipmentTags.innerHTML = '';
-      if (activeModalEquipmentTags.length === 0) {
-        sumEquipmentTags.innerHTML = '<span class="s-no-equipment">No hardware or equipment tagged for this facility.</span>';
-      } else {
-        activeModalEquipmentTags.forEach(tag => {
-          const chip = document.createElement('span');
-          chip.className = 'summary-equipment-chip';
-          chip.textContent = tag;
-          sumEquipmentTags.appendChild(chip);
-        });
-      }
     }
 
     if (sumOccupantTag) {
@@ -2945,15 +2861,27 @@ document.addEventListener('DOMContentLoaded', () => {
       sumPropDeclared.textContent = roomObj.status === 'occupied' ? `${declMins} mins (${(declMins / 60).toFixed(1)} hrs)` : 'None';
     }
 
-    // Start in View Mode (Summary Sheet)
-    setRoomModalEditMode(false);
+    renderModalEquipmentTags();
+    renderAvailableTagChips();
+
+    if (btnSaveChanges) {
+      btnSaveChanges.textContent = 'Save';
+    }
+    if (btnReleaseRoom) {
+      if (roomObj.status === 'occupied') {
+        btnReleaseRoom.textContent = 'Release Room';
+        btnReleaseRoom.classList.remove('is-cancel');
+      } else {
+        btnReleaseRoom.textContent = 'Close';
+        btnReleaseRoom.classList.add('is-cancel');
+      }
+    }
 
     roomModalBackdrop.classList.remove('hidden');
   }
 
   function closeRoomModal() {
     roomModalBackdrop.classList.add('hidden');
-    setRoomModalEditMode(false);
     currentEditingRoom = null;
   }
 
@@ -2966,18 +2894,29 @@ document.addEventListener('DOMContentLoaded', () => {
 
   if (btnToggleEditMode) {
     btnToggleEditMode.addEventListener('click', () => {
-      setRoomModalEditMode(!isRoomModalEditMode);
+      if (modalRoomName) modalRoomName.focus();
     });
   }
 
   if (btnEditAction) {
     btnEditAction.addEventListener('click', () => {
-      setRoomModalEditMode(true);
+      if (modalRoomName) modalRoomName.focus();
     });
   }
 
-  if (roomAssignmentForm) {
-    roomAssignmentForm.addEventListener('submit', (e) => {
+  if (modalCapacity) {
+    modalCapacity.addEventListener('input', (e) => {
+      if (sumCapacityVal) sumCapacityVal.textContent = e.target.value || '0';
+    });
+  }
+  if (modalRoomType) {
+    modalRoomType.addEventListener('input', (e) => {
+      if (sumTypeVal) sumTypeVal.textContent = e.target.value || 'Classroom';
+    });
+  }
+
+  if (btnSaveChanges) {
+    btnSaveChanges.addEventListener('click', (e) => {
       e.preventDefault();
       if (!currentEditingRoom) return;
 
@@ -2987,8 +2926,8 @@ document.addEventListener('DOMContentLoaded', () => {
       // - room type
       // - equipment (tags)
       const newRoomName = modalRoomName ? modalRoomName.value.trim() : currentEditingRoom.room;
-      const newCapacity = modalCapacity ? parseInt(modalCapacity.value, 10) : (currentEditingRoom.capacity || 45);
-      const newType = modalRoomType ? modalRoomType.value.trim() : currentEditingRoom.type;
+      const newCapacity = modalCapacity ? parseInt(modalCapacity.value, 10) || 45 : (currentEditingRoom.capacity || 45);
+      const newType = modalRoomType ? modalRoomType.value.trim() || 'Classroom' : currentEditingRoom.type;
       const newEquipmentTags = [...activeModalEquipmentTags];
       const newEquipment = newEquipmentTags.join(', ');
 
@@ -3019,8 +2958,7 @@ document.addEventListener('DOMContentLoaded', () => {
         loadFloorSVG(activeBuilding, activeFloor);
       }
 
-      setRoomModalEditMode(false);
-      showToast(`Updated properties for ${currentEditingRoom.roomCode}.`);
+      showToast(`Saved properties for ${currentEditingRoom.roomCode}.`);
       closeRoomModal();
     });
   }
@@ -3028,12 +2966,6 @@ document.addEventListener('DOMContentLoaded', () => {
   if (btnReleaseRoom) {
     btnReleaseRoom.addEventListener('click', () => {
       if (!currentEditingRoom) return;
-      if (isRoomModalEditMode) {
-        // Cancel edit mode and restore values
-        setRoomModalEditMode(false);
-        openRoomModal(currentEditingRoom);
-        return;
-      }
       if (currentEditingRoom.status === 'vacant') {
         closeRoomModal();
         return;
