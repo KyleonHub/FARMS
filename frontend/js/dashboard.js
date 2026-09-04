@@ -3021,6 +3021,20 @@ document.addEventListener('DOMContentLoaded', () => {
         loadFloorSVG(activeBuilding, activeFloor);
       }
 
+      // Asynchronously sync to backend SQLite database
+      if (window.farmsApi && typeof farmsApi.updateRoom === 'function') {
+        farmsApi.updateRoom(currentEditingRoom.id, {
+          roomName: newRoomName,
+          type: newType,
+          capacity: newCapacity,
+          equipmentTags: newEquipmentTags
+        }).then(res => {
+          if (res && res.success) {
+            console.log(`[API] Saved ${currentEditingRoom.roomCode} to backend SQLite database.`);
+          }
+        }).catch(err => console.warn('[API] Offline fallback active:', err.message));
+      }
+
       showToast(`Saved properties for ${currentEditingRoom.roomCode}.`);
       setRoomModalEditMode(false);
     });
@@ -3073,6 +3087,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
       if (activeBuilding) {
         loadFloorSVG(activeBuilding, activeFloor);
+      }
+
+      // Asynchronously sync release to backend SQLite database
+      if (window.farmsApi && typeof farmsApi.releaseRoom === 'function') {
+        farmsApi.releaseRoom(currentEditingRoom.id).then(res => {
+          if (res && res.success) {
+            console.log(`[API] Room ${currentEditingRoom.roomCode} release synced to backend.`);
+          }
+        }).catch(err => console.warn('[API] Offline fallback active:', err.message));
       }
 
       closeRoomModal();
@@ -3175,7 +3198,14 @@ document.addEventListener('DOMContentLoaded', () => {
   // ==========================================
   const mainScrollContent = document.querySelector('.admin-scroll-content');
 
-  function switchView(viewName) {
+  function switchView(viewName, updateUrl = true) {
+    if (!viewName) return;
+
+    localStorage.setItem('farms_active_view', viewName);
+    if (updateUrl && window.location.hash !== `#${viewName}`) {
+      history.replaceState(null, '', `#${viewName}`);
+    }
+
     navItems.forEach(item => {
       item.classList.toggle('active', item.getAttribute('data-view') === viewName);
     });
@@ -3190,7 +3220,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (viewName === 'facilities') {
       renderStandaloneMatrix();
-      renderMasterDirectory();
     }
     if (viewName === 'requests') renderAccessRequests();
     if (viewName === 'logs') renderTimelineLogs();
@@ -3552,8 +3581,90 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // ==========================================
-  // 15. BOOTSTRAP INITIALIZATION
+  // 15. BOOTSTRAP & BACKEND SYNCHRONIZATION
   // ==========================================
+  async function syncWithBackend() {
+    const dbPill = document.getElementById('dbSyncStatusPill');
+    const dbVersionTag = document.querySelector('.sidebar-version-tag');
+    const modalDbSyncBadge = document.getElementById('modalDbSyncBadge');
+    const modalDbSyncText = document.getElementById('modalDbSyncText');
+
+    if (!window.farmsApi || typeof farmsApi.getRooms !== 'function') {
+      if (dbPill) {
+        dbPill.classList.add('offline');
+        const label = dbPill.querySelector('.db-sync-label');
+        if (label) label.textContent = 'SQLite: Offline';
+      }
+      return;
+    }
+
+    try {
+      const res = await farmsApi.getRooms();
+      if (res && res.success && Array.isArray(res.data) && res.data.length > 0) {
+        console.log(`[FARMS] Connected to SQLite backend. Loaded ${res.data.length} live rooms.`);
+        
+        // Update visual indicators
+        if (dbPill) {
+          dbPill.classList.remove('offline');
+          dbPill.classList.add('online');
+          const label = dbPill.querySelector('.db-sync-label');
+          if (label) label.textContent = 'SQLite: Live';
+          dbPill.title = `Connected to SQLite Database (${res.data.length} rooms in sync)`;
+        }
+        if (dbVersionTag) {
+          dbVersionTag.textContent = `FARMS v2.4 • SQLite Synced (${res.data.length} Rooms)`;
+        }
+        if (modalDbSyncBadge) {
+          modalDbSyncBadge.classList.remove('offline');
+          modalDbSyncBadge.classList.add('online');
+          if (modalDbSyncText) modalDbSyncText.textContent = 'SQLite Synced';
+        }
+
+        // Sync server rooms into active client state
+        res.data.forEach(serverRoom => {
+          const idx = rooms.findIndex(r => r.id === serverRoom.id);
+          if (idx !== -1) {
+            rooms[idx] = { ...rooms[idx], ...serverRoom };
+          } else {
+            rooms.push(serverRoom);
+          }
+        });
+
+        saveState();
+        renderListView();
+        renderMatrixView();
+        if (typeof renderStandaloneMatrix === 'function') renderStandaloneMatrix();
+        updateKPIs();
+        if (activeBuilding) {
+          loadFloorSVG(activeBuilding, activeFloor);
+        }
+
+        showToast(`Connected to SQLite Backend (${res.data.length} rooms in sync).`);
+      } else {
+        if (dbPill) {
+          dbPill.classList.add('offline');
+          const label = dbPill.querySelector('.db-sync-label');
+          if (label) label.textContent = 'SQLite: Offline';
+        }
+        if (modalDbSyncBadge) {
+          modalDbSyncBadge.classList.add('offline');
+          if (modalDbSyncText) modalDbSyncText.textContent = 'Offline Cache';
+        }
+      }
+    } catch (e) {
+      console.warn('[FARMS] Running with local browser cache:', e.message);
+      if (dbPill) {
+        dbPill.classList.add('offline');
+        const label = dbPill.querySelector('.db-sync-label');
+        if (label) label.textContent = 'SQLite: Offline';
+      }
+      if (modalDbSyncBadge) {
+        modalDbSyncBadge.classList.add('offline');
+        if (modalDbSyncText) modalDbSyncText.textContent = 'Offline Cache';
+      }
+    }
+  }
+
   updateDynamicGreeting();
   updateKPIs();
   renderListView();
@@ -3564,8 +3675,21 @@ document.addEventListener('DOMContentLoaded', () => {
   renderAccessRequests();
   renderTimelineLogs();
 
-  // Ensure initial active view uses flex
-  contentViews.forEach(view => {
-    view.style.display = view.classList.contains('active') ? 'flex' : 'none';
+  // Restore previously active view from URL hash or localStorage
+  const validViews = ['dashboard', 'facilities', 'faculty', 'requests', 'logs', 'schedules'];
+  const hashView = window.location.hash.replace('#', '').trim();
+  const savedView = localStorage.getItem('farms_active_view');
+  const initialView = (validViews.includes(hashView) ? hashView : (validViews.includes(savedView) ? savedView : 'dashboard'));
+
+  switchView(initialView, false);
+
+  window.addEventListener('hashchange', () => {
+    const currentHash = window.location.hash.replace('#', '').trim();
+    if (validViews.includes(currentHash)) {
+      switchView(currentHash, false);
+    }
   });
+
+  // Asynchronously synchronize with SQLite backend
+  syncWithBackend();
 });

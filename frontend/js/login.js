@@ -86,11 +86,12 @@ document.addEventListener('DOMContentLoaded', () => {
   const btnText = signInBtn ? signInBtn.querySelector('.btn-text') : null;
   const btnSpinner = signInBtn ? signInBtn.querySelector('.btn-spinner') : null;
 
-  // Restore saved email if rememberMe was used
-  const savedEmail = localStorage.getItem('farms_remembered_email');
-  if (savedEmail && usernameInput) {
-    usernameInput.value = savedEmail;
-  }
+  // Clear inputs by default so the form always starts clean and clear
+  if (usernameInput) usernameInput.value = '';
+  if (passwordInput) passwordInput.value = '';
+  const rememberCheckbox = document.getElementById('rememberMe');
+  if (rememberCheckbox) rememberCheckbox.checked = false;
+  localStorage.removeItem('farms_remembered_email');
 
   if (loginForm) {
     loginForm.addEventListener('submit', (e) => {
@@ -100,18 +101,14 @@ document.addEventListener('DOMContentLoaded', () => {
       const enteredPassword = passwordInput.value.trim();
       const rememberMe = document.getElementById('rememberMe')?.checked;
 
-      // Reset alert and show loading spinner
+      // Reset alert and show loading spinner inside sign in button
       messageBox.className = 'login-message';
       messageBox.textContent = '';
       if (signInBtn) signInBtn.disabled = true;
-      if (btnText) btnText.textContent = 'Authenticating...';
+      if (btnText) btnText.classList.add('hidden');
       if (btnSpinner) btnSpinner.classList.remove('hidden');
 
       setTimeout(() => {
-        if (btnSpinner) btnSpinner.classList.add('hidden');
-        if (signInBtn) signInBtn.disabled = false;
-        if (btnText) btnText.textContent = 'Sign In to Dashboard';
-
         // Check against users or allow any standard email/pass for smooth demo
         let matchedUser = VALID_USERS.find(
           u => u.email.toLowerCase() === enteredEmail && u.password === enteredPassword
@@ -128,10 +125,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         if (matchedUser) {
-          messageBox.classList.add('success');
-          messageBox.textContent = `Welcome, ${matchedUser.name}! Opening ${matchedUser.role} portal...`;
-          if (signInBtn) signInBtn.disabled = true;
-
           // Store session info in localStorage
           localStorage.setItem('farms_session_user', JSON.stringify(matchedUser));
           if (rememberMe) {
@@ -140,15 +133,18 @@ document.addEventListener('DOMContentLoaded', () => {
             localStorage.removeItem('farms_remembered_email');
           }
 
-          updateCardHeight();
-
-          // Redirect to appropriate dashboard
+          // Keep loading spinner spinning in button until redirected
           const targetUrl = matchedUser.redirect || 'dashboard.html';
           setTimeout(() => {
             window.location.href = targetUrl;
-          }, 600);
+          }, 350);
 
         } else {
+          // Restore button on error
+          if (btnSpinner) btnSpinner.classList.add('hidden');
+          if (btnText) btnText.classList.remove('hidden');
+          if (signInBtn) signInBtn.disabled = false;
+
           messageBox.classList.add('error');
           messageBox.textContent = 'Invalid credentials. Please use demo credentials.';
           updateCardHeight();
@@ -169,15 +165,8 @@ document.addEventListener('DOMContentLoaded', () => {
         redirect: 'dashboard.html'
       };
       
-      messageBox.className = 'login-message success';
-      messageBox.textContent = 'Entering FARMS as Guest (Live Room Availability Mode)...';
-      updateCardHeight();
-
       localStorage.setItem('farms_session_user', JSON.stringify(guestUser));
-      
-      setTimeout(() => {
-        window.location.href = 'dashboard.html';
-      }, 400);
+      window.location.href = 'dashboard.html';
     });
   }
 
