@@ -4,7 +4,11 @@ const requestController = require('../controllers/requestController');
 
 router.get('/', requestController.getAllRequests);
 router.post('/', requestController.createRequest);
+router.put('/:id', requestController.updateRequestStatus);
+router.patch('/:id', requestController.updateRequestStatus);
 router.put('/:id/status', requestController.updateRequestStatus);
+router.patch('/:id/status', requestController.updateRequestStatus);
 router.get('/logs', requestController.getActivityLogs);
 
 module.exports = router;
+

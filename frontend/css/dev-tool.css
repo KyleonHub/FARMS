@@ -1,0 +1,180 @@
+/* ==========================================================================
+   FARMS Floating In-Page Developer HUD
+   Viewport Telemetry & Quick-Switch Dock
+   ========================================================================== */
+
+.farms-dev-hud {
+  position: fixed;
+  bottom: 14px;
+  right: 14px;
+  z-index: 99999;
+  font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  user-select: none;
+}
+
+/* Compact Floating Pill */
+.farms-dev-pill {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(15, 23, 42, 0.94);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 2px solid #000000;
+  border-radius: 20px;
+  padding: 6px 14px;
+  box-shadow: 3px 3px 0px #000000, 0 8px 20px rgba(0, 0, 0, 0.35);
+  cursor: pointer;
+  transition: all 0.15s cubic-bezier(0.16, 1, 0.3, 1);
+  color: #ffffff;
+}
+
+.farms-dev-pill:hover {
+  transform: translate(-1.5px, -1.5px);
+  box-shadow: 4.5px 4.5px 0px #000000;
+  background: #0f172a;
+}
+
+.farms-dev-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #ccff00;
+  box-shadow: 0 0 6px #ccff00;
+}
+
+.farms-dev-text {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.74rem;
+  font-weight: 800;
+  color: #f8fafc;
+  letter-spacing: 0.3px;
+}
+
+.farms-dev-bp-chip {
+  font-size: 0.65rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  background: #1e293b;
+  border: 1px solid #475569;
+  color: #ccff00;
+  padding: 1px 6px;
+  border-radius: 4px;
+}
+
+/* Expanded Quick-Dev Flyout Panel */
+.farms-dev-panel {
+  position: absolute;
+  bottom: calc(100% + 10px);
+  right: 0;
+  width: 280px;
+  background: #0f172a;
+  border: 2.5px solid #000000;
+  border-radius: 12px;
+  box-shadow: 5px 5px 0px #000000, 0 15px 35px rgba(0, 0, 0, 0.5);
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  color: #f8fafc;
+  transform-origin: bottom right;
+  transition: opacity 0.15s ease, transform 0.15s ease;
+  z-index: 100000;
+}
+
+.farms-dev-panel.hidden {
+  display: none !important;
+}
+
+.farms-dev-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1.5px solid #334155;
+  padding-bottom: 8px;
+}
+
+.farms-dev-title {
+  font-size: 0.8rem;
+  font-weight: 900;
+  letter-spacing: 0.5px;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.farms-dev-close {
+  background: none;
+  border: none;
+  color: #94a3b8;
+  font-size: 0.9rem;
+  cursor: pointer;
+  padding: 2px;
+}
+.farms-dev-close:hover {
+  color: #ffffff;
+}
+
+.farms-dev-metrics {
+  background: #090d16;
+  border: 1px solid #1e293b;
+  border-radius: 6px;
+  padding: 8px 10px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.72rem;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.farms-dev-metric-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.farms-dev-metric-label {
+  color: #64748b;
+  font-weight: 600;
+}
+.farms-dev-metric-val {
+  color: #f8fafc;
+  font-weight: 800;
+}
+
+/* Quick Actions */
+.farms-dev-btn-launch {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  padding: 8px 12px;
+  background: #ccff00;
+  color: #000000;
+  border: 2px solid #000000;
+  border-radius: 8px;
+  box-shadow: 2.5px 2.5px 0px #000000;
+  font-family: inherit;
+  font-size: 0.82rem;
+  font-weight: 900;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.12s ease;
+}
+.farms-dev-btn-launch:hover {
+  background: #bbf7d0;
+  transform: translate(-1px, -1px);
+  box-shadow: 3.5px 3.5px 0px #000000;
+}
+
+.farms-dev-btn-launch:active {
+  transform: translate(1px, 1px);
+  box-shadow: 1.5px 1.5px 0px #000000;
+}
+
+.farms-dev-hint {
+  font-size: 0.68rem;
+  color: #64748b;
+  text-align: center;
+}

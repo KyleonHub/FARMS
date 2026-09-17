@@ -91,17 +91,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const ROOM_DATA = [
     { bldg: 'Pancho Building', room: '101', floor: 1, status: 'vacant', occupant: 'Open Study Space', schedule: 'No class currently', capacity: 45 },
-    { bldg: 'Pancho Building', room: '103', floor: 1, status: 'occupied', occupant: 'Dr. Reyes (BUS301)', schedule: 'Business Ethics Lecture', capacity: 45 },
+    { bldg: 'Pancho Building', room: '103', floor: 1, status: 'vacant', occupant: 'Open Study Space', schedule: 'No class currently', capacity: 45 },
     { bldg: 'Pancho Building', room: '105', floor: 1, status: 'vacant', occupant: 'Open Study Space', schedule: 'No class currently', capacity: 45 },
-    { bldg: 'Pancho Building', room: 'Science Laboratory', floor: 1, status: 'occupied', occupant: 'Dr. Lim (BIO102)', schedule: 'General Biology Lab', capacity: 40 },
-    { bldg: 'Pancho Building', room: 'Multimedia Room', floor: 1, status: 'occupied', occupant: 'Prof. Santos (CS101)', schedule: 'Multimedia Lecture', capacity: 50 },
+    { bldg: 'Pancho Building', room: 'Science Laboratory', floor: 1, status: 'vacant', occupant: 'Open Study Space', schedule: 'No class currently', capacity: 40 },
+    { bldg: 'Pancho Building', room: 'Multimedia Room', floor: 1, status: 'vacant', occupant: 'Open Study Space', schedule: 'No class currently', capacity: 50 },
     { bldg: 'CBA Building', room: 'CBA 101', floor: 1, status: 'vacant', occupant: 'Open Study Space', schedule: 'Available for Study', capacity: 45 },
-    { bldg: 'CBA Building', room: 'CBA 102', floor: 1, status: 'occupied', occupant: 'Prof. Santos (CS101)', schedule: 'Intro to Programming', capacity: 50 },
+    { bldg: 'CBA Building', room: 'CBA 102', floor: 1, status: 'vacant', occupant: 'Open Study Space', schedule: 'Available for Study', capacity: 50 },
     { bldg: 'CBA Building', room: 'CBA 103', floor: 1, status: 'vacant', occupant: 'Open Study Space', schedule: 'Available for Study', capacity: 45 },
-    { bldg: 'Hangar', room: 'Hangar 001', floor: 1, status: 'occupied', occupant: 'Engr. Cruz (AERO101)', schedule: 'Powerplants Session', capacity: 35 },
+    { bldg: 'Hangar', room: 'Hangar 001', floor: 1, status: 'vacant', occupant: 'Open Study Space', schedule: 'Available for Study', capacity: 35 },
     { bldg: 'Hangar', room: 'Hangar 002', floor: 1, status: 'vacant', occupant: 'Open Study Space', schedule: 'Available for Study', capacity: 35 },
     { bldg: 'Hangar', room: 'Hangar 003', floor: 1, status: 'vacant', occupant: 'Open Study Space', schedule: 'Available for Study', capacity: 35 },
-    { bldg: 'Hangar', room: 'Hangar 004', floor: 1, status: 'occupied', occupant: 'Prof. De Vega (UAV101)', schedule: 'Drone Testing Lab', capacity: 35 }
+    { bldg: 'Hangar', room: 'Hangar 004', floor: 1, status: 'vacant', occupant: 'Open Study Space', schedule: 'Available for Study', capacity: 35 }
   ];
 
   function openBuilding(bldgName, floorNum = 1) {
@@ -250,4 +250,36 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   if (modalClose) modalClose.addEventListener('click', () => modal.classList.add('hidden'));
+  
+  // Database Health Polling (Compact DTB Indicator)
+  async function checkDbHealth() {
+    const pill = document.getElementById('dbSyncStatusPill');
+    if (!pill) return;
+    const dot = pill.querySelector('.db-sync-dot');
+    const label = pill.querySelector('.db-sync-label');
+
+    try {
+      const res = await fetch('http://localhost:5000/api/health');
+      if (res.ok) {
+        const data = await res.json();
+        if (data.status === 'healthy' || data.database === 'connected') {
+          pill.classList.remove('offline');
+          pill.classList.add('online');
+          if (dot) { dot.className = 'db-sync-dot online'; }
+          if (label) label.textContent = 'DTB';
+          pill.title = 'FARMS Database: Live (Port 5000)';
+          return;
+        }
+      }
+      throw new Error('Degraded');
+    } catch (err) {
+      pill.classList.add('offline');
+      pill.classList.remove('online');
+      if (dot) { dot.className = 'db-sync-dot offline'; }
+      if (label) label.textContent = 'DTB';
+      pill.title = 'FARMS Database: Offline';
+    }
+  }
+  checkDbHealth();
+  setInterval(checkDbHealth, 15000);
 });

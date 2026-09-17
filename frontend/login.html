@@ -2,12 +2,15 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>FARMS - Faculty Availability & Room Management System</title>
-  <link rel="stylesheet" href="css/login.css?v=2.5.0">
+  <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+  <link rel="dns-prefetch" href="https://fonts.gstatic.com">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/login.css?v=2.5.2">
+  <link rel="stylesheet" href="css/dev-tool.css">
 </head>
 <body>
 
@@ -118,7 +121,14 @@
       <!-- FRONT FACE: LOGIN PORTAL -->
       <div class="card-face card-front">
         <div class="login-card-header">
-          <h1 class="mini-logo">FARMS</h1>
+          <div class="login-brand-lockup">
+            <div class="brand-seal-icon">
+              <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="#000000" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M3 21h18M5 21V9l7-5 7 5v12M9 14h6M9 18h6M9 10h6"/>
+              </svg>
+            </div>
+            <h1 class="mini-logo">FARMS</h1>
+          </div>
           <hr class="header-divider">
           <h5 class="login-card-subtitle">Faculty Availability &amp; Room Management System</h5>
         </div>
@@ -204,7 +214,7 @@
 
         <div class="admin-profile-box">
           <div class="admin-image-container">
-            <img src="assets/images/ADMIN jeibog.jpg" alt="System Administrator" class="admin-avatar-box" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'100\' height=\'100\' viewBox=\'0 0 24 24\' fill=\'%23064e3b\'><circle cx=\'12\' cy=\'8\' r=\'4\'/><path d=\'M20 21a8 8 0 0 0-16 0\'/></svg>'">
+            <img src="assets/images/ADMIN jeibog.jpg" alt="System Administrator" class="admin-avatar-box" width="76" height="76" loading="lazy" decoding="async" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'100\' height=\'100\' viewBox=\'0 0 24 24\' fill=\'%23064e3b\'><circle cx=\'12\' cy=\'8\' r=\'4\'/><path d=\'M20 21a8 8 0 0 0-16 0\'/></svg>'">
           </div>
           
           <div class="admin-profile-info">
@@ -235,5 +245,6 @@
   </div>
 
   <script src="js/login.js?v=2.5.0"></script>
+  <script src="js/dev-tool.js"></script>
 </body>
 </html>

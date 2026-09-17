@@ -2,1387 +2,274 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>FARMS - Faculty Workstation &amp; Room Access Portal</title>
+  <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+  <link rel="dns-prefetch" href="https://fonts.gstatic.com">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/dashboard.css">
-  <style>
-    /* ==========================================================================
-       FARMS FACULTY WORKSTATION — NEO-BRUTALIST & COMIC-MAXIMALIST THEME
-       Unified with the Core Dashboard Palette & Interactive Design Language
-       ========================================================================== */
-
-    :root {
-      --font-main: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
-      --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-      --radius-sm: 8px;
-      --radius-md: 12px;
-      --radius-lg: 16px;
-      --radius-pill: 9999px;
-
-      /* Light Mode Palette */
-      --bg-canvas: #fafaf9;
-      --bg-surface: #ffffff;
-      --bg-surface-elevated: #f4f4f5;
-      --border-main: 2.5px solid #000000;
-      --border-sub: 1.5px solid #000000;
-      --shadow-main: 3.5px 3.5px 0px #000000;
-      --shadow-sm: 2px 2px 0px #000000;
-      --shadow-lg: 5px 5px 0px #000000;
-      --text-main: #000000;
-      --text-sub: #475569;
-      --accent-available: #84cc16;
-      --accent-occupied: #ff4d4d;
-      --accent-pending: #fbbf24;
-      --accent-cyan: #38bdf8;
-    }
-
-    [data-theme="dark"] {
-      --bg-canvas: #131313;
-      --bg-surface: #1c1b1b;
-      --bg-surface-elevated: #262626;
-      --border-main: 2.5px solid #3a3939;
-      --border-sub: 1.5px solid #3a3939;
-      --shadow-main: 3.5px 3.5px 0px #000000;
-      --shadow-sm: 2px 2px 0px #000000;
-      --shadow-lg: 5px 5px 0px #000000;
-      --text-main: #ffffff;
-      --text-sub: #d4d4d4;
-      --accent-available: #ccff00;
-      --accent-occupied: #ff4d4d;
-      --accent-pending: #fbbf24;
-      --accent-cyan: #38bdf8;
-    }
-
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    body {
-      font-family: var(--font-main);
-      background-color: var(--bg-canvas);
-      color: var(--text-main);
-      min-height: 100vh;
-      overflow: hidden;
-      -webkit-font-smoothing: antialiased;
-    }
-
-    [data-theme="dark"] body {
-      background-image: radial-gradient(circle, #3a3939 1.2px, transparent 1.2px);
-      background-size: 24px 24px;
-    }
-
-    /* ── App Shell ── */
-    .fac-app {
-      display: flex;
-      height: 100vh;
-      width: 100vw;
-      overflow: hidden;
-      background: transparent;
-    }
-
-    /* ── Sidebar (Neo-Brutalist Shell) ── */
-    .fac-sidebar {
-      width: 230px;
-      min-width: 230px;
-      background: var(--bg-surface);
-      border-right: var(--border-main);
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      padding: 16px 12px;
-      height: 100vh;
-      z-index: 40;
-      overflow-y: auto;
-      overflow-x: hidden;
-      transition: width .22s cubic-bezier(.4,0,.2,1), min-width .22s cubic-bezier(.4,0,.2,1), transform .25s cubic-bezier(.4,0,.2,1);
-      box-shadow: 4px 0 0px #000000;
-      flex-shrink: 0;
-    }
-
-    .fac-brand {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      padding: 6px 6px 14px 6px;
-      border-bottom: var(--border-sub);
-      margin-bottom: 12px;
-    }
-    .fac-brand-icon {
-      width: 36px;
-      height: 36px;
-      flex-shrink: 0;
-      filter: drop-shadow(2px 2px 0px #000000);
-    }
-    .fac-brand-text h1 {
-      font-size: 1.25rem;
-      font-weight: 900;
-      color: var(--text-main);
-      line-height: 1;
-      letter-spacing: -0.5px;
-    }
-    .fac-brand-text p {
-      font-size: 0.60rem;
-      font-weight: 800;
-      color: var(--text-sub);
-      margin: 3px 0 0;
-      line-height: 1.25;
-      text-transform: uppercase;
-      letter-spacing: 0.3px;
-    }
-
-    .fac-nav {
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-    }
-    .fac-nav-item {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      padding: 10px 12px;
-      border-radius: var(--radius-md);
-      color: var(--text-main);
-      text-decoration: none;
-      font-weight: 800;
-      font-size: 0.82rem;
-      border: 2px solid transparent;
-      background: transparent;
-      transition: all .15s ease;
-    }
-    .fac-nav-item svg {
-      width: 18px;
-      height: 18px;
-      flex-shrink: 0;
-      stroke: currentColor;
-      stroke-width: 2.3;
-    }
-    .fac-nav-item:hover {
-      background: var(--bg-surface-elevated);
-      border-color: var(--text-main);
-      transform: translate(-1px, -1px);
-      box-shadow: 2px 2px 0px #000000;
-    }
-    .fac-nav-item.active {
-      background: var(--accent-available);
-      color: #000000 !important;
-      font-weight: 900;
-      border: 2px solid #000000;
-      box-shadow: 2.5px 2.5px 0px #000000;
-    }
-    .fac-nav-item.active svg {
-      stroke: #000000 !important;
-    }
-    .fac-nav-badge {
-      margin-left: auto;
-      background: var(--accent-occupied);
-      color: #ffffff;
-      font-size: 0.64rem;
-      font-weight: 900;
-      padding: 1px 7px;
-      border-radius: var(--radius-pill);
-      border: 1.5px solid #000000;
-      box-shadow: 1px 1px 0px #000000;
-      min-width: 20px;
-      text-align: center;
-    }
-    .fac-signout {
-      margin-top: 14px;
-      color: var(--accent-occupied) !important;
-      border-top: var(--border-sub);
-      padding-top: 12px;
-    }
-    .fac-signout:hover {
-      background: rgba(255, 77, 77, 0.12) !important;
-      border-color: var(--accent-occupied) !important;
-    }
-
-    .fac-sidebar-foot {
-      font-size: 0.64rem;
-      color: var(--text-sub);
-      font-weight: 800;
-      padding: 8px 4px 4px;
-      border-top: var(--border-sub);
-      display: flex;
-      align-items: center;
-      text-transform: uppercase;
-      letter-spacing: 0.4px;
-    }
-    .fac-status-dot {
-      display: inline-block;
-      width: 7px;
-      height: 7px;
-      background: var(--accent-available);
-      border: 1.2px solid #000000;
-      border-radius: 50%;
-      margin-right: 6px;
-      box-shadow: 0 0 6px var(--accent-available);
-    }
-
-    /* ── Main Wrapper ── */
-    .fac-main {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      min-width: 0;
-      height: 100vh;
-      overflow: hidden;
-      background: transparent;
-    }
-
-    /* ── Topbar ── */
-    .fac-topbar {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      padding: 0 20px;
-      height: 56px;
-      min-height: 56px;
-      flex-shrink: 0;
-      background: var(--bg-surface);
-      border-bottom: var(--border-main);
-      box-shadow: 0 3px 0px #000000;
-      z-index: 30;
-    }
-
-    .fac-hamburger {
-      width: 38px;
-      height: 38px;
-      border-radius: var(--radius-sm);
-      border: var(--border-sub);
-      background: var(--bg-surface);
-      color: var(--text-main);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      flex-shrink: 0;
-      box-shadow: var(--shadow-sm);
-      transition: all .15s ease;
-    }
-    .fac-hamburger:hover {
-      background: var(--bg-surface-elevated);
-      transform: translate(-1px, -1px);
-      box-shadow: 3px 3px 0px #000000;
-    }
-
-    .fac-search-wrap {
-      flex: 1;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      background: var(--bg-canvas);
-      border: var(--border-sub);
-      border-radius: var(--radius-md);
-      padding: 0 14px;
-      height: 38px;
-      max-width: 460px;
-      box-shadow: var(--shadow-sm);
-      transition: all .15s ease;
-    }
-    .fac-search-wrap:focus-within {
-      border-color: var(--text-main);
-      box-shadow: 3px 3px 0px var(--accent-available);
-    }
-    .fac-search-wrap input {
-      flex: 1;
-      border: none;
-      background: transparent;
-      font-size: 0.82rem;
-      font-weight: 700;
-      color: var(--text-main);
-      outline: none;
-      font-family: inherit;
-    }
-    .fac-search-wrap input::placeholder {
-      color: var(--text-sub);
-      opacity: 0.8;
-    }
-
-    .fac-topbar-right {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      margin-left: auto;
-    }
-
-    .fac-theme-btn {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      padding: 7px 12px;
-      border-radius: var(--radius-md);
-      border: var(--border-sub);
-      background: var(--bg-surface);
-      font-size: 0.78rem;
-      font-weight: 900;
-      color: var(--text-main);
-      cursor: pointer;
-      white-space: nowrap;
-      box-shadow: var(--shadow-sm);
-      transition: all .15s ease;
-    }
-    .fac-theme-btn:hover {
-      background: var(--bg-surface-elevated);
-      transform: translate(-1px, -1px);
-      box-shadow: 3px 3px 0px #000000;
-    }
-
-    .fac-req-btn {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      padding: 7px 16px;
-      border-radius: var(--radius-md);
-      background: var(--accent-available);
-      color: #000000 !important;
-      border: 2px solid #000000;
-      font-size: 0.80rem;
-      font-weight: 900;
-      cursor: pointer;
-      white-space: nowrap;
-      box-shadow: var(--shadow-sm);
-      transition: all .15s ease;
-    }
-    .fac-req-btn:hover {
-      background: #ffffff;
-      color: #000000 !important;
-      transform: translate(-1.5px, -1.5px);
-      box-shadow: 3.5px 3.5px 0px #000000;
-    }
-    .fac-req-btn:active {
-      transform: translate(1px, 1px);
-      box-shadow: 1px 1px 0px #000000;
-    }
-
-    .fac-avatar {
-      width: 36px;
-      height: 36px;
-      border-radius: var(--radius-sm);
-      background: var(--bg-surface-elevated);
-      color: var(--text-main);
-      font-weight: 900;
-      font-size: 0.95rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-      cursor: pointer;
-      border: var(--border-sub);
-      box-shadow: var(--shadow-sm);
-      transition: all .15s ease;
-    }
-    .fac-avatar:hover {
-      transform: translate(-1px, -1px);
-      box-shadow: 3px 3px 0px #000000;
-    }
-
-    /* ── Scroll Content ── */
-    .fac-content {
-      flex: 1;
-      overflow-y: auto;
-      overflow-x: hidden;
-      padding: 20px 24px 100px;
-      -webkit-overflow-scrolling: touch;
-    }
-
-    /* ── CONTENT VIEWS ── */
-    .fac-view { display: none; }
-    .fac-view.active { display: block; }
-
-    /* ── Section Header ── */
-    .fac-section-header { margin-bottom: 20px; }
-    .fac-section-eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      font-size: 0.70rem;
-      font-weight: 900;
-      letter-spacing: .08em;
-      color: #000000;
-      background: var(--accent-available);
-      padding: 3px 10px;
-      border-radius: var(--radius-pill);
-      border: 1.5px solid #000000;
-      box-shadow: 1.5px 1.5px 0px #000000;
-      margin-bottom: 8px;
-      text-transform: uppercase;
-    }
-    .fac-section-title {
-      font-size: 1.7rem;
-      font-weight: 900;
-      color: var(--text-main);
-      margin: 0 0 4px;
-      line-height: 1.15;
-      letter-spacing: -0.5px;
-    }
-    .fac-section-sub {
-      font-size: 0.85rem;
-      color: var(--text-sub);
-      font-weight: 700;
-    }
-
-    /* ── KPI MODULE BLOCKS (Neo-Brutalist Deck) ── */
-    .fac-kpi-row {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 16px;
-      margin-bottom: 24px;
-    }
-    .fac-kpi-module {
-      border-radius: var(--radius-lg);
-      padding: 18px 20px;
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-      position: relative;
-      overflow: hidden;
-      background: var(--bg-surface);
-      border: var(--border-main);
-      box-shadow: var(--shadow-main);
-      transition: all .16s ease;
-    }
-    .fac-kpi-module:hover {
-      transform: translate(-1.5px, -1.5px);
-      box-shadow: var(--shadow-lg);
-    }
-    .fac-kpi-module.fac-kpi-mod-green {
-      border-left: 6px solid var(--accent-available);
-    }
-    .fac-kpi-module.fac-kpi-mod-blue {
-      border-left: 6px solid var(--accent-cyan);
-    }
-    .fac-kpi-module.fac-kpi-mod-amber {
-      border-left: 6px solid var(--accent-pending);
-    }
-
-    .fac-kpi-tag {
-      font-size: 0.65rem;
-      font-weight: 900;
-      letter-spacing: .06em;
-      padding: 3px 9px;
-      border-radius: var(--radius-pill);
-      width: fit-content;
-      text-transform: uppercase;
-      border: 1.5px solid #000000;
-      box-shadow: 1px 1px 0px #000000;
-    }
-    .fac-tag-green { background: var(--accent-available); color: #000000; }
-    .fac-tag-blue  { background: var(--accent-cyan); color: #000000; }
-    .fac-tag-amber { background: var(--accent-pending); color: #000000; }
-
-    .fac-kpi-num {
-      font-size: 2.8rem;
-      font-weight: 900;
-      line-height: 1;
-      color: var(--text-main);
-      font-family: inherit;
-    }
-    .fac-kpi-label {
-      font-size: 0.80rem;
-      font-weight: 900;
-      color: var(--text-main);
-      text-transform: uppercase;
-      letter-spacing: 0.4px;
-    }
-    .fac-kpi-detail {
-      font-size: 0.72rem;
-      font-weight: 700;
-      color: var(--text-sub);
-      margin-top: 2px;
-    }
-    .fac-detail-green { color: var(--accent-available); }
-    .fac-detail-blue  { color: var(--accent-cyan); }
-    .fac-detail-amber { color: var(--accent-pending); }
-
-    /* ── FILTER RAIL ── */
-    .fac-filter-rail {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      margin-bottom: 20px;
-      flex-wrap: wrap;
-    }
-    .fac-filter-chip {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      padding: 8px 16px;
-      border-radius: var(--radius-md);
-      font-size: 0.80rem;
-      font-weight: 900;
-      border: var(--border-sub);
-      background: var(--bg-surface);
-      color: var(--text-main);
-      cursor: pointer;
-      white-space: nowrap;
-      box-shadow: var(--shadow-sm);
-      transition: all .15s ease;
-    }
-    .fac-filter-chip:hover {
-      background: var(--bg-surface-elevated);
-      transform: translate(-1px, -1px);
-      box-shadow: 3px 3px 0px #000000;
-    }
-    .fac-filter-chip.active {
-      background: var(--accent-available);
-      color: #000000 !important;
-      border-color: #000000;
-      box-shadow: 2.5px 2.5px 0px #000000;
-    }
-
-    .fac-view-toggle {
-      display: flex;
-      gap: 6px;
-      margin-left: auto;
-      background: var(--bg-surface);
-      padding: 3px;
-      border-radius: var(--radius-md);
-      border: var(--border-sub);
-      box-shadow: var(--shadow-sm);
-    }
-    .fac-seg-btn {
-      padding: 6px 14px;
-      border-radius: var(--radius-sm);
-      font-size: 0.78rem;
-      font-weight: 900;
-      border: 1.5px solid transparent;
-      background: transparent;
-      color: var(--text-sub);
-      cursor: pointer;
-      transition: all .15s ease;
-    }
-    .fac-seg-btn.active {
-      background: var(--text-main);
-      color: var(--bg-surface) !important;
-      border-color: var(--text-main);
-      box-shadow: 1px 1px 0px #000000;
-    }
-    [data-theme="dark"] .fac-seg-btn.active {
-      background: var(--accent-available);
-      color: #000000 !important;
-      border-color: #000000;
-    }
-
-    /* ── ROOM SQUARE BUTTON MATRIX ── */
-    .fac-rooms-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(96px, 1fr));
-      gap: 12px;
-    }
-
-    /* Square room button */
-    .fac-room-sqbtn {
-      aspect-ratio: 1;
-      border-radius: var(--radius-md);
-      border: var(--border-sub);
-      cursor: pointer;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 5px;
-      font-family: inherit;
-      font-weight: 900;
-      font-size: 0.72rem;
-      text-align: center;
-      padding: 10px 6px;
-      box-shadow: var(--shadow-sm);
-      transition: transform .15s ease, box-shadow .15s ease;
-      position: relative;
-    }
-    .fac-room-sqbtn:hover {
-      transform: translate(-2px, -2px) scale(1.05);
-      z-index: 10;
-      box-shadow: 4px 4px 0px #000000;
-    }
-    .fac-room-sqbtn:active {
-      transform: translate(1px, 1px) scale(0.98);
-      box-shadow: 1px 1px 0px #000000;
-    }
-
-    /* Status surfaces */
-    .fac-room-sqbtn.vacant {
-      background: var(--bg-surface);
-      color: var(--text-main);
-      border-color: var(--accent-available);
-      border-width: 2.5px;
-    }
-    .fac-room-sqbtn.vacant .fac-sqbtn-name {
-      color: var(--text-main);
-    }
-    [data-theme="dark"] .fac-room-sqbtn.vacant {
-      background: rgba(204, 255, 0, 0.08);
-      border-color: var(--accent-available);
-    }
-    [data-theme="dark"] .fac-room-sqbtn.vacant .fac-sqbtn-name {
-      color: var(--accent-available);
-    }
-
-    .fac-room-sqbtn.occupied {
-      background: var(--bg-surface);
-      color: var(--text-main);
-      border-color: var(--accent-occupied);
-      border-width: 2.5px;
-    }
-    [data-theme="dark"] .fac-room-sqbtn.occupied {
-      background: rgba(255, 77, 77, 0.08);
-      border-color: var(--accent-occupied);
-    }
-    [data-theme="dark"] .fac-room-sqbtn.occupied .fac-sqbtn-name {
-      color: var(--accent-occupied);
-    }
-
-    .fac-room-sqbtn.maintenance {
-      background: var(--bg-surface);
-      color: var(--text-main);
-      border-color: var(--accent-pending);
-      border-width: 2.5px;
-    }
-    [data-theme="dark"] .fac-room-sqbtn.maintenance {
-      background: rgba(251, 191, 36, 0.08);
-      border-color: var(--accent-pending);
-    }
-    [data-theme="dark"] .fac-room-sqbtn.maintenance .fac-sqbtn-name {
-      color: var(--accent-pending);
-    }
-
-    /* Text inside button */
-    .fac-sqbtn-icon  { width: 8px; height: 8px; border-radius: 50%; display: inline-block; border: 1px solid #000000; }
-    .fac-sqbtn-name  { font-size: 0.70rem; font-weight: 900; max-width: 86px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-    .fac-sqbtn-floor { font-size: 0.60rem; color: var(--text-sub); font-weight: 800; text-transform: uppercase; }
-
-    /* Legend strip */
-    .fac-matrix-legend {
-      display: flex;
-      gap: 16px;
-      flex-wrap: wrap;
-      margin-bottom: 16px;
-      background: var(--bg-surface);
-      border: var(--border-sub);
-      border-radius: var(--radius-md);
-      padding: 8px 14px;
-      box-shadow: var(--shadow-sm);
-    }
-    .fac-legend-item {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      font-size: 0.75rem;
-      font-weight: 800;
-      color: var(--text-main);
-    }
-    .fac-legend-dot {
-      width: 12px;
-      height: 12px;
-      border-radius: 4px;
-      flex-shrink: 0;
-      border: 1.5px solid #000000;
-    }
-
-    /* Floating tooltip */
-    #facFloatTip {
-      position: fixed;
-      z-index: 9999;
-      pointer-events: none;
-      background: var(--bg-surface);
-      color: var(--text-main);
-      padding: 14px 16px;
-      border-radius: var(--radius-md);
-      width: 230px;
-      font-family: inherit;
-      border: var(--border-main);
-      box-shadow: 6px 6px 0px #000000;
-      opacity: 0;
-      transition: opacity .15s ease;
-      line-height: 1.45;
-      font-size: 0.75rem;
-    }
-    #facFloatTip .tip-room {
-      font-size: 1rem;
-      font-weight: 900;
-      margin-bottom: 2px;
-      color: var(--text-main);
-    }
-    #facFloatTip .tip-status {
-      font-size: 0.70rem;
-      font-weight: 900;
-      margin-bottom: 8px;
-      text-transform: uppercase;
-      letter-spacing: 0.4px;
-    }
-    #facFloatTip .tip-row {
-      display: flex;
-      justify-content: space-between;
-      gap: 8px;
-      padding: 4px 0;
-      border-bottom: 1px solid rgba(128,128,128,0.2);
-    }
-    #facFloatTip .tip-row:last-of-type { border: none; }
-    #facFloatTip .tip-key { color: var(--text-sub); font-size: 0.70rem; font-weight: 800; }
-    #facFloatTip .tip-val { font-weight: 900; font-size: 0.70rem; text-align: right; max-width: 140px; color: var(--text-main); }
-    #facFloatTip .tip-cta {
-      margin-top: 10px;
-      background: var(--accent-available);
-      color: #000000;
-      text-align: center;
-      padding: 6px 8px;
-      border-radius: var(--radius-sm);
-      font-size: 0.74rem;
-      font-weight: 900;
-      border: 1.5px solid #000000;
-      box-shadow: 1.5px 1.5px 0px #000000;
-    }
-
-    /* ── REQUEST FORM ── */
-    .fac-form-card {
-      background: var(--bg-surface);
-      border-radius: var(--radius-lg);
-      border: var(--border-main);
-      max-width: 820px;
-      margin: 0 auto;
-      overflow: hidden;
-      box-shadow: var(--shadow-main);
-    }
-    .fac-form-hero {
-      background: var(--bg-surface-elevated);
-      padding: 22px 28px;
-      color: var(--text-main);
-      border-bottom: var(--border-sub);
-    }
-    .fac-form-hero-title {
-      font-size: 1.4rem;
-      font-weight: 900;
-      margin: 0 0 4px;
-      letter-spacing: -0.3px;
-    }
-    .fac-form-hero-sub {
-      font-size: 0.82rem;
-      color: var(--text-sub);
-      font-weight: 700;
-    }
-    .fac-form-body {
-      padding: 24px 28px;
-      display: flex;
-      flex-direction: column;
-      gap: 18px;
-    }
-    .fac-form-row {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 16px;
-    }
-    .fac-form-group {
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-    }
-    .fac-form-label {
-      font-size: 0.76rem;
-      font-weight: 900;
-      color: var(--text-main);
-      text-transform: uppercase;
-      letter-spacing: .05em;
-    }
-    .fac-form-input {
-      height: 44px;
-      border-radius: var(--radius-md);
-      border: var(--border-sub);
-      padding: 0 14px;
-      font-size: 0.88rem;
-      font-weight: 800;
-      color: var(--text-main);
-      background: var(--bg-canvas);
-      outline: none;
-      font-family: inherit;
-      box-shadow: var(--shadow-sm);
-      transition: all .15s ease;
-    }
-    .fac-form-input:focus {
-      border-color: var(--text-main);
-      box-shadow: 3px 3px 0px var(--accent-available);
-    }
-    .fac-form-textarea {
-      height: auto !important;
-      padding: 12px 14px;
-      resize: vertical;
-      min-height: 90px;
-    }
-    .fac-form-select {
-      cursor: pointer;
-    }
-    .fac-form-footer {
-      display: flex;
-      gap: 12px;
-      justify-content: flex-end;
-      padding-top: 8px;
-    }
-    .fac-btn-reset {
-      height: 44px;
-      padding: 0 20px;
-      border-radius: var(--radius-md);
-      font-size: 0.84rem;
-      font-weight: 900;
-      background: var(--bg-surface-elevated);
-      border: var(--border-sub);
-      color: var(--text-main);
-      cursor: pointer;
-      box-shadow: var(--shadow-sm);
-      transition: all .15s ease;
-    }
-    .fac-btn-reset:hover {
-      background: var(--bg-surface);
-      transform: translate(-1px, -1px);
-      box-shadow: 3px 3px 0px #000000;
-    }
-    .fac-btn-submit {
-      height: 44px;
-      padding: 0 28px;
-      border-radius: var(--radius-md);
-      font-size: 0.88rem;
-      font-weight: 900;
-      background: var(--accent-available);
-      color: #000000 !important;
-      border: 2px solid #000000;
-      cursor: pointer;
-      box-shadow: var(--shadow-sm);
-      transition: all .15s ease;
-    }
-    .fac-btn-submit:hover {
-      background: #ffffff;
-      color: #000000 !important;
-      transform: translate(-1.5px, -1.5px);
-      box-shadow: 4px 4px 0px #000000;
-    }
-    .fac-btn-submit:active {
-      transform: translate(1px, 1px);
-      box-shadow: 1px 1px 0px #000000;
-    }
-
-    /* ── LOGS LIST ── */
-    .fac-logs-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 20px;
-      flex-wrap: wrap;
-      gap: 12px;
-    }
-    .fac-logs-list {
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
-    }
-    .fac-log-card {
-      background: var(--bg-surface);
-      border-radius: var(--radius-lg);
-      border: var(--border-main);
-      overflow: hidden;
-      box-shadow: var(--shadow-main);
-      transition: all .15s ease;
-    }
-    .fac-log-card:hover {
-      transform: translate(-1px, -1px);
-      box-shadow: var(--shadow-lg);
-    }
-    .fac-log-top {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 14px 18px;
-      border-bottom: var(--border-sub);
-      background: var(--bg-surface-elevated);
-    }
-    .fac-log-id {
-      font-size: 0.72rem;
-      font-weight: 900;
-      color: var(--text-sub);
-      letter-spacing: .06em;
-      text-transform: uppercase;
-      font-family: var(--font-mono);
-    }
-    .fac-log-room {
-      font-size: 1.1rem;
-      font-weight: 900;
-      color: var(--text-main);
-    }
-    .fac-log-meta-row {
-      display: flex;
-      gap: 16px;
-      padding: 10px 18px;
-      font-size: 0.78rem;
-      color: var(--text-sub);
-      font-weight: 800;
-      flex-wrap: wrap;
-    }
-    .fac-log-purpose {
-      padding: 10px 18px;
-      font-size: 0.82rem;
-      font-weight: 800;
-      color: var(--text-main);
-      background: var(--bg-canvas);
-      border-top: var(--border-sub);
-    }
-    .fac-log-footer {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 12px 18px;
-      border-top: var(--border-sub);
-    }
-
-    /* ── PROFILE ── */
-    .fac-profile-card {
-      background: var(--bg-surface);
-      border-radius: var(--radius-lg);
-      border: var(--border-main);
-      max-width: 820px;
-      margin: 0 auto;
-      overflow: hidden;
-      box-shadow: var(--shadow-main);
-    }
-    .fac-profile-hero {
-      background: var(--bg-surface-elevated);
-      padding: 28px;
-      display: flex;
-      align-items: center;
-      gap: 20px;
-      border-bottom: var(--border-sub);
-    }
-    .fac-profile-avatar {
-      width: 68px;
-      height: 68px;
-      border-radius: var(--radius-md);
-      background: var(--accent-available);
-      border: 2.5px solid #000000;
-      font-size: 2rem;
-      font-weight: 900;
-      color: #000000;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-      box-shadow: 3px 3px 0px #000000;
-    }
-    .fac-profile-name {
-      font-size: 1.5rem;
-      font-weight: 900;
-      color: var(--text-main);
-      margin: 0;
-      letter-spacing: -0.4px;
-    }
-    .fac-profile-dept {
-      font-size: 0.82rem;
-      color: var(--text-sub);
-      font-weight: 800;
-      margin-top: 4px;
-    }
-    .fac-profile-body {
-      padding: 28px;
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-    }
-
-    /* ── STATUS BADGE ── */
-    .fac-status-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 5px;
-      padding: 4px 12px;
-      border-radius: var(--radius-pill);
-      font-size: 0.70rem;
-      font-weight: 900;
-      text-transform: uppercase;
-      letter-spacing: .05em;
-      border: 1.5px solid #000000;
-      box-shadow: 1.5px 1.5px 0px #000000;
-    }
-    .fac-badge-approved { background: var(--accent-available); color: #000000; }
-    .fac-badge-pending  { background: var(--accent-pending); color: #000000; }
-    .fac-badge-denied   { background: var(--accent-occupied); color: #ffffff; }
-
-    /* ── MOBILE BOTTOM NAV ── */
-    .fac-bottom-nav {
-      display: none;
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      background: var(--bg-surface);
-      border-top: var(--border-main);
-      padding: 0 0 env(safe-area-inset-bottom);
-      z-index: 900;
-      box-shadow: 0 -4px 0px #000000;
-    }
-    .fac-nav-tabs { display: flex; }
-    .fac-nav-tab {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 3px;
-      padding: 10px 4px;
-      text-decoration: none;
-      font-size: 0.68rem;
-      font-weight: 900;
-      color: var(--text-sub);
-      transition: color .15s ease;
-      position: relative;
-    }
-    .fac-nav-tab svg { width: 20px; height: 20px; stroke: currentColor; stroke-width: 2.2; }
-    .fac-nav-tab.active { color: var(--text-main); }
-    .fac-nav-tab.active svg { stroke: var(--accent-available); transform: scale(1.1); }
-    .fac-nav-tab.active::after {
-      content: '';
-      position: absolute;
-      bottom: 4px;
-      width: 18px;
-      height: 3.5px;
-      background: var(--accent-available);
-      border-radius: var(--radius-pill);
-      border: 1px solid #000000;
-    }
-    .fac-tab-badge {
-      position: absolute;
-      top: 6px;
-      right: calc(50% - 18px);
-      background: var(--accent-occupied);
-      color: #fff;
-      font-size: 0.60rem;
-      font-weight: 900;
-      padding: 1px 5px;
-      border-radius: var(--radius-pill);
-      min-width: 16px;
-      text-align: center;
-      border: 1px solid #000000;
-    }
-
-    /* ── MODAL ── */
-    .fac-modal-backdrop {
-      display: none;
-      position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,.65);
-      backdrop-filter: blur(4px);
-      z-index: 2000;
-      align-items: center;
-      justify-content: center;
-      padding: 16px;
-    }
-    .fac-modal-backdrop.open { display: flex; }
-    .fac-modal {
-      background: var(--bg-surface);
-      border-radius: var(--radius-lg);
-      width: 100%;
-      max-width: 480px;
-      overflow: hidden;
-      border: var(--border-main);
-      box-shadow: 8px 8px 0px #000000;
-      animation: modalSlideUp .22s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-    @keyframes modalSlideUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
-    .fac-modal-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 16px 20px;
-      border-bottom: var(--border-sub);
-      background: var(--bg-surface-elevated);
-    }
-    .fac-modal-title {
-      font-size: 1.15rem;
-      font-weight: 900;
-      color: var(--text-main);
-    }
-    .fac-modal-close {
-      width: 32px;
-      height: 32px;
-      border-radius: var(--radius-sm);
-      background: var(--bg-surface);
-      border: var(--border-sub);
-      color: var(--text-main);
-      font-size: 1rem;
-      font-weight: 900;
-      cursor: pointer;
-      box-shadow: 1.5px 1.5px 0px #000000;
-    }
-    .fac-modal-close:hover {
-      background: var(--accent-occupied);
-      color: #fff;
-    }
-    .fac-modal-body { padding: 20px; }
-    .fac-modal-status {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      padding: 10px 14px;
-      border-radius: var(--radius-md);
-      margin-bottom: 16px;
-      font-size: 0.82rem;
-      font-weight: 900;
-      border: var(--border-sub);
-      box-shadow: var(--shadow-sm);
-    }
-    .fac-modal-status.available { background: rgba(204,255,0,0.15); color: var(--accent-available); border-color: var(--accent-available); }
-    .fac-modal-status.occupied  { background: rgba(255,77,77,0.15); color: var(--accent-occupied); border-color: var(--accent-occupied); }
-    .fac-modal-specs {
-      display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
-      gap: 10px;
-      margin-bottom: 18px;
-    }
-    .fac-modal-spec {
-      background: var(--bg-canvas);
-      border-radius: var(--radius-md);
-      padding: 10px 12px;
-      text-align: center;
-      border: var(--border-sub);
-      box-shadow: var(--shadow-sm);
-    }
-    .fac-modal-spec-lbl {
-      font-size: 0.65rem;
-      font-weight: 900;
-      color: var(--text-sub);
-      text-transform: uppercase;
-      display: block;
-      margin-bottom: 2px;
-    }
-    .fac-modal-spec-val {
-      font-size: 0.88rem;
-      font-weight: 900;
-      color: var(--text-main);
-    }
-
-    /* ── TOAST ── */
-    .fac-toast-container {
-      position: fixed;
-      bottom: 85px;
-      right: 20px;
-      z-index: 9999;
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-    }
-    .fac-toast {
-      background: var(--bg-surface);
-      color: var(--text-main);
-      padding: 12px 18px;
-      border-radius: var(--radius-md);
-      font-size: 0.84rem;
-      font-weight: 800;
-      border: var(--border-main);
-      box-shadow: 4px 4px 0px #000000;
-      animation: toastIn .22s ease;
-    }
-    @keyframes toastIn { from { opacity: 0; transform: translateX(20px); } to { opacity: 1; transform: translateX(0); } }
-
-    /* ── BACKDROP OVERLAY ── */
-    .fac-backdrop {
-      display: none;
-      position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,.5);
-      backdrop-filter: blur(3px);
-      z-index: 500;
-    }
-    .fac-app.mobile-open .fac-backdrop { display: block; }
-    .fac-app.mobile-open .fac-sidebar {
-      transform: translateX(0) !important;
-      box-shadow: 8px 0 0px #000000 !important;
-    }
-
-    /* ── RESPONSIVE ── */
-    @media (max-width: 768px) {
-      .fac-sidebar {
-        position: fixed;
-        top: 0;
-        left: 0;
-        bottom: 0;
-        width: 240px !important;
-        min-width: 240px !important;
-        transform: translateX(-100%);
-        z-index: 1050;
-      }
-      .fac-content { padding: 16px 14px 90px; }
-      .fac-bottom-nav { display: block; }
-      .fac-kpi-row { grid-template-columns: 1fr; gap: 12px; }
-      .fac-rooms-grid { grid-template-columns: repeat(auto-fill, minmax(80px, 1fr)) !important; gap: 8px !important; }
-      .fac-form-row { grid-template-columns: 1fr; }
-      .fac-topbar { padding: 0 12px; }
-      .fac-search-wrap { max-width: none; }
-      .fac-theme-btn span.fac-theme-label { display: none; }
-      .fac-req-btn span { display: none; }
-      .fac-section-title { font-size: 1.35rem; }
-      .fac-kpi-num { font-size: 2.2rem; }
-    }
-  </style>
+  <link rel="stylesheet" href="css/dashboard.css?v=2.5.0">
+  <link rel="stylesheet" href="css/faculty.css?v=2.5.0">
+  <link rel="stylesheet" href="css/dev-tool.css">
 </head>
-<body>
+<body class="fac-body">
 
   <div class="fac-app" id="facApp">
 
-    <!-- ── Sidebar ── -->
+    <!-- ── Left Faculty Sidebar (Cyber-CAD Neo-Brutalist Shell) ── -->
     <aside class="fac-sidebar" id="facSidebar">
       <div>
-        <!-- Brand -->
+        <!-- Brand Lockup -->
         <div class="fac-brand">
-          <svg class="fac-brand-icon" viewBox="0 0 100 100">
-            <circle cx="50" cy="50" r="46" fill="#043c2e" stroke="#eab308" stroke-width="4"/>
-            <circle cx="50" cy="50" r="38" fill="none" stroke="#ca8a04" stroke-width="1.5" stroke-dasharray="4,2"/>
-            <path d="M50 20 L58 36 L76 36 L62 48 L68 66 L50 54 L32 66 L38 48 L24 36 L42 36 Z" fill="#facc15"/>
-            <circle cx="50" cy="50" r="12" fill="#047857" stroke="#ca8a04" stroke-width="2"/>
-            <text x="50" y="54" font-family="Plus Jakarta Sans,system-ui" font-size="10" font-weight="900" fill="#fff" text-anchor="middle">BSU</text>
-          </svg>
+          <div class="fac-brand-seal">
+            <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#000000" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M3 21h18M5 21V9l7-5 7 5v12M9 14h6M9 18h6M9 10h6"/>
+            </svg>
+          </div>
           <div class="fac-brand-text">
             <h1>FARMS</h1>
-            <p>Faculty Availability and<br>Room Management System</p>
+            <p>Faculty Availability &amp;<br>Room Management System</p>
           </div>
         </div>
 
-        <!-- Nav -->
+        <!-- Navigation Menu -->
         <nav class="fac-nav">
-          <a href="#" class="fac-nav-item active" data-view="status">
-            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M3 21h18M5 21V7l7-4 7 4v14M9 10h1M14 10h1M9 14h1M14 14h1M9 18h1M14 18h1"/></svg>
-            Room Status &amp; Maps
+          <a href="#status" class="fac-nav-item active" data-view="status">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="3" width="18" height="18" rx="2.5"/>
+              <path d="M3 9h18M3 15h18M9 3v18M15 3v18"/>
+            </svg>
+            <span>Room Status &amp; Maps</span>
           </a>
-          <a href="#" class="fac-nav-item" data-view="request">
-            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
-            Request Room Access
+
+          <a href="#request" class="fac-nav-item" data-view="request">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="9"/>
+              <line x1="12" y1="8" x2="12" y2="16"/>
+              <line x1="8" y1="12" x2="16" y2="12"/>
+            </svg>
+            <span>Request Room Access</span>
           </a>
-          <a href="#" class="fac-nav-item" data-view="logs">
-            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1"/><path d="M9 14h6"/><path d="M9 18h6"/><path d="M9 10h6"/></svg>
-            Booking Logs &amp; Status
+
+          <a href="#logs" class="fac-nav-item" data-view="logs">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/>
+              <rect x="8" y="2" width="8" height="4" rx="1"/>
+              <path d="M9 14h6M9 18h6M9 10h6"/>
+            </svg>
+            <span>Booking Logs &amp; Permits</span>
             <span class="fac-nav-badge" id="sidebarLogBadge">1</span>
           </a>
-          <a href="#" class="fac-nav-item" data-view="profile">
-            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-            Edit Profile
+
+          <a href="#profile" class="fac-nav-item" data-view="profile">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+              <circle cx="12" cy="7" r="4"/>
+            </svg>
+            <span>Faculty Profile</span>
           </a>
+
           <a href="login.html" class="fac-nav-item fac-signout">
-            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
-            Sign Out
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
+              <polyline points="16 17 21 12 16 7"/>
+              <line x1="21" y1="12" x2="9" y2="12"/>
+            </svg>
+            <span>Sign Out</span>
           </a>
         </nav>
       </div>
 
+      <!-- Institutional Footer Badge -->
       <div class="fac-sidebar-foot">
-        <span class="fac-status-dot"></span>BSU Faculty Workstation &nbsp;·&nbsp; FARMS v2.4
+        <div class="fac-campus-pill">
+          <span class="fac-status-dot"></span>
+          <span>BSU Main Campus</span>
+        </div>
+        <div class="fac-version-tag">Faculty Terminal • FARMS v2.5</div>
       </div>
     </aside>
 
-    <!-- Backdrop -->
+    <!-- Mobile Backdrop Overlay -->
     <div class="fac-backdrop" id="facBackdrop"></div>
 
-    <!-- ── Main ── -->
+    <!-- ── Main Workspace Area ── -->
     <div class="fac-main">
 
-      <!-- Topbar -->
+      <!-- ── Topbar (Executive Time Sync & Chunky Controls) ── -->
       <header class="fac-topbar">
-        <button class="fac-hamburger" id="facToggleBtn" aria-label="Toggle Sidebar">
-          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round">
-            <line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/>
-          </svg>
-        </button>
+        <!-- Left Cluster -->
+        <div class="fac-topbar-left">
+          <button class="fac-hamburger" id="facToggleBtn" aria-label="Toggle Sidebar" title="Toggle Sidebar Navigation">
+            <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round">
+              <line x1="3" y1="6" x2="21" y2="6"/>
+              <line x1="3" y1="12" x2="21" y2="12"/>
+              <line x1="3" y1="18" x2="21" y2="18"/>
+            </svg>
+          </button>
 
-        <div class="fac-search-wrap">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#94a3b8" stroke-width="2.5" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-          <input type="text" id="facSearch" placeholder="Search rooms, buildings..." autocomplete="off">
+          <div class="fac-search-wrap">
+            <span class="fac-search-icon">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="11" cy="11" r="8"/>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+              </svg>
+            </span>
+            <input type="text" id="facSearch" placeholder="Search facilities, rooms, or buildings..." autocomplete="off">
+          </div>
         </div>
 
+        <!-- Center: Maximized Executive Live Clock Widget -->
+        <div class="fac-clock-widget" id="liveTimestampWidget" title="BSU Campus Realtime Clock Synchronization">
+          <div class="fac-clock-core">
+            <span class="fac-clock-digits" id="clockTimeDigits">12:00:00</span>
+            <span class="fac-clock-ampm" id="clockAmPm">AM</span>
+          </div>
+          <div class="fac-clock-sub" id="clockDateSub">
+            Loading date...
+          </div>
+          <!-- Hidden legacy span for script compatibility -->
+          <span id="liveTimestamp" style="display:none;"></span>
+        </div>
+
+        <!-- Right Cluster -->
         <div class="fac-topbar-right">
-          <button class="fac-theme-btn" id="facThemeBtn">
+          <!-- Database Live Sync Status Pill -->
+          <div class="db-sync-status-pill" id="dbSyncStatusPill" title="FARMS SQLite Database Connection">
+            <span class="db-sync-dot online"></span>
+            <span class="db-sync-label">DTB</span>
+          </div>
+
+          <!-- Dark / Light Theme Toggle -->
+          <button class="fac-theme-btn" id="facThemeBtn" title="Toggle Dark/Light Mode" aria-label="Toggle Theme">
             <span id="facThemeIcon">
-              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="5"/>
+                <line x1="12" y1="1" x2="12" y2="3"/>
+                <line x1="12" y1="21" x2="12" y2="23"/>
+                <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+                <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+                <line x1="1" y1="12" x2="3" y2="12"/>
+                <line x1="21" y1="12" x2="23" y2="12"/>
+                <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+                <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+              </svg>
             </span>
-            <span class="fac-theme-label" id="facThemeLabel">Dark</span>
+            <span class="fac-theme-label" id="facThemeLabel" style="display:none;">Dark</span>
           </button>
-          <button class="fac-req-btn" id="facQuickReqBtn">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
+
+          <!-- Fast Quick Request Action -->
+          <button class="fac-req-btn" id="facQuickReqBtn" title="Fast Room Reservation Request">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round">
+              <circle cx="12" cy="12" r="9"/>
+              <line x1="12" y1="8" x2="12" y2="16"/>
+              <line x1="8" y1="12" x2="16" y2="12"/>
+            </svg>
             <span>Request Room</span>
           </button>
-          <div class="fac-avatar" id="facAvatarBtn" data-view="profile" title="Edit Profile">M</div>
+
+          <!-- Faculty Profile Button -->
+          <div class="fac-profile-btn" id="facAvatarBtn" data-view="profile" title="View / Edit Faculty Profile">
+            <div class="fac-avatar-circle" id="profileAvatarHeader">M</div>
+            <div class="fac-profile-meta">
+              <span class="fac-profile-name" id="profileHeaderName">Prof. Santos</span>
+              <span class="fac-profile-role">Faculty Portal</span>
+            </div>
+          </div>
         </div>
       </header>
 
-      <!-- Scrollable Content -->
+      <!-- ── Scrollable Workspace Content ── -->
       <main class="fac-content" id="facScrollMain">
 
         <!-- ==========================================
-             VIEW 1: ROOM STATUS
+             VIEW 1: ROOM STATUS & CAMPUS MATRIX
              ========================================== -->
         <section class="fac-view active" id="view-status">
-
           <div class="fac-section-header">
             <div class="fac-section-eyebrow">
-              <span class="fac-status-dot" style="background:var(--accent-occupied); box-shadow:0 0 6px var(--accent-occupied);"></span> LIVE &nbsp;·&nbsp; <span id="liveTimestamp">BSU Faculty Terminal</span>
+              <span class="fac-status-dot"></span> LIVE FACULTY DASHBOARD &nbsp;·&nbsp; BSU TERMINAL
             </div>
-            <h2 class="fac-section-title">Room Status &amp; Availability</h2>
-            <p class="fac-section-sub">Welcome back, <strong id="greetingFacultyName" style="color:var(--accent-available);">Prof. Santos</strong> — select a room to request access.</p>
+            <h2 class="fac-section-title">Room Status &amp; Campus Availability</h2>
+            <p class="fac-section-sub">Welcome back, <strong id="greetingFacultyName" style="color:var(--fac-lime);">Prof. Santos</strong> — select any room to inspect occupancy or request instant access.</p>
           </div>
 
-          <!-- KPI Modules -->
+          <!-- Dynamic Active Session / Checkout Banner -->
+          <div id="facActiveSessionContainer"></div>
+
+          <!-- KPI Metric Modules -->
           <div class="fac-kpi-row">
-            <div class="fac-kpi-module fac-kpi-mod-green">
-              <span class="fac-kpi-tag fac-tag-green">● Vacant</span>
+            <!-- Vacant Rooms Card -->
+            <div class="fac-kpi-card">
+              <div class="fac-kpi-head">
+                <span class="fac-kpi-badge fac-badge-green">● Open Now</span>
+              </div>
               <div class="fac-kpi-num" id="statVacantCount">54</div>
-              <div class="fac-kpi-label">Available Rooms</div>
-              <div class="fac-kpi-detail fac-detail-green">Across 3 Buildings · Open Now</div>
+              <div class="fac-kpi-label">Available Vacant Rooms</div>
+              <div class="fac-kpi-desc">Across Pancho, CBA &amp; Hangar Buildings</div>
             </div>
-            <div class="fac-kpi-module fac-kpi-mod-blue">
-              <span class="fac-kpi-tag fac-tag-blue">● Active</span>
+
+            <!-- Approved Permits Card -->
+            <div class="fac-kpi-card">
+              <div class="fac-kpi-head">
+                <span class="fac-kpi-badge fac-badge-blue">● Verified Active</span>
+              </div>
               <div class="fac-kpi-num" id="statApprovedCount">2</div>
               <div class="fac-kpi-label">My Approved Permits</div>
-              <div class="fac-kpi-detail fac-detail-blue">Science Lab &amp; AVR</div>
+              <div class="fac-kpi-desc">Science Laboratory &amp; Multimedia Room</div>
             </div>
-            <div class="fac-kpi-module fac-kpi-mod-amber">
-              <span class="fac-kpi-tag fac-tag-amber">Pending</span>
+
+            <!-- Pending Approvals Card -->
+            <div class="fac-kpi-card">
+              <div class="fac-kpi-head">
+                <span class="fac-kpi-badge fac-badge-amber">⏳ Pending Review</span>
+              </div>
               <div class="fac-kpi-num" id="statPendingCount">1</div>
-              <div class="fac-kpi-label">Pending Requests</div>
-              <div class="fac-kpi-detail fac-detail-amber">Awaiting Admin Approval</div>
+              <div class="fac-kpi-label">Pending Endorsements</div>
+              <div class="fac-kpi-desc">Awaiting Admin Sign-off for Access</div>
             </div>
           </div>
 
-          <!-- Legend Strip -->
-          <div class="fac-matrix-legend">
-            <div class="fac-legend-item">
-              <span class="fac-legend-dot" style="background:var(--accent-available);"></span>
-              <span>Vacant (Available)</span>
+          <!-- Campus Matrix Card -->
+          <div class="fac-matrix-card">
+            <div class="fac-matrix-controls">
+              <!-- Building Selectors -->
+              <div class="fac-bldg-tabs">
+                <button class="fac-tab-btn active fac-filter-chip" data-filter="all">All Campus Facilities</button>
+                <button class="fac-tab-btn fac-filter-chip" data-filter="vacant"><span class="fac-status-dot" style="display:inline-block; margin-right:4px;"></span> Vacant Only</button>
+                <button class="fac-tab-btn fac-filter-chip" data-filter="Pancho Building">Pancho Building</button>
+                <button class="fac-tab-btn fac-filter-chip" data-filter="CBA Building">CBA Building</button>
+                <button class="fac-tab-btn fac-filter-chip" data-filter="Hangar">Aviation Hangar</button>
+              </div>
+
+              <!-- Legend Strip -->
+              <div class="fac-matrix-legend">
+                <div class="fac-legend-item">
+                  <span class="fac-legend-dot" style="background:var(--fac-lime);"></span>
+                  <span>Vacant (Open)</span>
+                </div>
+                <div class="fac-legend-item">
+                  <span class="fac-legend-dot" style="background:var(--fac-coral);"></span>
+                  <span>Occupied (In-Use)</span>
+                </div>
+                <div class="fac-legend-item">
+                  <span class="fac-legend-dot" style="background:var(--fac-amber);"></span>
+                  <span>Maintenance / Restricted</span>
+                </div>
+              </div>
             </div>
-            <div class="fac-legend-item">
-              <span class="fac-legend-dot" style="background:var(--accent-occupied);"></span>
-              <span>Occupied (In-Use)</span>
+
+            <!-- Room Cards Dynamic Container -->
+            <div class="fac-rooms-grid" id="facRoomsGrid">
+              <!-- Populated dynamically via js/faculty.js -->
             </div>
-            <div class="fac-legend-item">
-              <span class="fac-legend-dot" style="background:var(--accent-pending);"></span>
-              <span>Maintenance / Restricted</span>
+
+            <!-- Vector Map (hidden fallback) -->
+            <div class="hidden" id="facMapContainer">
+              <div id="facMapContent"></div>
             </div>
           </div>
-
-          <!-- Filter Rail -->
-          <div class="fac-filter-rail">
-            <div style="display:flex; gap:8px; overflow-x:auto; flex:1; -webkit-overflow-scrolling:touch; padding-bottom:2px;">
-              <button class="fac-filter-chip active" data-filter="all">All Rooms</button>
-              <button class="fac-filter-chip" data-filter="vacant"><span class="fac-status-dot" style="background:var(--accent-available); margin:0;"></span> Vacant Only</button>
-              <button class="fac-filter-chip" data-filter="Pancho Building">Pancho</button>
-              <button class="fac-filter-chip" data-filter="CBA Building">CBA</button>
-              <button class="fac-filter-chip" data-filter="Hangar">Hangar</button>
-            </div>
-            <div class="fac-view-toggle" style="flex-shrink:0;">
-              <button class="fac-seg-btn active" id="facBtnCards">Cards</button>
-              <button class="fac-seg-btn" id="facBtnMap">Map</button>
-            </div>
-          </div>
-
-          <!-- Room Cards Grid -->
-          <div class="fac-rooms-grid" id="facRoomsGrid">
-            <!-- Populated by JS -->
-          </div>
-
-          <!-- Vector Map (hidden by default) -->
-          <div class="hidden" id="facMapContainer" style="background:var(--bg-surface); border-radius:var(--radius-lg); border:var(--border-main); box-shadow:var(--shadow-main); overflow:hidden; min-height:400px;">
-            <div id="facMapContent"></div>
-          </div>
-
         </section>
 
         <!-- ==========================================
@@ -1390,114 +277,367 @@
              ========================================== -->
         <section class="fac-view" id="view-request">
           <div class="fac-section-header">
-            <div class="fac-section-eyebrow">Form</div>
-            <h2 class="fac-section-title">Request Room Access</h2>
-            <p class="fac-section-sub">Submit a room reservation request for classes, labs, or academic events.</p>
+            <div class="fac-section-eyebrow">Permit Form</div>
+            <h2 class="fac-section-title">Request Facility Access</h2>
+            <p class="fac-section-sub">Submit an official room reservation request for classes, laboratory defense, or academic consultations.</p>
           </div>
 
-          <div class="fac-form-card">
-            <div class="fac-form-hero">
-              <div class="fac-form-hero-title">Room Reservation Form</div>
-              <div class="fac-form-hero-sub">All requests are reviewed by the Admin within 24 hours.</div>
-            </div>
-            <div class="fac-form-body">
+          <div class="fac-request-layout">
+            <!-- Left Column: Permit Request Form -->
+            <div class="fac-form-card">
               <form id="facRequestForm">
-                <div class="fac-form-row">
+                <div class="fac-form-grid">
                   <div class="fac-form-group">
-                    <label class="fac-form-label">Building</label>
-                    <select id="reqBuilding" class="fac-form-input fac-form-select" required>
+                    <label class="fac-form-label">Building / Sector</label>
+                    <select id="reqBuilding" class="fac-form-select" required>
                       <option value="Pancho Building">Pancho Building</option>
                       <option value="CBA Building">CBA Building</option>
                       <option value="Hangar">Hangar Aviation Complex</option>
                     </select>
                   </div>
+
                   <div class="fac-form-group">
-                    <label class="fac-form-label">Room / Facility</label>
-                    <select id="reqRoom" class="fac-form-input fac-form-select" required>
-                      <option value="Pancho 101">Pancho 101 (Classroom)</option>
-                      <option value="Pancho 105">Pancho 105 (Classroom)</option>
-                      <option value="Science Laboratory">Science Laboratory</option>
-                      <option value="Multimedia Room">Multimedia Room / AVR</option>
-                      <option value="CBA 101">CBA 101 (Classroom)</option>
-                      <option value="CBA 102">CBA 102 (Computer Lab)</option>
-                      <option value="CBA 202">CBA 202 (Lecture Room)</option>
-                      <option value="Hangar 002">Hangar 002 (Aviation Bay)</option>
-                      <option value="Hangar 003">Hangar 003 (Aviation Bay)</option>
+                    <label class="fac-form-label">Facility / Room Code</label>
+                    <select id="reqRoom" class="fac-form-select" required>
+                      <option value="Pancho 101">Pancho 101 (Classroom - 45 seats)</option>
+                      <option value="Pancho 105">Pancho 105 (Classroom - 45 seats)</option>
+                      <option value="Science Laboratory">Science Laboratory (Lab - 40 seats)</option>
+                      <option value="Multimedia Room">Multimedia Room / AVR (AV - 50 seats)</option>
+                      <option value="CBA 101">CBA 101 (Lecture - 45 seats)</option>
+                      <option value="CBA 102">CBA 102 (Computer Lab - 50 seats)</option>
+                      <option value="CBA 202">CBA 202 (Lecture Hall - 45 seats)</option>
+                      <option value="Hangar 002">Hangar 002 (Aviation Bay - 35 seats)</option>
+                      <option value="Hangar 003">Hangar 003 (Aviation Bay - 35 seats)</option>
                     </select>
                   </div>
-                </div>
-                <div class="fac-form-row">
+
                   <div class="fac-form-group">
                     <label class="fac-form-label">Reservation Date</label>
                     <input type="date" id="reqDate" class="fac-form-input" required>
                   </div>
-                  <div class="fac-form-group">
-                    <label class="fac-form-label">Time Duration</label>
-                    <input type="text" id="reqTime" placeholder="e.g. 01:00 PM – 03:00 PM" class="fac-form-input" required>
+                </div>
+
+                <!-- ── Interactive Time Range Selector UI ── -->
+                <div class="fac-form-group" style="margin-bottom: 20px;">
+                  <label class="fac-form-label">Time Window &amp; Duration</label>
+                  <div class="time-range-picker-card" id="reqTimePickerCard">
+                    <div class="time-inputs-row">
+                      <div class="time-field-box">
+                        <div class="time-field-header">
+                          <label class="time-field-label">Start Time</label>
+                          <button type="button" class="btn-time-now" data-action="set-now" title="Set Start Time to current time">
+                            <svg viewBox="0 0 24 24" width="11" height="11" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><polyline points="12 6 12 12 15 15"/></svg>
+                            Now
+                          </button>
+                        </div>
+                        <input type="time" class="time-ui-input" id="reqStartTime" value="08:00" required>
+                      </div>
+                      <div class="time-divider-arrow">→</div>
+                      <div class="time-field-box">
+                        <label class="time-field-label" style="height:19px; display:flex; align-items:center;">End Time</label>
+                        <input type="time" class="time-ui-input" id="reqEndTime" value="10:00" required>
+                      </div>
+                    </div>
+
+                    <!-- Quick Duration Preset Chips -->
+                    <div class="time-quick-duration-strip">
+                      <span class="quick-dur-label">Quick Duration:</span>
+                      <div class="quick-dur-chips">
+                        <button type="button" class="dur-chip" data-mins="30">30m</button>
+                        <button type="button" class="dur-chip" data-mins="60">1 hr</button>
+                        <button type="button" class="dur-chip" data-mins="90">1.5 hrs</button>
+                        <button type="button" class="dur-chip active" data-mins="120">2 hrs</button>
+                        <button type="button" class="dur-chip" data-mins="150">2.5 hrs</button>
+                        <button type="button" class="dur-chip" data-mins="180">3 hrs</button>
+                        <button type="button" class="dur-chip" data-mins="240">4 hrs</button>
+                      </div>
+                    </div>
+
+                    <!-- Live Calculated Summary Banner -->
+                    <div class="time-summary-banner" id="reqTimeSummaryBanner">
+                      <span class="time-summary-icon">🕒</span>
+                      <span class="time-summary-text" id="reqTimeSummaryText">08:00 AM – 10:00 AM (120 mins / 2.0 hrs)</span>
+                    </div>
                   </div>
+                  <!-- Hidden input for backwards-compatible submission -->
+                  <input type="hidden" id="reqTime" value="08:00 AM – 10:00 AM">
                 </div>
-                <div class="fac-form-group">
+
+                <div class="fac-form-group" style="margin-bottom: 20px;">
                   <label class="fac-form-label">Subject Code / Event Title</label>
-                  <input type="text" id="reqSubject" placeholder="e.g. CS101 – Python Lab Exam" class="fac-form-input" required>
+                  <input type="text" id="reqSubject" placeholder="e.g. CS101 – Advanced Python Programming Lab" class="fac-form-input" required>
                 </div>
-                <div class="fac-form-group">
-                  <label class="fac-form-label">Purpose / Justification</label>
-                  <textarea id="reqPurpose" class="fac-form-input fac-form-textarea" rows="3" placeholder="Provide class size, equipment needs, and reason..." required></textarea>
+
+                <div class="fac-form-group" style="margin-bottom: 24px;">
+                  <label class="fac-form-label">Purpose &amp; Equipment Requirements</label>
+                  <textarea id="reqPurpose" class="fac-form-textarea" placeholder="Detail class roster size, projector/equipment needs, or exam schedule..." required></textarea>
                 </div>
-                <div class="fac-form-footer">
-                  <button type="reset" class="fac-btn-reset">Reset</button>
-                  <button type="submit" class="fac-btn-submit">Submit Request</button>
+
+                <div class="fac-form-actions">
+                  <button type="reset" class="fac-tab-btn" style="height:44px; padding:0 20px;">Reset Fields</button>
+                  <button type="submit" class="fac-btn-submit">Submit Reservation Request</button>
                 </div>
               </form>
             </div>
+
+            <!-- Right Column: Interactive Vector Blueprint Visualizer -->
+            <div class="fac-req-svg-card">
+              <div class="fac-req-svg-header">
+                <div>
+                  <div class="fac-req-svg-eyebrow">
+                    <span class="fac-status-dot"></span> LIVE VECTOR BLUEPRINT
+                  </div>
+                  <h3 class="fac-req-svg-title">Interactive Campus Map</h3>
+                  <p class="fac-req-svg-sub">Click any building on the map to autofill the reservation form.</p>
+                </div>
+                <div class="fac-svg-bldg-pills">
+                  <button type="button" class="fac-svg-pill active" data-svg-bldg="Pancho Building">Pancho</button>
+                  <button type="button" class="fac-svg-pill" data-svg-bldg="CBA Building">CBA</button>
+                  <button type="button" class="fac-svg-pill" data-svg-bldg="Hangar">Hangar</button>
+                </div>
+              </div>
+
+              <!-- Realtime Focus Banner -->
+              <div class="fac-svg-selection-banner" id="facSvgSelectionBanner">
+                <span style="font-size:1.1rem;">📍</span>
+                <span id="facSvgSelectedText">Focused Building: <strong style="color:var(--fac-lime); background:#000; padding:2px 8px; border-radius:4px;">Pancho Building</strong></span>
+              </div>
+
+              <!-- SVG Frame Container -->
+              <div class="fac-req-svg-frame" id="facReqSvgFrame">
+                <svg viewBox="0 0 1600 860" width="100%" height="100%" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" id="facInteractiveSvg">
+                  <defs>
+                    <pattern id="facBpGrid" width="24" height="24" patternUnits="userSpaceOnUse">
+                      <path d="M 24 0 L 0 0 0 24" fill="none" stroke="#e2e8f0" stroke-width="0.75"/>
+                      <circle cx="0" cy="0" r="1.2" fill="#cbd5e1" opacity="0.7"/>
+                    </pattern>
+                    <pattern id="facHalftone" width="12" height="12" patternUnits="userSpaceOnUse">
+                      <circle cx="6" cy="6" r="1.5" fill="#000000" opacity="0.08"/>
+                    </pattern>
+                  </defs>
+
+                  <!-- Background Blueprint Patterns -->
+                  <rect width="100%" height="100%" fill="#fafaf9"/>
+                  <rect width="100%" height="100%" fill="url(#facBpGrid)"/>
+                  <rect width="100%" height="100%" fill="url(#facHalftone)"/>
+
+                  <!-- Inner Decorative Border -->
+                  <rect x="35" y="48" width="1530" height="806" rx="14" fill="none" stroke="#000000" stroke-width="2"/>
+
+                  <!-- Campus Road Network -->
+                  <g id="facRoadsLayer">
+                    <rect x="35" y="352" width="1185" height="56" fill="#f1f5f9" stroke="#cbd5e1" stroke-width="1.5"/>
+                    <line x1="45" y1="380" x2="1215" y2="380" stroke="#eab308" stroke-width="2.5" stroke-dasharray="16,12"/>
+                  </g>
+
+                  <!-- 1. PANCHO BUILDING (Interactive) -->
+                  <g id="fac-svg-pancho" class="interactive-bldg active-selected" data-bldg="Pancho Building" style="cursor:pointer;">
+                    <polygon points="125,145 715,145 715,315 655,315 655,235 125,235" fill="#000000"/>
+                    <polygon points="120,140 710,140 710,310 650,310 650,230 120,230" fill="#ecfccb" stroke="#000000" stroke-width="3"/>
+                    <line x1="165" y1="185" x2="680" y2="185" stroke="#000000" stroke-width="2.5"/>
+                    <line x1="120" y1="140" x2="165" y2="185" stroke="#000000" stroke-width="2.5"/>
+                    <line x1="120" y1="230" x2="165" y2="185" stroke="#000000" stroke-width="2.5"/>
+                    <line x1="650" y1="140" x2="680" y2="185" stroke="#000000" stroke-width="2.5"/>
+                    <line x1="650" y1="230" x2="680" y2="185" stroke="#000000" stroke-width="2.5"/>
+                    <line x1="680" y1="185" x2="680" y2="280" stroke="#000000" stroke-width="2.5"/>
+                    <line x1="650" y1="310" x2="680" y2="280" stroke="#000000" stroke-width="2.5"/>
+                    <line x1="710" y1="310" x2="680" y2="280" stroke="#000000" stroke-width="2.5"/>
+
+                    <g stroke="#000000" stroke-width="1.2" opacity="0.85">
+                      <line x1="140" y1="140" x2="140" y2="230"/><line x1="160" y1="140" x2="160" y2="230"/>
+                      <line x1="180" y1="140" x2="180" y2="230"/><line x1="200" y1="140" x2="200" y2="230"/>
+                      <line x1="220" y1="140" x2="220" y2="230"/><line x1="240" y1="140" x2="240" y2="230"/>
+                      <line x1="260" y1="140" x2="260" y2="230"/><line x1="280" y1="140" x2="280" y2="230"/>
+                      <line x1="300" y1="140" x2="300" y2="230"/><line x1="320" y1="140" x2="320" y2="230"/>
+                      <line x1="340" y1="140" x2="340" y2="230"/><line x1="360" y1="140" x2="360" y2="230"/>
+                      <line x1="380" y1="140" x2="380" y2="230"/><line x1="400" y1="140" x2="400" y2="230"/>
+                      <line x1="450" y1="140" x2="450" y2="230"/><line x1="470" y1="140" x2="470" y2="230"/>
+                      <line x1="490" y1="140" x2="490" y2="230"/><line x1="510" y1="140" x2="510" y2="230"/>
+                      <line x1="530" y1="140" x2="530" y2="230"/><line x1="550" y1="140" x2="550" y2="230"/>
+                      <line x1="570" y1="140" x2="570" y2="230"/><line x1="590" y1="140" x2="590" y2="230"/>
+                      <line x1="610" y1="140" x2="610" y2="230"/><line x1="630" y1="140" x2="630" y2="230"/>
+                      <line x1="650" y1="245" x2="710" y2="245"/><line x1="650" y1="260" x2="710" y2="260"/>
+                      <line x1="650" y1="275" x2="710" y2="275"/><line x1="650" y1="290" x2="710" y2="290"/>
+                    </g>
+
+                    <g fill="#d9f99d" stroke="#000000" stroke-width="2">
+                      <rect x="410" y="125" width="35" height="16"/>
+                      <rect x="410" y="229" width="35" height="24"/>
+                    </g>
+
+                    <g transform="translate(230, 84)">
+                      <rect x="0" y="0" width="270" height="46" rx="23" fill="#ffffff" stroke="#000000" stroke-width="2.5"/>
+                      <circle cx="23" cy="23" r="15" fill="#84cc16" stroke="#000000" stroke-width="2"/>
+                      <text x="23" y="28" font-family="Plus Jakarta Sans" font-weight="900" font-size="13" fill="#000000" text-anchor="middle">P</text>
+                      <text x="50" y="30" font-family="Plus Jakarta Sans" font-weight="900" font-size="16.5" fill="#000000">PANCHO BUILDING</text>
+                    </g>
+                  </g>
+
+                  <!-- 2. ADMINISTRATOR BUILDING (Contextual Architectural Feature) -->
+                  <g id="fac-svg-admin" class="static-bldg" style="cursor:default;">
+                    <polygon points="214,494 564,494 564,644 424,644 424,669 384,669 384,644 214,644" fill="#000000"/>
+                    <polygon points="210,490 560,490 560,640 420,640 420,665 380,665 380,640 210,640" fill="#ffffff" stroke="#000000" stroke-width="2.2"/>
+                    <rect x="300" y="475" width="120" height="15" fill="#f8fafc" stroke="#000000" stroke-width="1.5"/>
+                    <g fill="#ffffff" stroke="#000000" stroke-width="1.5">
+                      <rect x="220" y="500" width="45" height="40"/><rect x="265" y="500" width="45" height="40"/>
+                      <rect x="310" y="500" width="75" height="40"/><rect x="220" y="540" width="330" height="30"/>
+                      <rect x="220" y="570" width="55" height="60"/><rect x="275" y="570" width="70" height="60"/>
+                      <rect x="390" y="570" width="80" height="60"/><rect x="470" y="570" width="80" height="60"/>
+                    </g>
+                    <g transform="translate(190, 672)">
+                      <rect x="0" y="0" width="340" height="46" rx="23" fill="#ffffff" stroke="#000000" stroke-width="2.5"/>
+                      <circle cx="23" cy="23" r="15" fill="#94a3b8" stroke="#000000" stroke-width="2"/>
+                      <text x="23" y="28" font-family="Plus Jakarta Sans" font-weight="900" font-size="11" fill="#ffffff" text-anchor="middle">ADM</text>
+                      <text x="50" y="30" font-family="Plus Jakarta Sans" font-weight="900" font-size="16.5" fill="#334155">ADMINISTRATOR BUILDING</text>
+                    </g>
+                  </g>
+
+                  <!-- 3. ACTIVITY CENTER / GYMNASIUM -->
+                  <g id="fac-svg-gym" class="static-bldg" style="cursor:default;">
+                    <rect x="734" y="524" width="190" height="280" rx="4" fill="#000000"/>
+                    <rect x="730" y="520" width="190" height="280" rx="4" fill="#ffffff" stroke="#000000" stroke-width="2.2"/>
+                    <line x1="730" y1="520" x2="825" y2="565" stroke="#000000" stroke-width="2"/>
+                    <line x1="920" y1="520" x2="825" y2="565" stroke="#000000" stroke-width="2"/>
+                    <line x1="825" y1="565" x2="825" y2="755" stroke="#000000" stroke-width="2"/>
+                    <line x1="730" y1="800" x2="825" y2="755" stroke="#000000" stroke-width="2"/>
+                    <line x1="920" y1="800" x2="825" y2="755" stroke="#000000" stroke-width="2"/>
+                    <g transform="translate(695, 796)">
+                      <rect x="0" y="0" width="250" height="46" rx="23" fill="#ffffff" stroke="#000000" stroke-width="2.5"/>
+                      <circle cx="23" cy="23" r="15" fill="#94a3b8" stroke="#000000" stroke-width="2"/>
+                      <text x="23" y="28" font-family="Plus Jakarta Sans" font-weight="900" font-size="10.5" fill="#ffffff" text-anchor="middle">GYM</text>
+                      <text x="50" y="30" font-family="Plus Jakarta Sans" font-weight="900" font-size="16.5" fill="#334155">ACTIVITY CENTER</text>
+                    </g>
+                  </g>
+
+                  <!-- 4. HANGAR COMPLEX (Interactive) -->
+                  <g id="fac-svg-hangar" class="interactive-bldg" data-bldg="Hangar" style="cursor:pointer;">
+                    <polygon points="965,535 1165,535 1165,805 965,805" fill="#000000"/>
+                    <polygon points="960,530 1160,530 1160,800 960,800" fill="#e0f2fe" stroke="#000000" stroke-width="2.2"/>
+                    <rect x="960" y="650" width="200" height="28" fill="#bae6fd" stroke="#000000" stroke-width="2"/>
+                    <g stroke="#000000" stroke-width="1.2">
+                      <line x1="970" y1="650" x2="970" y2="678"/><line x1="985" y1="650" x2="985" y2="678"/>
+                      <line x1="1000" y1="650" x2="1000" y2="678"/><line x1="1015" y1="650" x2="1015" y2="678"/>
+                      <line x1="1030" y1="650" x2="1030" y2="678"/><line x1="1045" y1="650" x2="1045" y2="678"/>
+                      <line x1="1060" y1="650" x2="1060" y2="678"/><line x1="1075" y1="650" x2="1075" y2="678"/>
+                      <line x1="1090" y1="650" x2="1090" y2="678"/><line x1="1105" y1="650" x2="1105" y2="678"/>
+                    </g>
+                    <g stroke="#000000" stroke-width="1" opacity="0.75">
+                      <line x1="960" y1="545" x2="1160" y2="545"/><line x1="960" y1="558" x2="1160" y2="558"/>
+                      <line x1="960" y1="571" x2="1160" y2="571"/><line x1="960" y1="584" x2="1160" y2="584"/>
+                      <line x1="960" y1="692" x2="1160" y2="692"/><line x1="960" y1="706" x2="1160" y2="706"/>
+                      <line x1="960" y1="720" x2="1160" y2="720"/><line x1="960" y1="734" x2="1160" y2="734"/>
+                    </g>
+                    <line x1="1060" y1="530" x2="1060" y2="800" stroke="#000000" stroke-width="2"/>
+                    <g transform="translate(945, 796)">
+                      <rect x="0" y="0" width="250" height="46" rx="23" fill="#ffffff" stroke="#000000" stroke-width="2.5"/>
+                      <circle cx="23" cy="23" r="15" fill="#0284c7" stroke="#000000" stroke-width="2"/>
+                      <text x="23" y="28.5" font-family="Plus Jakarta Sans" font-weight="900" font-size="12" fill="#ffffff" text-anchor="middle">H</text>
+                      <text x="50" y="30" font-family="Plus Jakarta Sans" font-weight="900" font-size="16.5" fill="#000000">HANGAR COMPLEX</text>
+                    </g>
+                  </g>
+
+                  <!-- 5. CBA BUILDING (Interactive) -->
+                  <g id="fac-svg-cba" class="interactive-bldg" data-bldg="CBA Building" style="cursor:pointer;">
+                    <polygon points="1225,145 1325,145 1325,545 1225,545" fill="#000000"/>
+                    <polygon points="1220,140 1320,140 1320,540 1220,540" fill="#f3e8ff" stroke="#000000" stroke-width="2.2"/>
+                    <line x1="1270" y1="185" x2="1270" y2="495" stroke="#000000" stroke-width="2"/>
+                    <line x1="1220" y1="140" x2="1270" y2="185" stroke="#000000" stroke-width="2"/>
+                    <line x1="1320" y1="140" x2="1270" y2="185" stroke="#000000" stroke-width="2"/>
+                    <line x1="1220" y1="540" x2="1270" y2="495" stroke="#000000" stroke-width="2"/>
+                    <line x1="1320" y1="540" x2="1270" y2="495" stroke="#000000" stroke-width="2"/>
+                    <g stroke="#000000" stroke-width="1" opacity="0.75">
+                      <line x1="1220" y1="160" x2="1320" y2="160"/><line x1="1220" y1="200" x2="1320" y2="200"/>
+                      <line x1="1220" y1="240" x2="1320" y2="240"/><line x1="1220" y1="280" x2="1320" y2="280"/>
+                      <line x1="1220" y1="320" x2="1320" y2="320"/><line x1="1220" y1="360" x2="1320" y2="360"/>
+                      <line x1="1220" y1="400" x2="1320" y2="400"/><line x1="1220" y1="440" x2="1320" y2="440"/>
+                      <line x1="1220" y1="480" x2="1320" y2="480"/><line x1="1220" y1="520" x2="1320" y2="520"/>
+                    </g>
+                    <g fill="#e9d5ff" stroke="#000000" stroke-width="1.8">
+                      <rect x="1204" y="325" width="16" height="35"/>
+                      <rect x="1320" y="325" width="16" height="35"/>
+                    </g>
+                    <g transform="translate(1120, 84)">
+                      <rect x="0" y="0" width="240" height="46" rx="23" fill="#ffffff" stroke="#000000" stroke-width="2.5"/>
+                      <circle cx="23" cy="23" r="15" fill="#a855f7" stroke="#000000" stroke-width="2"/>
+                      <text x="23" y="28" font-family="Plus Jakarta Sans" font-weight="900" font-size="11" fill="#ffffff" text-anchor="middle">CBA</text>
+                      <text x="50" y="30" font-family="Plus Jakarta Sans" font-weight="900" font-size="16.5" fill="#000000">CBA BUILDING</text>
+                    </g>
+                  </g>
+
+                  <!-- Campus Trees -->
+                  <g id="facTreesLayer">
+                    <g class="comic-tree-group" transform="translate(170, 305)">
+                      <ellipse cx="2" cy="4" rx="20" ry="12" fill="#000000" opacity="0.18"/>
+                      <path d="M 0,-18 C 10,-20 18,-12 18,-2 C 22,7 15,18 3,18 C -7,18 -18,15 -18,4 C -20,-6 -12,-18 0,-18 Z" fill="#84cc16" stroke="#000000" stroke-width="1.8"/>
+                    </g>
+                    <g class="comic-tree-group" transform="translate(800, 235)">
+                      <ellipse cx="2" cy="4" rx="20" ry="12" fill="#000000" opacity="0.18"/>
+                      <path d="M 0,-18 C 10,-20 18,-12 18,-2 C 22,7 15,18 3,18 C -7,18 -18,15 -18,4 C -20,-6 -12,-18 0,-18 Z" fill="#84cc16" stroke="#000000" stroke-width="1.8"/>
+                    </g>
+                    <g class="comic-tree-group" transform="translate(900, 235)">
+                      <ellipse cx="2" cy="4" rx="20" ry="12" fill="#000000" opacity="0.18"/>
+                      <path d="M 0,-18 C 10,-20 18,-12 18,-2 C 22,7 15,18 3,18 C -7,18 -18,15 -18,4 C -20,-6 -12,-18 0,-18 Z" fill="#84cc16" stroke="#000000" stroke-width="1.8"/>
+                    </g>
+                  </g>
+                </svg>
+              </div>
+            </div>
           </div>
         </section>
 
         <!-- ==========================================
-             VIEW 3: BOOKING LOGS
+             VIEW 3: BOOKING LOGS & DIGITAL PERMITS
              ========================================== -->
         <section class="fac-view" id="view-logs">
-          <div class="fac-logs-header">
+          <div class="fac-section-header" style="display:flex; justify-content:space-between; align-items:flex-end; flex-wrap:wrap; gap:14px;">
             <div>
-              <div class="fac-section-eyebrow">History</div>
-              <h2 class="fac-section-title">Booking Logs &amp; Status</h2>
+              <div class="fac-section-eyebrow">Access Records</div>
+              <h2 class="fac-section-title">Booking Logs &amp; Digital Permits</h2>
+              <p class="fac-section-sub">Review active digital door keys, approved permits, and historical room reservations.</p>
             </div>
-            <button class="fac-btn-submit" id="facGoToRequest" style="height:40px; padding:0 20px; font-size:0.8rem;">New Request</button>
+            <button class="fac-btn-submit" id="facGoToRequest" style="height:42px; padding:0 18px; font-size:0.8rem;">+ New Room Request</button>
           </div>
-          <div class="fac-logs-list" id="facLogsList">
-            <!-- Populated by JS -->
+
+          <div class="fac-logs-card">
+            <div class="fac-logs-grid" id="facLogsList">
+              <!-- Populated dynamically via js/faculty.js -->
+            </div>
           </div>
         </section>
 
         <!-- ==========================================
-             VIEW 4: EDIT PROFILE
+             VIEW 4: FACULTY PROFILE & CONSULTATION
              ========================================== -->
         <section class="fac-view" id="view-profile">
           <div class="fac-section-header">
-            <div class="fac-section-eyebrow">Profile</div>
-            <h2 class="fac-section-title">Faculty Profile Settings</h2>
+            <div class="fac-section-eyebrow">Faculty Directory</div>
+            <h2 class="fac-section-title">Faculty Profile &amp; Consultation Roster</h2>
+            <p class="fac-section-sub">Update your consultation hours, department designation, and official contact credentials.</p>
           </div>
-          <div class="fac-profile-card">
-            <div class="fac-profile-hero">
-              <div class="fac-profile-avatar" id="profileAvatarBig">M</div>
-              <div>
-                <div class="fac-profile-name" id="profileNameDisplay">Prof. Maria Santos</div>
-                <div class="fac-profile-dept" id="profileDeptDisplay">College of Information &amp; Communications Technology</div>
+
+          <div class="fac-profile-wrap">
+            <!-- Left Profile Badge -->
+            <div class="fac-profile-badge-card">
+              <div class="fac-avatar-giant" id="profileAvatarBig">M</div>
+              <h3 class="fac-profile-badge-name" id="profileNameDisplay">Prof. Maria Santos</h3>
+              <p class="fac-profile-badge-dept" id="profileDeptDisplay">College of Information and Communications Technology</p>
+              <div style="margin-top:16px; padding:10px; background:var(--fac-surface-elevated); border:var(--fac-border-sub); border-radius:10px; font-size:0.75rem; font-weight:800;">
+                <span style="color:var(--fac-lime);">● Active Workstation</span>
               </div>
             </div>
-            <div class="fac-profile-body">
+
+            <!-- Right Profile Form -->
+            <div class="fac-form-card">
               <form id="facProfileForm">
-                <div class="fac-form-row" style="margin-bottom:14px;">
+                <div class="fac-form-grid">
                   <div class="fac-form-group">
-                    <label class="fac-form-label">Full Name</label>
+                    <label class="fac-form-label">Full Academic Name</label>
                     <input type="text" id="profFullName" value="Prof. Maria Santos" class="fac-form-input" required>
                   </div>
                   <div class="fac-form-group">
-                    <label class="fac-form-label">Employee / Faculty ID</label>
+                    <label class="fac-form-label">Faculty / Employee ID</label>
                     <input type="text" id="profFacultyId" value="BSU-FAC-2024-881" class="fac-form-input" required>
                   </div>
-                </div>
-                <div class="fac-form-row" style="margin-bottom:14px;">
                   <div class="fac-form-group">
                     <label class="fac-form-label">Department / College</label>
                     <input type="text" id="profDepartment" value="College of Information and Communications Technology" class="fac-form-input" required>
@@ -1506,23 +646,23 @@
                     <label class="fac-form-label">Academic Title / Rank</label>
                     <input type="text" id="profTitle" value="Associate Professor III" class="fac-form-input" required>
                   </div>
-                </div>
-                <div class="fac-form-row" style="margin-bottom:14px;">
                   <div class="fac-form-group">
-                    <label class="fac-form-label">Official Email</label>
+                    <label class="fac-form-label">Official BSU Email</label>
                     <input type="email" id="profEmail" value="maria.santos@bulsu.edu.ph" class="fac-form-input" required>
                   </div>
                   <div class="fac-form-group">
-                    <label class="fac-form-label">Contact Number</label>
+                    <label class="fac-form-label">Direct Contact Number</label>
                     <input type="text" id="profPhone" value="+63 917 882 4591" class="fac-form-input" required>
                   </div>
                 </div>
-                <div class="fac-form-group" style="margin-bottom:20px;">
-                  <label class="fac-form-label">Consultation Hours / Office</label>
+
+                <div class="fac-form-group" style="margin-bottom: 24px;">
+                  <label class="fac-form-label">Official Consultation Hours &amp; Office</label>
                   <input type="text" id="profOfficeHours" value="Mon/Wed 1:00 PM - 4:00 PM (Faculty Hall Rm 204)" class="fac-form-input" required>
                 </div>
-                <div style="display:flex; justify-content:flex-end;">
-                  <button type="submit" class="fac-btn-submit">Save Changes</button>
+
+                <div class="fac-form-actions">
+                  <button type="submit" class="fac-btn-submit">Save Profile Changes</button>
                 </div>
               </form>
             </div>
@@ -1533,68 +673,101 @@
     </div><!-- end fac-main -->
   </div><!-- end fac-app -->
 
-  <!-- Room Detail Modal -->
-  <div class="fac-modal-backdrop" id="facModalBackdrop">
-    <div class="fac-modal">
+  <!-- Room Inspection Modal -->
+  <div class="fac-modal-overlay" id="facModalBackdrop">
+    <div class="fac-modal-card">
       <div class="fac-modal-header">
-        <div class="fac-modal-title" id="facModalTitle">Room Details</div>
+        <h3 class="fac-modal-title" id="facModalTitle">Room Inspection</h3>
         <button class="fac-modal-close" id="facModalClose">✕</button>
       </div>
       <div class="fac-modal-body">
-        <div class="fac-modal-status available" id="facModalStatus">
+        <div id="facModalStatus" style="padding:10px 14px; border-radius:8px; border:2px solid #000000; font-size:0.82rem; font-weight:900; margin-bottom:16px; background:#dcfce7; color:#166534;">
           <span>●</span> <strong id="facModalStatusText">AVAILABLE FOR RESERVATION</strong>
         </div>
-        <div class="fac-modal-specs">
-          <div class="fac-modal-spec">
-            <span class="fac-modal-spec-lbl">Capacity</span>
-            <div class="fac-modal-spec-val" id="facModalCap">45 Seats</div>
+
+        <div style="display:grid; grid-template-columns:repeat(3, 1fr); gap:10px; margin-bottom:18px;">
+          <div style="background:var(--fac-surface-elevated); padding:10px; border-radius:8px; border:1.5px solid #000000; text-align:center;">
+            <div style="font-size:0.65rem; font-weight:800; color:var(--fac-text-muted); text-transform:uppercase;">Capacity</div>
+            <div style="font-size:0.88rem; font-weight:900; margin-top:2px;" id="facModalCap">45 Seats</div>
           </div>
-          <div class="fac-modal-spec">
-            <span class="fac-modal-spec-lbl">Occupant</span>
-            <div class="fac-modal-spec-val" id="facModalOcc">Vacant</div>
+          <div style="background:var(--fac-surface-elevated); padding:10px; border-radius:8px; border:1.5px solid #000000; text-align:center;">
+            <div style="font-size:0.65rem; font-weight:800; color:var(--fac-text-muted); text-transform:uppercase;">Occupant</div>
+            <div style="font-size:0.88rem; font-weight:900; margin-top:2px;" id="facModalOcc">Vacant</div>
           </div>
-          <div class="fac-modal-spec">
-            <span class="fac-modal-spec-lbl">Schedule</span>
-            <div class="fac-modal-spec-val" id="facModalSched">Open</div>
+          <div style="background:var(--fac-surface-elevated); padding:10px; border-radius:8px; border:1.5px solid #000000; text-align:center;">
+            <div style="font-size:0.65rem; font-weight:800; color:var(--fac-text-muted); text-transform:uppercase;">Schedule</div>
+            <div style="font-size:0.88rem; font-weight:900; margin-top:2px;" id="facModalSched">Open</div>
           </div>
         </div>
+
         <form id="facModalForm">
-          <div style="display:flex; flex-direction:column; gap:10px;">
-            <input type="text" id="facModalSubject" placeholder="Subject / Purpose (e.g. CS101 Lab Exam)" class="fac-form-input" required>
-            <input type="text" id="facModalTime" placeholder="Time (e.g. 02:00 PM – 04:00 PM)" class="fac-form-input" required>
-            <button type="submit" class="fac-btn-submit" style="width:100%; height:46px;">Submit Room Request</button>
+          <div style="display:flex; flex-direction:column; gap:12px;">
+            <div class="fac-form-group">
+              <label class="fac-form-label">Subject / Reservation Purpose</label>
+              <input type="text" id="facModalSubject" placeholder="e.g. CS101 Examination &amp; Defense" class="fac-form-input" required>
+            </div>
+            <div class="fac-form-group">
+              <label class="fac-form-label">Requested Time &amp; Duration</label>
+              <div class="time-range-picker-card" id="modalTimePickerCard">
+                <div class="time-inputs-row">
+                  <div class="time-field-box">
+                    <div class="time-field-header">
+                      <label class="time-field-label">Start Time</label>
+                      <button type="button" class="btn-time-now" data-action="set-now" title="Set Start Time to current time">
+                        <svg viewBox="0 0 24 24" width="11" height="11" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><polyline points="12 6 12 12 15 15"/></svg>
+                        Now
+                      </button>
+                    </div>
+                    <input type="time" class="time-ui-input" id="modalStartTime" value="13:00" required>
+                  </div>
+                  <div class="time-divider-arrow">→</div>
+                  <div class="time-field-box">
+                    <label class="time-field-label" style="height:19px; display:flex; align-items:center;">End Time</label>
+                    <input type="time" class="time-ui-input" id="modalEndTime" value="15:00" required>
+                  </div>
+                </div>
+
+                <!-- Quick Duration Preset Chips -->
+                <div class="time-quick-duration-strip">
+                  <span class="quick-dur-label">Quick Duration:</span>
+                  <div class="quick-dur-chips">
+                    <button type="button" class="dur-chip" data-mins="30">30m</button>
+                    <button type="button" class="dur-chip" data-mins="60">1 hr</button>
+                    <button type="button" class="dur-chip" data-mins="90">1.5 hrs</button>
+                    <button type="button" class="dur-chip active" data-mins="120">2 hrs</button>
+                    <button type="button" class="dur-chip" data-mins="150">2.5 hrs</button>
+                    <button type="button" class="dur-chip" data-mins="180">3 hrs</button>
+                  </div>
+                </div>
+
+                <!-- Live Calculated Summary Banner -->
+                <div class="time-summary-banner" id="modalTimeSummaryBanner">
+                  <span class="time-summary-icon">🕒</span>
+                  <span class="time-summary-text" id="modalTimeSummaryText">01:00 PM – 03:00 PM (120 mins / 2.0 hrs)</span>
+                </div>
+              </div>
+              <input type="hidden" id="facModalTime" value="01:00 PM – 03:00 PM">
+            </div>
+            <button type="submit" class="fac-btn-submit" style="width:100%; margin-top:6px;">Submit Access Request</button>
           </div>
         </form>
+
+        <!-- Dedicated Checkout Button Section (shown when room is occupied by current faculty) -->
+        <div id="facModalCheckoutSection" style="display:none; margin-top:16px; padding-top:14px; border-top:2px dashed #000000;">
+          <div style="font-size:0.75rem; font-weight:800; color:var(--fac-text-muted); margin-bottom:8px; text-transform:uppercase;">Active Occupancy Session</div>
+          <button type="button" class="fac-btn-checkout-hero" id="btnModalCheckout" style="width:100%; justify-content:center;">
+            ⚡ Check Out &amp; Release Room
+          </button>
+        </div>
       </div>
     </div>
   </div>
 
-  <!-- Toasts -->
+  <!-- Toast Container -->
   <div class="fac-toast-container" id="facToasts"></div>
 
-  <!-- Mobile Bottom Nav -->
-  <nav class="fac-bottom-nav">
-    <div class="fac-nav-tabs">
-      <a href="#" class="fac-nav-tab active" data-view="status">
-        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M3 21h18M5 21V7l7-4 7 4v14M9 10h1M14 10h1M9 14h1M14 14h1M9 18h1M14 18h1"/></svg>
-        Status
-      </a>
-      <a href="#" class="fac-nav-tab" data-view="request">
-        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
-        Request
-      </a>
-      <a href="#" class="fac-nav-tab" data-view="logs" style="position:relative;">
-        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1"/><path d="M9 14h6"/><path d="M9 18h6"/><path d="M9 10h6"/></svg>
-        <span class="fac-tab-badge" id="mobileLogBadge">1</span>
-        Logs
-      </a>
-      <a href="#" class="fac-nav-tab" data-view="profile">
-        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-        Profile
-      </a>
-    </div>
-  </nav>
-
-  <script src="js/faculty.js"></script>
+  <script src="js/api.js?v=2.5.0"></script>
+  <script src="js/faculty.js?v=2.5.0"></script>
+  <script src="js/dev-tool.js"></script>
 </body>
 </html>

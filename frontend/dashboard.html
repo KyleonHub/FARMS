@@ -2,12 +2,15 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>FARMS - Architectural Vector Campus &amp; Floor Blueprints</title>
+  <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+  <link rel="dns-prefetch" href="https://fonts.gstatic.com">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/dashboard.css?v=2.5.0">
+  <link rel="stylesheet" href="css/dev-tool.css">
 </head>
 <body>
 
@@ -80,6 +83,14 @@
             <span>Activity Logs</span>
           </a>
 
+          <a href="#schedules" class="nav-item" data-view="schedules">
+            <svg class="nav-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+              <line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>
+            </svg>
+            <span>Class Schedules</span>
+          </a>
+
           <a href="login.html" class="nav-item sign-out-nav-item">
             <svg class="nav-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
               <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/>
@@ -146,9 +157,9 @@
         <!-- ── Right Actions Cluster (Clean Vector SVG Icons & Reverted Order) ── -->
         <div class="topbar-right-cluster">
           <!-- Database Live Sync Status Pill -->
-          <div class="db-sync-status-pill" id="dbSyncStatusPill" title="FARMS SQLite Database Connection">
+          <div class="db-sync-status-pill" id="dbSyncStatusPill" title="FARMS Database: Live (Port 5000)">
             <span class="db-sync-dot online"></span>
-            <span class="db-sync-label">SQLite: Live</span>
+            <span class="db-sync-label">DTB</span>
           </div>
 
           <!-- 1. Dark / Light Theme Toggle (Clean SVG Sun/Moon) -->
@@ -171,12 +182,6 @@
               <div class="notif-list" id="notifList"></div>
             </div>
           </div>
-
-          <!-- 3. Mobile / Desktop View Mode Toggle Button (Clean SVG Phone/Desktop) -->
-          <button class="topbar-icon-btn mobile-mode-btn" id="btnToggleMobileMode" title="Toggle Mobile UI Mode" aria-label="Toggle Mobile UI Mode">
-            <svg class="mobile-mode-icon icon-phone" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
-            <svg class="mobile-mode-icon icon-desktop" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="display:none;"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
-          </button>
 
           <!-- 4. User Profile -->
           <div class="user-profile-btn" title="Admin Account">
@@ -218,7 +223,7 @@
                   <span class="kpi-v2-title">Active Classes</span>
                 </div>
                 <div class="capacity-metric-row">
-                  <div class="kpi-v2-big-num in-use-num" id="statActiveClasses">28</div>
+                  <div class="kpi-v2-big-num in-use-num" id="statActiveClasses">0</div>
                   
                   <!-- Horizontal Bar Graphs for Buildings -->
                   <div class="capacity-bldg-breakdown">
@@ -226,25 +231,25 @@
                       <span class="bldg-stat-dot dot-cba"></span>
                       <span class="bldg-stat-name">CBA</span>
                       <div class="bldg-stat-track">
-                        <div class="bldg-stat-fill purple" id="barFillCba" style="width: 50%;"></div>
+                        <div class="bldg-stat-fill purple" id="barFillCba" style="width: 0%;"></div>
                       </div>
-                      <strong class="bldg-stat-val" id="barValCba">4</strong>
+                      <strong class="bldg-stat-val" id="barValCba">0</strong>
                     </div>
                     <div class="bldg-stat-row">
                       <span class="bldg-stat-dot dot-hangar"></span>
                       <span class="bldg-stat-name">Hangar</span>
                       <div class="bldg-stat-track">
-                        <div class="bldg-stat-fill cyan" id="barFillHangar" style="width: 33%;"></div>
+                        <div class="bldg-stat-fill cyan" id="barFillHangar" style="width: 0%;"></div>
                       </div>
-                      <strong class="bldg-stat-val" id="barValHangar">2</strong>
+                      <strong class="bldg-stat-val" id="barValHangar">0</strong>
                     </div>
                     <div class="bldg-stat-row">
                       <span class="bldg-stat-dot dot-pancho"></span>
                       <span class="bldg-stat-name">Pancho</span>
                       <div class="bldg-stat-track">
-                        <div class="bldg-stat-fill lime" id="barFillPancho" style="width: 75%;"></div>
+                        <div class="bldg-stat-fill lime" id="barFillPancho" style="width: 0%;"></div>
                       </div>
-                      <strong class="bldg-stat-val" id="barValPancho">22</strong>
+                      <strong class="bldg-stat-val" id="barValPancho">0</strong>
                     </div>
                   </div>
                 </div>
@@ -260,7 +265,7 @@
                   <span class="kpi-v2-title">Vacant Rooms</span>
                 </div>
                 <div class="capacity-metric-row vacant-pie-row">
-                  <div class="kpi-v2-big-num vacant-num" id="statVacantRooms">55</div>
+                  <div class="kpi-v2-big-num vacant-num" id="statVacantRooms">85</div>
 
                   <!-- Mini Legend Stack for Pie Graph (Clean Color Key, No Redundant Numbers) -->
                   <div class="capacity-pie-legend">
@@ -282,10 +287,8 @@
                   <div class="capacity-gauge-wrap">
                     <svg viewBox="0 0 100 100" width="106" height="106" class="enhanced-pie-svg" id="vacantPieSvg" role="img" aria-label="Room Availability Breakdown Pie Graph">
                       <g id="pieSlicesGroup">
-                        <!-- Dynamic crisp SVG pie slices rendered by updateKPIStats -->
-                        <path d="M 50 50 L 50 8 A 42 42 0 1 1 13.6 29 Z" fill="#0284c7" stroke="#000000" stroke-width="2.2" class="pie-slice-path"/>
-                        <path d="M 50 50 L 13.6 29 A 42 42 0 0 1 43.4 8.5 Z" fill="#84cc16" stroke="#000000" stroke-width="2.2" class="pie-slice-path"/>
-                        <path d="M 50 50 L 43.4 8.5 A 42 42 0 0 1 50 8 Z" fill="#f59e0b" stroke="#000000" stroke-width="2.2" class="pie-slice-path"/>
+                        <!-- 100% Free full circle pie slice by default -->
+                        <circle cx="50" cy="50" r="42" fill="#0284c7" stroke="#000000" stroke-width="2.2" class="pie-slice-path"/>
                       </g>
                       <!-- Center Mechanical Blueprint Pin -->
                       <circle cx="50" cy="50" r="7" fill="#ffffff" stroke="#000000" stroke-width="2.5" class="pie-center-pin"/>
@@ -304,7 +307,7 @@
                   <span class="kpi-v2-title">Pending Requests</span>
                   <span class="kpi-status-badge badge-pending">Action Required</span>
                 </div>
-                <div class="kpi-v2-big-num" id="statPendingRequests">5</div>
+                <div class="kpi-v2-big-num" id="statPendingRequests">0</div>
                 <div class="kpi-v2-sub dark-amber">Requires Approval · <strong style="color:#b45309;">Review Queue</strong></div>
               </div>
               <div class="kpi-v2-widget">
@@ -334,13 +337,13 @@
                     <small>Room Slot</small>
                   </div>
                 </button>
-                <button class="dispatch-kpi-tile" id="btnDispatchReset" title="Reset Campus Map">
+                <button class="dispatch-kpi-tile btn-danger-action" id="btnDispatchReset" title="Reset System (Vacate all rooms, clear requests, preserve audit logs)">
                   <span class="d-icon icon-reset">
-                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>
+                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>
                   </span>
                   <div class="d-tile-text">
-                    <strong>Reset Map</strong>
-                    <small>Clear State</small>
+                    <strong>Reset System</strong>
+                    <small>Preserve Logs</small>
                   </div>
                 </button>
                 <button class="dispatch-kpi-tile" id="btnDispatchExport" title="Download Room Audit Log">
@@ -1280,7 +1283,74 @@
               </div> <!-- statusDisplayMain -->
 
             </div> <!-- live-status-layout -->
-          </div> <!-- modular-card live-status-container   -->
+          </div> <!-- modular-card live-status-container -->
+
+          <!-- ── Bento Grid: Authorization Queue (Access Requests) & Live Activity Stream ── -->
+          <div class="admin-bento-grid">
+            <!-- Left Bento Box: Pending Access Queue -->
+            <div class="modular-card auth-queue-card">
+              <div class="modular-card-header">
+                <div class="card-header-left">
+                  <div class="card-header-icon-box amber">
+                    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M21 2l-2 2m-1.5 1.5L14 9M3 21l3.5-3.5M10.5 7.5a4.5 4.5 0 1 1-6.36 6.36 4.5 4.5 0 0 1 6.36-6.36z"/>
+                      <path d="M15 8l3 3M18 5l3 3"/>
+                    </svg>
+                  </div>
+                  <div>
+                    <h3 class="modular-card-title">Access Authorization Queue</h3>
+                    <p class="modular-card-subtitle">Pending room reservations &amp; facility entry permits</p>
+                  </div>
+                </div>
+                <div class="card-header-right" style="display:flex; gap:10px; align-items:center;">
+                  <span class="auth-queue-counter-tag"><span id="authQueuePendingCount">0</span> Pending</span>
+                  <button class="header-action-btn primary" id="btnNewRequest" title="Create New Access Request">+ Request</button>
+                </div>
+              </div>
+              <div class="table-card-body scrollable-sub-table">
+                <table class="comic-data-table auth-queue-table">
+                  <thead>
+                    <tr>
+                      <th>Requester</th>
+                      <th>Facility</th>
+                      <th>Schedule</th>
+                      <th>Purpose</th>
+                      <th>Status</th>
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+                  <tbody id="accessRequestsTableBody">
+                    <!-- Dynamic access requests rendered via dashboard.js -->
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <!-- Right Bento Box: Real-Time Activity Stream -->
+            <div class="bento-right-stack">
+              <div class="modular-card live-stream-card">
+                <div class="modular-card-header">
+                  <div class="card-header-left">
+                    <div class="card-header-icon-box green">
+                      <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="9.5"/>
+                        <polyline points="12 6.5 12 12 15.5 14.5"/>
+                      </svg>
+                    </div>
+                    <div>
+                      <h3 class="modular-card-title">Live Activity Stream</h3>
+                      <p class="modular-card-subtitle">Real-time room status audits</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="timeline-scroll-container bento-timeline">
+                  <div class="timeline-list" id="activityTimelineList">
+                    <!-- Dynamic timeline items rendered via dashboard.js -->
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
 
         </section>
 
@@ -1368,7 +1438,7 @@
         </section>
 
         <!-- ====================================================
-             VIEW 3: ACCESS REQUESTS (UNDER CONSTRUCTION)
+             VIEW 3: ACCESS REQUESTS
              ==================================================== -->
         <section id="view-requests" class="content-view">
           <div class="dashboard-greeting-row">
@@ -1376,25 +1446,54 @@
               <h2 class="page-section-heading">Room Booking &amp; Access Requests</h2>
               <p class="page-section-sub">Classroom &amp; laboratory reservation permit authorization</p>
             </div>
+            <div class="greeting-action-stack">
+              <button class="header-action-btn primary" id="btnNewRequestView">
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle; margin-right:4px;">
+                  <line x1="12" y1="5" x2="12" y2="19"/>
+                  <line x1="5" y1="12" x2="19" y2="12"/>
+                </svg>
+                + New Access Request
+              </button>
+            </div>
           </div>
 
-          <div class="modular-card under-construction-page-card">
-            <div class="construction-hazard-bar"></div>
-            <div class="under-construction-page-body">
-              <div class="u-const-icon-circle">
-                <svg viewBox="0 0 24 24" width="38" height="38" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M21 2l-2 2m-1.5 1.5L14 9M3 21l3.5-3.5M10.5 7.5a4.5 4.5 0 1 1-6.36 6.36 4.5 4.5 0 0 1 6.36-6.36z"/>
-                  <path d="M15 8l3 3M18 5l3 3"/>
-                </svg>
+          <div class="modular-card">
+            <div class="modular-card-header">
+              <div class="card-header-left">
+                <div class="card-header-icon-box amber">
+                  <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 2l-2 2m-1.5 1.5L14 9M3 21l3.5-3.5M10.5 7.5a4.5 4.5 0 1 1-6.36 6.36 4.5 4.5 0 0 1 6.36-6.36z"/>
+                    <path d="M15 8l3 3M18 5l3 3"/>
+                  </svg>
+                </div>
+                <div>
+                  <h3 class="modular-card-title">Pending &amp; Authorized Permits</h3>
+                  <p class="modular-card-subtitle">Real-time synchronized faculty access requests</p>
+                </div>
               </div>
-              <div class="u-const-badge">UNDER CONSTRUCTION</div>
-              <h3 class="u-const-title">Access Requests Under Active Development</h3>
+            </div>
+            <div class="table-card-body">
+              <table class="comic-data-table">
+                <thead>
+                  <tr>
+                    <th>Requester</th>
+                    <th>Facility / Room</th>
+                    <th>Date &amp; Time</th>
+                    <th>Purpose / Subject</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody id="fullRequestsTableBody">
+                  <!-- Rendered dynamically via renderAccessRequests() -->
+                </tbody>
+              </table>
             </div>
           </div>
         </section>
 
         <!-- ====================================================
-             VIEW 4: ACTIVITY LOGS (UNDER CONSTRUCTION)
+             VIEW 4: ACTIVITY LOGS
              ==================================================== -->
         <section id="view-logs" class="content-view">
           <div class="dashboard-greeting-row">
@@ -1402,73 +1501,157 @@
               <h2 class="page-section-heading">System Audit &amp; Event Logs</h2>
               <p class="page-section-sub">Chronological event telemetry of room status changes</p>
             </div>
+            <div class="greeting-action-stack" style="display:flex; gap:10px; align-items:center;">
+              <select id="activityLogFilterSelect" class="header-action-btn secondary" style="padding:6px 12px; font-weight:800; cursor:pointer; background: #1e293b; color: #f8fafc; border: 1.5px solid rgba(255,255,255,0.2);">
+                <option value="all" style="background:#0f172a; color:#fff;">All Events</option>
+                <option value="booking" style="background:#0f172a; color:#fff;">Bookings</option>
+                <option value="release" style="background:#0f172a; color:#fff;">Releases</option>
+                <option value="request" style="background:#0f172a; color:#fff;">Requests</option>
+                <option value="maintenance" style="background:#0f172a; color:#fff;">Maintenance</option>
+                <option value="broadcast" style="background:#0f172a; color:#fff;">Announcements</option>
+                <option value="system" style="background:#0f172a; color:#fff;">System</option>
+              </select>
+              <button class="header-action-btn secondary" id="btnClearAllLogs" title="Clear all local event logs">
+                Clear Logs
+              </button>
+            </div>
           </div>
 
-          <div class="modular-card under-construction-page-card">
-            <div class="construction-hazard-bar"></div>
-            <div class="under-construction-page-body">
-              <div class="u-const-icon-circle">
-                <svg viewBox="0 0 24 24" width="38" height="38" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-                  <circle cx="12" cy="12" r="9.5"/>
-                  <polyline points="12 6.5 12 12 15.5 14.5"/>
-                </svg>
+          <div class="modular-card">
+            <div class="modular-card-header">
+              <div class="card-header-left">
+                <div class="card-header-icon-box green">
+                  <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="9.5"/>
+                    <polyline points="12 6.5 12 12 15.5 14.5"/>
+                  </svg>
+                </div>
+                <div>
+                  <h3 class="modular-card-title">Live Audit Trail</h3>
+                  <p class="modular-card-subtitle">Real-time facility status changes and administrative actions</p>
+                </div>
               </div>
-              <div class="u-const-badge">UNDER CONSTRUCTION</div>
-              <h3 class="u-const-title">System Audit Trail Under Active Development</h3>
+            </div>
+            <div class="timeline-scroll-container full-view-timeline">
+              <div class="timeline-list" id="fullActivityTimelineList">
+                <!-- Rendered dynamically via renderTimelineLogs() -->
+              </div>
+            </div>
+            <div style="padding: 14px 20px; display: flex; justify-content: center; border-top: 1.5px solid rgba(255, 255, 255, 0.12); background: rgba(0, 0, 0, 0.2);">
+              <button class="header-action-btn primary" id="btnLoadMoreActivity">Load Older Records</button>
             </div>
           </div>
         </section>
 
         <!-- ====================================================
-             VIEW 5: FACULTY STATUS (UNDER CONSTRUCTION)
+             VIEW 5: FACULTY STATUS
              ==================================================== -->
         <section id="view-faculty" class="content-view">
           <div class="dashboard-greeting-row">
             <div>
               <h2 class="page-section-heading">Faculty Directory &amp; Availability</h2>
-              <p class="page-section-sub">Live teaching schedules and office consultation hours</p>
+              <p class="page-section-sub">Live teaching assignments, active classrooms, and consultation hours</p>
             </div>
           </div>
 
-          <div class="modular-card under-construction-page-card">
-            <div class="construction-hazard-bar"></div>
-            <div class="under-construction-page-body">
-              <div class="u-const-icon-circle">
-                <svg viewBox="0 0 24 24" width="38" height="38" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
-                  <circle cx="9" cy="7" r="4"/>
-                  <path d="M22 21v-2a4 4 0 0 0-3-3.87"/>
-                  <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
-                </svg>
+          <div class="modular-card">
+            <div class="modular-card-header">
+              <div class="card-header-left">
+                <div class="card-header-icon-box green">
+                  <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
+                    <circle cx="9" cy="7" r="4"/>
+                    <path d="M22 21v-2a4 4 0 0 0-3-3.87"/>
+                    <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                  </svg>
+                </div>
+                <div>
+                  <h3 class="modular-card-title">Campus Faculty Roster</h3>
+                  <p class="modular-card-subtitle">Real-time status synchronization with active classroom schedules</p>
+                </div>
               </div>
-              <div class="u-const-badge">UNDER CONSTRUCTION</div>
-              <h3 class="u-const-title">Faculty Directory Under Active Development</h3>
+            </div>
+            <div class="table-card-body">
+              <table class="comic-data-table">
+                <thead>
+                  <tr>
+                    <th>Faculty Member</th>
+                    <th>ID &amp; Designation</th>
+                    <th>Department</th>
+                    <th>Current Location</th>
+                    <th>Status</th>
+                    <th>Contact</th>
+                  </tr>
+                </thead>
+                <tbody id="facultyRosterTableBody">
+                  <!-- Rendered dynamically via renderFacultyRoster() -->
+                </tbody>
+              </table>
             </div>
           </div>
         </section>
 
         <!-- ====================================================
-             VIEW 6: CLASS SCHEDULES (UNDER CONSTRUCTION)
+             VIEW 6: CLASS SCHEDULES & TIMETABLES
              ==================================================== -->
         <section id="view-schedules" class="content-view">
           <div class="dashboard-greeting-row">
             <div>
-              <h2 class="page-section-heading">Campus Class Schedules</h2>
-              <p class="page-section-sub">Academic calendar timetable and room slot reservations</p>
+              <h2 class="page-section-heading">Campus Class Schedules &amp; Timetables</h2>
+              <p class="page-section-sub">Weekly academic calendar, section room allocations, and slot timetables</p>
+            </div>
+            <div class="greeting-action-stack" style="display:flex; gap:10px; align-items:center; flex-wrap:wrap;">
+              <select id="scheduleBldgFilterSelect" class="header-action-btn secondary" style="padding:6px 12px; font-weight:800; cursor:pointer; background: #1e293b; color: #f8fafc; border: 1.5px solid rgba(255,255,255,0.2);">
+                <option value="all" style="background:#0f172a; color:#fff;">All Facilities</option>
+                <option value="CBA Building" style="background:#0f172a; color:#fff;">CBA Building</option>
+                <option value="Pancho Building" style="background:#0f172a; color:#fff;">Pancho Building</option>
+                <option value="Hangar" style="background:#0f172a; color:#fff;">Hangar Complex</option>
+              </select>
+
+              <select id="scheduleDayFilterSelect" class="header-action-btn secondary" style="padding:6px 12px; font-weight:800; cursor:pointer; background: #1e293b; color: #f8fafc; border: 1.5px solid rgba(255,255,255,0.2);">
+                <option value="all" style="background:#0f172a; color:#fff;">All Days (Mon - Sat)</option>
+                <option value="Monday" style="background:#0f172a; color:#fff;">Monday</option>
+                <option value="Tuesday" style="background:#0f172a; color:#fff;">Tuesday</option>
+                <option value="Wednesday" style="background:#0f172a; color:#fff;">Wednesday</option>
+                <option value="Thursday" style="background:#0f172a; color:#fff;">Thursday</option>
+                <option value="Friday" style="background:#0f172a; color:#fff;">Friday</option>
+                <option value="Saturday" style="background:#0f172a; color:#fff;">Saturday</option>
+              </select>
             </div>
           </div>
 
-          <div class="modular-card under-construction-page-card">
-            <div class="construction-hazard-bar"></div>
-            <div class="under-construction-page-body">
-              <div class="u-const-icon-circle">
-                <svg viewBox="0 0 24 24" width="38" height="38" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-                  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
-                  <line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>
-                </svg>
+          <div class="modular-card">
+            <div class="modular-card-header">
+              <div class="card-header-left">
+                <div class="card-header-icon-box cyan">
+                  <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+                    <line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>
+                  </svg>
+                </div>
+                <div>
+                  <h3 class="modular-card-title">Academic Schedule Timetable</h3>
+                  <p class="modular-card-subtitle">Active classroom sessions, laboratory bookings, and recurring lecture blocks</p>
+                </div>
               </div>
-              <div class="u-const-badge">UNDER CONSTRUCTION</div>
-              <h3 class="u-const-title">Class Schedules Under Active Development</h3>
+            </div>
+            <div class="table-card-body">
+              <table class="comic-data-table">
+                <thead>
+                  <tr>
+                    <th>Course Code &amp; Title</th>
+                    <th>Section</th>
+                    <th>Instructor</th>
+                    <th>Assigned Room</th>
+                    <th>Day &amp; Time Slot</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody id="classSchedulesTableBody">
+                  <!-- Rendered dynamically via renderClassSchedules() -->
+                </tbody>
+              </table>
             </div>
           </div>
         </section>
@@ -1479,92 +1662,137 @@
 
   <!-- ====================================================
        ROOM PROPERTY & ATTRIBUTES MODAL
+  <!-- ====================================================
+       ROOM PROPERTY & ATTRIBUTES MODAL (HIERARCHICAL REDESIGN)
        ==================================================== -->
   <div id="roomModalBackdrop" class="modal-backdrop hidden">
-    <div class="modal-card modular-modal" id="modalCardContainer">
-      <div class="modal-header">
+    <div class="modal-card modular-modal modal-hierarchical" id="modalCardContainer">
+      
+      <!-- ── LEVEL 1: MODAL HEADER & BREADCRUMB ── -->
+      <div class="modal-header modal-header-hierarchical">
         <div class="modal-title-group">
-          <h3 id="modalRoomTitle">PANCHO 103</h3>
+          <div class="modal-room-badge-row">
+            <span class="modal-room-code-badge" id="modalRoomTitle">PANCHO 103</span>
+            <span class="modal-room-breadcrumb" id="modalRoomSubtitle">Pancho Building · Level 1</span>
+          </div>
         </div>
         <div class="modal-header-actions">
           <button class="btn-toggle-edit" id="btnToggleEditMode" type="button" title="Toggle Edit Mode">
+            <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
             <span class="edit-btn-text">Edit Mode</span>
           </button>
           <button class="modal-close" id="modalCloseBtn" type="button" title="Close dialog">✕</button>
         </div>
       </div>
 
-      <div class="modal-body">
-        <div class="room-status-banner vacant" id="modalStatusBanner">
-          <span class="status-indicator-dot"></span>
-          <span id="modalStatusText">Currently Available</span>
+      <div class="modal-body modal-body-hierarchical">
+        
+        <!-- ── LEVEL 1.5: HERO REAL-TIME STATUS HERO BANNER ── -->
+        <div class="room-status-banner-hero vacant" id="modalStatusBanner">
+          <div class="status-hero-left">
+            <span class="status-radar-beacon"></span>
+            <div class="status-hero-text-wrap">
+              <span class="status-hero-pill" id="modalStatusHeroPill">LIVE STATUS</span>
+              <h4 class="status-hero-title" id="modalStatusText">Currently Available</h4>
+            </div>
+          </div>
+          <div class="status-hero-right" id="modalStatusHeroRight">
+            <span class="status-hero-timer-chip" id="modalHeroTimerChip">⏱️ 0 mins</span>
+          </div>
         </div>
 
         <!-- ── ROOM PROPERTIES & ATTRIBUTES SUMMARY SHEET ── -->
         <div id="roomSummaryView" class="room-summary-sheet">
-          <!-- Quick Vitals Ribbon -->
-          <div class="summary-vitals-strip">
-            <div class="summary-vital-card">
-              <span class="s-vital-lbl">SEATING CAPACITY</span>
+          
+          <!-- ── LEVEL 2: COMPACT OPERATIONAL VITALS RIBBON ── -->
+          <div class="summary-vitals-strip hierarchical-vitals">
+            <div class="summary-vital-card vital-capacity">
+              <div class="vital-header-row">
+                <span class="vital-icon">👥</span>
+                <span class="s-vital-lbl">CAPACITY</span>
+              </div>
               <div class="s-vital-main">
                 <strong class="s-vital-val" id="sumCapacityVal">45</strong>
                 <span class="s-vital-unit">Seats</span>
               </div>
             </div>
 
-            <div class="summary-vital-card">
-              <span class="s-vital-lbl">FACILITY TYPE</span>
+            <div class="summary-vital-card vital-type">
+              <div class="vital-header-row">
+                <span class="vital-icon">🏷️</span>
+                <span class="s-vital-lbl">TYPE</span>
+              </div>
               <div class="s-vital-main">
                 <strong class="s-vital-val type-val" id="sumTypeVal">Classroom</strong>
               </div>
             </div>
 
-            <div class="summary-vital-card">
-              <span class="s-vital-lbl">OPERATIONAL STATUS</span>
+            <div class="summary-vital-card vital-status">
+              <div class="vital-header-row">
+                <span class="vital-icon">⚡</span>
+                <span class="s-vital-lbl">STATUS</span>
+              </div>
               <div class="s-vital-main">
                 <span class="s-status-badge available" id="sumStatusBadge">Available</span>
               </div>
             </div>
 
-            <div class="summary-vital-card">
-              <span class="s-vital-lbl">SESSION TIME</span>
+            <div class="summary-vital-card vital-time">
+              <div class="vital-header-row">
+                <span class="vital-icon">⏱️</span>
+                <span class="s-vital-lbl">SESSION</span>
+              </div>
               <div class="s-vital-main">
                 <strong class="s-vital-val" id="sumOccupiedMins">0 mins</strong>
               </div>
             </div>
           </div>
 
-          <!-- Occupancy & Reservation Telemetry -->
-          <div class="summary-spec-card">
+          <!-- ── LEVEL 3: PRIMARY BLOCK — ACTIVE OCCUPANCY & SCHEDULE TELEMETRY (DOMINANT CARD) ── -->
+          <div class="summary-spec-card card-hierarchy-primary" id="modalOccupancyCard">
             <div class="summary-card-header">
-              <span class="summary-card-title">Occupancy &amp; Schedule Details</span>
+              <div class="card-header-left">
+                <span class="card-header-icon-box">👤</span>
+                <span class="summary-card-title">Live Occupancy &amp; Schedule Telemetry</span>
+              </div>
+              <span class="summary-card-tag tag-primary-highlight" id="sumOccupantTag">Session Live</span>
             </div>
 
-            <div class="summary-properties-grid">
-              <div class="summary-prop-slot full-span">
-                <span class="s-prop-label">ASSIGNED FACULTY / SUBJECT</span>
-                <span class="s-prop-value" id="sumPropOccupant">None (Available)</span>
+            <div class="summary-occupancy-body">
+              <!-- Faculty Profile Slot -->
+              <div class="occupant-profile-card" id="modalOccupantProfileCard">
+                <div class="occupant-avatar" id="modalOccupantAvatar">F</div>
+                <div class="occupant-details">
+                  <span class="s-prop-label">CURRENT ASSIGNED FACULTY / USER</span>
+                  <div class="occupant-name-display" id="sumPropOccupant">None (Available)</div>
+                </div>
               </div>
 
-              <div class="summary-prop-slot">
-                <span class="s-prop-label">SCHEDULE / TIME SLOT</span>
-                <span class="s-prop-value" id="sumPropSchedule">--</span>
-              </div>
-
-              <div class="summary-prop-slot">
-                <span class="s-prop-label">DECLARED STAY DURATION</span>
-                <span class="s-prop-value" id="sumPropDeclared">None</span>
+              <!-- Schedule & Duration Grid -->
+              <div class="occupancy-metrics-grid">
+                <div class="occupancy-metric-box">
+                  <span class="s-prop-label">📅 SCHEDULE WINDOW</span>
+                  <span class="s-prop-value" id="sumPropSchedule">--</span>
+                </div>
+                <div class="occupancy-metric-box">
+                  <span class="s-prop-label">⏳ DECLARED STAY</span>
+                  <span class="s-prop-value" id="sumPropDeclared">None</span>
+                </div>
               </div>
             </div>
           </div>
 
-          <!-- Specifications Card -->
-          <div class="summary-spec-card">
+          <!-- ── LEVEL 4: SECONDARY BLOCK — FACILITY ARCHITECTURAL SPECIFICATIONS ── -->
+          <div class="summary-spec-card card-hierarchy-secondary">
             <div class="summary-card-header">
-              <span class="summary-card-title">Facility Specifications</span>
+              <div class="card-header-left">
+                <span class="card-header-icon-box">🏛️</span>
+                <span class="summary-card-title">Facility Specifications</span>
+              </div>
+              <span class="summary-card-tag">Architecture</span>
             </div>
             
-            <div class="summary-properties-grid">
+            <div class="summary-properties-grid hierarchical-specs-grid">
               <div class="summary-prop-slot">
                 <span class="s-prop-label">ROOM CODE</span>
                 <span class="summary-prop-static code-font" id="sumPropCode">PANCHO 103</span>
@@ -1600,10 +1828,13 @@
             </div>
           </div>
 
-          <!-- Installed Hardware & Equipment -->
-          <div class="summary-spec-card">
+          <!-- ── LEVEL 5: TERTIARY BLOCK — INSTALLED HARDWARE & EQUIPMENT ── -->
+          <div class="summary-spec-card card-hierarchy-tertiary">
             <div class="summary-card-header">
-              <span class="summary-card-title">Installed Hardware &amp; Equipment</span>
+              <div class="card-header-left">
+                <span class="card-header-icon-box">📦</span>
+                <span class="summary-card-title">Installed Hardware &amp; Equipment</span>
+              </div>
               <span class="summary-card-tag count" id="sumEquipmentCount">2 items</span>
             </div>
             <div class="summary-equipment-wrap" id="modalEquipmentTagsList">
@@ -1624,13 +1855,16 @@
           </div>
         </div>
 
-        <div class="modal-actions">
-          <div class="modal-db-sync-indicator" id="modalDbSyncBadge">
+        <!-- ── LEVEL 6: COMMAND FOOTER & ACTIONS ── -->
+        <div class="modal-actions modal-actions-hierarchical">
+          <div class="modal-db-sync-indicator" id="modalDbSyncBadge" title="FARMS Database Status">
             <span class="db-sync-dot online"></span>
-            <span id="modalDbSyncText">SQLite Synced</span>
+            <span id="modalDbSyncText">DTB</span>
           </div>
-          <button type="button" class="btn-modal secondary" id="btnReleaseRoom">Close</button>
-          <button type="button" class="btn-modal primary hidden" id="btnSaveChanges">Save</button>
+          <div class="modal-action-buttons-group">
+            <button type="button" class="btn-modal secondary" id="btnReleaseRoom">Close</button>
+            <button type="button" class="btn-modal primary hidden" id="btnSaveChanges">Save</button>
+          </div>
         </div>
       </div>
     </div>
@@ -1658,10 +1892,129 @@
     </div>
   </div>
 
+  <!-- ====================================================
+       ADMIN NEW ACCESS REQUEST CREATION MODAL
+       ==================================================== -->
+  <div id="adminReqModalBackdrop" class="modal-backdrop hidden">
+    <div class="modal-card modular-modal" style="max-width: 580px;">
+      <div class="modal-header">
+        <div class="modal-title-group">
+          <h3 style="font-size: 1.15rem; font-weight: 900; letter-spacing: -0.5px;">+ Create Room Access Request</h3>
+        </div>
+        <div class="modal-header-actions">
+          <button class="modal-close" id="adminReqModalClose" type="button" title="Close dialog">✕</button>
+        </div>
+      </div>
+
+      <div class="modal-body" style="padding: 18px 22px;">
+        <form id="adminNewRequestForm">
+          <div style="display: flex; flex-direction: column; gap: 14px;">
+            
+            <!-- Faculty / Requester -->
+            <div class="summary-prop-slot" style="display: flex; flex-direction: column; gap: 4px;">
+              <label class="s-prop-label" style="font-size: 0.72rem; font-weight: 900; text-transform: uppercase;">Faculty Member / Requester</label>
+              <select id="adminReqFaculty" class="summary-prop-input" style="display: block; width: 100%; height: 38px; border: 2px solid #000; border-radius: 6px; font-weight: 800; padding: 0 10px;" required>
+                <option value="Prof. Maria Santos (BSU-FAC-2024-881)">Prof. Maria Santos (CICT · BSU-FAC-2024-881)</option>
+                <option value="Dr. Roberto Reyes (BSU-FAC-2024-882)">Dr. Roberto Reyes (CBA · BSU-FAC-2024-882)</option>
+                <option value="Engr. Daniel Cruz (BSU-FAC-2024-883)">Engr. Daniel Cruz (Eng &amp; Aviation · BSU-FAC-2024-883)</option>
+                <option value="Prof. Ana Gomez (BSU-FAC-2024-884)">Prof. Ana Gomez (Educ &amp; Arts · BSU-FAC-2024-884)</option>
+                <option value="Dr. Manuel Lim (BSU-FAC-2024-885)">Dr. Manuel Lim (College of Science · BSU-FAC-2024-885)</option>
+                <option value="Prof. Elena De Vega (BSU-FAC-2024-886)">Prof. Elena De Vega (Aviation · BSU-FAC-2024-886)</option>
+              </select>
+            </div>
+
+            <!-- Building & Room Row -->
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+              <div class="summary-prop-slot" style="display: flex; flex-direction: column; gap: 4px;">
+                <label class="s-prop-label" style="font-size: 0.72rem; font-weight: 900; text-transform: uppercase;">Target Building</label>
+                <select id="adminReqBuilding" class="summary-prop-input" style="display: block; width: 100%; height: 38px; border: 2px solid #000; border-radius: 6px; font-weight: 800; padding: 0 10px;" required>
+                  <option value="Pancho Building">Pancho Building</option>
+                  <option value="CBA Building">CBA Building</option>
+                  <option value="Hangar">Hangar Complex</option>
+                </select>
+              </div>
+
+              <div class="summary-prop-slot" style="display: flex; flex-direction: column; gap: 4px;">
+                <label class="s-prop-label" style="font-size: 0.72rem; font-weight: 900; text-transform: uppercase;">Facility / Room</label>
+                <select id="adminReqRoom" class="summary-prop-input" style="display: block; width: 100%; height: 38px; border: 2px solid #000; border-radius: 6px; font-weight: 800; padding: 0 10px;" required>
+                  <!-- Populated dynamically via JS -->
+                </select>
+              </div>
+            </div>
+
+            <!-- Date Row -->
+            <div class="summary-prop-slot" style="display: flex; flex-direction: column; gap: 4px;">
+              <label class="s-prop-label" style="font-size: 0.72rem; font-weight: 900; text-transform: uppercase;">Reservation Date</label>
+              <input type="date" id="adminReqDate" class="summary-prop-input" style="display: block; width: 100%; height: 38px; border: 2px solid #000; border-radius: 6px; font-weight: 800; padding: 0 10px;" required>
+            </div>
+
+            <!-- ── Interactive Time Range Selector UI ── -->
+            <div class="summary-prop-slot" style="display: flex; flex-direction: column; gap: 6px;">
+              <label class="s-prop-label" style="font-size: 0.72rem; font-weight: 900; text-transform: uppercase;">Access Window &amp; Duration</label>
+              <div class="time-range-picker-card" id="adminReqTimePickerCard">
+                <div class="time-inputs-row">
+                  <div class="time-field-box">
+                    <div class="time-field-header">
+                      <label class="time-field-label">Start Time</label>
+                      <button type="button" class="btn-time-now" data-action="set-now" title="Set Start Time to current time">
+                        <svg viewBox="0 0 24 24" width="11" height="11" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><polyline points="12 6 12 12 15 15"/></svg>
+                        Now
+                      </button>
+                    </div>
+                    <input type="time" class="time-ui-input" id="adminReqStartTime" value="09:00" required>
+                  </div>
+                  <div class="time-divider-arrow">→</div>
+                  <div class="time-field-box">
+                    <label class="time-field-label" style="height:19px; display:flex; align-items:center;">End Time</label>
+                    <input type="time" class="time-ui-input" id="adminReqEndTime" value="11:00" required>
+                  </div>
+                </div>
+
+                <!-- Quick Duration Preset Chips -->
+                <div class="time-quick-duration-strip">
+                  <span class="quick-dur-label">Quick Duration:</span>
+                  <div class="quick-dur-chips">
+                    <button type="button" class="dur-chip" data-mins="30">30m</button>
+                    <button type="button" class="dur-chip" data-mins="60">1 hr</button>
+                    <button type="button" class="dur-chip" data-mins="90">1.5 hrs</button>
+                    <button type="button" class="dur-chip active" data-mins="120">2 hrs</button>
+                    <button type="button" class="dur-chip" data-mins="150">2.5 hrs</button>
+                    <button type="button" class="dur-chip" data-mins="180">3 hrs</button>
+                    <button type="button" class="dur-chip" data-mins="240">4 hrs</button>
+                  </div>
+                </div>
+
+                <!-- Live Calculated Summary Banner -->
+                <div class="time-summary-banner" id="adminReqTimeSummaryBanner">
+                  <span class="time-summary-icon">🕒</span>
+                  <span class="time-summary-text" id="adminReqTimeSummaryText">09:00 AM – 11:00 AM (120 mins / 2.0 hrs)</span>
+                </div>
+              </div>
+              <input type="hidden" id="adminReqTimeFormatted" value="09:00 AM – 11:00 AM">
+            </div>
+
+            <!-- Purpose / Subject Code -->
+            <div class="summary-prop-slot" style="display: flex; flex-direction: column; gap: 4px;">
+              <label class="s-prop-label" style="font-size: 0.72rem; font-weight: 900; text-transform: uppercase;">Purpose / Course / Seminar</label>
+              <input type="text" id="adminReqPurpose" class="summary-prop-input" placeholder="e.g. IT302 Database Design Laboratory Review" style="display: block; width: 100%; height: 38px; border: 2px solid #000; border-radius: 6px; font-weight: 800; padding: 0 10px;" required>
+            </div>
+
+          </div>
+
+          <div class="modal-actions" style="margin-top: 18px; padding-top: 14px; border-top: 2px solid #000;">
+            <button type="button" class="btn-modal secondary" id="btnCancelAdminReq">Cancel</button>
+            <button type="submit" class="btn-modal primary" id="btnSubmitAdminReq">+ Issue Access Request</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
   <!-- Toast Notification Container -->
   <div id="toastContainer" class="toast-container"></div>
 
   <script src="js/api.js?v=2.5.0"></script>
   <script src="js/dashboard.js?v=2.5.0"></script>
+  <script src="js/dev-tool.js"></script>
 </body>
 </html>

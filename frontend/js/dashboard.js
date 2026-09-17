@@ -90,129 +90,126 @@ document.addEventListener('DOMContentLoaded', () => {
     // CBA Building (4 Storeys, 3 rooms each = 12 rooms)
     // Floor 1
     { id: 'cba-101', building: 'CBA Building', floor: 1, roomCode: 'CBA 101', room: 'CBA 101', type: 'Lecture Hall', status: 'vacant', occupant: 'None', schedule: '--', capacity: 45, equipment: 'Dual Projectors, Sound System, Whiteboard' },
-    { id: 'cba-102', building: 'CBA Building', floor: 1, roomCode: 'CBA 102', room: 'CBA 102', type: 'Computer Lab', status: 'occupied', occupant: 'Prof. Santos (CS101)', schedule: '08:00 AM - 10:00 AM', capacity: 40, equipment: '40 PC Workstations, Smart TV' },
+    { id: 'cba-102', building: 'CBA Building', floor: 1, roomCode: 'CBA 102', room: 'CBA 102', type: 'Computer Lab', status: 'vacant', occupant: 'None', schedule: '--', capacity: 40, equipment: '40 PC Workstations, Smart TV' },
     { id: 'cba-103', building: 'CBA Building', floor: 1, roomCode: 'CBA 103', room: 'CBA 103', type: 'Business Lab', status: 'vacant', occupant: 'None', schedule: '--', capacity: 35, equipment: 'Smart Board, Conference Setup' },
     // Floor 2
-    { id: 'cba-201', building: 'CBA Building', floor: 2, roomCode: 'CBA 201', room: 'CBA 201', type: 'Smart Classroom', status: 'occupied', occupant: 'Dr. Reyes (BUS201)', schedule: '10:00 AM - 12:00 PM', capacity: 40, equipment: 'Interactive Display, Sound System' },
+    { id: 'cba-201', building: 'CBA Building', floor: 2, roomCode: 'CBA 201', room: 'CBA 201', type: 'Smart Classroom', status: 'vacant', occupant: 'None', schedule: '--', capacity: 40, equipment: 'Interactive Display, Sound System' },
     { id: 'cba-202', building: 'CBA Building', floor: 2, roomCode: 'CBA 202', room: 'CBA 202', type: 'Lecture Hall', status: 'vacant', occupant: 'None', schedule: '--', capacity: 45, equipment: 'Projector, Whiteboard' },
-    { id: 'cba-203', building: 'CBA Building', floor: 2, roomCode: 'CBA 203', room: 'CBA 203', type: 'Accounting Lab', status: 'occupied', occupant: 'Prof. Villanueva (ACT101)', schedule: '01:00 PM - 03:00 PM', capacity: 35, equipment: 'Workstations, Ledger Terminal' },
+    { id: 'cba-203', building: 'CBA Building', floor: 2, roomCode: 'CBA 203', room: 'CBA 203', type: 'Accounting Lab', status: 'vacant', occupant: 'None', schedule: '--', capacity: 35, equipment: 'Workstations, Ledger Terminal' },
     // Floor 3
     { id: 'cba-301', building: 'CBA Building', floor: 3, roomCode: 'CBA 301', room: 'CBA 301', type: 'Classroom', status: 'vacant', occupant: 'None', schedule: '--', capacity: 40, equipment: 'Whiteboard, Ceiling Fans' },
-    { id: 'cba-302', building: 'CBA Building', floor: 3, roomCode: 'CBA 302', room: 'CBA 302', type: 'Economics Lab', status: 'maintenance', occupant: 'None', schedule: 'Under Maintenance', capacity: 30, equipment: 'Terminal Racks, Smart TV' },
+    { id: 'cba-302', building: 'CBA Building', floor: 3, roomCode: 'CBA 302', room: 'CBA 302', type: 'Economics Lab', status: 'vacant', occupant: 'None', schedule: '--', capacity: 30, equipment: 'Terminal Racks, Smart TV' },
     { id: 'cba-303', building: 'CBA Building', floor: 3, roomCode: 'CBA 303', room: 'CBA 303', type: 'Seminar Room', status: 'vacant', occupant: 'None', schedule: '--', capacity: 35, equipment: 'Projector, Whiteboard' },
     // Floor 4
     { id: 'cba-401', building: 'CBA Building', floor: 4, roomCode: 'CBA 401', room: 'CBA 401', type: 'Executive Hall', status: 'vacant', occupant: 'None', schedule: '--', capacity: 60, equipment: 'Audio System, Dual Projectors' },
-    { id: 'cba-402', building: 'CBA Building', floor: 4, roomCode: 'CBA 402', room: 'CBA 402', type: 'Conference Suite', status: 'occupied', occupant: 'Dean Mendoza (Admin)', schedule: '01:00 PM - 04:00 PM', capacity: 25, equipment: 'Video Conference, Smart TV' },
+    { id: 'cba-402', building: 'CBA Building', floor: 4, roomCode: 'CBA 402', room: 'CBA 402', type: 'Conference Suite', status: 'vacant', occupant: 'None', schedule: '--', capacity: 25, equipment: 'Video Conference, Smart TV' },
     { id: 'cba-403', building: 'CBA Building', floor: 4, roomCode: 'CBA 403', room: 'CBA 403', type: 'Case Study Room', status: 'vacant', occupant: 'None', schedule: '--', capacity: 35, equipment: 'Tiered Seating, Screen' },
 
     // Hangar (1 Storey, 6 rooms: Left 004, 005, 006; Right 003, 002, 001)
-    { id: 'h-001', building: 'Hangar', floor: 1, roomCode: 'H 001', room: 'Hangar 001', type: 'Powerplants Bay', status: 'occupied', occupant: 'Engr. Cruz (AERO202)', schedule: '09:00 AM - 12:00 PM', capacity: 50, equipment: 'Engine Test Stands, Heavy Hoist' },
+    { id: 'h-001', building: 'Hangar', floor: 1, roomCode: 'H 001', room: 'Hangar 001', type: 'Powerplants Bay', status: 'vacant', occupant: 'None', schedule: '--', capacity: 50, equipment: 'Engine Test Stands, Heavy Hoist' },
     { id: 'h-002', building: 'Hangar', floor: 1, roomCode: 'H 002', room: 'Hangar 002', type: 'Avionics Lab', status: 'vacant', occupant: 'None', schedule: '--', capacity: 40, equipment: 'Diagnostic Benches, Oscilloscopes' },
     { id: 'h-003', building: 'Hangar', floor: 1, roomCode: 'H 003', room: 'Hangar 003', type: 'Flight Simulation', status: 'vacant', occupant: 'None', schedule: '--', capacity: 30, equipment: 'Flight Simulators, Avionics Racks' },
-    { id: 'h-004', building: 'Hangar', floor: 1, roomCode: 'H 004', room: 'Hangar 004', type: 'UAV & Drone Lab', status: 'occupied', occupant: 'Prof. De Vega (UAV101)', schedule: '01:00 PM - 03:30 PM', capacity: 35, equipment: 'Drone Cages, Telemetry Racks' },
+    { id: 'h-004', building: 'Hangar', floor: 1, roomCode: 'H 004', room: 'Hangar 004', type: 'UAV & Drone Lab', status: 'vacant', occupant: 'None', schedule: '--', capacity: 35, equipment: 'Drone Cages, Telemetry Racks' },
     { id: 'h-005', building: 'Hangar', floor: 1, roomCode: 'H 005', room: 'Hangar 005', type: 'Composite Materials', status: 'vacant', occupant: 'None', schedule: '--', capacity: 40, equipment: 'Autoclave, Vacuum Table, Tooling' },
-    { id: 'h-006', building: 'Hangar', floor: 1, roomCode: 'H 006', room: 'Hangar 006', type: 'Aircraft Assembly', status: 'maintenance', occupant: 'None', schedule: 'Facility Recalibration', capacity: 60, equipment: 'Hydraulic Lifts, Tool Depots' },
+    { id: 'h-006', building: 'Hangar', floor: 1, roomCode: 'H 006', room: 'Hangar 006', type: 'Aircraft Assembly', status: 'vacant', occupant: 'None', schedule: '--', capacity: 60, equipment: 'Hydraulic Lifts, Tool Depots' },
 
     // Pancho Building - Floor 1
     { id: 'p1-101', building: 'Pancho Building', floor: 1, roomCode: 'PANCHO 101', room: '101', type: 'Classroom', status: 'vacant', occupant: 'None', schedule: '--', capacity: 45, equipment: 'Whiteboard, Ceiling Fans' },
-    { id: 'p1-103', building: 'Pancho Building', floor: 1, roomCode: 'PANCHO 103', room: '103', type: 'Classroom', status: 'occupied', occupant: 'Dr. Reyes (BUS301)', schedule: '01:00 PM - 03:00 PM', capacity: 45, equipment: 'Projector, Whiteboard' },
+    { id: 'p1-103', building: 'Pancho Building', floor: 1, roomCode: 'PANCHO 103', room: '103', type: 'Classroom', status: 'vacant', occupant: 'None', schedule: '--', capacity: 45, equipment: 'Projector, Whiteboard' },
     { id: 'p1-105', building: 'Pancho Building', floor: 1, roomCode: 'PANCHO 105', room: '105', type: 'Classroom', status: 'vacant', occupant: 'None', schedule: '--', capacity: 45, equipment: 'Whiteboard, Smart TV' },
     { id: 'p1-107', building: 'Pancho Building', floor: 1, roomCode: 'PANCHO 107', room: '107', type: 'Classroom', status: 'vacant', occupant: 'None', schedule: '--', capacity: 45, equipment: 'Whiteboard' },
-    { id: 'p1-109', building: 'Pancho Building', floor: 1, roomCode: 'PANCHO 109', room: '109', type: 'Classroom', status: 'occupied', occupant: 'Prof. Diaz (MATH101)', schedule: '10:00 AM - 12:00 PM', capacity: 45, equipment: 'Whiteboard, Sound System' },
+    { id: 'p1-109', building: 'Pancho Building', floor: 1, roomCode: 'PANCHO 109', room: '109', type: 'Classroom', status: 'vacant', occupant: 'None', schedule: '--', capacity: 45, equipment: 'Whiteboard, Sound System' },
     { id: 'p1-111', building: 'Pancho Building', floor: 1, roomCode: 'PANCHO 111', room: '111', type: 'Classroom', status: 'vacant', occupant: 'None', schedule: '--', capacity: 45, equipment: 'Whiteboard' },
-    { id: 'p1-113', building: 'Pancho Building', floor: 1, roomCode: 'PANCHO 113', room: '113', type: 'Classroom', status: 'vacant', occupant: 'None', schedule: '--', capacity: 45, equipment: 'Whiteboard, Projector' },
-    { id: 'p1-115', building: 'Pancho Building', floor: 1, roomCode: 'PANCHO 115', room: '115', type: 'Classroom', status: 'occupied', occupant: 'Prof. Rivera (CHEM101)', schedule: '08:00 AM - 11:00 AM', capacity: 45, equipment: 'Chemistry Lab Benches' },
+    { id: 'p1-113', building: 'Pancho Building', floor: 1, room_code: 'PANCHO 113', room: '113', type: 'Classroom', status: 'vacant', occupant: 'None', schedule: '--', capacity: 45, equipment: 'Whiteboard, Projector' },
+    { id: 'p1-115', building: 'Pancho Building', floor: 1, roomCode: 'PANCHO 115', room: '115', type: 'Classroom', status: 'vacant', occupant: 'None', schedule: '--', capacity: 45, equipment: 'Chemistry Lab Benches' },
     { id: 'p1-117a', building: 'Pancho Building', floor: 1, roomCode: 'PANCHO 117A', room: '117A', type: 'Classroom', status: 'vacant', occupant: 'None', schedule: '--', capacity: 40, equipment: 'Whiteboard' },
     { id: 'p1-119', building: 'Pancho Building', floor: 1, roomCode: 'PANCHO 119', room: '119', type: 'Classroom', status: 'vacant', occupant: 'None', schedule: '--', capacity: 45, equipment: 'Whiteboard' },
-    { id: 'p1-121', building: 'Pancho Building', floor: 1, roomCode: 'PANCHO 121', room: '121', type: 'Classroom', status: 'occupied', occupant: 'Prof. Soriano (FIL101)', schedule: '01:00 PM - 03:00 PM', capacity: 45, equipment: 'Projector, Whiteboard' },
+    { id: 'p1-121', building: 'Pancho Building', floor: 1, roomCode: 'PANCHO 121', room: '121', type: 'Classroom', status: 'vacant', occupant: 'None', schedule: '--', capacity: 45, equipment: 'Projector, Whiteboard' },
     { id: 'p1-123a', building: 'Pancho Building', floor: 1, roomCode: 'PANCHO 123A', room: '123A', type: 'Classroom', status: 'vacant', occupant: 'None', schedule: '--', capacity: 40, equipment: 'Whiteboard' },
     { id: 'p1-125', building: 'Pancho Building', floor: 1, roomCode: 'PANCHO 125', room: '125', type: 'Classroom', status: 'vacant', occupant: 'None', schedule: '--', capacity: 45, equipment: 'Whiteboard' },
-    { id: 'p1-lecture', building: 'Pancho Building', floor: 1, roomCode: 'PANCHO LEC', room: 'Lecture Room', type: 'Lecture Hall', status: 'occupied', occupant: 'Prof. Gomez (ENG101)', schedule: '10:00 AM - 12:00 PM', capacity: 90, equipment: 'Tiered Seating, Sound System' },
+    { id: 'p1-lecture', building: 'Pancho Building', floor: 1, roomCode: 'PANCHO LEC', room: 'Lecture Room', type: 'Lecture Hall', status: 'vacant', occupant: 'None', schedule: '--', capacity: 90, equipment: 'Tiered Seating, Sound System' },
     { id: 'p1-102', building: 'Pancho Building', floor: 1, roomCode: 'PANCHO 102', room: '102', type: 'Classroom', status: 'vacant', occupant: 'None', schedule: '--', capacity: 45, equipment: 'Whiteboard' },
     { id: 'p1-104', building: 'Pancho Building', floor: 1, roomCode: 'PANCHO 104', room: '104', type: 'Classroom', status: 'vacant', occupant: 'None', schedule: '--', capacity: 45, equipment: 'Whiteboard' },
-    { id: 'p1-106', building: 'Pancho Building', floor: 1, roomCode: 'PANCHO 106', room: '106', type: 'Classroom', status: 'occupied', occupant: 'Prof. Morales (ENG201)', schedule: '08:00 AM - 10:00 AM', capacity: 45, equipment: 'Projector, Whiteboard' },
+    { id: 'p1-106', building: 'Pancho Building', floor: 1, roomCode: 'PANCHO 106', room: '106', type: 'Classroom', status: 'vacant', occupant: 'None', schedule: '--', capacity: 45, equipment: 'Projector, Whiteboard' },
     { id: 'p1-108', building: 'Pancho Building', floor: 1, roomCode: 'PANCHO 108', room: '108', type: 'Classroom', status: 'vacant', occupant: 'None', schedule: '--', capacity: 45, equipment: 'Whiteboard' },
-    { id: 'p1-scilab', building: 'Pancho Building', floor: 1, roomCode: 'PANCHO SCILAB', room: 'Science Laboratory', type: 'Wet Lab', status: 'occupied', occupant: 'Dr. Lim (BIO102)', schedule: '02:00 PM - 05:00 PM', capacity: 50, equipment: 'Microscopes, Safety Showers' },
+    { id: 'p1-scilab', building: 'Pancho Building', floor: 1, roomCode: 'PANCHO SCILAB', room: 'Science Laboratory', type: 'Wet Lab', status: 'vacant', occupant: 'None', schedule: '--', capacity: 50, equipment: 'Microscopes, Safety Showers' },
     { id: 'p1-112a', building: 'Pancho Building', floor: 1, roomCode: 'PANCHO 112A', room: '112A', type: 'Classroom', status: 'vacant', occupant: 'None', schedule: '--', capacity: 40, equipment: 'Whiteboard' },
     { id: 'p1-112b', building: 'Pancho Building', floor: 1, roomCode: 'PANCHO 112B', room: '112B', type: 'Classroom', status: 'vacant', occupant: 'None', schedule: '--', capacity: 40, equipment: 'Whiteboard' },
-    { id: 'p1-114', building: 'Pancho Building', floor: 1, roomCode: 'PANCHO 114', room: '114', type: 'Classroom', status: 'occupied', occupant: 'Prof. Navarro (PHY102)', schedule: '02:00 PM - 04:00 PM', capacity: 45, equipment: 'Physics Apparatus, Projector' },
+    { id: 'p1-114', building: 'Pancho Building', floor: 1, roomCode: 'PANCHO 114', room: '114', type: 'Classroom', status: 'vacant', occupant: 'None', schedule: '--', capacity: 45, equipment: 'Physics Apparatus, Projector' },
     { id: 'p1-116', building: 'Pancho Building', floor: 1, roomCode: 'PANCHO 116', room: '116', type: 'Classroom', status: 'vacant', occupant: 'None', schedule: '--', capacity: 45, equipment: 'Whiteboard' },
     { id: 'p1-118', building: 'Pancho Building', floor: 1, roomCode: 'PANCHO 118', room: '118', type: 'Classroom', status: 'vacant', occupant: 'None', schedule: '--', capacity: 45, equipment: 'Whiteboard' },
-    { id: 'p1-122', building: 'Pancho Building', floor: 1, roomCode: 'PANCHO 122', room: '122', type: 'Classroom', status: 'occupied', occupant: 'Dr. Santos (SOC102)', schedule: '10:00 AM - 12:00 PM', capacity: 45, equipment: 'Whiteboard, Projector' },
+    { id: 'p1-122', building: 'Pancho Building', floor: 1, roomCode: 'PANCHO 122', room: '122', type: 'Classroom', status: 'vacant', occupant: 'None', schedule: '--', capacity: 45, equipment: 'Whiteboard, Projector' },
     { id: 'p1-103bot', building: 'Pancho Building', floor: 1, roomCode: 'PANCHO 103E', room: '103E', type: 'Classroom', status: 'vacant', occupant: 'None', schedule: '--', capacity: 45, equipment: 'Whiteboard' },
     { id: 'p1-library', building: 'Pancho Building', floor: 1, roomCode: 'PANCHO LIB', room: 'Library', type: 'Learning Center', status: 'vacant', occupant: 'Open Access', schedule: '08:00 AM - 06:00 PM', capacity: 120, equipment: 'Book Stacks, Wi-Fi Desks' },
-    { id: 'p1-multimedia', building: 'Pancho Building', floor: 1, roomCode: 'PANCHO MULTIMEDIA', room: 'Multimedia Room', type: 'Audio-Visual Hall', status: 'occupied', occupant: 'AV Team (Forum)', schedule: '09:00 AM - 11:30 AM', capacity: 70, equipment: 'Acoustic Panels, 4K Projector' },
+    { id: 'p1-multimedia', building: 'Pancho Building', floor: 1, roomCode: 'PANCHO MULTIMEDIA', room: 'Multimedia Room', type: 'Audio-Visual Hall', status: 'vacant', occupant: 'None', schedule: '--', capacity: 70, equipment: 'Acoustic Panels, 4K Projector' },
 
     // Pancho Building - Floor 2
     { id: 'p2-201', building: 'Pancho Building', floor: 2, roomCode: 'PANCHO 201', room: '201', type: 'Classroom', status: 'vacant', occupant: 'None', schedule: '--', capacity: 45, equipment: 'Whiteboard' },
     { id: 'p2-203', building: 'Pancho Building', floor: 2, roomCode: 'PANCHO 203', room: '203', type: 'Classroom', status: 'vacant', occupant: 'None', schedule: '--', capacity: 45, equipment: 'Whiteboard' },
     { id: 'p2-206', building: 'Pancho Building', floor: 2, roomCode: 'PANCHO 206', room: '206', type: 'Classroom', status: 'vacant', occupant: 'None', schedule: '--', capacity: 45, equipment: 'Whiteboard' },
-    { id: 'p2-202', building: 'Pancho Building', floor: 2, roomCode: 'PANCHO 202', room: 'Pancho 202', type: 'Conference Room', status: 'occupied', occupant: 'Dr. Smith (Physics Seminar)', schedule: '02:00 PM - 04:00 PM', capacity: 12, equipment: 'Video Conf, Smart Board' },
+    { id: 'p2-202', building: 'Pancho Building', floor: 2, roomCode: 'PANCHO 202', room: 'Pancho 202', type: 'Conference Room', status: 'vacant', occupant: 'None', schedule: '--', capacity: 12, equipment: 'Video Conf, Smart Board' },
     { id: 'p2-210', building: 'Pancho Building', floor: 2, roomCode: 'PANCHO 210', room: '210', type: 'Classroom', status: 'vacant', occupant: 'None', schedule: '--', capacity: 45, equipment: 'Whiteboard' },
-    { id: 'p2-212', building: 'Pancho Building', floor: 2, roomCode: 'PANCHO 212', room: '212', type: 'Classroom', status: 'occupied', occupant: 'Prof. Mendoza (HIST101)', schedule: '08:00 AM - 10:00 AM', capacity: 45, equipment: 'Whiteboard' },
+    { id: 'p2-212', building: 'Pancho Building', floor: 2, roomCode: 'PANCHO 212', room: '212', type: 'Classroom', status: 'vacant', occupant: 'None', schedule: '--', capacity: 45, equipment: 'Whiteboard' },
     { id: 'p2-214a', building: 'Pancho Building', floor: 2, roomCode: 'PANCHO 214A', room: '214A', type: 'Classroom', status: 'vacant', occupant: 'None', schedule: '--', capacity: 40, equipment: 'Whiteboard' },
     { id: 'p2-214b', building: 'Pancho Building', floor: 2, roomCode: 'PANCHO 214B', room: '214B', type: 'Classroom', status: 'vacant', occupant: 'None', schedule: '--', capacity: 40, equipment: 'Whiteboard' },
     { id: 'p2-216a', building: 'Pancho Building', floor: 2, roomCode: 'PANCHO 216A', room: '216A', type: 'Classroom', status: 'vacant', occupant: 'None', schedule: '--', capacity: 40, equipment: 'Whiteboard' },
-    { id: 'p2-216b', building: 'Pancho Building', floor: 2, roomCode: 'PANCHO 216B', room: '216B', type: 'Classroom', status: 'occupied', occupant: 'Prof. De Leon (LIT102)', schedule: '01:00 PM - 03:00 PM', capacity: 40, equipment: 'Whiteboard, Projector' },
-    { id: 'p2-215', building: 'Pancho Building', floor: 2, roomCode: 'PANCHO 215', room: '215', type: 'Architecture Studio', status: 'occupied', occupant: 'Engr. Dalisay (ARCH202)', schedule: '08:00 AM - 11:30 AM', capacity: 40, equipment: 'Drafting Tables, Plotter' },
+    { id: 'p2-216b', building: 'Pancho Building', floor: 2, roomCode: 'PANCHO 216B', room: '216B', type: 'Classroom', status: 'vacant', occupant: 'None', schedule: '--', capacity: 40, equipment: 'Whiteboard, Projector' },
+    { id: 'p2-215', building: 'Pancho Building', floor: 2, roomCode: 'PANCHO 215', room: '215', type: 'Architecture Studio', status: 'vacant', occupant: 'None', schedule: '--', capacity: 40, equipment: 'Drafting Tables, Plotter' },
     { id: 'p2-220', building: 'Pancho Building', floor: 2, roomCode: 'PANCHO 220', room: '220', type: 'Classroom', status: 'vacant', occupant: 'None', schedule: '--', capacity: 45, equipment: 'Whiteboard' },
     { id: 'p2-222', building: 'Pancho Building', floor: 2, roomCode: 'PANCHO 222', room: '222', type: 'Classroom', status: 'vacant', occupant: 'None', schedule: '--', capacity: 45, equipment: 'Whiteboard' },
     { id: 'p2-224', building: 'Pancho Building', floor: 2, roomCode: 'PANCHO 224', room: '224', type: 'Lecture Hall', status: 'vacant', occupant: 'None', schedule: '--', capacity: 65, equipment: 'Projector, Whiteboard' },
-    { id: 'p2-226', building: 'Pancho Building', floor: 2, roomCode: 'PANCHO 226', room: '226', type: 'Classroom', status: 'occupied', occupant: 'Dr. Garcia (CHEM202)', schedule: '02:00 PM - 04:00 PM', capacity: 45, equipment: 'Smart Board' },
+    { id: 'p2-226', building: 'Pancho Building', floor: 2, roomCode: 'PANCHO 226', room: '226', type: 'Classroom', status: 'vacant', occupant: 'None', schedule: '--', capacity: 45, equipment: 'Smart Board' },
     { id: 'p2-228a', building: 'Pancho Building', floor: 2, roomCode: 'PANCHO 228A', room: '228A', type: 'Classroom', status: 'vacant', occupant: 'None', schedule: '--', capacity: 35, equipment: 'Whiteboard' },
     { id: 'p2-228b', building: 'Pancho Building', floor: 2, roomCode: 'PANCHO 228B', room: '228B', type: 'Classroom', status: 'vacant', occupant: 'None', schedule: '--', capacity: 35, equipment: 'Whiteboard' },
-    { id: 'p2-sped', building: 'Pancho Building', floor: 2, roomCode: 'PANCHO SPED', room: 'SPED Room', type: 'Resource Room', status: 'occupied', occupant: 'Mrs. Ramos (Special Ed)', schedule: '08:00 AM - 12:00 PM', capacity: 20, equipment: 'Sensory Stations, Braille Display' },
+    { id: 'p2-sped', building: 'Pancho Building', floor: 2, roomCode: 'PANCHO SPED', room: 'SPED Room', type: 'Resource Room', status: 'vacant', occupant: 'None', schedule: '--', capacity: 20, equipment: 'Sensory Stations, Braille Display' },
     { id: 'p2-unites', building: 'Pancho Building', floor: 2, roomCode: 'PANCHO UNITES', room: 'Unites Room', type: 'Activity Hall', status: 'vacant', occupant: 'None', schedule: '--', capacity: 30, equipment: 'Round Tables' },
     { id: 'p2-200', building: 'Pancho Building', floor: 2, roomCode: 'PANCHO 200', room: '200', type: 'Classroom', status: 'vacant', occupant: 'None', schedule: '--', capacity: 45, equipment: 'Whiteboard' },
-    { id: 'p2-204', building: 'Pancho Building', floor: 2, roomCode: 'PANCHO 204', room: '204', type: 'Classroom', status: 'occupied', occupant: 'Prof. Cruz (ENG102)', schedule: '10:00 AM - 12:00 PM', capacity: 45, equipment: 'Projector' },
+    { id: 'p2-204', building: 'Pancho Building', floor: 2, roomCode: 'PANCHO 204', room: '204', type: 'Classroom', status: 'vacant', occupant: 'None', schedule: '--', capacity: 45, equipment: 'Projector' },
     { id: 'p2-pta', building: 'Pancho Building', floor: 2, roomCode: 'PANCHO PTA', room: 'PTA Room', type: 'Office', status: 'vacant', occupant: 'None', schedule: '--', capacity: 15, equipment: 'Conference Table' },
-    { id: 'p2-sto', building: 'Pancho Building', floor: 2, roomCode: 'PANCHO STO', room: 'STO', type: 'Faculty Office', status: 'occupied', occupant: 'Student Affairs', schedule: '08:00 AM - 05:00 PM', capacity: 15, equipment: 'Desks, File Storage' },
+    { id: 'p2-sto', building: 'Pancho Building', floor: 2, roomCode: 'PANCHO STO', room: 'STO', type: 'Faculty Office', status: 'vacant', occupant: 'None', schedule: '--', capacity: 15, equipment: 'Desks, File Storage' },
     { id: 'p2-scouts', building: 'Pancho Building', floor: 2, roomCode: 'PANCHO SCOUTS', room: 'Scouts Room', type: 'Activity Office', status: 'vacant', occupant: 'None', schedule: '--', capacity: 20, equipment: 'Benches, Gear Lockers' },
     { id: 'p2-207', building: 'Pancho Building', floor: 2, roomCode: 'PANCHO 207', room: '207', type: 'Classroom', status: 'vacant', occupant: 'None', schedule: '--', capacity: 45, equipment: 'Whiteboard' },
-    { id: 'p2-209', building: 'Pancho Building', floor: 2, roomCode: 'PANCHO 209', room: '209', type: 'Classroom', status: 'occupied', occupant: 'Prof. Tolentino (FIL102)', schedule: '01:00 PM - 03:00 PM', capacity: 45, equipment: 'Whiteboard' },
+    { id: 'p2-209', building: 'Pancho Building', floor: 2, roomCode: 'PANCHO 209', room: '209', type: 'Classroom', status: 'vacant', occupant: 'None', schedule: '--', capacity: 45, equipment: 'Whiteboard' },
     { id: 'p2-211', building: 'Pancho Building', floor: 2, roomCode: 'PANCHO 211', room: '211', type: 'Classroom', status: 'vacant', occupant: 'None', schedule: '--', capacity: 45, equipment: 'Whiteboard' },
     { id: 'p2-213', building: 'Pancho Building', floor: 2, roomCode: 'PANCHO 213', room: '213', type: 'Classroom', status: 'vacant', occupant: 'None', schedule: '--', capacity: 45, equipment: 'Whiteboard' },
-    { id: 'p2-217', building: 'Pancho Building', floor: 2, roomCode: 'PANCHO 217', room: '217', type: 'Lecture Hall', status: 'occupied', occupant: 'Dr. Hernandez (ENG202)', schedule: '09:00 AM - 11:30 AM', capacity: 85, equipment: 'Sound System, Dual TV' },
+    { id: 'p2-217', building: 'Pancho Building', floor: 2, roomCode: 'PANCHO 217', room: '217', type: 'Lecture Hall', status: 'vacant', occupant: 'None', schedule: '--', capacity: 85, equipment: 'Sound System, Dual TV' },
     { id: 'p2-219', building: 'Pancho Building', floor: 2, roomCode: 'PANCHO 219', room: '219', type: 'Classroom', status: 'vacant', occupant: 'None', schedule: '--', capacity: 45, equipment: 'Whiteboard' },
     { id: 'p2-221', building: 'Pancho Building', floor: 2, roomCode: 'PANCHO 221', room: '221', type: 'Classroom', status: 'vacant', occupant: 'None', schedule: '--', capacity: 45, equipment: 'Whiteboard' },
-    { id: 'p2-223', building: 'Pancho Building', floor: 2, roomCode: 'PANCHO 223', room: '223', type: 'Classroom', status: 'occupied', occupant: 'Prof. Castillo (MATH201)', schedule: '08:00 AM - 10:00 AM', capacity: 45, equipment: 'Whiteboard' },
+    { id: 'p2-223', building: 'Pancho Building', floor: 2, roomCode: 'PANCHO 223', room: '223', type: 'Classroom', status: 'vacant', occupant: 'None', schedule: '--', capacity: 45, equipment: 'Whiteboard' },
     { id: 'p2-225', building: 'Pancho Building', floor: 2, roomCode: 'PANCHO 225', room: '225', type: 'Lecture Hall', status: 'vacant', occupant: 'None', schedule: '--', capacity: 70, equipment: 'Projector, Whiteboard' },
     { id: 'p2-227a', building: 'Pancho Building', floor: 2, roomCode: 'PANCHO 227A', room: '227A', type: 'Classroom', status: 'vacant', occupant: 'None', schedule: '--', capacity: 40, equipment: 'Whiteboard' },
     { id: 'p2-227b', building: 'Pancho Building', floor: 2, roomCode: 'PANCHO 227B', room: '227B', type: 'Classroom', status: 'vacant', occupant: 'None', schedule: '--', capacity: 40, equipment: 'Whiteboard' },
-    { id: 'p2-229', building: 'Pancho Building', floor: 2, roomCode: 'PANCHO 229', room: '229', type: 'Classroom', status: 'occupied', occupant: 'Dr. Valerio (PHYS201)', schedule: '02:00 PM - 04:30 PM', capacity: 45, equipment: 'Physics Kits' },
+    { id: 'p2-229', building: 'Pancho Building', floor: 2, roomCode: 'PANCHO 229', room: '229', type: 'Classroom', status: 'vacant', occupant: 'None', schedule: '--', capacity: 45, equipment: 'Physics Kits' },
     { id: 'p2-231', building: 'Pancho Building', floor: 2, roomCode: 'PANCHO 231', room: '231', type: 'Classroom', status: 'vacant', occupant: 'None', schedule: '--', capacity: 45, equipment: 'Whiteboard' },
     { id: 'p2-232', building: 'Pancho Building', floor: 2, roomCode: 'PANCHO 232', room: '232', type: 'Classroom', status: 'vacant', occupant: 'None', schedule: '--', capacity: 45, equipment: 'Whiteboard' },
-    { id: 'p2-233', building: 'Pancho Building', floor: 2, roomCode: 'PANCHO 233', room: '233', type: 'Classroom', status: 'occupied', occupant: 'Prof. Robles (BIO201)', schedule: '10:00 AM - 12:00 PM', capacity: 45, equipment: 'Whiteboard, Screen' }
+    { id: 'p2-233', building: 'Pancho Building', floor: 2, roomCode: 'PANCHO 233', room: '233', type: 'Classroom', status: 'vacant', occupant: 'None', schedule: '--', capacity: 45, equipment: 'Whiteboard, Screen' }
   ];
 
-  const DEFAULT_REQUESTS = [
-    { id: 'REQ-101', requester: 'Dr. Reyes (BUS301)', room: 'Pancho 103', date: 'Today, 01:00 PM', purpose: 'Business Admin Forum', status: 'approved' },
-    { id: 'REQ-102', requester: 'Prof. Diaz (MATH101)', room: 'Pancho 109', date: 'Today, 10:00 AM', purpose: 'Calculus Midterms', status: 'approved' },
-    { id: 'REQ-103', requester: 'Engr. Cruz (AERO202)', room: 'Hangar 001', date: 'Today, 09:00 AM', purpose: 'Propulsion Diagnostics', status: 'approved' },
-    { id: 'REQ-104', requester: 'Prof. Santos (CS101)', room: 'CBA 102', date: 'Today, 08:00 AM', purpose: 'Python Laboratory', status: 'approved' },
-    { id: 'REQ-105', requester: 'Prof. Gomez (ENG101)', room: 'Pancho Lecture Room', date: 'Tomorrow, 09:00 AM', purpose: 'Speech & Debate Workshop', status: 'pending' },
-    { id: 'REQ-106', requester: 'Dr. Lim (BIO102)', room: 'Science Laboratory', date: 'Tomorrow, 02:00 PM', purpose: 'Cellular Biology Lab', status: 'pending' },
-    { id: 'REQ-107', requester: 'Prof. Navarro (PHY102)', room: 'Pancho 114', date: 'Oct 24, 02:00 PM', purpose: 'Electromagnetics Practical', status: 'pending' },
-    { id: 'REQ-108', requester: 'Engr. Dalisay (ARCH202)', room: 'Pancho 215', date: 'Oct 25, 08:00 AM', purpose: 'Blueprint Drafting Review', status: 'pending' },
-    { id: 'REQ-109', requester: 'Dr. Smith (Physics Seminar)', room: 'Pancho 202', date: 'Oct 26, 02:00 PM', purpose: 'Guest Lecture Physics', status: 'pending' }
-  ];
+  const DEFAULT_REQUESTS = [];
 
+  // 0. SCHEMA VERSION CHECK & AUTOMATIC PURGE OF STALE LOCAL STORAGE
+  const CURRENT_SCHEMA_VERSION = 'farms_release_v6_clean';
+  if (localStorage.getItem('farms_schema_version') !== CURRENT_SCHEMA_VERSION) {
+    [
+      'farms_rooms_v4', 'farms_requests_v4', 'farms_logs_v4', 'farms_notifs_v4',
+      'farms_rooms_v5', 'farms_requests_v5', 'farms_logs_v5', 'farms_notifs_v5',
+      'farms_rooms', 'farms_requests', 'farms_logs', 'farms_notifs',
+      'farms_faculty_bookings', 'farms_faculty_bookings_v5'
+    ].forEach(k => localStorage.removeItem(k));
+    localStorage.setItem('farms_schema_version', CURRENT_SCHEMA_VERSION);
+  }
+
+  const nowMs = Date.now();
   const DEFAULT_TIMELINE = [
-    { id: 'LOG-1', title: 'Room Assigned: Pancho 103', time: '10 mins ago', desc: 'Assigned to Dr. Reyes for Business Admin Forum (01:00 PM - 03:00 PM)', icon: 'booking', type: 'booking', color: 'green', side: 'left' },
-    { id: 'LOG-2', title: 'Schedule Override: Hangar 001', time: '45 mins ago', desc: 'Extended until 12:00 PM for Engr. Cruz (Propulsion Test)', icon: 'booking', type: 'booking', color: 'teal', side: 'right' },
-    { id: 'LOG-3', title: 'Maintenance Flagged: CBA 302', time: '2 hours ago', desc: 'Scheduled maintenance for economics lab terminal recalibration.', icon: 'maintenance', type: 'maintenance', color: 'amber', side: 'left' },
-    { id: 'LOG-4', title: 'Room Released: Pancho 105', time: '3 hours ago', desc: 'Morning session completed. Room returned to Available pool.', icon: 'release', type: 'release', color: 'teal', side: 'right' },
-    { id: 'LOG-5', title: 'Automated Facility Audit', time: '5 hours ago', desc: 'Daily room occupancy synchronization executed. 68 total facilities synced.', icon: 'system', type: 'system', color: 'green', side: 'left' }
+    { id: 'LOG-1', title: 'FARMS System Initialized', timestamp: nowMs, createdAt: new Date(nowMs).toISOString(), desc: 'System initialized with all campus facilities vacant and ready for scheduling.', icon: 'system', type: 'system', color: 'green', side: 'left' }
   ];
 
   const DEFAULT_NOTIFS = [
-    { id: 'N1', title: 'New Access Request', desc: 'Prof. Gomez requested Pancho Lecture Room for tomorrow.', time: '5 mins ago', unread: true },
-    { id: 'N2', title: 'Maintenance Pending', desc: 'CBA 302 terminal recalibration scheduled for inspection.', time: '1 hour ago', unread: true },
-    { id: 'N3', title: 'Auto-Sync Completed', desc: 'All 3 campus buildings operational status refreshed.', time: '4 hours ago', unread: false }
+    { id: 'N1', title: 'System Initialized', desc: 'FARMS release ready. All campus facilities synced and available.', time: 'Just now', unread: true }
   ];
 
-  // Refresh local storage if old seed format detected
-  let storedRooms = JSON.parse(localStorage.getItem('farms_rooms_v4'));
+  // Refresh local storage if old seed format detected or newly initialized
+  let storedRooms = JSON.parse(localStorage.getItem('farms_rooms_v6'));
   let rooms = storedRooms || DEFAULT_ROOMS;
 
   // Auto-migrate rooms to ensure roomCode property is always present and concise
@@ -235,17 +232,301 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  let requests = JSON.parse(localStorage.getItem('farms_requests_v4')) || DEFAULT_REQUESTS;
-  let timelineLogs = JSON.parse(localStorage.getItem('farms_logs_v4')) || DEFAULT_TIMELINE;
-  let notifs = JSON.parse(localStorage.getItem('farms_notifs_v4')) || DEFAULT_NOTIFS;
+  let requests = JSON.parse(localStorage.getItem('farms_requests_v6')) || DEFAULT_REQUESTS;
+  let timelineLogs = JSON.parse(localStorage.getItem('farms_logs_v6')) || DEFAULT_TIMELINE;
+
+  // Ensure all logs have numeric timestamp and ISO createdAt
+  timelineLogs.forEach((log, idx) => {
+    if (!log.timestamp) {
+      if (log.createdAt) {
+        log.timestamp = new Date(log.createdAt).getTime();
+      } else if (typeof log.time === 'string') {
+        const m = log.time.match(/(\d+)\s*min/i);
+        const h = log.time.match(/(\d+)\s*hour/i);
+        const d = log.time.match(/(\d+)\s*day/i);
+        if (m) log.timestamp = Date.now() - parseInt(m[1], 10) * 60000;
+        else if (h) log.timestamp = Date.now() - parseInt(h[1], 10) * 3600000;
+        else if (d) log.timestamp = Date.now() - parseInt(d[1], 10) * 86400000;
+        else log.timestamp = Date.now() - (idx + 1) * 600000;
+      } else {
+        log.timestamp = Date.now() - (idx + 1) * 600000;
+      }
+    }
+    if (!log.createdAt) {
+      log.createdAt = new Date(log.timestamp).toISOString();
+    }
+  });
+
+  let notifs = JSON.parse(localStorage.getItem('farms_notifs_v6')) || DEFAULT_NOTIFS;
 
   function saveState() {
-    localStorage.setItem('farms_rooms_v4', JSON.stringify(rooms));
-    localStorage.setItem('farms_requests_v4', JSON.stringify(requests));
-    localStorage.setItem('farms_logs_v4', JSON.stringify(timelineLogs));
-    localStorage.setItem('farms_notifs_v4', JSON.stringify(notifs));
-    updateKPIs();
+    localStorage.setItem('farms_rooms_v6', JSON.stringify(rooms));
+    localStorage.setItem('farms_requests_v6', JSON.stringify(requests));
+    localStorage.setItem('farms_logs_v6', JSON.stringify(timelineLogs));
+    localStorage.setItem('farms_notifs_v6', JSON.stringify(notifs));
+    if (typeof updateKPIs === 'function') updateKPIs();
   }
+
+  function findMatchingRoom(target) {
+    if (!target) return null;
+    const roomStr = typeof target === 'string' ? target : (target.room || target.facility || target.roomCode || '');
+    if (!roomStr) return null;
+
+    const raw = roomStr.trim();
+    const lower = raw.toLowerCase();
+
+    // 1. Direct match on id
+    const byId = rooms.find(r => r.id && r.id.toLowerCase() === lower);
+    if (byId) return byId;
+
+    // 2. Direct match on roomCode
+    const byCode = rooms.find(r => (r.roomCode || '').toLowerCase() === lower);
+    if (byCode) return byCode;
+
+    // 3. Extract building hint
+    let bldgHint = null;
+    if (/pancho/i.test(lower)) bldgHint = 'Pancho Building';
+    else if (/cba/i.test(lower)) bldgHint = 'CBA Building';
+    else if (/hangar/i.test(lower)) bldgHint = 'Hangar';
+
+    // 4. Special named facilities
+    if (/science|scilab/i.test(lower)) {
+      return rooms.find(r => r.id === 'p1-scilab' || (r.room && /science/i.test(r.room)));
+    }
+    if (/multimedia|avr/i.test(lower)) {
+      return rooms.find(r => r.id === 'p1-multimedia' || (r.room && /multimedia/i.test(r.room)));
+    }
+    if (/lecture/i.test(lower) && (!bldgHint || bldgHint === 'Pancho Building')) {
+      return rooms.find(r => r.id === 'p1-lecture' || (r.room && /lecture room/i.test(r.room)));
+    }
+    if (/library|lib/i.test(lower)) {
+      return rooms.find(r => r.id === 'p1-library' || (r.room && /library/i.test(r.room)));
+    }
+    if (/sped/i.test(lower)) {
+      return rooms.find(r => r.id === 'p2-sped' || (r.room && /sped/i.test(r.room)));
+    }
+    if (/unites/i.test(lower)) {
+      return rooms.find(r => r.id === 'p2-unites' || (r.room && /unites/i.test(r.room)));
+    }
+    if (/pta/i.test(lower)) {
+      return rooms.find(r => r.id === 'p2-pta' || (r.room && /pta/i.test(r.room)));
+    }
+    if (/sto/i.test(lower)) {
+      return rooms.find(r => r.id === 'p2-sto' || (r.room && /sto/i.test(r.room)));
+    }
+    if (/scouts/i.test(lower)) {
+      return rooms.find(r => r.id === 'p2-scouts' || (r.room && /scouts/i.test(r.room)));
+    }
+
+    // 5. Extract room number or alphanumeric code (e.g. "101", "103", "201", "001", "117A", "123A", "228B")
+    const numMatch = lower.match(/\b\d{3}[a-z]?\b/) || lower.match(/\b\d{1,3}[a-z]?\b/);
+    if (numMatch) {
+      const num = numMatch[0].toLowerCase();
+      const candidateRooms = bldgHint ? rooms.filter(r => r.building === bldgHint) : rooms;
+      const match = candidateRooms.find(r => {
+        const rCode = (r.roomCode || '').toLowerCase();
+        const rName = (r.room || '').toLowerCase();
+        const rId = (r.id || '').toLowerCase();
+        return rCode.endsWith(num) || rName === num || rName.endsWith(num) || rId.endsWith(num);
+      });
+      if (match) return match;
+    }
+
+    // 6. Generic substring matching
+    const cleanStr = lower.replace(/\([^)]*\)/g, '').replace(/building|room|floor|flr|\d/gi, '').trim();
+    if (cleanStr.length > 2) {
+      const candidateRooms = bldgHint ? rooms.filter(r => r.building === bldgHint) : rooms;
+      const subMatch = candidateRooms.find(r => {
+        const rName = (r.room || '').toLowerCase();
+        return rName.includes(cleanStr) || cleanStr.includes(rName);
+      });
+      if (subMatch) return subMatch;
+    }
+
+    return null;
+  }
+
+  function parseDurationMinutesFromSchedule(scheduleStr) {
+    if (!scheduleStr || typeof scheduleStr !== 'string' || scheduleStr === '--') return 120;
+    const str = scheduleStr.trim();
+
+    // Look for patterns like "08:00 AM - 10:00 AM", "1:00 PM – 3:30 PM", "9:00 AM - 12:00 PM"
+    const timeRangeMatch = str.match(/(\d{1,2}):(\d{2})\s*(AM|PM)?\s*[-–—to]+\s*(\d{1,2}):(\d{2})\s*(AM|PM)?/i);
+    if (timeRangeMatch) {
+      let [ , h1, m1, p1, h2, m2, p2 ] = timeRangeMatch;
+      if (!p1 && p2) p1 = p2;
+      if (!p2 && p1) p2 = p1;
+      let startHour = parseInt(h1, 10);
+      let endHour = parseInt(h2, 10);
+      if (p1 && p1.toUpperCase() === 'PM' && startHour !== 12) startHour += 12;
+      if (p1 && p1.toUpperCase() === 'AM' && startHour === 12) startHour = 0;
+      if (p2 && p2.toUpperCase() === 'PM' && endHour !== 12) endHour += 12;
+      if (p2 && p2.toUpperCase() === 'AM' && endHour === 12) endHour = 0;
+
+      let startMins = startHour * 60 + parseInt(m1, 10);
+      let endMins = endHour * 60 + parseInt(m2, 10);
+      if (endMins > startMins) {
+        return endMins - startMins;
+      }
+    }
+
+    // Look for explicit hours/minutes pattern like "2 hrs", "90 mins", "3 hours"
+    const hoursMatch = str.match(/(\d+(\.\d+)?)\s*(hr|hour|hrs|hours)/i);
+    if (hoursMatch) {
+      return Math.round(parseFloat(hoursMatch[1]) * 60);
+    }
+    const minsMatch = str.match(/(\d+)\s*(min|mins|minutes)/i);
+    if (minsMatch) {
+      return parseInt(minsMatch[1], 10);
+    }
+
+    // Standard default session length (120 mins = 2.0 hrs)
+    return 120;
+  }
+
+  function occupyRoomFromRequest(req) {
+    if (!req) return null;
+    const targetRoom = findMatchingRoom(req);
+    if (targetRoom) {
+      targetRoom.status = 'occupied';
+      targetRoom.occupant = req.requester || 'Faculty Occupant';
+      targetRoom.schedule = req.date || 'Active Session';
+      
+      const parsedDecl = parseDurationMinutesFromSchedule(targetRoom.schedule);
+      targetRoom.declaredDuration = parsedDecl > 0 ? parsedDecl : 120;
+      
+      if (!targetRoom.sessionStartTime) {
+        targetRoom.sessionStartTime = Date.now();
+      }
+      const startMs = typeof targetRoom.sessionStartTime === 'number' ? targetRoom.sessionStartTime : new Date(targetRoom.sessionStartTime).getTime();
+      const elapsed = Math.max(0, Math.floor((Date.now() - startMs) / 60000));
+      targetRoom.actualOccupiedMinutes = elapsed;
+      
+      const existingLog = timelineLogs.find(l => l.desc && l.desc.includes(req.id || 'REQ-MATCH'));
+      if (!existingLog) {
+        const now = Date.now();
+        const logItem = {
+          id: `LOG-${now}-${Math.floor(Math.random()*1000)}`,
+          title: `Room Occupied: ${targetRoom.roomCode || targetRoom.room}`,
+          desc: `Assigned to ${req.requester} for ${req.purpose || 'Academic Session'} (${req.id || 'REQ'})`,
+          text: `Assigned to ${req.requester} for ${req.purpose || 'Academic Session'} (${req.id || 'REQ'})`,
+          icon: 'booking',
+          type: 'booking',
+          color: 'green',
+          side: 'left',
+          timestamp: now,
+          createdAt: new Date(now).toISOString()
+        };
+        timelineLogs.unshift(logItem);
+        if (window.farmsApi && typeof farmsApi.createLog === 'function') {
+          farmsApi.createLog(logItem).catch(() => {});
+        }
+      }
+
+      saveState();
+
+      if (window.farmsApi && typeof farmsApi.updateRoom === 'function') {
+        farmsApi.updateRoom(targetRoom.id, {
+          status: 'occupied',
+          occupant: targetRoom.occupant,
+          schedule: targetRoom.schedule,
+          declaredDuration: targetRoom.declaredDuration,
+          actualOccupiedMinutes: targetRoom.actualOccupiedMinutes,
+          sessionStartTime: targetRoom.sessionStartTime
+        }).catch(err => console.warn('[farmsApi] Auto room occupancy sync failed:', err));
+        farmsApi.broadcastLocalEvent('room_updated', targetRoom);
+      }
+      return targetRoom;
+    }
+    return null;
+  }
+
+  function releaseRoomFromRequest(req) {
+    if (!req) return null;
+    const targetRoom = findMatchingRoom(req);
+    if (targetRoom) {
+      targetRoom.status = 'vacant';
+      targetRoom.occupant = 'None';
+      targetRoom.schedule = '--';
+      targetRoom.declaredDuration = 0;
+      targetRoom.actualOccupiedMinutes = 0;
+      targetRoom.sessionStartTime = null;
+
+      const now = Date.now();
+      const logItem = {
+        id: `LOG-${now}-${Math.floor(Math.random()*1000)}`,
+        title: `Room Released: ${targetRoom.roomCode || targetRoom.room}`,
+        desc: `Request ${req.id || ''} closed. Room returned to Available pool.`,
+        text: `Request ${req.id || ''} closed. Room returned to Available pool.`,
+        icon: 'release',
+        type: 'release',
+        color: 'teal',
+        side: 'right',
+        timestamp: now,
+        createdAt: new Date(now).toISOString()
+      };
+      timelineLogs.unshift(logItem);
+      if (window.farmsApi && typeof farmsApi.createLog === 'function') {
+        farmsApi.createLog(logItem).catch(() => {});
+      }
+
+      saveState();
+
+      if (window.farmsApi && typeof farmsApi.updateRoom === 'function') {
+        farmsApi.updateRoom(targetRoom.id, {
+          status: 'vacant',
+          occupant: 'None',
+          schedule: '--',
+          declaredDuration: 0,
+          actualOccupiedMinutes: 0,
+          sessionStartTime: null
+        }).catch(err => console.warn('[farmsApi] Auto room release sync failed:', err));
+        farmsApi.broadcastLocalEvent('room_updated', targetRoom);
+      }
+      return targetRoom;
+    }
+    return null;
+  }
+
+  function refreshAllViews() {
+    saveState();
+    if (activeBuilding && typeof loadFloorSVG === 'function') {
+      loadFloorSVG(activeBuilding, activeFloor);
+      if (typeof buildFloorPills === 'function') buildFloorPills(activeBuilding);
+    }
+    if (typeof renderAccessRequests === 'function') renderAccessRequests();
+    if (typeof renderMatrixView === 'function') renderMatrixView();
+    if (typeof renderListView === 'function') renderListView();
+    if (typeof renderStandaloneMatrix === 'function') renderStandaloneMatrix();
+    if (typeof renderMasterDirectory === 'function') renderMasterDirectory();
+    if (typeof renderStationaryOccupancyRings === 'function') renderStationaryOccupancyRings();
+    if (typeof updateKPIs === 'function') updateKPIs();
+    if (typeof updateAdaptiveSidebar === 'function') updateAdaptiveSidebar();
+    if (typeof renderTimelineLogs === 'function') renderTimelineLogs();
+  }
+
+  // Startup reconciliation: Reconcile rooms occupancy with any approved requests
+  requests.forEach(req => {
+    if (req.status === 'approved') {
+      const match = findMatchingRoom(req);
+      if (match) {
+        match.status = 'occupied';
+        if (!match.occupant || match.occupant === 'None') {
+          match.occupant = req.requester || 'Faculty Occupant';
+        }
+        if (!match.schedule || match.schedule === '--') {
+          match.schedule = req.date || 'Active Session';
+        }
+        const decl = parseDurationMinutesFromSchedule(match.schedule);
+        match.declaredDuration = match.declaredDuration && match.declaredDuration > 0 ? match.declaredDuration : decl;
+        if (!match.sessionStartTime) {
+          match.sessionStartTime = Date.now();
+        }
+        const startMs = typeof match.sessionStartTime === 'number' ? match.sessionStartTime : new Date(match.sessionStartTime).getTime();
+        match.actualOccupiedMinutes = Math.max(0, Math.floor((Date.now() - startMs) / 60000));
+      }
+    }
+  });
 
   // ==========================================
   // 1.5 USER SESSION & GUEST MODE ENFORCEMENT
@@ -2506,6 +2787,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
       requests.forEach(req => {
         const tr = document.createElement('tr');
+        if (req._isRealtimeNew) {
+          tr.classList.add('realtime-row-pulse');
+          setTimeout(() => {
+            req._isRealtimeNew = false;
+            tr.classList.remove('realtime-row-pulse');
+          }, 5000);
+        }
+
         const badgeClass = req.status === 'approved' ? 'badge-approved' : req.status === 'denied' ? 'badge-denied' : 'badge-pending';
         const badgeText = req.status === 'approved' ? '• Approved' : req.status === 'denied' ? '• Denied' : '• Pending';
 
@@ -2531,20 +2820,42 @@ document.addEventListener('DOMContentLoaded', () => {
         const denyBtn = tr.querySelector('.action-link-deny');
 
         if (approveBtn) {
-          approveBtn.addEventListener('click', () => {
+          approveBtn.addEventListener('click', async () => {
             req.status = 'approved';
-            showToast(`Request ${req.id} for ${req.room} approved.`);
+            const occupiedRoom = occupyRoomFromRequest(req);
             saveState();
-            renderAccessRequests();
+            refreshAllViews();
+            showToast(`Request ${req.id} for ${req.room} approved.`);
+
+            if (window.farmsApi) {
+              try {
+                await farmsApi.updateRequestStatus(req.id, 'approved');
+              } catch (err) {
+                console.warn('[FARMS] Request approval sync notice:', err.message);
+              }
+              farmsApi.broadcastLocalEvent('request_status_updated', req);
+              if (occupiedRoom) farmsApi.broadcastLocalEvent('room_updated', occupiedRoom);
+            }
           });
         }
 
         if (denyBtn) {
-          denyBtn.addEventListener('click', () => {
+          denyBtn.addEventListener('click', async () => {
             req.status = 'denied';
-            showToast(`Request ${req.id} denied.`, 'error');
+            const releasedRoom = releaseRoomFromRequest(req);
             saveState();
-            renderAccessRequests();
+            refreshAllViews();
+            showToast(`Request ${req.id} denied.`, 'error');
+
+            if (window.farmsApi) {
+              try {
+                await farmsApi.updateRequestStatus(req.id, 'denied');
+              } catch (err) {
+                console.warn('[FARMS] Request denial sync notice:', err.message);
+              }
+              farmsApi.broadcastLocalEvent('request_status_updated', req);
+              if (releasedRoom) farmsApi.broadcastLocalEvent('room_updated', releasedRoom);
+            }
           });
         }
 
@@ -2559,42 +2870,725 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  function handleNewRequestPrompt() {
-    const requester = prompt('Enter Requester Name & Title:');
-    if (!requester) return;
-    const room = prompt('Enter Room (e.g. Pancho 105, CBA 101, Hangar 001):');
-    if (!room) return;
-    const purpose = prompt('Enter Purpose of Access:') || 'Department Class / Activity';
+  // ==========================================
+  // 9.2 ADMIN NEW REQUEST MODAL & TIME PICKER
+  // ==========================================
+  function formatTimeTo12Hour(time24) {
+    if (!time24 || !time24.includes(':')) return time24 || '--:--';
+    const [hStr, mStr] = time24.split(':');
+    let h = parseInt(hStr, 10);
+    const m = mStr || '00';
+    const ampm = h >= 12 ? 'PM' : 'AM';
+    h = h % 12 || 12;
+    return `${String(h).padStart(2, '0')}:${m} ${ampm}`;
+  }
+
+  function timeToMinutes(time24) {
+    if (!time24 || !time24.includes(':')) return 0;
+    const [h, m] = time24.split(':').map(Number);
+    return (h || 0) * 60 + (m || 0);
+  }
+
+  function minutesToTime(totalMins) {
+    let norm = (totalMins % 1440 + 1440) % 1440;
+    const h = Math.floor(norm / 60);
+    const m = norm % 60;
+    return `${String(h).padStart(2, '0')}:${String(m).padStart(2, '0')}`;
+  }
+
+  function initAdminTimeRangePicker() {
+    const card = document.getElementById('adminReqTimePickerCard');
+    if (!card) return null;
+
+    const startInput = document.getElementById('adminReqStartTime');
+    const endInput = document.getElementById('adminReqEndTime');
+    const summaryText = document.getElementById('adminReqTimeSummaryText');
+    const hiddenInput = document.getElementById('adminReqTimeFormatted');
+    const chips = card.querySelectorAll('.dur-chip');
+
+    function updateCalculations(source = 'manual') {
+      if (!startInput || !endInput) return;
+      const startMins = timeToMinutes(startInput.value);
+      const endMins = timeToMinutes(endInput.value);
+      const diffMins = endMins - startMins;
+
+      const start12 = formatTimeTo12Hour(startInput.value);
+      const end12 = formatTimeTo12Hour(endInput.value);
+
+      if (diffMins <= 0) {
+        card.classList.add('time-error');
+        if (summaryText) {
+          summaryText.innerHTML = `<span style="color:#ef4444; font-weight:900;">⚠️ Invalid Window:</span> End time (${end12}) must be after start time (${start12}).`;
+        }
+        if (hiddenInput) hiddenInput.value = `${start12} – ${end12}`;
+        chips.forEach(c => c.classList.remove('active'));
+        return { start: startInput.value, end: endInput.value, diffMins: 0, valid: false };
+      }
+
+      card.classList.remove('time-error');
+      const hrs = (diffMins / 60).toFixed(diffMins % 60 === 0 ? 0 : 1);
+      const durationStr = `${diffMins} mins (${hrs} hr${hrs === '1' ? '' : 's'})`;
+
+      if (summaryText) {
+        summaryText.innerHTML = `<strong>${start12} – ${end12}</strong> <span style="color:#84cc16; background:#000000; padding:1px 6px; border-radius:4px; font-weight:900; margin-left:6px;">${durationStr}</span>`;
+      }
+
+      if (hiddenInput) {
+        hiddenInput.value = `${start12} – ${end12}`;
+      }
+
+      if (source !== 'chip') {
+        chips.forEach(c => {
+          const chipMins = parseInt(c.dataset.mins, 10);
+          c.classList.toggle('active', chipMins === diffMins);
+        });
+      }
+
+      return { start: startInput.value, end: endInput.value, diffMins, valid: true };
+    }
+
+    const btnNow = card.querySelector('.btn-time-now');
+    btnNow?.addEventListener('click', (e) => {
+      e.preventDefault();
+      const now = new Date();
+      const h = String(now.getHours()).padStart(2, '0');
+      const m = String(now.getMinutes()).padStart(2, '0');
+      const curTime24 = `${h}:${m}`;
+      if (startInput) startInput.value = curTime24;
+
+      const activeChip = card.querySelector('.dur-chip.active');
+      const durMins = activeChip ? parseInt(activeChip.dataset.mins, 10) : 120;
+      if (endInput) {
+        endInput.value = minutesToTime(timeToMinutes(curTime24) + durMins);
+      }
+      updateCalculations('now');
+      showToast(`⏱️ Start time set to current time (${formatTimeTo12Hour(curTime24)})`);
+    });
+
+    chips.forEach(chip => {
+      chip.addEventListener('click', (e) => {
+        e.preventDefault();
+        chips.forEach(c => c.classList.remove('active'));
+        chip.classList.add('active');
+        const mins = parseInt(chip.dataset.mins, 10);
+        const startMins = timeToMinutes(startInput.value);
+        endInput.value = minutesToTime(startMins + mins);
+        updateCalculations('chip');
+      });
+    });
+
+    startInput?.addEventListener('input', () => {
+      const activeChip = card.querySelector('.dur-chip.active');
+      if (activeChip) {
+        const mins = parseInt(activeChip.dataset.mins, 10);
+        const startMins = timeToMinutes(startInput.value);
+        endInput.value = minutesToTime(startMins + mins);
+      }
+      updateCalculations('start');
+    });
+
+    endInput?.addEventListener('input', () => {
+      updateCalculations('end');
+    });
+
+    updateCalculations('init');
+
+    return {
+      getValues: () => ({
+        start_time: startInput?.value || '09:00',
+        end_time: endInput?.value || '11:00',
+        duration_minutes: Math.max(0, timeToMinutes(endInput?.value) - timeToMinutes(startInput?.value)),
+        formatted_window: hiddenInput?.value || `${formatTimeTo12Hour(startInput?.value)} – ${formatTimeTo12Hour(endInput?.value)}`
+      }),
+      reset: (defaultStart = '09:00', defaultMins = 120) => {
+        if (startInput) startInput.value = defaultStart;
+        if (endInput) endInput.value = minutesToTime(timeToMinutes(defaultStart) + defaultMins);
+        chips.forEach(c => c.classList.toggle('active', parseInt(c.dataset.mins, 10) === defaultMins));
+        updateCalculations('init');
+      }
+    };
+  }
+
+  const adminReqTimePicker = initAdminTimeRangePicker();
+
+  const adminReqModalBackdrop = document.getElementById('adminReqModalBackdrop');
+  const adminReqModalClose = document.getElementById('adminReqModalClose');
+  const btnCancelAdminReq = document.getElementById('btnCancelAdminReq');
+  const adminNewRequestForm = document.getElementById('adminNewRequestForm');
+  const adminReqBuilding = document.getElementById('adminReqBuilding');
+  const adminReqRoom = document.getElementById('adminReqRoom');
+  const adminReqDate = document.getElementById('adminReqDate');
+
+  const ADMIN_BLDG_ROOMS = {
+    'Pancho Building': [
+      'Pancho 101', 'Pancho 103', 'Pancho 105', 'Pancho 107', 'Pancho 109', 'Pancho 114',
+      'Pancho 202', 'Pancho 204', 'Pancho 208', 'Pancho 215',
+      'Science Laboratory', 'Lecture Room', 'Multimedia Room / AVR'
+    ],
+    'CBA Building': [
+      'CBA 101', 'CBA 102', 'CBA 103', 'CBA 201', 'CBA 202', 'CBA 203', 'CBA 301', 'CBA 401'
+    ],
+    'Hangar': [
+      'Hangar 001', 'Hangar 002', 'Hangar 003', 'Hangar 004', 'Hangar 005', 'Hangar 006'
+    ]
+  };
+
+  function updateAdminReqRoomOptions(bldgName) {
+    if (!adminReqRoom) return;
+    adminReqRoom.innerHTML = '';
+    const roomList = ADMIN_BLDG_ROOMS[bldgName] || ['Room 101'];
+    roomList.forEach(r => {
+      const opt = document.createElement('option');
+      opt.value = r;
+      opt.textContent = r;
+      adminReqRoom.appendChild(opt);
+    });
+  }
+
+  adminReqBuilding?.addEventListener('change', () => {
+    updateAdminReqRoomOptions(adminReqBuilding.value);
+  });
+
+  function openAdminNewRequestModal() {
+    if (!adminReqModalBackdrop) return;
+    if (adminReqBuilding) {
+      updateAdminReqRoomOptions(adminReqBuilding.value);
+    }
+    if (adminReqDate && !adminReqDate.value) {
+      const today = new Date().toISOString().split('T')[0];
+      adminReqDate.value = today;
+    }
+    adminReqTimePicker?.reset('09:00', 120);
+    adminReqModalBackdrop.classList.remove('hidden');
+  }
+
+  function closeAdminNewRequestModal() {
+    if (!adminReqModalBackdrop) return;
+    adminReqModalBackdrop.classList.add('hidden');
+  }
+
+  adminReqModalClose?.addEventListener('click', closeAdminNewRequestModal);
+  btnCancelAdminReq?.addEventListener('click', closeAdminNewRequestModal);
+  adminReqModalBackdrop?.addEventListener('click', (e) => {
+    if (e.target === adminReqModalBackdrop) closeAdminNewRequestModal();
+  });
+
+  btnNewRequest?.addEventListener('click', openAdminNewRequestModal);
+  btnNewRequestView?.addEventListener('click', openAdminNewRequestModal);
+
+  adminNewRequestForm?.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const timeData = adminReqTimePicker ? adminReqTimePicker.getValues() : {
+      start_time: '09:00',
+      end_time: '11:00',
+      duration_minutes: 120,
+      formatted_window: '09:00 AM – 11:00 AM'
+    };
+
+    if (timeData.duration_minutes <= 0) {
+      showToast('⚠️ Invalid time window: End time must be after Start time.', 'error');
+      return;
+    }
+
+    const dVal = adminReqDate?.value ? new Date(adminReqDate.value) : new Date();
+    const dStr = dVal.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+    const requester = document.getElementById('adminReqFaculty')?.value || 'Faculty Member';
+    const room = adminReqRoom?.value || 'Pancho 101';
+    const purpose = document.getElementById('adminReqPurpose')?.value.trim() || 'Academic Session';
 
     const newReq = {
       id: `REQ-${Date.now().toString().slice(-4)}`,
       requester,
       room,
-      date: 'Today, ' + new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+      date: `${dStr}, ${timeData.formatted_window}`,
+      start_time: timeData.start_time,
+      end_time: timeData.end_time,
+      duration_minutes: timeData.duration_minutes,
       purpose,
-      status: 'pending'
+      status: 'pending',
+      _isRealtimeNew: true
     };
 
     requests.unshift(newReq);
-    timelineLogs.unshift({
-      id: `LOG-${Date.now()}`,
-      title: 'New Access Request',
-      time: 'Just now',
-      desc: `${requester} submitted request for ${room}.`,
+    localStorage.setItem('farms_requests_v6', JSON.stringify(requests));
+    
+    if (typeof logActivity === 'function') {
+      logActivity('request', 'New Access Request Created', `${requester} submitted reservation for ${room} (${timeData.formatted_window})`);
+    }
+
+    renderAccessRequests();
+    closeAdminNewRequestModal();
+    adminNewRequestForm.reset();
+    showToast(`Access Request ${newReq.id} created successfully.`);
+
+    if (window.farmsApi) {
+      farmsApi.createRequest(newReq).catch(() => {});
+      farmsApi.broadcastLocalEvent('new_request', newReq);
+    }
+  });
+
+  // ==========================================
+  // 9.5 FACULTY STATUS ROSTER
+  // ==========================================
+  const DEFAULT_FACULTY = [
+    { id: 'f-1', faculty_id: 'BSU-FAC-2024-881', name: 'Prof. Maria Santos', dept: 'College of Information and Communications Technology', title: 'Associate Professor III', email: 'maria.santos@bulsu.edu.ph', status: 'in-class', room: 'CBA Room 102' },
+    { id: 'f-2', faculty_id: 'BSU-FAC-2024-882', name: 'Dr. Roberto Reyes', dept: 'College of Business Administration', title: 'Full Professor I', email: 'roberto.reyes@bulsu.edu.ph', status: 'in-class', room: 'Pancho Room 103' },
+    { id: 'f-3', faculty_id: 'BSU-FAC-2024-883', name: 'Engr. Daniel Cruz', dept: 'College of Engineering & Aviation', title: 'Assistant Professor II', email: 'daniel.cruz@bulsu.edu.ph', status: 'in-class', room: 'Hangar Bay 001' },
+    { id: 'f-4', faculty_id: 'BSU-FAC-2024-884', name: 'Prof. Ana Gomez', dept: 'College of Education & Arts', title: 'Associate Professor I', email: 'ana.gomez@bulsu.edu.ph', status: 'in-class', room: 'Pancho Lecture Room' },
+    { id: 'f-5', faculty_id: 'BSU-FAC-2024-885', name: 'Dr. Manuel Lim', dept: 'College of Science', title: 'Professor II', email: 'manuel.lim@bulsu.edu.ph', status: 'available', room: 'Faculty Office' },
+    { id: 'f-6', faculty_id: 'BSU-FAC-2024-886', name: 'Prof. Elena De Vega', dept: 'College of Engineering & Aviation', title: 'Instructor III', email: 'elena.devega@bulsu.edu.ph', status: 'consultation', room: 'Hangar Bay 004' }
+  ];
+
+  async function renderFacultyRoster() {
+    const tbody = document.getElementById('facultyRosterTableBody');
+    if (!tbody) return;
+
+    let facultyList = DEFAULT_FACULTY;
+    if (window.farmsApi && typeof farmsApi.getFaculty === 'function') {
+      try {
+        const res = await farmsApi.getFaculty();
+        if (res && res.success && Array.isArray(res.data) && res.data.length > 0) {
+          facultyList = res.data;
+        }
+      } catch (_) {}
+    }
+
+    tbody.innerHTML = '';
+    facultyList.forEach(fac => {
+      const tr = document.createElement('tr');
+      const statusPill = fac.status === 'in-class' 
+        ? '<span class="status-pill-badge badge-occupied">• In Class</span>'
+        : fac.status === 'available'
+        ? '<span class="status-pill-badge badge-available">• Available</span>'
+        : fac.status === 'consultation'
+        ? '<span class="status-pill-badge badge-inuse">• Consultation</span>'
+        : '<span class="status-pill-badge badge-maintenance">• ' + (fac.status || 'Offline') + '</span>';
+
+      tr.innerHTML = `
+        <td>
+          <div style="display:flex; align-items:center; gap:10px;">
+            <div style="width:34px; height:34px; border-radius:50%; background:#84cc16; color:#000; border:2px solid #000; display:flex; align-items:center; justify-content:center; font-weight:900; font-size:0.75rem;">
+              ${(fac.name || 'F').split(' ').map(n=>n[0]).slice(0,2).join('')}
+            </div>
+            <div>
+              <strong style="color:#0f172a; font-size:0.88rem;">${fac.name}</strong>
+              <div style="font-size:0.72rem; color:#64748b;">${fac.email || '--'}</div>
+            </div>
+          </div>
+        </td>
+        <td>
+          <div style="font-weight:800; font-size:0.82rem; color:#0f172a;">${fac.faculty_id || fac.id}</div>
+          <small style="color:#64748b; font-weight:700;">${fac.title || 'Faculty'}</small>
+        </td>
+        <td style="font-size:0.82rem; color:#334155; font-weight:700;">${fac.dept || 'General Academics'}</td>
+        <td style="font-size:0.82rem; color:#0f172a; font-weight:800;">${fac.room || fac.location || 'Faculty Room'}</td>
+        <td>${statusPill}</td>
+        <td>
+          <a href="mailto:${fac.email || 'admin@farms.edu'}" class="action-link-approve" style="text-decoration:none; display:inline-flex; align-items:center; gap:4px; font-size:0.76rem; padding:4px 10px;">
+            <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+            Contact
+          </a>
+        </td>
+      `;
+      tbody.appendChild(tr);
+    });
+  }
+
+  // ==========================================
+  // 9.6 ACADEMIC CLASS SCHEDULES & TIMETABLES
+  // ==========================================
+  const DEFAULT_SCHEDULES = [
+    { id: 'sch-101', code: 'CS101', title: 'Data Structures & Algorithms', section: 'BSIT 1-A', instructor: 'Prof. Maria Santos', bldg: 'CBA Building', room: 'CBA 102', day: 'Monday', time: '08:00 AM - 10:00 AM', status: 'active' },
+    { id: 'sch-102', code: 'BUS201', title: 'Strategic Operations & Management', section: 'BSBA 2-A', instructor: 'Dr. Roberto Reyes', bldg: 'CBA Building', room: 'CBA 201', day: 'Monday', time: '10:00 AM - 12:00 PM', status: 'active' },
+    { id: 'sch-103', code: 'AERO202', title: 'Turbine & Gas Propulsion Systems', section: 'BSAERO 2-B', instructor: 'Engr. Daniel Cruz', bldg: 'Hangar', room: 'Hangar 001', day: 'Tuesday', time: '09:00 AM - 12:00 PM', status: 'active' },
+    { id: 'sch-104', code: 'ENG101', title: 'Purposive Communication & Debate', section: 'BACOMM 1-C', instructor: 'Prof. Ana Gomez', bldg: 'Pancho Building', room: 'Pancho Lecture Room', day: 'Tuesday', time: '09:00 AM - 12:00 PM', status: 'active' },
+    { id: 'sch-105', code: 'BIO102', title: 'Cellular Microbiology Laboratory', section: 'BSBIO 1-A', instructor: 'Dr. Manuel Lim', bldg: 'Pancho Building', room: 'Pancho Science Laboratory', day: 'Wednesday', time: '01:30 PM - 03:30 PM', status: 'active' },
+    { id: 'sch-106', code: 'UAV101', title: 'Autonomous Flight Control & Telemetry', section: 'BSAERO 3-A', instructor: 'Prof. Elena De Vega', bldg: 'Hangar', room: 'Hangar 004', day: 'Thursday', time: '01:00 PM - 03:30 PM', status: 'active' },
+    { id: 'sch-107', code: 'ACT101', title: 'Financial Accounting Principles', section: 'BSA 1-A', instructor: 'Prof. Teresa Villanueva', bldg: 'CBA Building', room: 'CBA 203', day: 'Thursday', time: '01:00 PM - 03:00 PM', status: 'active' },
+    { id: 'sch-108', code: 'MATH101', title: 'Differential & Integral Calculus', section: 'BSCE 1-B', instructor: 'Prof. Andrea Dalisay', bldg: 'Pancho Building', room: 'Pancho 109', day: 'Friday', time: '10:00 AM - 12:00 PM', status: 'active' },
+    { id: 'sch-109', code: 'ARCH202', title: 'Architectural Blueprint Modeling', section: 'BSARCH 2-A', instructor: 'Engr. Andrea Dalisay', bldg: 'Pancho Building', room: 'Pancho 215', day: 'Friday', time: '01:00 PM - 04:00 PM', status: 'active' },
+    { id: 'sch-110', code: 'PHY102', title: 'Electromagnetism & Wave Physics', section: 'BSME 2-A', instructor: 'Dr. Ferdinand Soriano', bldg: 'Pancho Building', room: 'Pancho 114', day: 'Saturday', time: '02:00 PM - 05:00 PM', status: 'active' }
+  ];
+
+  function renderClassSchedules() {
+    const tbody = document.getElementById('classSchedulesTableBody');
+    if (!tbody) return;
+
+    const bldgFilter = document.getElementById('scheduleBldgFilterSelect')?.value || 'all';
+    const dayFilter = document.getElementById('scheduleDayFilterSelect')?.value || 'all';
+
+    const filtered = DEFAULT_SCHEDULES.filter(sch => {
+      const matchBldg = bldgFilter === 'all' || sch.bldg === bldgFilter;
+      const matchDay = dayFilter === 'all' || sch.day === dayFilter;
+      return matchBldg && matchDay;
+    });
+
+    tbody.innerHTML = '';
+    if (filtered.length === 0) {
+      tbody.innerHTML = `<tr><td colspan="7" style="text-align:center; padding:24px; color:#94a3b8;">No scheduled classes match the selected filter criteria.</td></tr>`;
+      return;
+    }
+
+    filtered.forEach(sch => {
+      const tr = document.createElement('tr');
+      tr.innerHTML = `
+        <td>
+          <div style="font-weight:900; color:#0f172a; font-size:0.88rem;">${sch.code}</div>
+          <div style="font-size:0.75rem; color:#64748b; font-weight:700;">${sch.title}</div>
+        </td>
+        <td>
+          <span style="display:inline-block; padding:3px 8px; border-radius:6px; background:#f1f5f9; border:1.5px solid #000000; color:#0f172a; font-weight:800; font-size:0.76rem;">
+            ${sch.section}
+          </span>
+        </td>
+        <td style="color:#334155; font-weight:800; font-size:0.82rem;">${sch.instructor}</td>
+        <td>
+          <span style="font-weight:800; color:#15803d; font-size:0.82rem;">${sch.room}</span>
+          <div style="font-size:0.7rem; color:#64748b;">${sch.bldg}</div>
+        </td>
+        <td>
+          <div style="font-weight:800; color:#0f172a; font-size:0.8rem;">${sch.day}</div>
+          <div style="font-size:0.72rem; color:#64748b; font-weight:700;">${sch.time}</div>
+        </td>
+        <td>
+          <span class="status-pill-badge badge-approved">• Active Slot</span>
+        </td>
+        <td>
+          <button class="action-link-approve" style="padding:4px 10px; font-size:0.75rem;" onclick="if(window.switchView){window.switchView('facilities');}">
+            Inspect
+          </button>
+        </td>
+      `;
+      tbody.appendChild(tr);
+    });
+  }
+
+  document.getElementById('scheduleBldgFilterSelect')?.addEventListener('change', renderClassSchedules);
+  document.getElementById('scheduleDayFilterSelect')?.addEventListener('change', renderClassSchedules);
+
+  // Web Audio chime for real-time alerts (zero external MP3/WAV dependencies)
+  function playRealtimeAlertChime() {
+    try {
+      const AudioContext = window.AudioContext || window.webkitAudioContext;
+      if (!AudioContext) return;
+      const ctx = new AudioContext();
+      if (ctx.state === 'suspended') {
+        ctx.resume();
+      }
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      
+      osc.type = 'sine';
+      // Harmonic chime: Note D5 (587.33Hz) ramping up to A5 (880Hz)
+      osc.frequency.setValueAtTime(587.33, ctx.currentTime);
+      osc.frequency.exponentialRampToValueAtTime(880, ctx.currentTime + 0.12);
+      
+      gain.gain.setValueAtTime(0.18, ctx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + 0.55);
+      
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+      osc.start();
+      osc.stop(ctx.currentTime + 0.55);
+    } catch (_) {}
+  }
+
+  // ──────────────────────────────────────────────────────────
+  // REAL-TIME SYNCHRONIZATION & EVENT HANDLING
+  // ──────────────────────────────────────────────────────────
+  function handleIncomingRealtimeRequest(newReq) {
+    if (!newReq || !newReq.room) return;
+
+    // Deduplicate by ID or exact match
+    const existingIndex = requests.findIndex(r => 
+      (newReq.id && r.id === newReq.id) || 
+      (r.requester === newReq.requester && r.room === newReq.room && r.date === newReq.date)
+    );
+
+    if (existingIndex !== -1) {
+      if (newReq.status && requests[existingIndex].status !== newReq.status) {
+        requests[existingIndex].status = newReq.status;
+        saveState();
+        renderAccessRequests();
+      }
+      return;
+    }
+
+    // New request!
+    newReq._isRealtimeNew = true;
+    requests.unshift(newReq);
+
+    // Add activity timeline log with dynamic timestamp
+    const now = Date.now();
+    const logItem = {
+      id: `LOG-${now}-${Math.floor(Math.random()*1000)}`,
+      title: 'Real-Time Access Request',
+      desc: `${newReq.requester || 'Faculty'} requested ${newReq.room || 'facility'} (${newReq.purpose || 'Academic'})`,
+      text: `${newReq.requester || 'Faculty'} requested ${newReq.room || 'facility'} (${newReq.purpose || 'Academic'})`,
       icon: 'request',
       type: 'request',
       color: 'amber',
-      side: 'left'
-    });
+      side: 'left',
+      timestamp: now,
+      createdAt: new Date(now).toISOString()
+    };
+    timelineLogs.unshift(logItem);
+
+    // Add notification
+    if (typeof notifications !== 'undefined' && Array.isArray(notifications)) {
+      notifications.unshift({
+        id: `N-${now}`,
+        title: 'New Access Request',
+        desc: `${newReq.requester || 'Faculty'} requested ${newReq.room || 'facility'}.`,
+        time: 'Just now',
+        timestamp: now,
+        unread: true
+      });
+      if (typeof renderNotifications === 'function') renderNotifications();
+    }
 
     saveState();
     renderAccessRequests();
     renderTimelineLogs();
-    showToast(`Access request ${newReq.id} created.`);
+
+    // Play subtle audio alert
+    playRealtimeAlertChime();
+
+    // Show visual notification toast
+    showToast(`🔔 Real-Time: New Room Request from ${newReq.requester} for ${newReq.room}!`);
+
+    // Pulse animation on the pending requests count badge
+    const badge = document.getElementById('authQueuePendingCount');
+    if (badge) {
+      badge.classList.add('badge-pulse-alert');
+      setTimeout(() => badge.classList.remove('badge-pulse-alert'), 3000);
+    }
+    const statCard = document.getElementById('statPendingRequests');
+    if (statCard) {
+      statCard.classList.add('badge-pulse-alert');
+      setTimeout(() => statCard.classList.remove('badge-pulse-alert'), 3000);
+    }
   }
 
-  if (btnNewRequest) btnNewRequest.addEventListener('click', handleNewRequestPrompt);
-  if (btnNewRequestView) btnNewRequestView.addEventListener('click', handleNewRequestPrompt);
+  // Setup real-time listeners on boot
+  if (window.farmsApi) {
+    function processIncomingRealtimeEvent(evt) {
+      if (!evt) return;
+      if (evt.type === 'new_request' && evt.data) {
+        handleIncomingRealtimeRequest(evt.data);
+      } else if (evt.type === 'request_status_updated' && evt.data) {
+        const found = requests.find(r => r.id === evt.data.id);
+        if (found) {
+          found.status = evt.data.status;
+        } else {
+          requests.unshift(evt.data);
+        }
+        if (evt.data.status === 'approved') {
+          occupyRoomFromRequest(evt.data);
+        } else if (evt.data.status === 'denied') {
+          releaseRoomFromRequest(evt.data);
+        }
+        refreshAllViews();
+      } else if (evt.type === 'room_updated' && evt.data) {
+        const target = findMatchingRoom(evt.data.id) || findMatchingRoom(evt.data);
+        if (target) {
+          target.status = evt.data.status || target.status;
+          target.occupant = evt.data.occupant || target.occupant;
+          target.schedule = evt.data.schedule || target.schedule;
+          target.declaredDuration = evt.data.declaredDuration !== undefined ? evt.data.declaredDuration : target.declaredDuration;
+          target.actualOccupiedMinutes = evt.data.actualOccupiedMinutes !== undefined ? evt.data.actualOccupiedMinutes : target.actualOccupiedMinutes;
+          target.sessionStartTime = evt.data.sessionStartTime !== undefined ? evt.data.sessionStartTime : target.sessionStartTime;
+          refreshAllViews();
+        }
+      } else if (evt.type === 'new_log' && evt.data) {
+        const logData = evt.data;
+        const exists = timelineLogs.find(l => l.id === logData.id || (l.timestamp && l.timestamp === logData.timestamp && l.desc === logData.desc));
+        if (!exists) {
+          timelineLogs.unshift(logData);
+          if (timelineLogs.length > 200) timelineLogs.pop();
+          saveState();
+          renderTimelineLogs();
+        }
+      } else if (evt.type === 'system_reset') {
+        rooms.forEach(r => {
+          r.status = 'vacant';
+          r.occupant = 'None';
+          r.schedule = '--';
+          r.declaredDuration = 0;
+          r.actualOccupiedMinutes = 0;
+        });
+        requests = [];
+        saveState();
+        refreshAllViews();
+        showToast('🔄 System state was reset by Administrator. All rooms are vacant.');
+      }
+    }
+
+    // 1. Cross-tab BroadcastChannel listener
+    farmsApi.listenLocalEvents(processIncomingRealtimeEvent);
+
+    // 2. Server-Sent Events stream from backend
+    farmsApi.connectEventStream(processIncomingRealtimeEvent);
+
+    // 3. Database Polling Function (for absolute real-time sync across tabs/devices)
+    async function syncAdminDatabaseState() {
+      try {
+        const [roomRes, reqRes, logRes] = await Promise.allSettled([
+          farmsApi.getRooms(),
+          farmsApi.getRequests(),
+          farmsApi.getLogs()
+        ]);
+
+        let stateChanged = false;
+
+        if (roomRes.status === 'fulfilled' && roomRes.value && roomRes.value.success && Array.isArray(roomRes.value.data)) {
+          roomRes.value.data.forEach(remoteRoom => {
+            const local = rooms.find(r => r.id === remoteRoom.id || (r.room_code || '').toLowerCase() === (remoteRoom.room_code || '').toLowerCase());
+            if (local) {
+              if (local.status !== remoteRoom.status || local.occupant !== remoteRoom.occupant || local.schedule !== remoteRoom.schedule) {
+                local.status = remoteRoom.status;
+                local.occupant = remoteRoom.occupant;
+                local.schedule = remoteRoom.schedule;
+                local.declaredDuration = remoteRoom.declaredDuration;
+                local.actualOccupiedMinutes = remoteRoom.actualOccupiedMinutes;
+                local.sessionStartTime = remoteRoom.sessionStartTime;
+                stateChanged = true;
+              }
+            }
+          });
+        }
+
+        if (reqRes.status === 'fulfilled' && reqRes.value && reqRes.value.success && Array.isArray(reqRes.value.data)) {
+          reqRes.value.data.forEach(remoteReq => {
+            const localMatch = requests.find(r => r.id === remoteReq.id);
+            if (!localMatch) {
+              requests.unshift(remoteReq);
+              stateChanged = true;
+            } else if (localMatch.status !== remoteReq.status) {
+              localMatch.status = remoteReq.status;
+              stateChanged = true;
+            }
+            if (remoteReq.status === 'approved') {
+              const match = findMatchingRoom(remoteReq);
+              if (match && match.status !== 'occupied') {
+                match.status = 'occupied';
+                match.occupant = remoteReq.requester || 'Faculty Occupant';
+                match.schedule = remoteReq.date || 'Active Session';
+                match.declaredDuration = parseDurationMinutesFromSchedule(match.schedule);
+                if (!match.sessionStartTime) match.sessionStartTime = Date.now();
+                stateChanged = true;
+              }
+            }
+          });
+        }
+
+        if (logRes.status === 'fulfilled' && logRes.value && logRes.value.success && Array.isArray(logRes.value.data)) {
+          let logsAdded = false;
+          logRes.value.data.forEach(remoteLog => {
+            const local = timelineLogs.find(l => l.id === remoteLog.id);
+            if (!local) {
+              timelineLogs.push(remoteLog);
+              logsAdded = true;
+            }
+          });
+          if (logsAdded) {
+            timelineLogs.sort((a, b) => (b.timestamp || 0) - (a.timestamp || 0));
+            if (timelineLogs.length > 200) timelineLogs = timelineLogs.slice(0, 200);
+            stateChanged = true;
+          }
+        }
+
+        if (stateChanged) {
+          saveState();
+          refreshAllViews();
+        }
+      } catch (err) {
+        console.warn('[dashboard] Background sync error:', err.message);
+      }
+    }
+
+    // Initial sync
+    syncAdminDatabaseState();
+
+    // Smart adaptive polling: Relaxed heartbeat when tab is visible, suspended when hidden
+    let syncIntervalTimer = setInterval(() => {
+      if (document.hidden) return;
+      syncAdminDatabaseState();
+    }, 10000);
+
+    // Re-sync immediately when tab becomes visible again
+    document.addEventListener('visibilitychange', () => {
+      if (!document.hidden) {
+        syncAdminDatabaseState();
+      }
+    });
+  }
+
+  // Dynamic Relative Timestamp Formatter
+  function formatDynamicTime(timestamp) {
+    if (!timestamp) return 'Just now';
+    let timeMs = timestamp;
+    if (typeof timestamp === 'string') {
+      const parsed = Date.parse(timestamp);
+      if (!isNaN(parsed)) {
+        timeMs = parsed;
+      } else if (!isNaN(Number(timestamp))) {
+        timeMs = Number(timestamp);
+      } else {
+        return timestamp;
+      }
+    }
+
+    const now = Date.now();
+    const diffSec = Math.max(0, Math.floor((now - timeMs) / 1000));
+
+    if (diffSec < 45) {
+      return '⚡ Just now';
+    }
+    if (diffSec < 90) {
+      return '1m ago';
+    }
+    if (diffSec < 3600) {
+      return `${Math.floor(diffSec / 60)}m ago`;
+    }
+    if (diffSec < 7200) {
+      return '1h ago';
+    }
+    if (diffSec < 86400) {
+      return `${Math.floor(diffSec / 3600)}h ago`;
+    }
+    if (diffSec < 172800) {
+      const d = new Date(timeMs);
+      const timeStr = d.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+      return `Yesterday · ${timeStr}`;
+    }
+
+    const d = new Date(timeMs);
+    const dateStr = d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+    const timeStr = d.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+    return `${dateStr} · ${timeStr}`;
+  }
+
+  function formatExactDateTooltip(timestamp) {
+    if (!timestamp) return '';
+    let timeMs = timestamp;
+    if (typeof timestamp === 'string') {
+      const parsed = Date.parse(timestamp);
+      if (!isNaN(parsed)) timeMs = parsed;
+      else if (!isNaN(Number(timestamp))) timeMs = Number(timestamp);
+      else return timestamp;
+    }
+    const d = new Date(timeMs);
+    return isNaN(d.getTime()) ? '' : d.toLocaleString('en-US', {
+      month: 'short',
+      day: 'numeric',
+      year: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit',
+      hour12: true
+    });
+  }
 
   // Helper for timeline log SVG icons
   function getLogIconSvg(log) {
@@ -2630,23 +3624,36 @@ document.addEventListener('DOMContentLoaded', () => {
       const filtered = timelineLogs.filter(log => filter === 'all' || log.type === filter);
 
       if (filtered.length === 0) {
-        container.innerHTML = `<p style="text-align:center; padding:24px; color:#94a3b8;">No activity records.</p>`;
+        container.innerHTML = `<div class="timeline-empty-state" style="text-align:center; padding:36px 16px; color:#94a3b8; font-family:'JetBrains Mono',monospace;">
+          <svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.8" style="margin:0 auto 10px; opacity:0.6;"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          <div style="font-weight:700; font-size:13px; color:#64748b;">No Activity Records Found</div>
+          <div style="font-size:11px; margin-top:3px; opacity:0.8;">No log entries matching filter "${filter}".</div>
+        </div>`;
         return;
       }
 
       filtered.forEach(log => {
         const item = document.createElement('div');
         item.className = `timeline-item ${log.side || 'left'}`;
+        const timeDisplay = formatDynamicTime(log.timestamp || log.createdAt || log.time);
+        const exactTime = formatExactDateTooltip(log.timestamp || log.createdAt || log.time);
+        const typeBadge = log.type ? `<span class="timeline-type-badge badge-${log.type}">${log.type.toUpperCase()}</span>` : '';
+
         item.innerHTML = `
-          <div class="timeline-node-icon ${log.color}">
+          <div class="timeline-node-icon ${log.color || 'green'}">
             ${getLogIconSvg(log)}
           </div>
           <div class="timeline-card">
             <div class="timeline-card-top">
-              <span class="timeline-title">${log.title}</span>
-              <span class="timeline-time">${log.time}</span>
+              <div class="timeline-title-row">
+                <span class="timeline-title">${log.title}</span>
+                ${typeBadge}
+              </div>
+              <span class="timeline-time" title="${exactTime}" data-timestamp="${log.timestamp || log.createdAt || log.time || ''}">
+                <svg class="timeline-clock-icon" viewBox="0 0 24 24" width="11" height="11" fill="none" stroke="currentColor" stroke-width="2.2" style="display:inline-block; vertical-align:middle; margin-right:4px;"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>${timeDisplay}
+              </span>
             </div>
-            <p class="timeline-desc">${log.desc}</p>
+            <p class="timeline-desc">${log.desc || log.text || ''}</p>
           </div>
         `;
         container.appendChild(item);
@@ -2654,22 +3661,43 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  // Periodic in-place ticker to recalculate dynamic relative times without destroying DOM
+  function updateTimelineRelativeTimes() {
+    if (document.hidden) return;
+    document.querySelectorAll('.timeline-time[data-timestamp]').forEach(el => {
+      const ts = el.getAttribute('data-timestamp');
+      if (!ts) return;
+      const timeDisplay = formatDynamicTime(ts);
+      el.innerHTML = `<svg class="timeline-clock-icon" viewBox="0 0 24 24" width="11" height="11" fill="none" stroke="currentColor" stroke-width="2.2" style="display:inline-block; vertical-align:middle; margin-right:4px;"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>${timeDisplay}`;
+    });
+  }
+
+  setInterval(updateTimelineRelativeTimes, 15000);
+
   if (activityLogFilterSelect) activityLogFilterSelect.addEventListener('change', renderTimelineLogs);
 
   if (btnLoadMoreActivity) {
     btnLoadMoreActivity.addEventListener('click', () => {
-      timelineLogs.push({
-        id: `LOG-${Date.now()}`,
+      const now = Date.now();
+      const demoPastTime = now - 2 * 86400000;
+      const logItem = {
+        id: `LOG-${demoPastTime}`,
         title: 'System Health Check',
-        time: '2 days ago',
         desc: 'All 3 buildings sync verified. Database backup archived.',
+        text: 'All 3 buildings sync verified. Database backup archived.',
         icon: 'system',
         type: 'system',
         color: 'teal',
-        side: 'left'
-      });
+        side: 'left',
+        timestamp: demoPastTime,
+        createdAt: new Date(demoPastTime).toISOString()
+      };
+      timelineLogs.push(logItem);
       saveState();
       renderTimelineLogs();
+      if (window.farmsApi && typeof farmsApi.createLog === 'function') {
+        farmsApi.createLog(logItem).catch(() => {});
+      }
       showToast('Loaded older activity logs.');
     });
   }
@@ -2679,6 +3707,9 @@ document.addEventListener('DOMContentLoaded', () => {
       timelineLogs = [];
       saveState();
       renderTimelineLogs();
+      if (window.farmsApi && typeof farmsApi.clearLogs === 'function') {
+        farmsApi.clearLogs().catch(() => {});
+      }
       showToast('Activity logs cleared.');
     });
   }
@@ -2688,13 +3719,33 @@ document.addEventListener('DOMContentLoaded', () => {
   // ==========================================
   function updateModalStatusBanner(status, occupant) {
     if (!modalStatusBanner || !modalStatusText) return;
-    modalStatusBanner.className = `room-status-banner ${status}`;
+    modalStatusBanner.className = `room-status-banner-hero ${status}`;
+    const heroPill = document.getElementById('modalStatusHeroPill');
+    const heroTimer = document.getElementById('modalHeroTimerChip');
+    const occupantCard = document.getElementById('modalOccupantProfileCard');
+    const occupantAvatar = document.getElementById('modalOccupantAvatar');
+    
     if (status === 'vacant') {
-      modalStatusText.textContent = 'Currently Available For Booking';
+      if (heroPill) heroPill.textContent = 'AVAILABLE';
+      modalStatusText.textContent = 'Vacant · Open for Booking';
+      if (heroTimer) heroTimer.textContent = '🟢 Ready for Check-in';
+      if (occupantAvatar) occupantAvatar.textContent = '—';
+      if (occupantCard) occupantCard.classList.add('is-vacant');
     } else if (status === 'occupied') {
-      modalStatusText.textContent = occupant && occupant !== 'None' ? `In-Use · Occupied by ${occupant}` : 'In-Use · Active Facility Session';
+      if (heroPill) heroPill.textContent = 'LIVE IN-USE';
+      modalStatusText.textContent = occupant && occupant !== 'None' ? `Occupied · ${occupant}` : 'In-Use · Active Facility Session';
+      if (heroTimer) heroTimer.textContent = '⏱️ Session Active';
+      if (occupantAvatar) {
+        const cleanName = (occupant || 'F').replace(/^(Prof\.|Dr\.|Engr\.)\s*/i, '').trim();
+        occupantAvatar.textContent = cleanName.charAt(0).toUpperCase() || 'F';
+      }
+      if (occupantCard) occupantCard.classList.remove('is-vacant');
     } else {
+      if (heroPill) heroPill.textContent = 'MAINTENANCE';
       modalStatusText.textContent = 'Under Maintenance · Service In Progress';
+      if (heroTimer) heroTimer.textContent = '⚠️ Offline';
+      if (occupantAvatar) occupantAvatar.textContent = '🔧';
+      if (occupantCard) occupantCard.classList.add('is-vacant');
     }
   }
 
@@ -2809,13 +3860,16 @@ document.addEventListener('DOMContentLoaded', () => {
       if (enable) {
         btnReleaseRoom.textContent = 'Cancel';
         btnReleaseRoom.classList.add('is-cancel');
+        btnReleaseRoom.classList.remove('btn-release-highlight');
       } else {
         if (currentEditingRoom && currentEditingRoom.status === 'occupied') {
           btnReleaseRoom.textContent = 'Release Room';
           btnReleaseRoom.classList.remove('is-cancel');
+          btnReleaseRoom.classList.add('btn-release-highlight');
         } else {
           btnReleaseRoom.textContent = 'Close';
           btnReleaseRoom.classList.add('is-cancel');
+          btnReleaseRoom.classList.remove('btn-release-highlight');
         }
       }
     }
@@ -2831,6 +3885,11 @@ document.addEventListener('DOMContentLoaded', () => {
     currentEditingRoom = roomObj;
     const codeDisplay = roomObj.roomCode || getOrGenerateRoomCode(roomObj);
     modalRoomTitle.textContent = codeDisplay;
+    
+    const modalSubtitle = document.getElementById('modalRoomSubtitle');
+    const flrNum = roomObj.floor || 1;
+    const flrSuffix = flrNum === 1 ? '1 (Ground Floor)' : flrNum === 2 ? '2 (Second Floor)' : flrNum === 3 ? '3 (Third Floor)' : `${flrNum}`;
+    if (modalSubtitle) modalSubtitle.textContent = `${roomObj.building} · Level ${flrSuffix}`;
     if (modalBldgBadge) modalBldgBadge.textContent = `${roomObj.building} · Level ${roomObj.floor}`;
 
     updateModalStatusBanner(roomObj.status, roomObj.occupant);
@@ -2855,7 +3914,16 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Declared stay duration telemetry
-    const declMins = roomObj.declaredDuration !== undefined ? roomObj.declaredDuration : (roomObj.status === 'occupied' ? 120 : 0);
+    let declMins = 0;
+    if (roomObj.status === 'occupied') {
+      declMins = (roomObj.schedule && roomObj.schedule !== '--')
+        ? parseDurationMinutesFromSchedule(roomObj.schedule)
+        : (roomObj.declaredDuration || 120);
+      roomObj.declaredDuration = declMins;
+    } else {
+      declMins = 0;
+    }
+
     if (telemetryDeclaredVal) {
       telemetryDeclaredVal.textContent = roomObj.status === 'occupied' ? `${declMins} mins` : 'None';
     }
@@ -2863,13 +3931,46 @@ document.addEventListener('DOMContentLoaded', () => {
       telemetryDeclaredSub.textContent = roomObj.status === 'occupied' ? `Declared stay (${(declMins / 60).toFixed(1)} hrs)` : 'No active reservation';
     }
 
-    // Actual time occupied telemetry
-    const actMins = roomObj.actualOccupiedMinutes !== undefined ? roomObj.actualOccupiedMinutes : (roomObj.status === 'occupied' ? 45 : 0);
-    if (telemetryActualVal) {
-      telemetryActualVal.textContent = roomObj.status === 'occupied' ? `${actMins} mins` : '0 mins';
+    // Live Real-Time Ticking Session Elapsed Timer
+    if (window.modalLiveTimer) {
+      clearInterval(window.modalLiveTimer);
+      window.modalLiveTimer = null;
     }
-    if (telemetryActualSub) {
-      telemetryActualSub.textContent = roomObj.status === 'occupied' ? 'Occupied elapsed time' : 'Facility vacant';
+
+    function updateModalLiveSessionTime() {
+      const heroTimer = document.getElementById('modalHeroTimerChip');
+      if (roomObj.status === 'occupied') {
+        const startMs = roomObj.sessionStartTime ? (typeof roomObj.sessionStartTime === 'number' ? roomObj.sessionStartTime : new Date(roomObj.sessionStartTime).getTime()) : Date.now();
+        const elapsedSec = Math.max(0, Math.floor((Date.now() - startMs) / 1000));
+        const elapsedMin = Math.floor(elapsedSec / 60);
+        const remSec = elapsedSec % 60;
+        
+        let displayStr = '';
+        if (elapsedMin === 0) {
+          displayStr = `${elapsedSec}s (Just started)`;
+        } else if (elapsedMin < 60) {
+          displayStr = `${elapsedMin}m ${remSec}s`;
+        } else {
+          const hrs = Math.floor(elapsedMin / 60);
+          const mins = elapsedMin % 60;
+          displayStr = `${hrs}h ${mins}m`;
+        }
+
+        if (telemetryActualVal) telemetryActualVal.textContent = displayStr;
+        if (sumOccupiedMins) sumOccupiedMins.textContent = elapsedMin === 0 ? `${elapsedSec}s` : `${elapsedMin} mins`;
+        if (heroTimer) heroTimer.textContent = `⏱️ ${elapsedMin === 0 ? `${elapsedSec}s` : `${elapsedMin}m elapsed`}`;
+        if (telemetryActualSub) telemetryActualSub.textContent = 'Live Session Elapsed';
+      } else {
+        if (telemetryActualVal) telemetryActualVal.textContent = '0 mins';
+        if (sumOccupiedMins) sumOccupiedMins.textContent = '0 mins';
+        if (heroTimer) heroTimer.textContent = '🟢 Ready for Check-in';
+        if (telemetryActualSub) telemetryActualSub.textContent = 'Facility vacant';
+      }
+    }
+
+    updateModalLiveSessionTime();
+    if (roomObj.status === 'occupied') {
+      window.modalLiveTimer = setInterval(updateModalLiveSessionTime, 1000);
     }
 
     // ── Populate Summary View (Properties & Attributes Sheet) ──
@@ -2881,15 +3982,10 @@ document.addEventListener('DOMContentLoaded', () => {
       sumStatusBadge.className = `s-status-badge ${sCls}`;
       sumStatusBadge.textContent = sTxt;
     }
-    if (sumOccupiedMins) {
-      sumOccupiedMins.textContent = roomObj.status === 'occupied' ? `${actMins} mins` : '0 mins';
-    }
     if (sumPropCode) sumPropCode.textContent = codeDisplay;
     if (sumPropName) sumPropName.textContent = roomObj.room || codeDisplay;
     if (sumPropBldg) sumPropBldg.textContent = roomObj.building || 'Pancho Building';
     if (sumPropFloor) {
-      const flrNum = roomObj.floor || 1;
-      const flrSuffix = flrNum === 1 ? '1 (Ground Floor)' : flrNum === 2 ? '2 (Second Floor)' : flrNum === 3 ? '3 (Third Floor)' : `${flrNum}`;
       sumPropFloor.textContent = `Level ${flrSuffix}`;
     }
     if (sumPropType) sumPropType.textContent = roomObj.type || 'Classroom';
@@ -2918,7 +4014,14 @@ document.addEventListener('DOMContentLoaded', () => {
     roomModalBackdrop.classList.remove('hidden');
   }
 
+  window.openRoomModal = openRoomModal;
+  window.closeRoomModal = closeRoomModal;
+
   function closeRoomModal() {
+    if (window.modalLiveTimer) {
+      clearInterval(window.modalLiveTimer);
+      window.modalLiveTimer = null;
+    }
     roomModalBackdrop.classList.add('hidden');
     setRoomModalEditMode(false);
     currentEditingRoom = null;
@@ -3000,16 +4103,23 @@ document.addEventListener('DOMContentLoaded', () => {
       if (sumCapacityVal) sumCapacityVal.textContent = newCapacity;
       if (sumTypeVal) sumTypeVal.textContent = newType;
 
-      timelineLogs.unshift({
-        id: `LOG-${Date.now()}`,
+      const now = Date.now();
+      const logItem = {
+        id: `LOG-${now}-${Math.floor(Math.random()*1000)}`,
         title: 'Facility Properties Updated',
-        time: 'Just now',
         desc: `${currentEditingRoom.roomCode} (${currentEditingRoom.building}) updated: Name "${newRoomName}", Type "${newType}", Capacity ${newCapacity}, ${newEquipmentTags.length} equipment items.`,
+        text: `${currentEditingRoom.roomCode} (${currentEditingRoom.building}) updated: Name "${newRoomName}", Type "${newType}", Capacity ${newCapacity}, ${newEquipmentTags.length} equipment items.`,
         icon: 'system',
         type: 'system',
         color: 'teal',
-        side: 'right'
-      });
+        side: 'right',
+        timestamp: now,
+        createdAt: new Date(now).toISOString()
+      };
+      timelineLogs.unshift(logItem);
+      if (window.farmsApi && typeof farmsApi.createLog === 'function') {
+        farmsApi.createLog(logItem).catch(() => {});
+      }
 
       saveState();
       renderListView();
@@ -3067,17 +4177,25 @@ document.addEventListener('DOMContentLoaded', () => {
       currentEditingRoom.schedule = '--';
       currentEditingRoom.declaredDuration = 0;
       currentEditingRoom.actualOccupiedMinutes = 0;
+      currentEditingRoom.sessionStartTime = null;
 
-      timelineLogs.unshift({
-        id: `LOG-${Date.now()}`,
+      const now = Date.now();
+      const logItem = {
+        id: `LOG-${now}-${Math.floor(Math.random()*1000)}`,
         title: 'Room Released',
-        time: 'Just now',
         desc: `${currentEditingRoom.room} has been released and is now vacant.`,
+        text: `${currentEditingRoom.room} has been released and is now vacant.`,
         icon: 'release',
         type: 'release',
         color: 'teal',
-        side: 'left'
-      });
+        side: 'left',
+        timestamp: now,
+        createdAt: new Date(now).toISOString()
+      };
+      timelineLogs.unshift(logItem);
+      if (window.farmsApi && typeof farmsApi.createLog === 'function') {
+        farmsApi.createLog(logItem).catch(() => {});
+      }
 
       saveState();
       renderListView();
@@ -3221,8 +4339,10 @@ document.addEventListener('DOMContentLoaded', () => {
     if (viewName === 'facilities') {
       renderStandaloneMatrix();
     }
+    if (viewName === 'faculty') renderFacultyRoster();
     if (viewName === 'requests') renderAccessRequests();
     if (viewName === 'logs') renderTimelineLogs();
+    if (viewName === 'schedules') renderClassSchedules();
   }
 
   navItems.forEach(item => {
@@ -3247,10 +4367,64 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  document.getElementById('btnDispatchReset')?.addEventListener('click', () => {
+  document.getElementById('btnDispatchReset')?.addEventListener('click', async () => {
+    const confirmed = confirm(
+      '⚠️ SYSTEM RESET CONFIRMATION:\n\n' +
+      'Are you sure you want to reset all campus facilities to vacant and clear active requests?\n\n' +
+      '• All 85 rooms across CBA, Hangar, and Pancho will become Vacant.\n' +
+      '• Active class reservations & pending requests will be cleared.\n' +
+      '• Faculty rosters will reset to Available.\n' +
+      '• SYSTEM AUDIT LOGS WILL BE PRESERVED.\n\n' +
+      'Click OK to proceed.'
+    );
+    if (!confirmed) return;
+
+    // 1. Reset in-memory rooms to clean vacant state
+    rooms.forEach(r => {
+      r.status = 'vacant';
+      r.occupant = 'None';
+      r.schedule = '--';
+      r.declaredDuration = 0;
+      r.actualOccupiedMinutes = 0;
+      r.lastUpdated = Date.now();
+    });
+
+    // 2. Clear all active requests
+    requests = [];
+
+    // 3. Keep audit logs intact & record the system reset event in the log
+    const resetLog = {
+      id: `LOG-RESET-${Date.now()}`,
+      title: 'System State Reset',
+      desc: 'Administrator triggered a system reset. All 85 campus rooms set to vacant and reservations cleared. Audit history preserved.',
+      text: 'Administrator triggered a system reset. All 85 campus rooms set to vacant and reservations cleared. Audit history preserved.',
+      type: 'system',
+      icon: 'system',
+      color: 'amber',
+      side: 'left',
+      timestamp: Date.now(),
+      createdAt: new Date().toISOString()
+    };
+    timelineLogs.unshift(resetLog);
+
+    // 4. Save to localStorage
+    saveState();
+
+    // 5. Update UI views
     document.getElementById('btnSvgView')?.click();
     document.getElementById('backToCampusBtn')?.click();
-    showToast('Campus vector map & filters reset.');
+    refreshAllViews();
+
+    showToast('✨ System reset complete! All rooms are now vacant. Audit logs preserved.');
+
+    // 6. Sync with backend API & cross-tab broadcast
+    if (window.farmsApi && typeof farmsApi.resetSystem === 'function') {
+      try {
+        await farmsApi.resetSystem(true);
+      } catch (err) {
+        console.warn('[FARMS] Backend system reset call notice:', err.message);
+      }
+    }
   });
 
   document.getElementById('btnDispatchExport')?.addEventListener('click', () => {
@@ -3272,16 +4446,23 @@ document.addEventListener('DOMContentLoaded', () => {
     const msg = prompt('Enter Campus Operational Announcement:');
     if (!msg) return;
     showToast(`Announcement: ${msg}`);
-    timelineLogs.unshift({
-      id: `LOG-${Date.now()}`,
+    const now = Date.now();
+    const logItem = {
+      id: `LOG-${now}-${Math.floor(Math.random()*1000)}`,
       title: 'Campus Broadcast Announcement',
-      time: 'Just now',
       desc: msg,
+      text: msg,
       icon: 'broadcast',
       type: 'broadcast',
       color: 'amber',
-      side: 'left'
-    });
+      side: 'left',
+      timestamp: now,
+      createdAt: new Date(now).toISOString()
+    };
+    timelineLogs.unshift(logItem);
+    if (window.farmsApi && typeof farmsApi.createLog === 'function') {
+      farmsApi.createLog(logItem).catch(() => {});
+    }
     saveState();
     renderTimelineLogs();
   });
@@ -3526,7 +4707,7 @@ document.addEventListener('DOMContentLoaded', () => {
       target.occupant = willBeOcc ? 'Quick Reserved (Mobile)' : 'None';
       target.schedule = willBeOcc ? 'Current Period' : '--';
 
-      localStorage.setItem('farms_rooms_v4', JSON.stringify(rooms));
+      localStorage.setItem('farms_rooms_v6', JSON.stringify(rooms));
       updateKPIs();
       renderListView();
       renderMatrixView();
@@ -3580,6 +4761,19 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  function refreshAllViews() {
+    updateKPIs();
+    renderListView();
+    renderMatrixView();
+    renderMobileFloorPills();
+    renderMobileRoomFeed();
+    renderNotifications();
+    renderAccessRequests();
+    renderTimelineLogs();
+    renderFacultyRoster();
+    renderClassSchedules();
+  }
+
   // ==========================================
   // 15. BOOTSTRAP & BACKEND SYNCHRONIZATION
   // ==========================================
@@ -3592,75 +4786,100 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!window.farmsApi || typeof farmsApi.getRooms !== 'function') {
       if (dbPill) {
         dbPill.classList.add('offline');
+        dbPill.classList.remove('online');
         const label = dbPill.querySelector('.db-sync-label');
-        if (label) label.textContent = 'SQLite: Offline';
+        if (label) label.textContent = 'DTB';
+        dbPill.title = 'FARMS Database: Offline';
+      }
+      if (modalDbSyncBadge) {
+        modalDbSyncBadge.classList.add('offline');
+        modalDbSyncBadge.classList.remove('online');
+        if (modalDbSyncText) modalDbSyncText.textContent = 'DTB';
       }
       return;
     }
 
     try {
-      const res = await farmsApi.getRooms();
-      if (res && res.success && Array.isArray(res.data) && res.data.length > 0) {
-        console.log(`[FARMS] Connected to SQLite backend. Loaded ${res.data.length} live rooms.`);
-        
-        // Update visual indicators
+      const [roomRes, reqRes, logRes] = await Promise.allSettled([
+        farmsApi.getRooms(),
+        farmsApi.getRequests(),
+        farmsApi.getLogs()
+      ]);
+
+      let backendConnected = false;
+
+      if (roomRes.status === 'fulfilled' && roomRes.value && roomRes.value.success && Array.isArray(roomRes.value.data)) {
+        backendConnected = true;
+        roomRes.value.data.forEach(serverRoom => {
+          const target = findMatchingRoom(serverRoom.id) || findMatchingRoom(serverRoom);
+          if (target) {
+            target.status = serverRoom.status || 'vacant';
+            target.occupant = serverRoom.occupant !== undefined ? serverRoom.occupant : 'None';
+            target.schedule = serverRoom.schedule !== undefined ? serverRoom.schedule : '--';
+            if (serverRoom.capacity) target.capacity = serverRoom.capacity;
+            if (serverRoom.equipment) target.equipment = serverRoom.equipment;
+          }
+        });
+        localStorage.setItem('farms_rooms_v6', JSON.stringify(rooms));
+      }
+
+      if (reqRes.status === 'fulfilled' && reqRes.value && reqRes.value.success && Array.isArray(reqRes.value.data)) {
+        backendConnected = true;
+        requests = reqRes.value.data;
+        localStorage.setItem('farms_requests_v6', JSON.stringify(requests));
+      }
+
+      if (logRes.status === 'fulfilled' && logRes.value && logRes.value.success && Array.isArray(logRes.value.data)) {
+        backendConnected = true;
+        timelineLogs = logRes.value.data;
+        localStorage.setItem('farms_logs_v6', JSON.stringify(timelineLogs));
+      }
+
+      if (backendConnected) {
         if (dbPill) {
           dbPill.classList.remove('offline');
           dbPill.classList.add('online');
           const label = dbPill.querySelector('.db-sync-label');
-          if (label) label.textContent = 'SQLite: Live';
-          dbPill.title = `Connected to SQLite Database (${res.data.length} rooms in sync)`;
+          if (label) label.textContent = 'DTB';
+          dbPill.title = `Connected to Database (${requests.length} requests, ${rooms.length} rooms)`;
         }
         if (dbVersionTag) {
-          dbVersionTag.textContent = `FARMS v2.4 • SQLite Synced (${res.data.length} Rooms)`;
+          dbVersionTag.textContent = `FARMS v2.4 • Synced (${rooms.length} Rooms)`;
         }
         if (modalDbSyncBadge) {
           modalDbSyncBadge.classList.remove('offline');
           modalDbSyncBadge.classList.add('online');
-          if (modalDbSyncText) modalDbSyncText.textContent = 'SQLite Synced';
+          if (modalDbSyncText) modalDbSyncText.textContent = 'DTB';
         }
 
-        // Sync server rooms into active client state
-        res.data.forEach(serverRoom => {
-          const idx = rooms.findIndex(r => r.id === serverRoom.id);
-          if (idx !== -1) {
-            rooms[idx] = { ...rooms[idx], ...serverRoom };
-          } else {
-            rooms.push(serverRoom);
-          }
-        });
-
-        saveState();
-        renderListView();
-        renderMatrixView();
-        if (typeof renderStandaloneMatrix === 'function') renderStandaloneMatrix();
-        updateKPIs();
-        if (activeBuilding) {
-          loadFloorSVG(activeBuilding, activeFloor);
-        }
-
-        showToast(`Connected to SQLite Backend (${res.data.length} rooms in sync).`);
+        refreshAllViews();
       } else {
         if (dbPill) {
           dbPill.classList.add('offline');
+          dbPill.classList.remove('online');
           const label = dbPill.querySelector('.db-sync-label');
-          if (label) label.textContent = 'SQLite: Offline';
+          if (label) label.textContent = 'DTB';
+          dbPill.title = 'FARMS Database: Offline';
         }
         if (modalDbSyncBadge) {
           modalDbSyncBadge.classList.add('offline');
-          if (modalDbSyncText) modalDbSyncText.textContent = 'Offline Cache';
+          modalDbSyncBadge.classList.remove('online');
+          if (modalDbSyncText) modalDbSyncText.textContent = 'DTB';
         }
       }
     } catch (e) {
       console.warn('[FARMS] Running with local browser cache:', e.message);
       if (dbPill) {
         dbPill.classList.add('offline');
+        dbPill.classList.remove('online');
         const label = dbPill.querySelector('.db-sync-label');
-        if (label) label.textContent = 'SQLite: Offline';
+        if (label) label.textContent = 'DTB';
+        dbPill.title = 'FARMS Database: Offline';
       }
       if (modalDbSyncBadge) {
         modalDbSyncBadge.classList.add('offline');
-        if (modalDbSyncText) modalDbSyncText.textContent = 'Offline Cache';
+        modalDbSyncBadge.classList.remove('online');
+        if (modalDbSyncText) modalDbSyncText.textContent = 'DTB';
       }
     }
   }
@@ -3674,6 +4893,8 @@ document.addEventListener('DOMContentLoaded', () => {
   renderNotifications();
   renderAccessRequests();
   renderTimelineLogs();
+  renderFacultyRoster();
+  renderClassSchedules();
 
   // Restore previously active view from URL hash or localStorage
   const validViews = ['dashboard', 'facilities', 'faculty', 'requests', 'logs', 'schedules'];

@@ -17,33 +17,28 @@ document.addEventListener('DOMContentLoaded', () => {
     officeHours: 'Mon/Wed 1:00 PM - 4:00 PM (Faculty Hall Rm 204)'
   };
 
-  const DEFAULT_LOGS = [
-    { id: 'REQ-9012', facility: 'Multimedia Room (Pancho Flr 1)', date: 'Aug 28, 2026', time: '02:00 PM - 04:00 PM', purpose: 'Special Department Seminar & Defense', status: 'Approved', permit: 'BSU-KEY-9012' },
-    { id: 'REQ-9045', facility: 'Science Laboratory (Pancho Flr 1)', date: 'Aug 29, 2026', time: '09:00 AM - 11:30 AM', purpose: 'Make-up Chemistry Examination', status: 'Approved', permit: 'BSU-KEY-9045' },
-    { id: 'REQ-9102', facility: 'Hangar 004 (Aviation Bay)', date: 'Sep 01, 2026', time: '01:00 PM - 03:00 PM', purpose: 'Drone Flight Simulation Demo', status: 'Pending', permit: 'Awaiting Admin' }
-  ];
+  const DEFAULT_LOGS = [];
 
-  const ROOM_DATA = [
-    { bldg: 'Pancho Building', roomCode: 'PANCHO 101', room: '101', floor: 1, status: 'vacant',      occupant: 'Unassigned',           schedule: 'Open', capacity: 45 },
-    { bldg: 'Pancho Building', roomCode: 'PANCHO 103', room: '103', floor: 1, status: 'occupied',    occupant: 'Dr. Reyes (BUS301)',    schedule: '08:00 AM – 11:00 AM', capacity: 45 },
-    { bldg: 'Pancho Building', roomCode: 'PANCHO 105', room: '105', floor: 1, status: 'vacant',      occupant: 'Unassigned',           schedule: 'Open', capacity: 45 },
-    { bldg: 'Pancho Building', roomCode: 'PANCHO SCILAB', room: 'Science Laboratory', floor: 1, status: 'occupied', occupant: 'Dr. Lim (BIO102)', schedule: '01:30 PM – 03:30 PM', capacity: 40 },
-    { bldg: 'Pancho Building', roomCode: 'PANCHO LEC', room: 'Lecture Room',       floor: 1, status: 'occupied', occupant: 'Prof. Gomez (ENG101)', schedule: '09:00 AM – 12:00 PM', capacity: 60 },
-    { bldg: 'Pancho Building', roomCode: 'PANCHO MULTIMEDIA', room: 'Multimedia Room',    floor: 1, status: 'occupied', occupant: 'Prof. Santos (CS101)', schedule: '02:00 PM – 04:00 PM', capacity: 50 },
-    { bldg: 'CBA Building',    roomCode: 'CBA 101', room: 'CBA 101', floor: 1,  status: 'vacant',      occupant: 'Unassigned',           schedule: 'Open', capacity: 45 },
-    { bldg: 'CBA Building',    roomCode: 'CBA 102', room: 'CBA 102', floor: 1,  status: 'occupied',    occupant: 'Prof. Santos (CS101)', schedule: '08:30 AM – 10:00 AM', capacity: 50 },
-    { bldg: 'CBA Building',    roomCode: 'CBA 103', room: 'CBA 103', floor: 1,  status: 'vacant',      occupant: 'Unassigned',           schedule: 'Open', capacity: 45 },
-    { bldg: 'CBA Building',    roomCode: 'CBA 202', room: 'CBA 202', floor: 2,  status: 'vacant',      occupant: 'Unassigned',           schedule: 'Open', capacity: 45 },
-    { bldg: 'Hangar',          roomCode: 'H 001', room: 'Hangar 001', floor: 1, status: 'occupied',  occupant: 'Engr. Cruz (AERO202)', schedule: '08:00 AM – 12:00 PM', capacity: 35 },
-    { bldg: 'Hangar',          roomCode: 'H 002', room: 'Hangar 002', floor: 1, status: 'vacant',    occupant: 'Unassigned',           schedule: 'Open', capacity: 35 },
-    { bldg: 'Hangar',          roomCode: 'H 003', room: 'Hangar 003', floor: 1, status: 'vacant',    occupant: 'Unassigned',           schedule: 'Open', capacity: 35 },
-    { bldg: 'Hangar',          roomCode: 'H 004', room: 'Hangar 004', floor: 1, status: 'occupied',  occupant: 'Prof. De Vega (UAV101)', schedule: '01:00 PM – 04:00 PM', capacity: 35 },
-    { bldg: 'Hangar',          roomCode: 'H 005', room: 'Hangar 005', floor: 1, status: 'vacant',    occupant: 'Unassigned',           schedule: 'Open', capacity: 35 },
-    { bldg: 'Hangar',          roomCode: 'H 006', room: 'Hangar 006', floor: 1, status: 'maintenance', occupant: 'Facility Maintenance', schedule: 'All Day', capacity: 35 }
+  let facultyProfile = JSON.parse(localStorage.getItem('farms_faculty_profile_v6')) || DEFAULT_PROFILE;
+  let bookingLogs    = JSON.parse(localStorage.getItem('farms_faculty_bookings_v6')) || DEFAULT_LOGS;
+  let ROOM_DATA      = [
+    { bldg: 'Pancho Building', roomCode: 'PANCHO 101', room: '101', floor: 1, status: 'vacant', occupant: 'Unassigned', schedule: 'Open', capacity: 45 },
+    { bldg: 'Pancho Building', roomCode: 'PANCHO 103', room: '103', floor: 1, status: 'vacant', occupant: 'Unassigned', schedule: 'Open', capacity: 45 },
+    { bldg: 'Pancho Building', roomCode: 'PANCHO 105', room: '105', floor: 1, status: 'vacant', occupant: 'Unassigned', schedule: 'Open', capacity: 45 },
+    { bldg: 'Pancho Building', roomCode: 'PANCHO SCILAB', room: 'Science Laboratory', floor: 1, status: 'vacant', occupant: 'Unassigned', schedule: 'Open', capacity: 40 },
+    { bldg: 'Pancho Building', roomCode: 'PANCHO LEC', room: 'Lecture Room', floor: 1, status: 'vacant', occupant: 'Unassigned', schedule: 'Open', capacity: 60 },
+    { bldg: 'Pancho Building', roomCode: 'PANCHO MULTIMEDIA', room: 'Multimedia Room', floor: 1, status: 'vacant', occupant: 'Unassigned', schedule: 'Open', capacity: 50 },
+    { bldg: 'CBA Building',    roomCode: 'CBA 101', room: 'CBA 101', floor: 1, status: 'vacant', occupant: 'Unassigned', schedule: 'Open', capacity: 45 },
+    { bldg: 'CBA Building',    roomCode: 'CBA 102', room: 'CBA 102', floor: 1, status: 'vacant', occupant: 'Unassigned', schedule: 'Open', capacity: 50 },
+    { bldg: 'CBA Building',    roomCode: 'CBA 103', room: 'CBA 103', floor: 1, status: 'vacant', occupant: 'Unassigned', schedule: 'Open', capacity: 45 },
+    { bldg: 'CBA Building',    roomCode: 'CBA 202', room: 'CBA 202', floor: 2, status: 'vacant', occupant: 'Unassigned', schedule: 'Open', capacity: 45 },
+    { bldg: 'Hangar',          roomCode: 'H 001', room: 'Hangar 001', floor: 1, status: 'vacant', occupant: 'Unassigned', schedule: 'Open', capacity: 35 },
+    { bldg: 'Hangar',          roomCode: 'H 002', room: 'Hangar 002', floor: 1, status: 'vacant', occupant: 'Unassigned', schedule: 'Open', capacity: 35 },
+    { bldg: 'Hangar',          roomCode: 'H 003', room: 'Hangar 003', floor: 1, status: 'vacant', occupant: 'Unassigned', schedule: 'Open', capacity: 35 },
+    { bldg: 'Hangar',          roomCode: 'H 004', room: 'Hangar 004', floor: 1, status: 'vacant', occupant: 'Unassigned', schedule: 'Open', capacity: 35 },
+    { bldg: 'Hangar',          roomCode: 'H 005', room: 'Hangar 005', floor: 1, status: 'vacant', occupant: 'Unassigned', schedule: 'Open', capacity: 35 },
+    { bldg: 'Hangar',          roomCode: 'H 006', room: 'Hangar 006', floor: 1, status: 'vacant', occupant: 'Unassigned', schedule: 'Open', capacity: 35 }
   ];
-
-  let facultyProfile = JSON.parse(localStorage.getItem('farms_faculty_profile')) || DEFAULT_PROFILE;
-  let bookingLogs    = JSON.parse(localStorage.getItem('farms_faculty_bookings')) || DEFAULT_LOGS;
 
   // ────────────────────────────────────────────────
   // 2. THEME
@@ -136,17 +131,70 @@ document.addEventListener('DOMContentLoaded', () => {
   document.getElementById('facQuickReqBtn')?.addEventListener('click', () => switchView('request'));
 
   // ────────────────────────────────────────────────
-  // 5. LIVE TIMESTAMP
+  // 5. EXECUTIVE REALTIME CLOCK & SQLITE HEALTH POLL
   // ────────────────────────────────────────────────
-  function updateTimestamp() {
-    const el = document.getElementById('liveTimestamp');
-    if (!el) return;
+  function updateExecutiveClock() {
     const now = new Date();
-    el.textContent = now.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric', year: 'numeric' }) +
-      ' — ' + now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
+    const digits = document.getElementById('clockTimeDigits');
+    const ampm = document.getElementById('clockAmPm');
+    const dateSub = document.getElementById('clockDateSub');
+    const legacy = document.getElementById('liveTimestamp');
+
+    let hours = now.getHours();
+    const minutes = String(now.getMinutes()).padStart(2, '0');
+    const seconds = String(now.getSeconds()).padStart(2, '0');
+    const ampmStr = hours >= 12 ? 'PM' : 'AM';
+    hours = hours % 12 || 12;
+    const hoursStr = String(hours).padStart(2, '0');
+
+    if (digits) digits.textContent = `${hoursStr}:${minutes}:${seconds}`;
+    if (ampm) ampm.textContent = ampmStr;
+    if (dateSub) {
+      dateSub.textContent = now.toLocaleDateString('en-US', {
+        weekday: 'short',
+        month: 'short',
+        day: 'numeric',
+        year: 'numeric'
+      });
+    }
+    if (legacy) {
+      legacy.textContent = now.toLocaleString();
+    }
   }
-  updateTimestamp();
-  setInterval(updateTimestamp, 60000);
+  updateExecutiveClock();
+  setInterval(updateExecutiveClock, 1000);
+
+  // SQLite Database Health Polling
+  async function checkDbHealth() {
+    const pill = document.getElementById('dbSyncStatusPill');
+    if (!pill) return;
+    const dot = pill.querySelector('.db-sync-dot');
+    const label = pill.querySelector('.db-sync-label');
+
+    try {
+      const res = await fetch('http://localhost:5000/api/health');
+      if (res.ok) {
+        const data = await res.json();
+        if (data.status === 'healthy' || data.database === 'connected') {
+          pill.classList.remove('offline');
+          pill.classList.add('online');
+          if (dot) { dot.className = 'db-sync-dot online'; }
+          if (label) label.textContent = 'DTB';
+          pill.title = 'FARMS Database: Live (Port 5000)';
+          return;
+        }
+      }
+      throw new Error('Degraded');
+    } catch (err) {
+      pill.classList.add('offline');
+      pill.classList.remove('online');
+      if (dot) { dot.className = 'db-sync-dot offline'; }
+      if (label) label.textContent = 'DTB';
+      pill.title = 'FARMS Database: Offline';
+    }
+  }
+  checkDbHealth();
+  setInterval(checkDbHealth, 15000);
 
   // ────────────────────────────────────────────────
   // 6. PROFILE
@@ -157,6 +205,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const els = {
       greetingFacultyName: facultyProfile.fullName,
       profileAvatarBig: initial,
+      profileAvatarHeader: initial,
+      profileHeaderName: facultyProfile.fullName,
       profileNameDisplay: facultyProfile.fullName,
       profileDeptDisplay: facultyProfile.department
     };
@@ -164,10 +214,6 @@ document.addEventListener('DOMContentLoaded', () => {
       const el = document.getElementById(id);
       if (el) el.textContent = val;
     });
-
-    // Topbar avatar
-    const avatar = document.getElementById('facAvatarBtn');
-    if (avatar) avatar.textContent = initial;
 
     // Form fields
     ['profFullName', 'profFacultyId', 'profDepartment', 'profTitle', 'profEmail', 'profPhone', 'profOfficeHours'].forEach(id => {
@@ -180,6 +226,25 @@ document.addEventListener('DOMContentLoaded', () => {
 
   renderProfile();
 
+  // Async load profile from backend if online
+  if (window.farmsApi) {
+    farmsApi.getFacultyById('f-1').then(res => {
+      if (res && res.success && res.data) {
+        facultyProfile = {
+          fullName: res.data.name || facultyProfile.fullName,
+          facultyId: res.data.faculty_id || facultyProfile.facultyId,
+          department: res.data.dept || facultyProfile.department,
+          title: res.data.title || facultyProfile.title,
+          email: res.data.email || facultyProfile.email,
+          phone: res.data.phone || facultyProfile.phone,
+          officeHours: res.data.consultation_hours || facultyProfile.officeHours
+        };
+        localStorage.setItem('farms_faculty_profile_v6', JSON.stringify(facultyProfile));
+        renderProfile();
+      }
+    }).catch(() => {});
+  }
+
   document.getElementById('facProfileForm')?.addEventListener('submit', e => {
     e.preventDefault();
     facultyProfile = {
@@ -191,9 +256,22 @@ document.addEventListener('DOMContentLoaded', () => {
       phone: document.getElementById('profPhone').value.trim(),
       officeHours: document.getElementById('profOfficeHours').value.trim()
     };
-    localStorage.setItem('farms_faculty_profile', JSON.stringify(facultyProfile));
+    localStorage.setItem('farms_faculty_profile_v6', JSON.stringify(facultyProfile));
     renderProfile();
     showToast('Profile updated successfully!');
+
+    // Persist updates to the live backend database
+    if (window.farmsApi) {
+      farmsApi.updateFaculty('f-1', {
+        name: facultyProfile.fullName,
+        faculty_id: facultyProfile.facultyId,
+        dept: facultyProfile.department,
+        title: facultyProfile.title,
+        email: facultyProfile.email,
+        phone: facultyProfile.phone,
+        consultation_hours: facultyProfile.officeHours
+      }).catch(err => console.warn('[farmsApi] Background profile sync failed:', err));
+    }
   });
 
   // ────────────────────────────────────────────────
@@ -235,19 +313,32 @@ document.addEventListener('DOMContentLoaded', () => {
   const grid = document.getElementById('facRoomsGrid');
 
   function makeSqBtn(r) {
-    const dotColor = r.status === 'vacant' ? '#22c55e' : r.status === 'occupied' ? '#ef4444' : '#f59e0b';
-    const btn = document.createElement('button');
-    btn.className = `fac-room-sqbtn ${r.status}`;
-    btn.setAttribute('aria-label', `${r.room} — ${r.status}`);
-    btn.innerHTML = `
-      <span class="fac-sqbtn-icon" style="display:inline-block; width:8px; height:8px; border-radius:50%; background:${dotColor}; box-shadow:0 0 6px ${dotColor};"></span>
-      <span class="fac-sqbtn-name">${r.room}</span>
-      <span class="fac-sqbtn-floor">Flr ${r.floor}</span>
+    const tile = document.createElement('div');
+    tile.className = `fac-room-tile ${r.status}`;
+    tile.setAttribute('role', 'button');
+    tile.setAttribute('tabindex', '0');
+    tile.setAttribute('aria-label', `${r.room} (${r.bldg}) — ${r.status}`);
+    tile.innerHTML = `
+      <div class="fac-tile-top">
+        <span class="fac-room-code">${r.room}</span>
+        <span class="fac-room-status-indicator"></span>
+      </div>
+      <div class="fac-tile-bottom">
+        <span class="fac-room-capacity">${r.capacity} seats</span>
+        <span class="fac-room-status-tag">${r.status}</span>
+      </div>
     `;
-    btn.addEventListener('mouseenter', () => showTip(r, btn));
-    btn.addEventListener('mouseleave', hideTip);
-    btn.addEventListener('click', () => { hideTip(); openRoomModal(r); });
-    return btn;
+    tile.addEventListener('mouseenter', () => showTip(r, tile));
+    tile.addEventListener('mouseleave', hideTip);
+    tile.addEventListener('click', () => { hideTip(); openRoomModal(r); });
+    tile.addEventListener('keydown', e => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        hideTip();
+        openRoomModal(r);
+      }
+    });
+    return tile;
   }
 
   function renderRooms() {
@@ -263,6 +354,7 @@ document.addEventListener('DOMContentLoaded', () => {
     list.forEach(r => grid.appendChild(makeSqBtn(r)));
     const el = document.getElementById('statVacantCount');
     if (el) el.textContent = ROOM_DATA.filter(r => r.status === 'vacant').length;
+    if (typeof renderActiveSessionBanner === 'function') renderActiveSessionBanner();
   }
 
   // Filter chips
@@ -305,7 +397,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!cont) return;
     cont.innerHTML = `
       <div style="padding:20px;">
-        <p style="font-size:0.8rem; font-weight:800; color:var(--text-sub); margin-bottom:12px; text-transform:uppercase; letter-spacing:0.5px;">Click a building to inspect rooms</p>
+        <p style="font-size:0.8rem; font-weight:800; color:var(--fac-text-muted); margin-bottom:12px; text-transform:uppercase; letter-spacing:0.5px;">Click a building to inspect rooms</p>
         <svg viewBox="0 0 1000 600" width="100%" style="max-height:400px; filter: drop-shadow(4px 4px 0px #000000);">
           <rect width="1000" height="600" fill="transparent"/>
           <path d="M 0 300 Q 500 280 1000 300" stroke="#475569" stroke-width="24" stroke-dasharray="16,10" fill="none"/>
@@ -348,6 +440,165 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // ────────────────────────────────────────────────
+  // 8.5 INTERACTIVE TIME RANGE PICKER COMPONENT
+  // ────────────────────────────────────────────────
+  function formatTimeTo12Hour(time24) {
+    if (!time24 || !time24.includes(':')) return time24 || '--:--';
+    const [hStr, mStr] = time24.split(':');
+    let h = parseInt(hStr, 10);
+    const m = mStr || '00';
+    const ampm = h >= 12 ? 'PM' : 'AM';
+    h = h % 12 || 12;
+    return `${String(h).padStart(2, '0')}:${m} ${ampm}`;
+  }
+
+  function timeToMinutes(time24) {
+    if (!time24 || !time24.includes(':')) return 0;
+    const [h, m] = time24.split(':').map(Number);
+    return (h || 0) * 60 + (m || 0);
+  }
+
+  function minutesToTime(totalMins) {
+    let norm = (totalMins % 1440 + 1440) % 1440;
+    const h = Math.floor(norm / 60);
+    const m = norm % 60;
+    return `${String(h).padStart(2, '0')}:${String(m).padStart(2, '0')}`;
+  }
+
+  function initTimeRangePicker({ cardId, startId, endId, summaryTextId, hiddenId }) {
+    const card = document.getElementById(cardId);
+    if (!card) return null;
+
+    const startInput = document.getElementById(startId);
+    const endInput = document.getElementById(endId);
+    const summaryText = document.getElementById(summaryTextId);
+    const hiddenInput = document.getElementById(hiddenId);
+    const chips = card.querySelectorAll('.dur-chip');
+
+    function updateCalculations(source = 'manual') {
+      if (!startInput || !endInput) return;
+      const startMins = timeToMinutes(startInput.value);
+      const endMins = timeToMinutes(endInput.value);
+      const diffMins = endMins - startMins;
+
+      const start12 = formatTimeTo12Hour(startInput.value);
+      const end12 = formatTimeTo12Hour(endInput.value);
+
+      if (diffMins <= 0) {
+        card.classList.add('time-error');
+        if (summaryText) {
+          summaryText.innerHTML = `<span style="color:var(--fac-coral); font-weight:900;">⚠️ Invalid Window:</span> End time (${end12}) must be after start time (${start12}).`;
+        }
+        if (hiddenInput) hiddenInput.value = `${start12} – ${end12}`;
+        chips.forEach(c => c.classList.remove('active'));
+        return { start: startInput.value, end: endInput.value, diffMins: 0, valid: false };
+      }
+
+      card.classList.remove('time-error');
+      const hrs = (diffMins / 60).toFixed(diffMins % 60 === 0 ? 0 : 1);
+      const durationStr = `${diffMins} mins (${hrs} hr${hrs === '1' ? '' : 's'})`;
+
+      if (summaryText) {
+        summaryText.innerHTML = `<strong>${start12} – ${end12}</strong> <span style="color:var(--fac-lime); background:#000000; padding:1px 6px; border-radius:4px; font-weight:900; margin-left:6px;">${durationStr}</span>`;
+      }
+
+      if (hiddenInput) {
+        hiddenInput.value = `${start12} – ${end12}`;
+      }
+
+      // Update chip active state if matches
+      if (source !== 'chip') {
+        chips.forEach(c => {
+          const chipMins = parseInt(c.dataset.mins, 10);
+          c.classList.toggle('active', chipMins === diffMins);
+        });
+      }
+
+      return { start: startInput.value, end: endInput.value, diffMins, valid: true };
+    }
+
+    // Attach listeners
+    const btnNow = card.querySelector('.btn-time-now');
+    btnNow?.addEventListener('click', (e) => {
+      e.preventDefault();
+      const now = new Date();
+      const h = String(now.getHours()).padStart(2, '0');
+      const m = String(now.getMinutes()).padStart(2, '0');
+      const curTime24 = `${h}:${m}`;
+      if (startInput) startInput.value = curTime24;
+
+      const activeChip = card.querySelector('.dur-chip.active');
+      const durMins = activeChip ? parseInt(activeChip.dataset.mins, 10) : 120;
+      if (endInput) {
+        endInput.value = minutesToTime(timeToMinutes(curTime24) + durMins);
+      }
+      updateCalculations('now');
+      showToast(`⏱️ Start time set to current time (${formatTimeTo12Hour(curTime24)})`);
+    });
+
+    chips.forEach(chip => {
+      chip.addEventListener('click', (e) => {
+        e.preventDefault();
+        chips.forEach(c => c.classList.remove('active'));
+        chip.classList.add('active');
+        const mins = parseInt(chip.dataset.mins, 10);
+        const startMins = timeToMinutes(startInput.value);
+        endInput.value = minutesToTime(startMins + mins);
+        updateCalculations('chip');
+      });
+    });
+
+    startInput?.addEventListener('input', () => {
+      const activeChip = card.querySelector('.dur-chip.active');
+      if (activeChip) {
+        const mins = parseInt(activeChip.dataset.mins, 10);
+        const startMins = timeToMinutes(startInput.value);
+        endInput.value = minutesToTime(startMins + mins);
+      }
+      updateCalculations('start');
+    });
+
+    endInput?.addEventListener('input', () => {
+      updateCalculations('end');
+    });
+
+    // Initial run
+    updateCalculations('init');
+
+    return {
+      getValues: () => ({
+        start_time: startInput?.value || '08:00',
+        end_time: endInput?.value || '10:00',
+        duration_minutes: Math.max(0, timeToMinutes(endInput?.value) - timeToMinutes(startInput?.value)),
+        formatted_window: hiddenInput?.value || `${formatTimeTo12Hour(startInput?.value)} – ${formatTimeTo12Hour(endInput?.value)}`
+      }),
+      reset: (defaultStart = '08:00', defaultMins = 120) => {
+        if (startInput) startInput.value = defaultStart;
+        if (endInput) endInput.value = minutesToTime(timeToMinutes(defaultStart) + defaultMins);
+        chips.forEach(c => c.classList.toggle('active', parseInt(c.dataset.mins, 10) === defaultMins));
+        updateCalculations('init');
+      }
+    };
+  }
+
+  // Initialize both time range pickers
+  const reqTimePicker = initTimeRangePicker({
+    cardId: 'reqTimePickerCard',
+    startId: 'reqStartTime',
+    endId: 'reqEndTime',
+    summaryTextId: 'reqTimeSummaryText',
+    hiddenId: 'reqTime'
+  });
+
+  const modalTimePicker = initTimeRangePicker({
+    cardId: 'modalTimePickerCard',
+    startId: 'modalStartTime',
+    endId: 'modalEndTime',
+    summaryTextId: 'modalTimeSummaryText',
+    hiddenId: 'facModalTime'
+  });
+
+  // ────────────────────────────────────────────────
   // 9. ROOM MODAL
   // ────────────────────────────────────────────────
   let selectedRoom = null;
@@ -371,37 +622,326 @@ document.addEventListener('DOMContentLoaded', () => {
     if (modalCap)   modalCap.textContent   = `${r.capacity} Seats`;
     if (modalOcc)   modalOcc.textContent   = r.occupant;
     if (modalSched) modalSched.textContent = r.schedule;
-    if (modal) modal.classList.add('open');
+    if (modal) modal.classList.add('active', 'open');
 
-    // Hide form for occupied/maintenance
+    // Check if this room is occupied by current faculty
+    const myName = (facultyProfile.fullName || '').toLowerCase();
+    const isMyOccupiedRoom = r.status === 'occupied' && (
+      (r.occupant && r.occupant.toLowerCase().includes(myName)) ||
+      bookingLogs.some(l => l.status === 'Approved' && l.facility.toLowerCase().includes(r.room.toLowerCase()))
+    );
+
+    const checkoutSection = document.getElementById('facModalCheckoutSection');
+    const btnModalCheckout = document.getElementById('btnModalCheckout');
     const formEl = document.getElementById('facModalForm');
-    if (formEl) formEl.style.display = r.status === 'vacant' ? '' : 'none';
+
+    if (isMyOccupiedRoom) {
+      if (modalStatus) modalStatus.className = 'fac-modal-status occupied';
+      if (modalSText) modalSText.textContent = 'OCCUPIED BY YOU (ACTIVE SESSION)';
+      if (checkoutSection) checkoutSection.style.display = 'block';
+      if (formEl) formEl.style.display = 'none';
+      if (btnModalCheckout) {
+        btnModalCheckout.onclick = () => {
+          window.checkoutFacRoom(null, `${r.room} (${r.bldg})`, r.id || r.roomCode || r.room);
+        };
+      }
+    } else {
+      if (checkoutSection) checkoutSection.style.display = 'none';
+      if (formEl) formEl.style.display = r.status === 'vacant' ? '' : 'none';
+    }
   }
 
-  modalClose?.addEventListener('click', () => modal?.classList.remove('open'));
-  modal?.addEventListener('click', e => { if (e.target === modal) modal.classList.remove('open'); });
+  function closeModal() {
+    if (modal) modal.classList.remove('active', 'open');
+  }
+
+  modalClose?.addEventListener('click', closeModal);
+  modal?.addEventListener('click', e => { if (e.target === modal) closeModal(); });
+  window.addEventListener('keydown', e => {
+    if (e.key === 'Escape') closeModal();
+  });
 
   modalForm?.addEventListener('submit', e => {
     e.preventDefault();
     if (!selectedRoom) return;
     const subj = document.getElementById('facModalSubject')?.value.trim() || 'N/A';
-    const time = document.getElementById('facModalTime')?.value.trim() || 'N/A';
+    const timeData = modalTimePicker ? modalTimePicker.getValues() : {
+      start_time: '13:00',
+      end_time: '15:00',
+      duration_minutes: 120,
+      formatted_window: document.getElementById('facModalTime')?.value.trim() || '01:00 PM – 03:00 PM'
+    };
+
+    if (timeData.duration_minutes <= 0) {
+      showToast('⚠️ Please select a valid time range (End time must be after Start time).');
+      return;
+    }
+
     const newLog = {
       id: `REQ-${Date.now().toString().slice(-4)}`,
       facility: `${selectedRoom.room} (${selectedRoom.bldg})`,
       date: new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }),
-      time,
+      time: timeData.formatted_window,
       purpose: subj,
       status: 'Pending',
       permit: 'Awaiting Admin'
     };
     bookingLogs.unshift(newLog);
-    localStorage.setItem('farms_faculty_bookings', JSON.stringify(bookingLogs));
+    localStorage.setItem('farms_faculty_bookings_v6', JSON.stringify(bookingLogs));
     renderLogs();
-    modal?.classList.remove('open');
+    closeModal();
     modalForm.reset();
     showToast(`Request submitted for ${selectedRoom.room}!`);
+
+    // Sync request to backend database and cross-tab broadcast
+    const reqPayload = {
+      id: newLog.id,
+      requester: `${facultyProfile.fullName} (${facultyProfile.facultyId})`,
+      room: newLog.facility,
+      purpose: newLog.purpose,
+      date: `${newLog.date}, ${newLog.time}`,
+      start_time: timeData.start_time,
+      end_time: timeData.end_time,
+      duration_minutes: timeData.duration_minutes,
+      status: 'pending'
+    };
+
+    if (window.farmsApi) {
+      farmsApi.createRequest(reqPayload).catch(err => console.warn('[farmsApi] Request creation sync failed:', err));
+      farmsApi.broadcastLocalEvent('new_request', reqPayload);
+    }
   });
+
+  // Real-time listener for admin approval notifications & room state changes
+  function handleIncomingRealtime(evt) {
+    if (!evt) return;
+    if (evt.type === 'room_updated' && evt.data) {
+      const u = evt.data;
+      const target = ROOM_DATA.find(r => r.id === u.id || r.roomCode === u.room_code || (r.bldg === u.building && r.room === u.room));
+      if (target) {
+        target.status = u.status;
+        target.occupant = u.occupant && u.occupant !== 'None' ? u.occupant : 'Unassigned';
+        target.schedule = u.schedule && u.schedule !== '--' ? u.schedule : 'Open';
+        renderRooms();
+      } else {
+        syncRealtimeData();
+      }
+    } else if (evt.type === 'request_status_updated' && evt.data) {
+      const updated = evt.data;
+      const target = bookingLogs.find(b => b.id === updated.id || (b.facility && updated.room && b.facility.includes(updated.room)));
+      if (target) {
+        target.status = updated.status === 'approved' ? 'Approved' : updated.status === 'completed' ? 'Completed' : 'Denied';
+        if (updated.status === 'approved' && (!target.permit || target.permit.includes('Awaiting'))) {
+          target.permit = `BSU-KEY-${updated.id ? updated.id.replace(/\D/g, '') : Math.floor(1000 + Math.random() * 9000)}`;
+        }
+        localStorage.setItem('farms_faculty_bookings_v6', JSON.stringify(bookingLogs));
+        renderLogs();
+        if (updated.status === 'approved') {
+          showToast(`🎉 Room permit issued for ${target.facility}!`);
+        } else if (updated.status === 'completed') {
+          showToast(`Room session ended for ${target.facility}.`);
+        } else {
+          showToast(`Notice: Request for ${target.facility} was denied.`);
+        }
+      }
+      syncRealtimeData();
+    } else if (evt.type === 'new_request') {
+      syncRealtimeData();
+    }
+  }
+
+  // Active Session Banner Renderer
+  function renderActiveSessionBanner() {
+    const container = document.getElementById('facActiveSessionContainer');
+    if (!container) return;
+
+    const myName = (facultyProfile.fullName || '').toLowerCase();
+    
+    // Look in bookingLogs for approved requests
+    const activeLog = bookingLogs.find(l => l.status === 'Approved');
+    
+    // Also check ROOM_DATA for rooms occupied by current faculty
+    let activeRoom = null;
+    if (activeLog) {
+      activeRoom = ROOM_DATA.find(r => activeLog.facility && (
+        activeLog.facility.toLowerCase().includes(r.room.toLowerCase()) ||
+        (r.roomCode && activeLog.facility.toLowerCase().includes(r.roomCode.toLowerCase()))
+      ));
+    }
+    if (!activeRoom) {
+      activeRoom = ROOM_DATA.find(r => r.status === 'occupied' && (
+        (r.occupant && r.occupant.toLowerCase().includes(myName)) ||
+        (facultyProfile.facultyId && r.occupant && r.occupant.includes(facultyProfile.facultyId))
+      ));
+    }
+
+    if (!activeLog && !activeRoom) {
+      container.innerHTML = '';
+      return;
+    }
+
+    const sessionFacility = activeLog ? activeLog.facility : `${activeRoom.room} (${activeRoom.bldg})`;
+    const sessionTime = activeLog ? activeLog.time : (activeRoom.schedule !== '--' ? activeRoom.schedule : 'Active Session');
+    const sessionPurpose = activeLog ? activeLog.purpose : 'Faculty Class Window';
+    const sessionPermit = activeLog?.permit || 'BSU-KEY-ACTIVE';
+    const logId = activeLog ? activeLog.id : '';
+    const roomId = activeRoom ? (activeRoom.id || activeRoom.roomCode || activeRoom.room) : '';
+
+    container.innerHTML = `
+      <div class="fac-active-session-card">
+        <div class="fac-active-session-icon">🔑</div>
+        <div class="fac-active-session-info">
+          <div class="fac-active-session-title">Active Room Session: <strong>${sessionFacility}</strong></div>
+          <div class="fac-active-session-sub">⏰ <strong>${sessionTime}</strong> &nbsp;·&nbsp; 📝 ${sessionPurpose} &nbsp;·&nbsp; Permit: <span class="fac-permit-chip" style="display:inline-block; padding:1px 6px; font-size:0.7rem;">${sessionPermit}</span></div>
+        </div>
+        <div class="fac-active-session-actions">
+          <button class="fac-btn-checkout-hero" onclick="window.checkoutFacRoom('${logId}', '${sessionFacility}', '${roomId}')">
+            ⚡ Check Out Room
+          </button>
+        </div>
+      </div>
+    `;
+  }
+
+  // Global Checkout Room Handler
+  window.checkoutFacRoom = async (logId, facilityTitle, directRoomId) => {
+    try {
+      // 1. Find matching room in ROOM_DATA
+      let targetRoom = null;
+      if (directRoomId) {
+        targetRoom = ROOM_DATA.find(r => r.id === directRoomId || r.roomCode === directRoomId || r.room === directRoomId);
+      }
+      if (!targetRoom && facilityTitle) {
+        targetRoom = ROOM_DATA.find(r => 
+          facilityTitle.toLowerCase().includes(r.room.toLowerCase()) || 
+          (r.roomCode && facilityTitle.toLowerCase().includes(r.roomCode.toLowerCase()))
+        );
+      }
+      if (!targetRoom && logId) {
+        const matchLog = bookingLogs.find(l => l.id === logId);
+        if (matchLog) {
+          targetRoom = ROOM_DATA.find(r => 
+            matchLog.facility.toLowerCase().includes(r.room.toLowerCase()) || 
+            (r.roomCode && matchLog.facility.toLowerCase().includes(r.roomCode.toLowerCase()))
+          );
+        }
+      }
+
+      // 2. Update local room state immediately
+      if (targetRoom) {
+        targetRoom.status = 'vacant';
+        targetRoom.occupant = 'Unassigned';
+        targetRoom.schedule = 'Open';
+      }
+
+      // 3. Update bookingLogs
+      bookingLogs.forEach(l => {
+        if ((logId && l.id === logId) || (targetRoom && l.status === 'Approved' && l.facility.toLowerCase().includes(targetRoom.room.toLowerCase()))) {
+          l.status = 'Completed';
+        }
+      });
+      localStorage.setItem('farms_faculty_bookings_v6', JSON.stringify(bookingLogs));
+
+      // 4. Update UI
+      closeModal();
+      renderRooms();
+      renderLogs();
+      renderActiveSessionBanner();
+
+      const displayTitle = facilityTitle || targetRoom?.room || 'room';
+      showToast(`Checked out of ${displayTitle} successfully! Room is now vacant.`);
+
+      // 5. Send checkout API request to backend
+      const roomIdToUse = targetRoom?.id || targetRoom?.roomCode || directRoomId || (facilityTitle ? facilityTitle.split('(')[0].trim() : 'room');
+      if (window.farmsApi) {
+        await farmsApi.checkoutRoom(roomIdToUse);
+        if (logId) {
+          farmsApi.updateRequestStatus(logId, 'completed').catch(() => {});
+        }
+      }
+      
+      // Auto re-sync
+      setTimeout(syncRealtimeData, 500);
+    } catch (err) {
+      console.error('Checkout error:', err);
+      showToast('Notice: Checkout recorded.');
+    }
+  };
+
+  // Fetch real-time rooms and booking requests from backend REST API
+  async function syncRealtimeData() {
+    if (!window.farmsApi) return;
+    try {
+      const roomRes = await farmsApi.getRooms();
+      if (roomRes && roomRes.success && Array.isArray(roomRes.data) && roomRes.data.length > 0) {
+        ROOM_DATA.length = 0;
+        roomRes.data.forEach(r => {
+          ROOM_DATA.push({
+            id: r.id,
+            bldg: r.building,
+            roomCode: r.room_code || r.room,
+            room: r.room || r.room_code,
+            floor: r.floor || 1,
+            status: r.status || 'vacant',
+            occupant: r.occupant && r.occupant !== 'None' ? r.occupant : 'Unassigned',
+            schedule: r.schedule && r.schedule !== '--' ? r.schedule : 'Open',
+            capacity: r.capacity || 45,
+            equipment: r.equipment || ''
+          });
+        });
+        renderRooms();
+        if (reqBldgSelect?.value) {
+          updateRoomDropdown(reqBldgSelect.value);
+        }
+      }
+
+      const reqRes = await farmsApi.getRequests();
+      if (reqRes && reqRes.success && Array.isArray(reqRes.data)) {
+        const mappedLogs = reqRes.data.map(req => {
+          let dStr = req.date || 'Today';
+          let tStr = req.time || '';
+          if (dStr.includes(',')) {
+            const parts = dStr.split(',');
+            dStr = parts[0].trim();
+            tStr = parts.slice(1).join(',').trim();
+          }
+          return {
+            id: req.id,
+            facility: req.room,
+            date: dStr,
+            time: tStr || 'Class Window',
+            purpose: req.purpose,
+            status: req.status === 'approved' ? 'Approved' : req.status === 'completed' ? 'Completed' : req.status === 'denied' ? 'Denied' : 'Pending',
+            permit: req.status === 'approved' ? `BSU-KEY-${req.id.replace(/\D/g, '') || '9012'}` : req.status === 'completed' ? `BSU-KEY-${req.id.replace(/\D/g, '') || '9012'}` : (req.status === 'denied' ? 'Denied' : 'Awaiting Admin')
+          };
+        });
+        bookingLogs = mappedLogs;
+        localStorage.setItem('farms_faculty_bookings_v6', JSON.stringify(bookingLogs));
+        renderLogs();
+      }
+    } catch (e) {
+      console.warn('[faculty] Real-time sync notice:', e.message);
+    }
+  }
+
+  syncRealtimeData();
+  
+  // Smart adaptive polling: Relaxed heartbeat when tab is visible, suspended when hidden
+  setInterval(() => {
+    if (document.hidden) return;
+    syncRealtimeData();
+  }, 10000);
+
+  document.addEventListener('visibilitychange', () => {
+    if (!document.hidden) {
+      syncRealtimeData();
+    }
+  });
+
+  if (window.farmsApi) {
+    farmsApi.listenLocalEvents(handleIncomingRealtime);
+    farmsApi.connectEventStream(handleIncomingRealtime);
+  }
 
   // ────────────────────────────────────────────────
   // 10. BOOKING LOGS
@@ -417,31 +957,46 @@ document.addEventListener('DOMContentLoaded', () => {
       if (log.status === 'Approved') approved++;
       if (log.status === 'Pending') pending++;
 
-      const badgeCls = log.status === 'Approved' ? 'fac-badge-approved' : log.status === 'Denied' ? 'fac-badge-denied' : 'fac-badge-pending';
-      const badgeText = log.status === 'Approved' ? 'Approved' : log.status === 'Denied' ? 'Denied' : 'Pending';
+      const badgeCls = log.status === 'Approved' ? 'fac-badge-approved' : 
+                       log.status === 'Completed' ? 'fac-badge-completed' :
+                       log.status === 'Denied' ? 'fac-badge-denied' : 'fac-badge-pending';
+      const badgeText = log.status === 'Approved' ? 'Approved' : 
+                        log.status === 'Completed' ? 'Completed' :
+                        log.status === 'Denied' ? 'Denied' : 'Pending';
 
-      const permitHtml = log.status === 'Pending'
-        ? `<button class="fac-btn-reset" style="height:30px; padding:0 12px; font-size:0.72rem; color:#ef4444; border-color:#ef4444;" onclick="window.cancelFacReq('${log.id}')">Cancel</button>`
-        : `<code style="background:#f0fdf4; color:#047857; padding:3px 10px; border-radius:6px; font-weight:900; font-size:0.78rem;">${log.permit}</code>`;
+      let actionHtml = '';
+      if (log.status === 'Pending') {
+        actionHtml = `<button class="fac-tab-btn" style="height:32px; padding:0 12px; font-size:0.72rem; color:var(--fac-coral); border-color:var(--fac-coral); box-shadow:2px 2px 0px var(--fac-coral); cursor:pointer;" onclick="window.cancelFacReq('${log.id}')">Cancel Request</button>`;
+      } else if (log.status === 'Approved') {
+        actionHtml = `
+          <div style="display:flex; align-items:center; gap:8px; flex-wrap:wrap; justify-content:flex-end;">
+            <span class="fac-permit-chip">🔑 ${log.permit}</span>
+            <button class="fac-tab-btn fac-btn-checkout" style="height:30px; padding:0 10px; font-size:0.72rem; color:#ffffff; background:#e11d48; border-color:#e11d48; box-shadow:2px 2px 0px #000000; font-weight:800; cursor:pointer;" onclick="window.checkoutFacRoom('${log.id}', '${log.facility}')">⚡ Check Out</button>
+          </div>
+        `;
+      } else if (log.status === 'Completed') {
+        actionHtml = `<span class="fac-permit-chip" style="opacity:0.75; border-style:dashed;">✔ Completed</span>`;
+      } else {
+        actionHtml = `<span class="fac-permit-chip" style="opacity:0.5;">Denied</span>`;
+      }
 
       const card = document.createElement('div');
-      card.className = 'fac-log-card';
+      card.className = 'fac-log-item';
       card.innerHTML = `
-        <div class="fac-log-top">
-          <div>
-            <div class="fac-log-id">${log.id}</div>
-            <div class="fac-log-room">${log.facility}</div>
+        <div class="fac-log-main">
+          <div style="display:flex; align-items:center; gap:8px;">
+            <span style="font-family:var(--fac-mono); font-size:0.75rem; font-weight:900; color:var(--fac-lime); background:#000000; padding:2px 7px; border-radius:4px; border:1px solid #333333;">${log.id}</span>
+            <span class="fac-log-title">${log.facility}</span>
           </div>
+          <div class="fac-log-meta" style="margin-top:6px; display:flex; gap:12px; flex-wrap:wrap;">
+            <span>📅 ${log.date}</span>
+            <span>⏰ ${log.time}</span>
+            <span>📝 ${log.purpose}</span>
+          </div>
+        </div>
+        <div class="fac-log-side">
           <span class="fac-status-badge ${badgeCls}">${badgeText}</span>
-        </div>
-        <div class="fac-log-meta-row">
-          <span>Date: ${log.date}</span>
-          <span>Time: ${log.time}</span>
-        </div>
-        <div class="fac-log-purpose">${log.purpose}</div>
-        <div class="fac-log-footer">
-          <span style="font-size:0.72rem; color:#94a3b8;">Permit:</span>
-          ${permitHtml}
+          ${actionHtml}
         </div>
       `;
       list.appendChild(card);
@@ -451,20 +1006,21 @@ document.addEventListener('DOMContentLoaded', () => {
     const elApproved = document.getElementById('statApprovedCount');
     const elPending  = document.getElementById('statPendingCount');
     const sidebarBadge = document.getElementById('sidebarLogBadge');
-    const mobileBadge  = document.getElementById('mobileLogBadge');
 
     if (elApproved) elApproved.textContent = approved;
     if (elPending)  elPending.textContent  = pending;
-    if (sidebarBadge) sidebarBadge.textContent = pending;
-    if (mobileBadge)  mobileBadge.textContent  = pending;
-    if (sidebarBadge) sidebarBadge.style.display = pending > 0 ? '' : 'none';
-    if (mobileBadge)  mobileBadge.style.display  = pending > 0 ? '' : 'none';
+    if (sidebarBadge) {
+      sidebarBadge.textContent = pending;
+      sidebarBadge.style.display = pending > 0 ? '' : 'none';
+    }
+
+    renderActiveSessionBanner();
   }
 
   // Global cancel handler
   window.cancelFacReq = (id) => {
     bookingLogs = bookingLogs.filter(l => l.id !== id);
-    localStorage.setItem('farms_faculty_bookings', JSON.stringify(bookingLogs));
+    localStorage.setItem('farms_faculty_bookings_v6', JSON.stringify(bookingLogs));
     renderLogs();
     showToast('Request cancelled.');
   };
@@ -472,26 +1028,167 @@ document.addEventListener('DOMContentLoaded', () => {
   renderLogs();
 
   // ────────────────────────────────────────────────
-  // 11. REQUEST FORM
+  // 11. REQUEST FORM & INTERACTIVE SVG BLUEPRINT SYNC
   // ────────────────────────────────────────────────
+  const BLDG_ROOMS = {
+    'Pancho Building': [
+      { code: 'Pancho 101', label: 'Pancho 101 (Classroom - 45 seats)' },
+      { code: 'Pancho 103', label: 'Pancho 103 (Classroom - 45 seats)' },
+      { code: 'Pancho 105', label: 'Pancho 105 (Classroom - 45 seats)' },
+      { code: 'Science Laboratory', label: 'Science Laboratory (Lab - 40 seats)' },
+      { code: 'Lecture Room', label: 'Lecture Room (Lecture - 60 seats)' },
+      { code: 'Multimedia Room', label: 'Multimedia Room / AVR (AV - 50 seats)' }
+    ],
+    'CBA Building': [
+      { code: 'CBA 101', label: 'CBA 101 (Lecture - 45 seats)' },
+      { code: 'CBA 102', label: 'CBA 102 (Computer Lab - 50 seats)' },
+      { code: 'CBA 103', label: 'CBA 103 (Classroom - 45 seats)' },
+      { code: 'CBA 202', label: 'CBA 202 (Lecture Hall - 45 seats)' }
+    ],
+    'Hangar': [
+      { code: 'Hangar 001', label: 'Hangar 001 (Aviation Bay - 35 seats)' },
+      { code: 'Hangar 002', label: 'Hangar 002 (Aviation Bay - 35 seats)' },
+      { code: 'Hangar 003', label: 'Hangar 003 (Aviation Bay - 35 seats)' },
+      { code: 'Hangar 004', label: 'Hangar 004 (Drone Bay - 35 seats)' },
+      { code: 'Hangar 005', label: 'Hangar 005 (Aviation Bay - 35 seats)' },
+      { code: 'Hangar 006', label: 'Hangar 006 (Maintenance Bay - 35 seats)' }
+    ]
+  };
+
+  const reqBldgSelect = document.getElementById('reqBuilding');
+  const reqRoomSelect = document.getElementById('reqRoom');
+  const bannerText    = document.getElementById('facSvgSelectedText');
+
+  function updateRoomDropdown(bldgName, selectedRoomCode = null) {
+    if (!reqRoomSelect) return;
+    const rooms = BLDG_ROOMS[bldgName] || [];
+    reqRoomSelect.innerHTML = '';
+    rooms.forEach(r => {
+      const opt = document.createElement('option');
+      opt.value = r.code;
+      opt.textContent = r.label;
+      if (selectedRoomCode && (r.code === selectedRoomCode || r.label.includes(selectedRoomCode))) {
+        opt.selected = true;
+      }
+      reqRoomSelect.appendChild(opt);
+    });
+  }
+
+  function highlightSvgBuilding(bldgName) {
+    // Highlight SVG polygon
+    document.querySelectorAll('#facReqSvgFrame .interactive-bldg').forEach(el => {
+      const isMatch = el.dataset.bldg === bldgName;
+      el.classList.toggle('active-selected', isMatch);
+    });
+
+    // Update filter pills
+    document.querySelectorAll('.fac-svg-pill').forEach(pill => {
+      pill.classList.toggle('active', pill.dataset.svgBldg === bldgName);
+    });
+
+    // Update form select if different
+    if (reqBldgSelect && reqBldgSelect.value !== bldgName) {
+      reqBldgSelect.value = bldgName;
+      updateRoomDropdown(bldgName);
+    }
+
+    // Update banner text
+    if (bannerText) {
+      const curRoom = reqRoomSelect?.value || 'Pancho 101';
+      bannerText.innerHTML = `Focused Building: <strong style="color:var(--fac-lime); background:#000000; padding:2px 8px; border-radius:4px;">${bldgName}</strong> &nbsp;·&nbsp; Room: <strong>${curRoom}</strong>`;
+    }
+  }
+
+  // Click on SVG buildings
+  document.querySelectorAll('#facReqSvgFrame .interactive-bldg').forEach(el => {
+    el.addEventListener('click', () => {
+      const bldg = el.dataset.bldg;
+      if (bldg) {
+        highlightSvgBuilding(bldg);
+        showToast(`📍 Selected ${bldg} from vector map.`);
+      }
+    });
+  });
+
+  // Click on SVG pills
+  document.querySelectorAll('.fac-svg-pill').forEach(pill => {
+    pill.addEventListener('click', () => {
+      const bldg = pill.dataset.svgBldg;
+      if (bldg) {
+        highlightSvgBuilding(bldg);
+      }
+    });
+  });
+
+  // Form select change
+  reqBldgSelect?.addEventListener('change', () => {
+    const bldg = reqBldgSelect.value;
+    updateRoomDropdown(bldg);
+    highlightSvgBuilding(bldg);
+  });
+
+  reqRoomSelect?.addEventListener('change', () => {
+    const bldg = reqBldgSelect?.value || 'Pancho Building';
+    const curRoom = reqRoomSelect?.value || '';
+    if (bannerText) {
+      bannerText.innerHTML = `Focused Building: <strong style="color:var(--fac-lime); background:#000000; padding:2px 8px; border-radius:4px;">${bldg}</strong> &nbsp;·&nbsp; Room: <strong>${curRoom}</strong>`;
+    }
+  });
+
+  // Initialize room dropdown on load
+  if (reqBldgSelect?.value) {
+    updateRoomDropdown(reqBldgSelect.value);
+  }
+
   document.getElementById('facRequestForm')?.addEventListener('submit', e => {
     e.preventDefault();
     const form = e.target;
+    const timeData = reqTimePicker ? reqTimePicker.getValues() : {
+      start_time: '08:00',
+      end_time: '10:00',
+      duration_minutes: 120,
+      formatted_window: form.reqTime?.value || '08:00 AM – 10:00 AM'
+    };
+
+    if (timeData.duration_minutes <= 0) {
+      showToast('⚠️ Please select a valid time range (End time must be after Start time).');
+      return;
+    }
+
     const newLog = {
       id: `REQ-${Date.now().toString().slice(-4)}`,
       facility: `${form.reqRoom.value} (${form.reqBuilding.value})`,
       date: new Date(form.reqDate.value).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }),
-      time: form.reqTime.value,
+      time: timeData.formatted_window,
       purpose: form.reqSubject.value,
       status: 'Pending',
       permit: 'Awaiting Admin'
     };
     bookingLogs.unshift(newLog);
-    localStorage.setItem('farms_faculty_bookings', JSON.stringify(bookingLogs));
+    localStorage.setItem('farms_faculty_bookings_v6', JSON.stringify(bookingLogs));
     renderLogs();
     form.reset();
+    reqTimePicker?.reset('08:00', 120);
     showToast(`Request submitted! Check Booking Logs.`);
     switchView('logs');
+
+    // Sync request to backend database and cross-tab broadcast
+    const reqPayload = {
+      id: newLog.id,
+      requester: `${facultyProfile.fullName} (${facultyProfile.facultyId})`,
+      room: newLog.facility,
+      purpose: newLog.purpose,
+      date: `${newLog.date}, ${newLog.time}`,
+      start_time: timeData.start_time,
+      end_time: timeData.end_time,
+      duration_minutes: timeData.duration_minutes,
+      status: 'pending'
+    };
+
+    if (window.farmsApi) {
+      farmsApi.createRequest(reqPayload).catch(err => console.warn('[farmsApi] Request form sync failed:', err));
+      farmsApi.broadcastLocalEvent('new_request', reqPayload);
+    }
   });
 
   // ────────────────────────────────────────────────
@@ -508,7 +1205,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!grid) return;
     grid.innerHTML = '';
     if (results.length === 0) {
-      grid.innerHTML = `<div style="grid-column:1/-1;text-align:center;padding:40px;color:var(--text-sub);font-weight:800;">No rooms match "${e.target.value}".</div>`;
+      grid.innerHTML = `<div style="grid-column:1/-1;text-align:center;padding:40px;color:var(--fac-text-muted);font-weight:800;">No rooms match "${e.target.value}".</div>`;
       return;
     }
     results.forEach(r => grid.appendChild(makeSqBtn(r)));
